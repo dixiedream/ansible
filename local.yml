@@ -1,0 +1,7 @@
+---
+  hosts: all
+  become: true
+  tasks:
+    - name: Set caps lock as another ctrl
+      command: localectl --no-convert set-x11-keymap it "" "" ctrl:nocaps
+
