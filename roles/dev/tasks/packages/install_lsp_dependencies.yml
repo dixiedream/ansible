@@ -1,0 +1,44 @@
+- name: install packages | LSP | install HTML 
+  tags: dev,html,lsp,vim
+  npm:
+    global: yes
+    name: vscode-langservers-extracted
+  
+- name: install packages | LSP | install gopls
+  tags: dev,golang,lsp,vim
+  command: go install golang.org/x/tools/gopls@latest
+
+- name: install packages | LSP | install GraphQl 
+  tags: dev,graphql,lsp,vim
+  npm:
+    global: yes
+    name: graphql-language-service-cli
+
+- name: install packages | LSP | install Intelephense
+  tags: dev,intelephense,lsp,php,vim
+  npm:
+    global: yes
+    name: intelephense
+
+- name: install packages | LSP | install Lua Language Server
+  tags: dev,lua,lsp,vim
+  package:
+    name: "{{ lua_language_server_package }}"
+
+- name: install packages | LSP | install Typescript
+  tags: dev,typescript,lsp,vim
+  npm:
+    global: yes
+    name: typescript
+
+- name: install packages | LSP | install Typescript Language Server
+  tags: dev,typescript,lsp,vim
+  npm:
+    global: yes
+    name: typescript-laguage-server
+
+- name: install packages | LSP | install Vue Language Server
+  tags: dev,lsp,vim,vue,volar
+  npm:
+    global: yes
+    name: @volar/vue-language-server

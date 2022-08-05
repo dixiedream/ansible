@@ -1,0 +1,10 @@
+- name: packages | install required packages
+  tags: dev,packages 
+  package:
+    name:
+      - "{{ docker_package }}"
+      - "{{ docker_compose_package}}"
+      - "{{ go_package }}"
+      - "{{ npm_package }}"
+      - "{{ php_package }}"
+    state: latest

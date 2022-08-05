@@ -1,0 +1,7 @@
+# Load distro specific variables
+- include_vars: "{{ ansible_distribution }}.yml"
+  tags: always
+
+- block:
+  - import_tasks: packages/install_packages.yml
+  - import_tasks: packages/install_lsp_dependencies.yml

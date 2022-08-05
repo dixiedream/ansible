@@ -1,0 +1,5 @@
+# Packages
+cups_package: cups
+go_package: go
+lua_language_server_package: lua-language-server
+npm_package: npm
