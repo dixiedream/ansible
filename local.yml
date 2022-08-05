@@ -1,7 +1,34 @@
 ---
-  hosts: all
+- hosts: all
+  tags: always
   become: true
-  tasks:
-    - name: Set caps lock as another ctrl
-      command: localectl --no-convert set-x11-keymap it "" "" ctrl:nocaps
+  pre_tasks:
+    - name: pre-run | update package cache (arch)
+      tags: always
+      pacman: update_cache=yes
+      changed_when: False
+      when: ansible_distribution == "Archlinux"
+
+  # run roles
+- hosts: all
+  tags: base
+  become: true
+  roles:
+    - base
+
+- hosts: dev
+  tags: dev
+  become: true
+  roles:
+    - dev
+
+# - hosts: server
+#   tags: server
+#   become: true
+#   roles:
+#     - server
+#
+  # tasks:
+  #   - name: Set caps lock as another ctrl
+  #     command: localectl --no-convert set-x11-keymap it "" "" ctrl:nocaps
 
