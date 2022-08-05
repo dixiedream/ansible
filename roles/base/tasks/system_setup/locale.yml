@@ -1,0 +1,3 @@
+- name: system setup | locale | set caps lock as ctrl
+  tags: locale,keyboard,system,setup
+  command: localectl --no-convert set-x11-keymap it "" "" ctrl:nocaps

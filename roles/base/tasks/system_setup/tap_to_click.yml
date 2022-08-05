@@ -1,0 +1,9 @@
+- name: system setup | tap to click
+  tags: laptop,system,setup
+  copy:
+    src: system_setup/tap_to_click.conf
+    dest: /etc/X11/xorg.conf.d/30-touchpad.conf 
+    owner: root
+    groups: root
+    mode: 0644
+
