@@ -16,6 +16,13 @@
   roles:
     - base
 
+- hosts: localhost
+  connection: local
+  tags: base
+  become: true
+  roles:
+    - base
+
 - hosts: dev
   tags: dev
   become: true
