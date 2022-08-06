@@ -1,0 +1,93 @@
+- name: packages | install packages
+  tags: package,software
+  package:
+    name:
+      - acpi_call
+      - arandr
+      - atool
+      - autorandr
+      - bc
+      - bleachbit
+      - bluez
+      - bluez-utils
+      - brightnessctl
+      - cmus
+      - dosfstools
+      - dunst
+      - exfat-utils
+      - fzf
+      - gzip
+      - htop
+      - imagemagick
+      - maim
+      - man-db
+      - mpv
+      - ncdu
+      - neofetch
+      - neovim
+      - noto-fonts
+      - noto-fonts-emoji
+      - ntfs-3g
+      - p7zip
+      # - pacman-contrib
+      - pavucontrol
+      - pipewire
+      - pipewire-alsa
+      - pipewire-pulse
+      - playerctl
+      - s-tui
+      - slock
+      - sxiv
+      - unclutter
+      - unrar
+      - unzip
+      - yt-dlp
+      - xclip
+      - xcompmgr
+      - xorg-server
+      - xorg-xinit
+      - xorg-xrandr
+      - xorg-xsetroot
+      - xwallpaper
+      - zathura
+      - zathura-pdf-mupdf
+      - zip
+      - zsh
+    state: latest
+
+- name: packages | install AUR packages (Arch linux)
+  tags: package,arch,aur
+  pacman:
+    name:
+      - auto-cpufreq
+      - brave-bin
+      - lf
+      - libxft-bgra-git
+      - nordic-theme-git
+    state: present
+    executable: yay
+    extra_args: --builddir /var/cache/yay
+  when: ansible_distribution == "ArchLinux"
+
+- name: packages | clone auto-cpufreq repo (Debian)
+  tags: package,auto-cpufreq,debian
+  git:
+    repo: https://github.com/AdnanHodzic/auto-cpufreq.git
+    dest: ~/src/auto-cpufreq
+  when: ansible_distribution is ["Debian", "Ubuntu"]
+
+- name: packages | install auto-cpufreq (Debian)
+  tags: package,auto-cpufreq,debian
+  shell: ./auto-cpufreq-installer 
+  args:
+    chdir: ~/src/auto-cpufreq
+  when: ansible_distribution is ["Debian", "Ubuntu"]
+
+- name: packages | install Brave required dependencies (Debian)
+  tags: package,brave,debian
+  package:
+    name:
+      - apt-transport-https
+      - curl
+  when: ansible_distribution is ["Debian", "Ubuntu"]
+
