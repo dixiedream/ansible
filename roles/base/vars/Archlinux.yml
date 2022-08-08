@@ -1,4 +1,5 @@
 acpi_call_package: acpi_call
 amd_microcode_package: amd-ucode
 bluez_utils_package: bluez-utils
+exfat_utils_package: exfat-utils
 intel_microcode_package: intel-ucode
