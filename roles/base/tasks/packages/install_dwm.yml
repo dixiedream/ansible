@@ -8,6 +8,7 @@
     name: 
       - make
       - gcc
+      - harfbuzz
       - libx11-dev
       - libxft-dev
       - libxinerama-dev
