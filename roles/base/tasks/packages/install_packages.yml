@@ -33,6 +33,7 @@
       - pipewire-alsa
       - pipewire-pulse
       - playerctl
+      - ripgrep
       - s-tui
       - slock
       - sxiv
