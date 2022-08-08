@@ -17,7 +17,7 @@
   shell: ./auto-cpufreq-installer --install
   args:
     chdir: ~/src/auto-cpufreq
-  creates: /usr/local/bin/auto-cpufreq
+    creates: /usr/local/bin/auto-cpufreq
   when: ansible_distribution in ["Debian", "Ubuntu"]
 
 # - name: packages | start and enable auto-cpufreq (Debian)
