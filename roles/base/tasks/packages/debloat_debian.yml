@@ -15,7 +15,6 @@
 
 - name: packages | debloat Debian | remove unwanted services
   service:
-    name:
-      - bluetooth
+    name: bluetooth
     state: stopped
     enabled: no
