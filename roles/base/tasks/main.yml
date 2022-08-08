@@ -20,7 +20,7 @@
   - import_tasks: system_setup/tap_to_click.yml
 
   - import_tasks: system_setup/pacman.yml
-    when: ansible_distribution == "ArchLinux"
+    when: ansible_distribution == "Archlinux"
 
   - import_tasks: system_setup/dotfiles.yml
   - import_tasks: system_setup/remove_beep.yml

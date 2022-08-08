@@ -5,7 +5,7 @@
     state: present
     executable: yay
     extra_args: --builddir /var/cache/yay
-  when: ansible_distribution == "ArchLinux"
+  when: ansible_distribution == "Archlinux"
 
 - name: packages | download and install Nordic theme (Debian)
   unarchive:

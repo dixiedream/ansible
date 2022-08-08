@@ -57,14 +57,14 @@
     name:
       - xorg-xsetroot
     state: latest
-  when: ansible_distribution == "ArchLinux"
+  when: ansible_distribution == "Archlinux"
 
 - name: packages | install Pacman Contrib package (Arch linux)
   pacman:
     name:
       - pacman-contrib
     state: latest
-  when: ansible_distribution == "ArchLinux"
+  when: ansible_distribution == "Archlinux"
 
 - name: packages | install LF file manager (Arch linux)
   pacman:
@@ -73,7 +73,7 @@
     state: present
     executable: yay
     extra_args: --builddir /var/cache/yay
-  when: ansible_distribution == "ArchLinux"
+  when: ansible_distribution == "Archlinux"
 
 - name: packages | install LF file manager (Debian)
   apt:
