@@ -4,4 +4,6 @@
     dest: ~/src/dmenu
 
 - name: packages | dmenu | install dmenu 
-  command: make clean install
+  make:
+    target: install
+    chdir: ~/src/dmenu

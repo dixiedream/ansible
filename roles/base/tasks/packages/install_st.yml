@@ -4,4 +4,6 @@
     dest: ~/src/st
 
 - name: packages | st | install st 
-  command: make clean install
+  make:
+    target: install
+    chdir: ~/src/st

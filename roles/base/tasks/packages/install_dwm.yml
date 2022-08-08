@@ -4,4 +4,6 @@
     dest: ~/src/dwm
 
 - name: packages | dwm | install dwm 
-  command: make clean install
+  make:
+    target: install
+    chdir: ~/src/dwm
