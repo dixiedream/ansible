@@ -25,5 +25,8 @@
   - import_tasks: system_setup/dotfiles.yml
   - import_tasks: system_setup/remove_beep.yml
   - import_tasks: system_setup/lock_on_suspend.yml
-  # - import_tasks: system_setup/battery_threshold.yml
+
+    # Only for laptops
+  - import_tasks: system_setup/battery_threshold.yml
+    when: ansible_form_factor == "Notebook"
 

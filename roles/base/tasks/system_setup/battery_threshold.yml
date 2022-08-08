@@ -1,0 +1,11 @@
+- name: system setup | battery threshold | install package (Thinkpads)
+  package:
+    name: tpacpi-bat 
+    state: latest
+  when: ansible_system_vendor == "LENOVO"
+
+- name: system setup | battery threshold | copy conf (Thinkpads)
+  copy:
+    src: system_setup/battery_threshold.conf
+    dest: /etc/conf.d/tpacpi
+  when: ansible_system_vendor == "LENOVO" 

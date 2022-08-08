@@ -1,9 +1,9 @@
 - name: packages | st | clone repo 
   git:
     repo: https://github.com/dixiedream/st
-    dest: ~/src/st
+    dest: /tmp/st
 
 - name: packages | st | install st 
   make:
     target: install
-    chdir: ~/src/st
+    chdir: /tmp/st

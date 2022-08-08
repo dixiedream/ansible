@@ -1,9 +1,9 @@
 - name: packages | dmenu | clone repo 
   git:
     repo: https://github.com/dixiedream/dmenu
-    dest: ~/src/dmenu
+    dest: /tmp/dmenu
 
 - name: packages | dmenu | install dmenu 
   make:
     target: install
-    chdir: ~/src/dmenu
+    chdir: /tmp/dmenu

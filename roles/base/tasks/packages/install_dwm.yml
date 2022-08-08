@@ -1,7 +1,7 @@
 - name: packages | dwm | clone repo 
   git:
     repo: https://github.com/dixiedream/dwm
-    dest: ~/src/dwm
+    dest: /tmp/dwm
 
 - name: packages | dwm | install required dependencies (Debian) 
   package:
@@ -21,4 +21,4 @@
 - name: packages | dwm | install dwm 
   make:
     target: install
-    chdir: ~/src/dwm
+    chdir: /tmp/dwm
