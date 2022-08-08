@@ -1,6 +1,4 @@
 - name: ansible setup | ensure ansible is the latest version
-  tags: ansible,ansible-setup
   package:
     name: ansible
     state: latest
-
