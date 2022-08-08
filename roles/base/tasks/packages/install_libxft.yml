@@ -1,0 +1,32 @@
+- name: packages | install LibXft (Arch linux)
+  pacman:
+    name:
+      - libxft-bgra-git
+    state: present
+    executable: yay
+    extra_args: --builddir /var/cache/yay
+  when: ansible_distribution == "ArchLinux"
+
+- name: packages | install LibXft (Debian)
+  apt:
+    name: libxft2
+    state: latest
+  when: ansible_distribution in ["Debian", "Ubuntu"]
+
+- name: packages | clone libxft patched version (Debian)
+  git:
+    repo: https://github.com/uditkarode/libxft-bgra
+    dest: ~/src/libxft-bgra 
+  when: ansible_distribution in ["Debian", "Ubuntu"]
+
+- name: packages | install auto-cpufreq (Debian)
+  shell: sh autogen.sh --sysconfdir=/etc --prefix=/usr --mandir=/usr/share/man
+  args:
+    chdir: ~/src/libxft-bgra
+  when: ansible_distribution in ["Debian", "Ubuntu"]
+
+- name: packages | install auto-cpufreq (Debian)
+  shell: make install
+  args:
+    chdir: ~/src/libxft-bgra
+  when: ansible_distribution in ["Debian", "Ubuntu"]
