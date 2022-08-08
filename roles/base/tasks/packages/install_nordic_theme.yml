@@ -1,0 +1,14 @@
+- name: packages | install Nordic theme (Arch linux)
+  pacman:
+    name:
+      - nordic-theme-git
+    state: present
+    executable: yay
+    extra_args: --builddir /var/cache/yay
+  when: ansible_distribution == "ArchLinux"
+
+- name: packages | download and install Nordic theme (Debian)
+  unarchive:
+    src: "https://github.com/EliverLara/Nordic/releases/download/{{ nordic_theme_version }}/Nordic.tar.xz"
+    dest: /usr/share/themes
+  when: ansible_distribution in ["Debian", "Ubuntu"]

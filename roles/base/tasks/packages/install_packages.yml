@@ -66,11 +66,10 @@
     state: latest
   when: ansible_distribution == "ArchLinux"
 
-- name: packages | install AUR packages (Arch linux)
+- name: packages | install LF file manager (Arch linux)
   pacman:
     name:
       - lf
-      - nordic-theme-git
     state: present
     executable: yay
     extra_args: --builddir /var/cache/yay
