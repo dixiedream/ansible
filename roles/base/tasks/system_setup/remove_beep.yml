@@ -1,7 +1,5 @@
 - name: system setup | remove beep | remove pcspkr
   command: rmmod pcspkr
-  register: rmmod_output
-  failed_when: "'Module pcspkr is not currently loaded' not in rmmod_output.stderr"
 
 - name: system setup | remove beep | blacklist pcspkr
   command: echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
