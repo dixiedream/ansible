@@ -7,7 +7,7 @@
   user:
     name: ale
     group: ale
-    groups: ansible,{{ sudo_group }},docker
+    groups: {{ sudo_group }}
     state: present
     # password: "{{ ale_passwd }}"
 
