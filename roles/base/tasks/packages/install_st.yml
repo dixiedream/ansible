@@ -1,0 +1,7 @@
+- name: packages | st | clone repo 
+  git:
+    src: https://github.com/dixiedream/st
+    dest: ~/src/st
+
+- name: packages | st | install st 
+  command: make clean install

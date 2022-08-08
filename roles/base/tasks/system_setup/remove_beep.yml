@@ -1,0 +1,5 @@
+- name: system setup | remove beep | remove pcspkr
+  command: rmmod pcspkr
+
+- name: system setup | remove beep | blacklist pcspkr
+  command: echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
