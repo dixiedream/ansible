@@ -42,8 +42,8 @@
       - yt-dlp
       - xclip
       - xcompmgr
-      - xorg-server
-      - xorg-xinit
+      - "{{ xorg_server_package }}"
+      - "{{ xorg_xinit_package }}"
       - xorg-xrandr
       - xorg-xsetroot
       - xwallpaper
