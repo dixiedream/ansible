@@ -8,7 +8,7 @@
       - bc
       - bleachbit
       - bluez
-      - bluez-utils
+      - "{{ bluez_utils_package }}"
       - brightnessctl
       - cmus
       - dosfstools
