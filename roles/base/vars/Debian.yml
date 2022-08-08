@@ -1,5 +1,5 @@
 # Common vars
-sudo_groud: sudo
+sudo_group: sudo
 
 # Nordic theme version
 nordic_theme_version: v2.2.0

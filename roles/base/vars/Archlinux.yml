@@ -1,5 +1,5 @@
 # Common vars
-sudo_groud: wheel
+sudo_group: wheel
 
 # Package names
 acpi_call_package: acpi_call
