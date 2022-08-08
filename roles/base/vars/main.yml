@@ -1,2 +1,2 @@
 ale_passwd: ale
-dotfile_src: ~/.cfg
+dotfile_src: /home/ale/.cfg

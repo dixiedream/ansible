@@ -1,18 +1,14 @@
 - name: system setup | dotfiles | Clone repo 
-  become: ale
   git:
     bare: yes
     repo: https://github.com/dixiedream/dotfiles.git
     dest: "{{ dotfile_src }}"
 
 - name: system setup | dotfiles | Setup repo
-  become: ale
   command: "git --git-dir={{ dotfile_src }} --work-tree='~' checkout dwm"
 
 - name: system setup | dotfiles | Setup repo
-  become: ale
   command: "git --git-dir={{ dotfile_src }} --work-tree='~' config --local status.showUntrackedFiles no"
 
 - name: system setup | dotfiles | Setup repo
-  become: ale
   command: "git --git-dir={{ dotfile_src }} --work-tree='~' config remote.origin.fetch 'refs/heads/*:refs/remotes/origin/*'"
