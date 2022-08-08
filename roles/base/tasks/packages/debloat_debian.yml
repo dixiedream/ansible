@@ -1,0 +1,14 @@
+- name: packages | debloat Debian
+  apt:
+    name:
+      - anacron
+      - cron-daemon-common
+      - cron
+      - debian-faq
+      - doc-debian
+      - iamerican
+      - ibritish
+      - ienglish-common
+      - nano
+      - powertop
+    state: absent
