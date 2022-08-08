@@ -37,7 +37,7 @@
       - slock
       - sxiv
       - unclutter
-      - unrar
+      - "{{ unrar_package }}"
       - unzip
       - yt-dlp
       - xclip

@@ -5,3 +5,4 @@ exfat_utils_package: exfat-utils
 intel_microcode_package: intel-ucode
 noto_fonts_package: noto-fonts
 noto_fonts_emoji_package: noto-fonts-emoji
+unrar_package: unrar
