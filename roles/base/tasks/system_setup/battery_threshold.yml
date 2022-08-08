@@ -2,7 +2,20 @@
   package:
     name: tpacpi-bat 
     state: latest
-  when: ansible_system_vendor == "LENOVO"
+  when: ansible_system_vendor == "LENOVO" and ansible_distribution == "Archlinux"
+
+- name: system setup | battery threshold | clone package repo (Thinkpads Debian)
+  git:
+    repo: https://github.com/teleshoes/tpacpi-bat.git
+    dest: /tmp/tpacpi-bat
+  when: ansible_system_vendor == "LENOVO" and ansible_distribution in ["Debian", "Ubuntu"]
+
+- name: system setup | battery threshold | install package (Thinkpads Debian)
+  command: ./install.pl
+  args:
+    chdir: /tmp/tpacpi-bat
+    creates: /usr/bin/tpacpi-bat
+  when: ansible_system_vendor == "LENOVO" and ansible_distribution in ["Debian", "Ubuntu"]
 
 - name: system setup | battery threshold | copy conf (Thinkpads)
   copy:
