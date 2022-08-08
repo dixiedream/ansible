@@ -5,7 +5,12 @@
 
 - name: packages | dwm | install required dependencies (Debian) 
   package:
-    name: libxinerama
+    name: 
+      - make
+      - gcc
+      - libx11-dev
+      - libxft-dev
+      - libxinerama-dev
   when: ansible_distribution in ["Debian", "Ubuntu"]
 
 - name: packages | dwm | install dwm 
