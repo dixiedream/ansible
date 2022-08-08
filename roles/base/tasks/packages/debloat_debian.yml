@@ -12,7 +12,6 @@
       - nano 
       - powertop
       - pulseaudio
-      - pulseaudio-utils
     state: absent
 
 - name: packages | debloat Debian | remove unwanted services
