@@ -1,6 +1,6 @@
 - name: packages | dwm | clone repo 
   git:
-    src: https://github.com/dixiedream/dwm
+    repo: https://github.com/dixiedream/dwm
     dest: ~/src/dwm
 
 - name: packages | dwm | install dwm 

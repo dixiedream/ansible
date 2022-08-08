@@ -1,6 +1,6 @@
 - name: packages | dmenu | clone repo 
   git:
-    src: https://github.com/dixiedream/dmenu
+    repo: https://github.com/dixiedream/dmenu
     dest: ~/src/dmenu
 
 - name: packages | dmenu | install dmenu 
