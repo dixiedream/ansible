@@ -86,7 +86,7 @@
   when: ansible_distribution in ["Debian", "Ubuntu"]
 
 - name: packages | install auto-cpufreq (Debian)
-  shell: ./auto-cpufreq-installer 
+  shell: ./auto-cpufreq-installer --install
   args:
     chdir: ~/src/auto-cpufreq
   when: ansible_distribution in ["Debian", "Ubuntu"]
