@@ -1,4 +1,4 @@
-- name: packages | debloat Debian
+- name: packages | debloat Debian | remove unwanted packages 
   apt:
     name:
       - anacron
@@ -9,6 +9,13 @@
       - iamerican
       - ibritish
       - ienglish-common
-      - nano
+      - nano 
       - powertop
     state: absent
+
+- name: packages | debloat Debian | remove unwanted services
+  service:
+    name:
+      - bluetooth
+    state: stopped
+    enabled: no
