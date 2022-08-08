@@ -1,0 +1,13 @@
+- name: system setup | lock screen on suspend | copy conf file
+  copy:
+    src: system_setup/lock_on_suspend.conf
+    dest: /etc/systemd/system/slock@.service
+    owner: root
+    group: root
+
+- name: system setup | lock screen on suspend | enable service
+  service: 
+    name: "slock@ale.service"
+    state: started
+    enabled: yes
+

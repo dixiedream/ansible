@@ -3,12 +3,17 @@
     bare: yes
     repo: https://github.com/dixiedream/dotfiles.git
     dest: "{{ dotfile_src }}"
+    creates: "{{ dotfile_src }}"
+  become_user: ale
 
 - name: system setup | dotfiles | Setup repo
   command: "git --git-dir={{ dotfile_src }} --work-tree='{{ user_home}}' checkout -f dwm"
+  become_user: ale
 
 - name: system setup | dotfiles | Setup repo
   command: "git --git-dir={{ dotfile_src }} --work-tree='{{ user_home}}' config --local status.showUntrackedFiles no"
+  become_user: ale
 
 - name: system setup | dotfiles | Setup repo
   command: "git --git-dir={{ dotfile_src }} --work-tree='{{ user_home}}' config remote.origin.fetch 'refs/heads/*:refs/remotes/origin/*'"
+  become_user: ale

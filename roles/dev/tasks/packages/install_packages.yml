@@ -1,5 +1,4 @@
 - name: packages | install required packages
-  tags: dev,packages 
   package:
     name:
       - "{{ docker_package }}"
@@ -7,4 +6,5 @@
       - "{{ go_package }}"
       - "{{ npm_package }}"
       - "{{ php_package }}"
+      - ripgrep
     state: latest
