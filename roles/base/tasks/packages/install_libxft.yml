@@ -7,9 +7,11 @@
     extra_args: --builddir /var/cache/yay
   when: ansible_distribution == "ArchLinux"
 
-- name: packages | install LibXft (Debian)
+- name: packages | install LibXft required packages(Debian)
   apt:
-    name: libxft2
+    name: 
+      - libxft2
+      - autoconf
     state: latest
   when: ansible_distribution in ["Debian", "Ubuntu"]
 
