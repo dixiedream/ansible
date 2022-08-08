@@ -83,18 +83,18 @@
   git:
     repo: https://github.com/AdnanHodzic/auto-cpufreq.git
     dest: ~/src/auto-cpufreq
-  when: ansible_distribution is ["Debian", "Ubuntu"]
+  when: ansible_distribution in ["Debian", "Ubuntu"]
 
 - name: packages | install auto-cpufreq (Debian)
   shell: ./auto-cpufreq-installer 
   args:
     chdir: ~/src/auto-cpufreq
-  when: ansible_distribution is ["Debian", "Ubuntu"]
+  when: ansible_distribution in ["Debian", "Ubuntu"]
 
 - name: packages | install Brave required dependencies (Debian)
   package:
     name:
       - apt-transport-https
       - curl
-  when: ansible_distribution is ["Debian", "Ubuntu"]
+  when: ansible_distribution in ["Debian", "Ubuntu"]
 
