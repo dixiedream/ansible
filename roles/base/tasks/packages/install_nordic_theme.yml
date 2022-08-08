@@ -11,4 +11,5 @@
   unarchive:
     src: "https://github.com/EliverLara/Nordic/releases/download/{{ nordic_theme_version }}/Nordic.tar.xz"
     dest: /usr/share/themes
+    remote_src: yes
   when: ansible_distribution in ["Debian", "Ubuntu"]
