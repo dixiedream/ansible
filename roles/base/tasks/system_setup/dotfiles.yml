@@ -5,7 +5,7 @@
     dest: "{{ dotfile_src }}"
 
 - name: system setup | dotfiles | Setup repo
-  command: "git --git-dir={{ dotfile_src }} --work-tree='{{ user_home}}' checkout dwm"
+  command: "git --git-dir={{ dotfile_src }} --work-tree='{{ user_home}}' checkout -f dwm"
 
 - name: system setup | dotfiles | Setup repo
   command: "git --git-dir={{ dotfile_src }} --work-tree='{{ user_home}}' config --local status.showUntrackedFiles no"
