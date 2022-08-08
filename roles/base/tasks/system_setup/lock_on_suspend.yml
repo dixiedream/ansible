@@ -8,6 +8,4 @@
 - name: system setup | lock screen on suspend | enable service
   service: 
     name: "slock@ale.service"
-    state: started
     enabled: yes
-
