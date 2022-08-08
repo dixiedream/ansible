@@ -47,7 +47,7 @@
       - "{{ xorg_xrandr_package }}"
       - xwallpaper
       - zathura
-      - zathura-pdf-mupdf
+      - "{{ zathura_pdf_support_package }}"
       - zip
       - zsh
     state: latest
