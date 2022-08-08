@@ -3,7 +3,7 @@
   git:
     bare: yes
     repo: https://github.com/dixiedream/dotfiles.git
-    dest: {{ dotfile_src }}
+    dest: "{{ dotfile_src }}"
 
 - name: system setup | dotfiles | Setup repo
   become: ale
