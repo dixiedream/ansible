@@ -13,14 +13,17 @@
     dest: ~/src/auto-cpufreq
   when: ansible_distribution in ["Debian", "Ubuntu"]
 
-- name: packages | install auto-cpufreq (Debian)
-  shell: ./auto-cpufreq-installer --install
-  args:
-    chdir: ~/src/auto-cpufreq
-  when: ansible_distribution in ["Debian", "Ubuntu"]
+# - name: packages | install auto-cpufreq (Debian)
+#   shell: ./auto-cpufreq-installer --install
+#   args:
+#     chdir: ~/src/auto-cpufreq
+#   creates: /usr/local/bin/auto-cpufreq
+#   when: ansible_distribution in ["Debian", "Ubuntu"]
 
 - name: packages | start and enable auto-cpufreq (Debian)
   command: auto-cpufreq --install
+  register: installoutput
+  changed_when: "'auto-cpufreq is running in daemon mode' not in installoutput.stdout"
   when: ansible_distribution in ["Debian", "Ubuntu"]
 
 - name: packages | check auto-cpufreq is started and enabled
