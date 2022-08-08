@@ -1,0 +1,16 @@
+- name: packages | install Brave (Arch linux)
+  pacman:
+    name:
+      - brave-bin
+    state: present
+    executable: yay
+    extra_args: --builddir /var/cache/yay
+  when: ansible_distribution == "ArchLinux"
+
+- name: packages | install Brave required dependencies (Debian)
+  package:
+    name:
+      - apt-transport-https
+      - curl
+  when: ansible_distribution in ["Debian", "Ubuntu"]
+

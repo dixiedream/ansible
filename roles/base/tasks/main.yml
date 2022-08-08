@@ -4,6 +4,7 @@
 - block:
   - import_tasks: ansible_setup.yml
   - import_tasks: packages/install_packages.yml
+  - import_tasks: packages/install_brave.yml
   - import_tasks: system_setup/locale.yml
   - import_tasks: system_setup/microcode.yml # Need to set that as kernel par
   - import_tasks: system_setup/tap_to_click.yml
