@@ -12,6 +12,7 @@
     name: 
       - libxft2
       - autoconf
+      - xutils-dev
     state: latest
   when: ansible_distribution in ["Debian", "Ubuntu"]
 
