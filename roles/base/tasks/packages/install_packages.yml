@@ -2,7 +2,7 @@
   tags: package,software
   package:
     name:
-      - acpi_call
+      - "{{ acpi_call_package }}"
       - arandr
       - atool
       - autorandr
