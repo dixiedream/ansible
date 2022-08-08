@@ -22,3 +22,10 @@
     src: system_setup/battery_threshold.conf
     dest: /etc/conf.d/tpacpi
   when: ansible_system_vendor == "LENOVO" 
+
+- name: system setup | battery threshold | enable service (Thinkpads)
+  service:
+    name: tpacpi-bat
+    state: started
+    enabled: yes
+  when: ansible_system_vendor == "LENOVO" 
