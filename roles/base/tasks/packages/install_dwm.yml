@@ -3,6 +3,11 @@
     repo: https://github.com/dixiedream/dwm
     dest: ~/src/dwm
 
+- name: packages | dwm | install required dependencies (Debian) 
+  package:
+    name: libxinerama
+  when: ansible_distribution in ["Debian", "Ubuntu"]
+
 - name: packages | dwm | install dwm 
   make:
     target: install
