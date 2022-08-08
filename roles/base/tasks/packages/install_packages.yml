@@ -59,7 +59,7 @@
     state: latest
   when: ansible_distribution == "ArchLinux"
 
-- name: packages | install AUR packages (Arch linux)
+- name: packages | install Pacman Contrib package (Arch linux)
   pacman:
     name:
       - pacman-contrib
@@ -70,7 +70,6 @@
   pacman:
     name:
       - auto-cpufreq
-      - brave-bin
       - lf
       - libxft-bgra-git
       - nordic-theme-git
@@ -97,11 +96,3 @@
     state: started
     enabled: yes
   when: ansible_distribution == "ArchLinux"
-
-- name: packages | install Brave required dependencies (Debian)
-  package:
-    name:
-      - apt-transport-https
-      - curl
-  when: ansible_distribution in ["Debian", "Ubuntu"]
-
