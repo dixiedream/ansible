@@ -19,9 +19,12 @@
     chdir: ~/src/auto-cpufreq
   when: ansible_distribution in ["Debian", "Ubuntu"]
 
-- name: packages | start and enable auto-cpufreq (Arch linux)
+- name: packages | start and enable auto-cpufreq (Debian)
+  command: auto-cpufreq --install
+  when: ansible_distribution in ["Debian", "Ubuntu"]
+
+- name: packages | check auto-cpufreq is started and enabled
   service: 
     name: auto-cpufreq
     state: started
     enabled: yes
-  when: ansible_distribution == "Archlinux"

@@ -2,7 +2,7 @@
 - include_vars: "{{ ansible_distribution }}.yml"
 
 - block:
-  # - import_tasks: users/ale.yml
+  - import_tasks: users/ale.yml
 
   - import_tasks: ansible_setup.yml
 
@@ -24,6 +24,6 @@
 
   - import_tasks: system_setup/dotfiles.yml
   - import_tasks: system_setup/remove_beep.yml
-  # - import_tasks: system_setup/lock_on_suspend.yml
+  - import_tasks: system_setup/lock_on_suspend.yml
   # - import_tasks: system_setup/battery_threshold.yml
 

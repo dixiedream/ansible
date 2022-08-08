@@ -1,17 +1,15 @@
-# - name: users | ale | create group
-#   group:
-#     name: ale
-#     state: present
-#
-# - name: users | ale | create user
-#   user:
-#     name: ale
-#     group: ale
-#     groups: ansible,{{ sudo_group }},docker
-#     state: present
-#     comment: "Alessandro"
-#     password: "{{ ale_passwd }}"
-#     shell: /bin/zsh
+- name: users | ale | create group
+  group:
+    name: ale
+    state: present
+
+- name: users | ale | create user
+  user:
+    name: ale
+    group: ale
+    groups: ansible,{{ sudo_group }},docker
+    state: present
+    # password: "{{ ale_passwd }}"
 
 # - name: users | ale | create .ssh directory
 #   file:
