@@ -1,6 +1,3 @@
-vars:
-  - dotfile_src: ~/.cfg
-
 - name: system setup | dotfiles | Clone repo 
   become: ale
   git:
