@@ -24,8 +24,8 @@
       - ncdu
       - neofetch
       - neovim
-      - noto-fonts
-      - noto-fonts-emoji
+      - "{{ noto_fonts_package }}"
+      - "{{ noto_fonts_emoji_package }}" 
       - ntfs-3g
       - p7zip
       - pavucontrol
