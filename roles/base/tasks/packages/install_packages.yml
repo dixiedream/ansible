@@ -91,11 +91,12 @@
     chdir: ~/src/auto-cpufreq
   when: ansible_distribution in ["Debian", "Ubuntu"]
 
-- name: packages | start and enable auto-cpufreq
+- name: packages | start and enable auto-cpufreq (Arch linux)
   service: 
     name: auto-cpufreq
     state: started
     enabled: yes
+  when: ansible_distribution == "ArchLinux"
 
 - name: packages | install Brave required dependencies (Debian)
   package:
