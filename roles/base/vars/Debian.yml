@@ -1,2 +1,3 @@
+acpi_call_package: acpi-call
 amd_microcode_package: amd64-microcode
 intel_microcode_package: intel-microcode

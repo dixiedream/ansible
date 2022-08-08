@@ -1,5 +1,4 @@
 - name: packages | install packages
-  tags: package,software
   package:
     name:
       - "{{ acpi_call_package }}"
@@ -55,7 +54,6 @@
     state: latest
 
 - name: packages | install AUR packages (Arch linux)
-  tags: package,arch,aur
   pacman:
     name:
       - pacman-contrib
@@ -63,7 +61,6 @@
   when: ansible_distribution == "ArchLinux"
 
 - name: packages | install AUR packages (Arch linux)
-  tags: package,arch,aur
   pacman:
     name:
       - auto-cpufreq
@@ -77,21 +74,18 @@
   when: ansible_distribution == "ArchLinux"
 
 - name: packages | clone auto-cpufreq repo (Debian)
-  tags: package,auto-cpufreq,debian
   git:
     repo: https://github.com/AdnanHodzic/auto-cpufreq.git
     dest: ~/src/auto-cpufreq
   when: ansible_distribution is ["Debian", "Ubuntu"]
 
 - name: packages | install auto-cpufreq (Debian)
-  tags: package,auto-cpufreq,debian
   shell: ./auto-cpufreq-installer 
   args:
     chdir: ~/src/auto-cpufreq
   when: ansible_distribution is ["Debian", "Ubuntu"]
 
 - name: packages | install Brave required dependencies (Debian)
-  tags: package,brave,debian
   package:
     name:
       - apt-transport-https
