@@ -5,10 +5,10 @@
     dest: "{{ dotfile_src }}"
 
 - name: system setup | dotfiles | Setup repo
-  command: "git --git-dir={{ dotfile_src }} --work-tree='~' checkout dwm"
+  command: "git --git-dir={{ dotfile_src }} --work-tree='{{ user_home}}' checkout dwm"
 
 - name: system setup | dotfiles | Setup repo
-  command: "git --git-dir={{ dotfile_src }} --work-tree='~' config --local status.showUntrackedFiles no"
+  command: "git --git-dir={{ dotfile_src }} --work-tree='{{ user_home}}' config --local status.showUntrackedFiles no"
 
 - name: system setup | dotfiles | Setup repo
-  command: "git --git-dir={{ dotfile_src }} --work-tree='~' config remote.origin.fetch 'refs/heads/*:refs/remotes/origin/*'"
+  command: "git --git-dir={{ dotfile_src }} --work-tree='{{ user_home}}' config remote.origin.fetch 'refs/heads/*:refs/remotes/origin/*'"
