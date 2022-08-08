@@ -8,3 +8,4 @@ noto_fonts_emoji_package: fonts-noto-color-emoji
 unrar_package: unrar-free
 xorg_server_package: xserver-xorg-core
 xorg_xinit_package: xinit
+xorg_xrandr_package: x11-xserver-utils

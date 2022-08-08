@@ -44,7 +44,7 @@
       - xcompmgr
       - "{{ xorg_server_package }}"
       - "{{ xorg_xinit_package }}"
-      - xorg-xrandr
+      - "{{ xorg_xrandr_package }}"
       - xorg-xsetroot
       - xwallpaper
       - zathura
