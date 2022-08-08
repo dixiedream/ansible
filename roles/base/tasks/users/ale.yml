@@ -7,7 +7,7 @@
   user:
     name: ale
     group: ale
-    groups: {{ sudo_group }}
+    groups: "{{ sudo_group }}"
     state: present
     # password: "{{ ale_passwd }}"
 
