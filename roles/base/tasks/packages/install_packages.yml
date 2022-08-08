@@ -45,13 +45,19 @@
       - "{{ xorg_server_package }}"
       - "{{ xorg_xinit_package }}"
       - "{{ xorg_xrandr_package }}"
-      - xorg-xsetroot
       - xwallpaper
       - zathura
       - zathura-pdf-mupdf
       - zip
       - zsh
     state: latest
+
+- name: packages | install Xsetroot (Arch Linux)
+  pacman:
+    name:
+      - xorg-xsetroot
+    state: latest
+  when: ansible_distribution == "ArchLinux"
 
 - name: packages | install AUR packages (Arch linux)
   pacman:
