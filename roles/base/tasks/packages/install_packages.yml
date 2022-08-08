@@ -29,7 +29,6 @@
       - noto-fonts-emoji
       - ntfs-3g
       - p7zip
-      # - pacman-contrib
       - pavucontrol
       - pipewire
       - pipewire-alsa
@@ -54,6 +53,14 @@
       - zip
       - zsh
     state: latest
+
+- name: packages | install AUR packages (Arch linux)
+  tags: package,arch,aur
+  pacman:
+    name:
+      - pacman-contrib
+    state: latest
+  when: ansible_distribution == "ArchLinux"
 
 - name: packages | install AUR packages (Arch linux)
   tags: package,arch,aur
