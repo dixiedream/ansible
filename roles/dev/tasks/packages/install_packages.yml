@@ -3,8 +3,20 @@
     name:
       - docker
       - docker-compose
-      - go
       - npm
       - php
       - ripgrep
     state: latest
+
+- name: packages | install golang package (Archlinux)
+  pacman:
+    name: go
+    state: latest
+  when: ansible_os_family == "Archlinux"
+
+- name: packages | download golang archive (Debian)
+  get_url:
+    checksum: "{{ golang_checksum }}"
+    url: "https://go.dev/dl/go{{ golang_version }}.linux-amd64.tar.gz"
+    dest: /tmp/golang.tar.gz
+  when: ansible_os_family == "Debian"
