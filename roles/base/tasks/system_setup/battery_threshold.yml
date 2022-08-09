@@ -17,6 +17,18 @@
     creates: /usr/bin/tpacpi-bat
   when: ansible_system_vendor == "LENOVO" and ansible_distribution in ["Debian", "Ubuntu"]
 
+- name: system setup | battery threshold | copy service (Thinkpads Debian)
+  copy:
+    src: system_setup/battery_threshold.service
+    dest: /usr/lib/systemd/system/tpacpi.service
+  when: ansible_system_vendor == "LENOVO" and ansible_distribution in ["Debian", "Ubuntu"]
+
+- name: system setup | battery threshold | create required folder (Thinkpads Debian)
+  file:
+    path: /etc/conf.d
+    state: directory
+  when: ansible_system_vendor == "LENOVO" and ansible_distribution in ["Debian", "Ubuntu"] 
+
 - name: system setup | battery threshold | copy conf (Thinkpads)
   copy:
     src: system_setup/battery_threshold.conf
