@@ -14,7 +14,7 @@
 - name: packages | golang | extract archive (Debian)
   unarchive:
     src: /tmp/golang.tar.gz
-    dest: /usr/local/go
+    dest: /usr/local/
     owner: root
     group: root
   when: ansible_os_family == "Debian"
