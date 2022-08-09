@@ -29,6 +29,6 @@
   become_user: ale
   lineinfile:
     dest: "{{ user_home }}/.zprofile"
-    regexp: '^export PATH=$PATH:$GOROOT/bin:$GOPATH/bin'
+    regexp: '^export PATH=\$PATH:\$GOROOT/bin:\$GOPATH/bin'
     line: "export PATH=$PATH:$GOROOT/bin:$GOPATH/bin:/usr/local/go/bin"
   when: ansible_os_family == "Debian"
