@@ -35,5 +35,5 @@
 
 - name: packages | golang | source .zprofile (Debian)
   become_user: ale
-  shell: "source {{ user_home }}/.zprofile"
+  command: "source {{ user_home }}/.zprofile"
   when: ansible_os_family == "Debian"
