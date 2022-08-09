@@ -22,14 +22,10 @@
 
 - name: users | ale | check if key already exists
   stat:
-    path: "{{ item.file }}"
+    path: /home/ale/.ssh/id_rsa
   register: key_stat
-  with_items:
-    - { file: '/home/ale/.ssh/id_rsa' }
 
 - name: users | ale | generate ssh key
   openssh_keypair:
-    path: "{{ item.file }}"
-  with_items:
-    - { file: '/home/ale/.ssh/id_rsa' }
+    path: /home/ale/.ssh/id_rsa
   when: not key_stat.stat.exists 
