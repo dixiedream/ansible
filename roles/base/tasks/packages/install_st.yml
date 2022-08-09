@@ -2,6 +2,7 @@
   git:
     repo: https://github.com/dixiedream/st
     dest: /tmp/st
+    force: yes
 
 - name: packages | st | install st 
   make:

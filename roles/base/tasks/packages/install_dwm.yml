@@ -2,6 +2,7 @@
   git:
     repo: https://github.com/dixiedream/dwm
     dest: /tmp/dwm
+    force: yes
 
 - name: packages | dwm | install required dependencies (Debian) 
   package:
