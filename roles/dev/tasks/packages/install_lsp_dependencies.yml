@@ -3,9 +3,15 @@
     global: yes
     name: vscode-langservers-extracted
   
-- name: install packages | LSP | install gopls
+- name: install packages | LSP | install gopls (Archlinux)
   become: no
   command: go install golang.org/x/tools/gopls@latest
+  when: ansible_os_family == "Archlinux"
+
+- name: install packages | LSP | install gopls (Debian)
+  become: no
+  command: /usr/local/go/bin/go install golang.org/x/tools/gopls@latest
+  when: ansible_os_family == "Debian"
 
 - name: install packages | LSP | install GraphQl 
   npm:
