@@ -15,4 +15,8 @@
 
 - name: system setup | dotfiles | Setup repo
   become_user: ale
+  command: "git --git-dir={{ dotfile_src }} --work-tree='{{ user_home}}' config remote.origin.url 'git@github.com:dixiedream/dotfiles.git'"
+
+- name: system setup | dotfiles | Setup repo
+  become_user: ale
   command: "git --git-dir={{ dotfile_src }} --work-tree='{{ user_home}}' config remote.origin.fetch 'refs/heads/*:refs/remotes/origin/*'"
