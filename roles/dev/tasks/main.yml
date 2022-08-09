@@ -3,4 +3,5 @@
 
 - block:
   - import_tasks: packages/install_packages.yml
+  - import_tasks: packages/install_golang.yml
   - import_tasks: packages/install_lsp_dependencies.yml
