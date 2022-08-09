@@ -5,4 +5,3 @@
 
 - name: system setup | remove beep | blacklist pcspkr
   shell: echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
-  creates: /etc/modprobe.d/nobeep.conf 
