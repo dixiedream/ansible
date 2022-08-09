@@ -20,8 +20,16 @@
   with_items:
     - { dir: '/home/ale/.ssh' }
 
+- name: users | ale | check if key already exists
+  stat:
+    path: "{{ item.file }}"
+  register: key_stat
+  with_items:
+    - { file: '/home/ale/.ssh/id_rsa' }
+
 - name: users | ale | generate ssh key
   openssh_keypair:
     path: "{{ item.file }}"
   with_items:
     - { file: '/home/ale/.ssh/id_rsa' }
+  when: not key_stat.stat.exists 
