@@ -11,10 +11,16 @@
     dest: /tmp/golang.tar.gz
   when: ansible_os_family == "Debian"
 
+- name: packages | golang | creates dir if not exists (Debian)
+  file:
+    path: /usr/local/go
+    state: directory
+  when: ansible_os_family == "Debian"
+
 - name: packages | golang | extract archive (Debian)
   unarchive:
     src: /tmp/golang.tar.gz
-    dest: /usr/local/
+    dest: /usr/local/go
     owner: root
     group: root
   when: ansible_os_family == "Debian"

@@ -1,4 +1,4 @@
-- name: packages | install AUR packages (Arch linux)
+- name: packages | auto-cpufreq | install AUR package (Archlinux)
   pacman:
     name:
       - auto-cpufreq
@@ -7,26 +7,25 @@
     extra_args: --builddir /var/cache/yay
   when: ansible_distribution == "Archlinux"
 
-- name: packages | clone auto-cpufreq repo (Debian)
+- name: packages | auto-cpufreq | clone repo (Debian)
   git:
     repo: https://github.com/AdnanHodzic/auto-cpufreq.git
     dest: ~/src/auto-cpufreq
-  when: ansible_distribution in ["Debian", "Ubuntu"]
+  when: ansible_os_family == "Debian"
 
-- name: packages | install auto-cpufreq (Debian)
+- name: packages | auto-cpufreq | install (Debian)
   shell: ./auto-cpufreq-installer --install
   args:
     chdir: ~/src/auto-cpufreq
     creates: /usr/local/bin/auto-cpufreq
-  when: ansible_distribution in ["Debian", "Ubuntu"]
+  when: ansible_os_family == "Debian"
 
-# - name: packages | start and enable auto-cpufreq (Debian)
-#   command: auto-cpufreq --install
-#   register: installoutput
-#   changed_when: "'auto-cpufreq is running in daemon mode' not in installoutput.stdout"
-#   when: ansible_distribution in ["Debian", "Ubuntu"]
+- name: packages | auto-cpufreq | start and enable (Debian)
+  command: auto-cpufreq --install
+  ignore_errors: yes
+  when: ansible_os_family == "Debian"
 
-- name: packages | check auto-cpufreq is started and enabled
+- name: packages | auto-cpufreq | check is started and enabled (Archlinux)
   service: 
     name: auto-cpufreq
     state: started
