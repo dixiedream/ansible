@@ -1,7 +1,12 @@
 - name: system setup | remove beep | remove pcspkr
   command: rmmod pcspkr 
   ignore_errors: yes
-  # shell: rmmod pcspkr 2>/dev/null
+
+- name: system setup | remove beep | check if already blacklisted
+  stat:
+    path: /etc/modprobe.d/nobeep.conf
+  register: nobeep_check
 
 - name: system setup | remove beep | blacklist pcspkr
   shell: echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
+  when: not nobeep_check.stat.exists
