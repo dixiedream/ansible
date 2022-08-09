@@ -20,3 +20,10 @@
 - name: system setup | dotfiles | Setup repo
   become_user: ale
   command: "git --git-dir={{ dotfile_src }} --work-tree='{{ user_home}}' config remote.origin.fetch 'refs/heads/*:refs/remotes/origin/*'"
+
+- name: system setup | dotfiles | Change browser env var (Debian)
+  lineinfile:
+    dest: "{{ user_home }}/.zprofile"
+    regexp: '^BROWSER='
+    line: 'export BROWSER="brave-browser"'
+  when: ansible_os_family == "Debian"
