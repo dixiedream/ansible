@@ -9,120 +9,19 @@
     group: ale
     groups: "{{ sudo_group }}"
     state: present
-    # password: "{{ ale_passwd }}"
 
-# - name: users | ale | create .ssh directory
-#   file:
-#     path: "{{ item.dir }}"
-#     state: directory
-#     owner: ale
-#     group: ale 
-#     mode: 0700
-#   with_items:
-#     - { dir: '/home/ale/.ssh' }
-#
-# - name: users | ale | add public key
-#   authorized_key:
-#     user: ale
-#     key: "{{ item }}"
-#   with_file:
-#     - users/ale/ssh/ale_id_ed25519.pub
-#
-# - name: users | ale | create config directories
-#   file:
-#     path: /home/ale/{{ item.dir }}
-#     state: directory
-#     owner: ale
-#     group: ale
-#     mode: 0700
-#   with_items:
-#     - { dir: '.bash' }
-#     - { dir: '.config' }
-#     - { dir: '.config/htop' }
-#     - { dir: '.config/mc' }
-#     - { dir: '.tmux' }
-#     - { dir: '.tmux/config' }
-#     - { dir: '.tmux/plugins' }
-#     - { dir: '.vim' }
-#     - { dir: '.vim/autoload' }
-#     - { dir: '.vim/bundle' }
-#     - { dir: '.vim/colors' }
-#     - { dir: '.vim/ftplugin' }
-#     - { dir: '.zsh' }
-#
-# - name: users | ale | copy dotfiles
-#   tags: dotfiles,users,ale,tmux,users,vim,zsh
-#   copy:
-#     src: users/ale/{{ item.src }}
-#     dest: /home/ale/{{ item.dest }}
-#     owner: ale
-#     group: ale
-#     mode: 0600
-#   with_items:
-#     - { src: 'bash/bash_aliases', dest: '.bash/bash_aliases' }
-#     - { src: 'bash/bash_profile', dest: '.bash_profile' }
-#     - { src: 'bash/bash_prompt', dest: '.bash/bash_prompt' }
-#     - { src: 'bash/bash_functions', dest: '.bash/bash_functions' }
-#     - { src: 'bash/bashrc', dest: '.bashrc' }
-#     - { src: 'bash/profile', dest: '.profile' }
-#     - { src: 'git/gitconfig', dest: '.gitconfig' }
-#     - { src: 'htop/htoprc', dest: '.config/htop/htoprc' }
-#     - { src: 'inputrc', dest: '.inputrc' }
-#     - { src: 'mc/mc.ini', dest: '.config/mc/ini' }
-#     - { src: 'vim/vimrc', dest: '.vimrc' }
-#     - { src: 'zsh/zshrc', dest: '.zshrc' }
+- name: users | ale | create .ssh directory
+  file:
+    path: "{{ item.dir }}"
+    state: directory
+    owner: ale
+    group: ale 
+    mode: 0700
+  with_items:
+    - { dir: '/home/ale/.ssh' }
 
-
-# - name: users | ale | copy individual zsh config files
-#   tags: dotfiles,ale,users,zsh
-#   copy:
-#     src: users/ale/zsh/{{ item.src }}
-#     dest: /home/ale/.zsh/{{ item.src }}
-#     owner: ale
-#     group: ale
-#     mode: 0600
-#   with_items:
-#     - { src: 'aliases.zsh' }
-#     - { src: 'bindkey.zsh' }
-#     - { src: 'completion.zsh' }
-#     - { src: 'exports.zsh' }
-#     - { src: 'functions.zsh' }
-#     - { src: 'history.zsh' }
-#     - { src: 'path.zsh' }
-#     - { src: 'plugins.zsh' }
-#     - { src: 'prompt.zsh' }
-#     - { src: 'setopt.zsh' }
-#     - { src: 'theming.zsh' }
-#
-# - name: users | ale | copy vim ftype files
-#   tags: dotfiles,ale,users,vim
-#   copy:
-#     src: users/ale/vim/{{ item.src }}
-#     dest: /home/ale/.vim/ftplugin/{{ item.src }}
-#     owner: ale
-#     group: ale
-#     mode: 0600
-#   with_items:
-#     - { src: 'cmake.vim' }
-#     - { src: 'cpp.vim' }
-#     - { src: 'html.vim' }
-#     - { src: 'perl.vim' }
-#     - { src: 'python.vim' }
-#     - { src: 'ruby.vim' }
-#     - { src: 'sql.vim' }
-#     - { src: 'xml.vim' }
-#
-# - name: users | ale | copy vim color files
-#   tags: dotfiles,ale,users,vim
-#   copy:
-#     src: users/ale/vim/{{ item.src }}
-#     dest: /home/ale/.vim/colors/{{ item.src }}
-#     owner: ale
-#     group: ale
-#     mode: 0600
-#   with_items:
-#     - { src: 'bubblegum-256-dark.vim' }
-#     - { src: 'darktango.vim' }
-#     - { src: 'jellybeans.vim' }
-#     - { src: 'xoria256.vim' }
-#     - { src: 'zenburn.vim' }
+- name: users | ale | generate ssh key
+  openssh_keypair:
+    path: "{{ item.file }}"
+  with_items:
+    - { file: '/home/ale/.ssh/id_rsa' }
