@@ -1,10 +1,10 @@
 - name: packages | install required packages
   package:
     name:
-      - "{{ docker_package }}"
-      - "{{ docker_compose_package}}"
-      - "{{ go_package }}"
-      - "{{ npm_package }}"
-      - "{{ php_package }}"
+      - docker
+      - docker-compose
+      - go
+      - npm
+      - php
       - ripgrep
     state: latest
