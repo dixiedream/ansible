@@ -2,4 +2,4 @@
 
 hostname="${1:-127.0.0.1}"
 
-ansible $hostname -m ansible.builtin.setup
+ansible $hostname -m ansible.builtin.setup --connection=local
