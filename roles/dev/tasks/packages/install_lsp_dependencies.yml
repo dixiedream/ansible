@@ -31,7 +31,7 @@
 - name: install packages | LSP | install Typescript Language Server
   npm:
     global: yes
-    name: typescript-laguage-server
+    name: typescript-language-server
 
 - name: install packages | LSP | install Vue Language Server
   npm:
