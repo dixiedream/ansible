@@ -23,10 +23,6 @@
     global: yes
     name: intelephense
 
-- name: install packages | LSP | install Lua Language Server
-  package:
-    name: "{{ lua_language_server_package }}"
-
 - name: install packages | LSP | install Typescript
   npm:
     global: yes
