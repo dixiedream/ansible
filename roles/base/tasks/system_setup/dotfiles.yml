@@ -24,6 +24,6 @@
 - name: system setup | dotfiles | Change browser env var (Debian)
   lineinfile:
     dest: "{{ user_home }}/.zprofile"
-    regexp: '^BROWSER='
+    regexp: '^export BROWSER='
     line: 'export BROWSER="brave-browser"'
   when: ansible_os_family == "Debian"
