@@ -4,6 +4,7 @@
     name: vscode-langservers-extracted
   
 - name: install packages | LSP | install gopls
+  become: no
   command: go install golang.org/x/tools/gopls@latest
 
 - name: install packages | LSP | install GraphQl 
