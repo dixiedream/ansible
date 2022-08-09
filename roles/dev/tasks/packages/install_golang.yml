@@ -24,3 +24,11 @@
     owner: root
     group: root
   when: ansible_os_family == "Debian"
+
+- name: packages | golang | update $PATH var (Debian)
+  become_user: ale
+  lineinfile:
+    dest: "{{ user_home }}/.zprofile"
+    regexp: '^export PATH=$PATH:$GOROOT/bin:$GOPATH/bin'
+    line: "export PATH=$PATH:$GOROOT/bin:$GOPATH/bin:/usr/local/go/bin"
+  when: ansible_os_family == "Debian"
