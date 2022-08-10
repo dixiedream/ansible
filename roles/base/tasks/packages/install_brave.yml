@@ -35,7 +35,7 @@
 
 - name: packages | brave | copy brave binary to /usr/bin (Debian)
   file:
-    src: /opt/brave.com/brave/bin/brave
+    src: /opt/brave.com/brave/brave
     dest: /usr/bin/brave
     state: link
     owner: root
