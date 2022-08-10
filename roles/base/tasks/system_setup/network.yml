@@ -18,6 +18,18 @@
     owner: root
     group: root
 
+- name: system setup | network | check if wpa_supplicant folder exists
+  file: 
+    path: /etc/wpa_supplicant
+    state: directory
+
+- name: system setup | network | create wpa_supplicant template 
+  copy:
+    src: system_setup/wpa_supplicant.conf
+    dest: /etc/wpa_supplicant/wpa_supplicant-example.conf
+    owner: root
+    group: root
+
 - name: system setup | network | ensure networkd service is running and enabled
   service:
     name: systemd-networkd

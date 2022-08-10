@@ -47,6 +47,7 @@
       - "{{ unrar_package }}"
       - unzip
       - wireplumber
+      - "{{ wpa_supplicant_package }}"
       - yt-dlp
       - xclip
       - xcompmgr
