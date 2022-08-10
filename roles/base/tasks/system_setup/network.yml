@@ -1,3 +1,9 @@
+- name: system setup | network | remove ifupdown (Debian)
+  package:
+    name: ifupdown
+    state: absent
+  when: ansible_os_family == "Debian"
+
 - name: system setup | network | create basic ethernet conf
   copy:
     src: system_setup/network_ethernet.network
