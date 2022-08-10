@@ -9,6 +9,7 @@
     group: ale
     groups: "{{ sudo_group }}"
     state: present
+      shell: /usr/bin/zsh
 
 - name: users | ale | create .ssh directory
   file:
@@ -28,4 +29,6 @@
 - name: users | ale | generate ssh key
   openssh_keypair:
     path: /home/ale/.ssh/id_rsa
+    owner: ale
+    group: ale
   when: not key_stat.stat.exists 
