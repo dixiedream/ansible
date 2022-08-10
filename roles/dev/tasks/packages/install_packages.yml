@@ -7,3 +7,8 @@
       - php
       - ripgrep
     state: latest
+
+- name: packages | ensure docker service is not enabled
+  service: 
+    name: docker
+    enabled: no

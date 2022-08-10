@@ -1,6 +1,13 @@
+- name: packages | debloat Debian | remove unwanted services
+  service:
+    name: bluetooth
+    state: stopped
+    enabled: no
+
 - name: packages | debloat Debian | remove unwanted packages 
   apt:
     name:
+      - apache2
       - anacron
       - cron-daemon-common
       - cron
@@ -14,8 +21,49 @@
       - pulseaudio
     state: absent
 
-- name: packages | debloat Debian | remove unwanted services
-  service:
-    name: bluetooth
-    state: stopped
-    enabled: no
+- name: packages | debloat Debian | remove claimed non critical package 
+  apt:
+    name:
+      - aptitude
+      - at
+      - aspell
+      - aspell-en
+      - avahi-daemon
+      - bash-completion
+      - bin86
+      #- bind9-host 
+      #- ca-certificates
+      - console-common
+      - console-data
+      - console-tools
+      - dc
+      - debian-faq
+      - debian-faq-de
+      - debian-faq-fr
+      - debian-faq-it
+      - debian-faq-zh-cn
+      - dictoinaries
+      - doc-debian
+      - doc-linux-text
+      - eject
+      - fdutils
+      - iamerican
+      - ibritish
+      - ispell
+      - laptop-detect
+      - mtr-tiny
+      - mutt
+      - openssh-server
+      - ppp
+      - pppconfig
+      - pppoe
+      - pppoeconf
+      - reportbug
+      - vim-common
+      - vim-tiny
+      - w3m
+    state: absent
+
+
+
+
