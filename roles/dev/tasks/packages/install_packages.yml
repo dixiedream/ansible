@@ -13,3 +13,15 @@
     name: docker
     state: stopped
     enabled: no
+
+- name: packages | ensure containerd service is not enabled
+  service: 
+    name: containerd
+    state: stopped
+    enabled: no
+
+- name: packages | ensure php service is not enabled
+  service:
+    name: php8.1-fpm
+    state: stopped
+    enabled: no
