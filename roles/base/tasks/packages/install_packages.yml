@@ -1,3 +1,9 @@
+- name: packages | ensure pipewire-media-session is not present
+  package: 
+    name: pipewire-media-session
+    state: absent
+  ignore_errors: yes
+
 - name: packages | install packages
   package:
     name:
