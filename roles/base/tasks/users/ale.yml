@@ -36,4 +36,4 @@
 - name: users | ale | download wallpaper collection
   git:
     repo: https://github.com/dixiedream/wallpapers.git
-    dest: /home/ale
+    dest: /home/ale/
