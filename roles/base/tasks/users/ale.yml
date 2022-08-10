@@ -33,7 +33,7 @@
     group: ale
   when: not key_stat.stat.exists 
 
-- name: users | ale | download wallpaper collection
-  git:
-    repo: https://github.com/dixiedream/wallpapers.git
-    dest: /home/ale/
+# - name: users | ale | download wallpaper collection
+#   git:
+#     repo: https://github.com/dixiedream/wallpapers.git
+#     dest: /home/ale/
