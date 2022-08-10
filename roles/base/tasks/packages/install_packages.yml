@@ -53,21 +53,21 @@
       - zsh
     state: latest
 
-- name: packages | install Xsetroot (Arch Linux)
+- name: packages | install Xsetroot (Archlinux)
   pacman:
     name:
       - xorg-xsetroot
     state: latest
   when: ansible_distribution == "Archlinux"
 
-- name: packages | install Pacman Contrib package (Arch linux)
+- name: packages | install Pacman Contrib package (Archlinux)
   pacman:
     name:
       - pacman-contrib
     state: latest
   when: ansible_distribution == "Archlinux"
 
-- name: packages | install LF file manager (Arch linux)
+- name: packages | install LF file manager (Archlinux)
   pacman:
     name:
       - lf
@@ -80,4 +80,4 @@
   apt:
     name: lf
     state: latest
-  when: ansible_distribution in ["Debian", "Ubuntu"]
+  when: ansible_os_family == "Debian"

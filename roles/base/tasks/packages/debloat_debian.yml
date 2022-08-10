@@ -63,7 +63,3 @@
       - vim-tiny
       - w3m
     state: absent
-
-
-
-

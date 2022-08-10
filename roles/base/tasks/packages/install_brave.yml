@@ -1,4 +1,4 @@
-- name: packages | brave | install (Arch linux)
+- name: packages | brave | install (Archlinux)
   pacman:
     name:
       - brave-bin

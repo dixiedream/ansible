@@ -3,17 +3,17 @@
   connection: local
   become: true
   pre_tasks:
-    - name: pre-run | update package cache (arch)
+    - name: pre-run | update package cache (Archlinux)
       pacman: 
         update_cache: yes
       changed_when: False
       when: ansible_distribution == "Archlinux"
 
-    - name: pre-run | update package cache (debian)
+    - name: pre-run | update package cache (Debian)
       apt: 
         update_cache: yes
       changed_when: False
-      when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+      when: ansible_os_family == "Debian"
 
   # run roles
 - hosts: all
@@ -26,14 +26,14 @@
   connection: local
   become: true
   tasks:
-  - name: cleanup package cache (debian)
+  - name: cleanup package cache (Debian)
     apt:
       autoclean: yes
     changed_when: false
-    when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+    when: ansible_os_family == "Debian"
 
   - name: autoremove orphan packages (debian)
     apt:
       autoremove: yes
       purge: yes
-    when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+    when: ansible_os_family == "Debian"

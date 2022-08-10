@@ -17,7 +17,8 @@
       - xinit
       - xserver-xorg
       - x11-xserver-utils
-  when: ansible_distribution in ["Debian", "Ubuntu"]
+    state: present
+  when: ansible_os_family == "Debian"
 
 - name: packages | dwm | install dwm 
   make:

@@ -1,22 +1,22 @@
-- name: install packages | lua language server | install package (Archlinux)
+- name: packages | lua language server | install package (Archlinux)
   package:
     name: lua-language-server
     state: latest
   when: ansible_os_family == "Archlinux"
 
-- name: install packages | lua language server | download release (Debian)
+- name: packages | lua language server | download release (Debian)
   get_url:
     url: "https://github.com/sumneko/lua-language-server/releases/download/{{ lua_language_server_version }}/lua-language-server-{{ lua_language_server_version }}-linux-x64.tar.gz"
     dest: /tmp/lua-language-server.tar.gz
   when: ansible_os_family == "Debian"
 
-- name: install packages | lua language server | ensure dir exists (Debian)
+- name: packages | lua language server | ensure dir exists (Debian)
   file:
     path: /opt/lua-language-server
     state: directory
   when: ansible_os_family == "Debian"
 
-- name: install packages | lua language server | extract archive (Debian)
+- name: packages | lua language server | extract archive (Debian)
   unarchive:
     src: /tmp/lua-language-server.tar.gz
     dest: /opt/lua-language-server
@@ -24,7 +24,7 @@
     group: root
   when: ansible_os_family == "Debian"
 
-- name: install packages | lua language serve | create alias script (Debian)
+- name: packages | lua language serve | create alias script (Debian)
   copy:
     src: packages/install_lualanguageserver.sh
     dest: "{{ user_home }}/.local/bin/lua-language-server" 

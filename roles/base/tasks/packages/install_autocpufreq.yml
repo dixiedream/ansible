@@ -25,7 +25,7 @@
   ignore_errors: yes
   when: ansible_os_family == "Debian"
 
-- name: packages | auto-cpufreq | check is started and enabled (Archlinux)
+- name: packages | auto-cpufreq | check is started and enabled
   service: 
     name: auto-cpufreq
     state: started
