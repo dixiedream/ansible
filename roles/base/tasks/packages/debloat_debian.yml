@@ -16,6 +16,7 @@
       - iamerican
       - ibritish
       - ienglish-common
+      - ifupdown
       - nano 
       - powertop
       - pulseaudio
