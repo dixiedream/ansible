@@ -9,7 +9,7 @@
     group: ale
     groups: "{{ sudo_group }}"
     state: present
-      shell: /usr/bin/zsh
+    shell: /usr/bin/zsh
 
 - name: users | ale | create .ssh directory
   file:
