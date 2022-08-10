@@ -4,35 +4,6 @@
     state: latest
   when: ansible_os_family == "Archlinux"
 
-- name: install packages | lua language server | install build dep (Debian)
-  package:
-    name: 
-      - ninja-build
-      - clang
-    state: absent
-  when: ansible_os_family == "Debian"
-
-# - name: install packages | lua language server | clone repo (Debian)
-#   git:
-#     repo: https://github.com/sumneko/lua-language-server
-#     dest: /tmp/lua-language-server
-#     depth: 1
-#     recursive: yes
-#   when: ansible_os_family == "Debian"
-#
-# - name: install packages | lua language server | install (Debian)
-#   command: ./install.sh
-#   args:
-#     chdir: /tmp/lua-language-server/3rd/luamake/compile
-#   when: ansible_os_family == "Debian"
-#
-# - name: install packages | lua language server | rebuild (Debian)
-#   command: luamake rebuild
-#   args:
-#     chdir: /tmp/lua-language-server/3rd/luamake
-#   when: ansible_os_family == "Debian"
-#
-#
 - name: install packages | lua language server | download release (Debian)
   get_url:
     url: "https://github.com/sumneko/lua-language-server/releases/download/{{ lua_language_server_version }}/lua-language-server-{{ lua_language_server_version }}-linux-x64.tar.gz"
@@ -58,5 +29,6 @@
     src: packages/install_lualanguageserver.sh
     dest: "{{ user_home }}/.local/bin/lua-language-server" 
     owner: ale
-    group: ale
+    group: root
+    mode: 0755
   when: ansible_os_family == "Debian"
