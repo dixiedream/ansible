@@ -11,4 +11,5 @@
 - name: packages | ensure docker service is not enabled
   service: 
     name: docker
+    state: stopped
     enabled: no
