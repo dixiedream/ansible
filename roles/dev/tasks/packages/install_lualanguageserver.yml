@@ -4,28 +4,36 @@
     state: latest
   when: ansible_os_family == "Archlinux"
 
-- name: install packages | lua language server | install build dep (Debian)
-  package:
-    name: ninja-build
-    state: latest
-  when: ansible_os_family == "Debian"
+# - name: install packages | lua language server | install build dep (Debian)
+#   package:
+#     name: 
+#       - ninja-build
+#       - clang
+#     state: latest
+#   when: ansible_os_family == "Debian"
 
-- name: install packages | lua language server | clone repo (Debian)
-  git:
-    repo: https://github.com/sumneko/lua-language-server
-    dest: /tmp/lua-language-server
-    depth: 1
-    recursive: yes
-  when: ansible_os_family == "Debian"
-
+# - name: install packages | lua language server | clone repo (Debian)
+#   git:
+#     repo: https://github.com/sumneko/lua-language-server
+#     dest: /tmp/lua-language-server
+#     depth: 1
+#     recursive: yes
+#   when: ansible_os_family == "Debian"
+#
+# - name: install packages | lua language server | install (Debian)
+#   command: ./install.sh
+#   args:
+#     chdir: /tmp/lua-language-server/3rd/luamake/compile
+#   when: ansible_os_family == "Debian"
+#
+# - name: install packages | lua language server | rebuild (Debian)
+#   command: luamake rebuild
+#   args:
+#     chdir: /tmp/lua-language-server/3rd/luamake
+#   when: ansible_os_family == "Debian"
+#
 - name: install packages | lua language server | install (Debian)
-  command: ./install.sh
-  args:
-    chdir: /tmp/lua-language-server/3rd/luamake/compile
-  when: ansible_os_family == "Debian"
-
-- name: install packages | lua language server | rebuild (Debian)
-  command: luamake rebuild
-  args:
-    chdir: /tmp/lua-language-server/3rd/luamake
-  when: ansible_os_family == "Debian"
+  homebrew:
+    name: lua-language-server
+    state: present
+    update_homebrew: yes
