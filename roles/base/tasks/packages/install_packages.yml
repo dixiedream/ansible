@@ -79,7 +79,7 @@
   become_user: ale
   pacman:
     name:
-      - lf
+      - lf-bin
     state: present
     executable: yay
     extra_args: --builddir /var/cache/yay
