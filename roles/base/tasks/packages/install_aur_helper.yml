@@ -1,0 +1,10 @@
+- name: packages | AUR helper | clone Yay repo (Archlinux)
+  git:
+    repo: https://aur.archlinux.org/yay.git
+    dest: /tmp/yay
+
+- name: packages | AUR helper | install Yay (Archlinux)
+  command: makepkg --no-confirm -si
+  args:
+    chdir: /tmp/yay
+    creates: /usr/bin/yay
