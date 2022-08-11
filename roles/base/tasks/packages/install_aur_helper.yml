@@ -2,7 +2,7 @@
   become_user: ale
   git:
     repo: https://aur.archlinux.org/yay.git
-    dest: /home/ale/yay
+    dest: /tmp/yay
 
 - name: packages | AUR helper | install Yay (Archlinux)
   become_user: ale
