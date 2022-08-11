@@ -9,10 +9,10 @@
   - import_tasks: packages/debloat_debian.yml
     when: ansible_os_family == "Debian"
 
-  - import_tasks: packages/install_packages.yml
   - import_tasks: packages/install_aur_helper.yml
     when: ansible_os_family == "Archlinux"
 
+  - import_tasks: packages/install_packages.yml
   - import_tasks: packages/install_autocpufreq.yml
   - import_tasks: packages/install_brave.yml
   - import_tasks: packages/install_libxft.yml
