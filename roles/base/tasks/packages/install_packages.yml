@@ -77,13 +77,9 @@
 
 - name: packages | install LF file manager (Archlinux)
   become_user: ale
-  pacman:
-    name:
-      - lf-bin
-    state: present
-    update_cache: yes
-    executable: yay
-    extra_args: --builddir /var/cache/yay
+  comman: yay -S --noconfirm lf
+  args:
+    creates: /usr/bin/lf
   when: ansible_distribution == "Archlinux"
 
 - name: packages | install LF file manager (Debian)
