@@ -1,12 +1,6 @@
-- name: packages | libxft | remove old libxft (Archlinux)
-  package:
-    name: libxft
-    state: absent
-  when: ansible_distribution == "Archlinux"
-
 - name: packages | libxft | install (Archlinux)
   become_user: ale
-  command: yay -S --noconfirm libxft-bgra-git
+  shell: yes | yay -S --noconfirm libxft-git
   when: ansible_distribution == "Archlinux"
 
 - name: packages | libxft | install required dep (Debian)
