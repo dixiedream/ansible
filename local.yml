@@ -1,6 +1,5 @@
 ---
 - hosts: all
-  connection: local
   become: true
   pre_tasks:
     - name: pre-run | update package cache (Archlinux)
@@ -17,13 +16,11 @@
 
   # run roles
 - hosts: all
-  connection: local
   become: true
   roles:
     - base
 
 - hosts: all
-  connection: local
   become: true
   tasks:
   - name: cleanup package cache (Debian)

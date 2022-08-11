@@ -1,6 +1,5 @@
 ---
 - hosts: all
-  connection: local
   become: true
   pre_tasks:
     - name: pre-run | update package cache (arch)
@@ -17,7 +16,6 @@
 
   # run roles
 - hosts: all
-  connection: local
   become: true
   roles:
     - base
