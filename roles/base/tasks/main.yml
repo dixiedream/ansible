@@ -33,6 +33,9 @@
   - import_tasks: system_setup/remove_beep.yml
   - import_tasks: system_setup/lock_on_suspend.yml
 
+  - import_tasks: system_setup/debian_systemctl_shortcuts.yml
+    when: ansible_os_family == "Debian"
+
     # Only for laptops
   - import_tasks: system_setup/battery_threshold.yml
     when: ansible_form_factor == "Notebook"
