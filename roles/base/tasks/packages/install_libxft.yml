@@ -1,15 +1,11 @@
 - name: packages | libxft | install (Archlinux)
-  pacman:
-    name:
-      - libxft-bgra-git
-    state: present
-    executable: yay
-    extra_args: --builddir /var/cache/yay
+  become_user: ale
+  command: yay -S --noconfirm libxft-bgra-git
   when: ansible_distribution == "Archlinux"
 
 - name: packages | libxft | install required dep (Debian)
   apt:
-    name: 
+    name:
       - libxft2
       # - autoconf
       # - xutils-dev
@@ -19,5 +15,5 @@
 # - name: packages | clone libxft patched version (Debian)
 #   git:
 #     repo: https://github.com/uditkarode/libxft-bgra
-#     dest: ~/src/libxft-bgra 
+#     dest: ~/src/libxft-bgra
 #   when: ansible_os_family == "Debian"
