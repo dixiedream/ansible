@@ -1,6 +1,6 @@
 - name: packages | libxft | install (Archlinux)
   become_user: ale
-  shell: yes | yay -S --noconfirm libxft-git
+  shell: y | yay -S --removemake libxft-git
   when: ansible_distribution == "Archlinux"
 
 - name: packages | libxft | install required dep (Debian)
