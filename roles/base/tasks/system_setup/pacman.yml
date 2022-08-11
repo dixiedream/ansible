@@ -12,7 +12,6 @@
 #   command: sed -Ei "s/^#(ParallelDownloads).*/\1 = 5/;/^#Color$/s/#//" /etc/pacman.conf
 
 - name: system setup | pacman | setup parallel downloads (Archlinux)
-  command: sed -Ei "s/^#(ParallelDownloads).*/\1 = 5/;/^#Color$/s/#//" /etc/pacman.conf
   lineinfile:
     dest: /etc/pacman.conf
     regexp: '^#ParallelDownloads ='
