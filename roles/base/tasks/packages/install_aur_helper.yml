@@ -4,7 +4,7 @@
     dest: /tmp/yay
 
 - name: packages | AUR helper | install Yay (Archlinux)
-  command: makepkg --no-confirm -si
+  command: makepkg --noconfirm -si
   args:
     chdir: /tmp/yay
     creates: /usr/bin/yay
