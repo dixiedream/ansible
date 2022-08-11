@@ -1,7 +1,8 @@
 - name: packages | AUR helper | clone Yay repo (Archlinux)
+  become_user: ale
   git:
     repo: https://aur.archlinux.org/yay.git
-    dest: /tmp/yay
+    dest: /home/ale/yay
 
 - name: packages | AUR helper | install Yay (Archlinux)
   become_user: ale
