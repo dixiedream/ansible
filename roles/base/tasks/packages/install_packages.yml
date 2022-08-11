@@ -77,7 +77,7 @@
 
 - name: packages | install LF file manager (Archlinux)
   become_user: ale
-  comman: yay -S --noconfirm lf
+  command: yay -S --noconfirm lf
   args:
     creates: /usr/bin/lf
   when: ansible_distribution == "Archlinux"
