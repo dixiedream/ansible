@@ -1,0 +1,17 @@
+- name: system setup | debian systemctl shortcuts | create poweroff shortcut (Debian)
+  file:
+    src: systemctl
+    dest: /usr/bin/poweroff
+    state: link
+    owner: root
+    group: root
+  when: ansible_os_family == "Debian"
+
+- name: system setup | debian systemctl shortcuts | create reboot shortcut (Debian)
+  file:
+    src: systemctl
+    dest: /usr/bin/reboot
+    state: link
+    owner: root
+    group: root
+  when: ansible_os_family == "Debian"

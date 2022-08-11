@@ -1,10 +1,8 @@
 - name: packages | install Nordic theme (Archlinux)
-  pacman:
-    name:
-      - nordic-theme-git
-    state: present
-    executable: yay
-    extra_args: --builddir /var/cache/yay
+  become_user: ale
+  command: yay -S --noconfirm nordic-theme-git
+  args:
+    creates: /usr/share/themes/Nordic
   when: ansible_distribution == "Archlinux"
 
 - name: packages | download and install Nordic theme (Debian)

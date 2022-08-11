@@ -9,6 +9,9 @@
   - import_tasks: packages/debloat_debian.yml
     when: ansible_os_family == "Debian"
 
+  - import_tasks: packages/install_aur_helper.yml
+    when: ansible_os_family == "Archlinux"
+
   - import_tasks: packages/install_packages.yml
   - import_tasks: packages/install_autocpufreq.yml
   - import_tasks: packages/install_brave.yml
@@ -29,6 +32,9 @@
   - import_tasks: system_setup/dotfiles.yml
   - import_tasks: system_setup/remove_beep.yml
   - import_tasks: system_setup/lock_on_suspend.yml
+
+  - import_tasks: system_setup/debian_systemctl_shortcuts.yml
+    when: ansible_os_family == "Debian"
 
     # Only for laptops
   - import_tasks: system_setup/battery_threshold.yml

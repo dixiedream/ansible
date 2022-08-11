@@ -1,10 +1,8 @@
 - name: packages | brave | install (Archlinux)
-  pacman:
-    name:
-      - brave-bin
-    state: present
-    executable: yay
-    extra_args: --builddir /var/cache/yay
+  become_user: ale
+  command: yay -S --noconfirm brave-bin
+  args:
+    creates: /usr/bin/brave
   when: ansible_distribution == "Archlinux"
 
 - name: packages | brave | install required dependencies (Debian)
@@ -15,7 +13,7 @@
   when: ansible_os_family == "Debian"
 
 - name: packages | brave | setup keyring (Debian)
-  get_url: 
+  get_url:
     url: https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
     dest: /usr/share/keyrings/brave-browser-archive-keyring.gpg
   when: ansible_os_family == "Debian"

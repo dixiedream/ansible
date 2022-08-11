@@ -1,5 +1,5 @@
 - name: packages | ensure pipewire-media-session is not present
-  package: 
+  package:
     name: pipewire-media-session
     state: absent
   ignore_errors: yes
@@ -31,7 +31,7 @@
       - neofetch
       - neovim
       - "{{ noto_fonts_package }}"
-      - "{{ noto_fonts_emoji_package }}" 
+      - "{{ noto_fonts_emoji_package }}"
       - ntfs-3g
       - p7zip
       - pavucontrol
@@ -76,12 +76,10 @@
   when: ansible_distribution == "Archlinux"
 
 - name: packages | install LF file manager (Archlinux)
-  pacman:
-    name:
-      - lf
-    state: present
-    executable: yay
-    extra_args: --builddir /var/cache/yay
+  become_user: ale
+  command: yay -S --noconfirm lf
+  args:
+    creates: /usr/bin/lf
   when: ansible_distribution == "Archlinux"
 
 - name: packages | install LF file manager (Debian)

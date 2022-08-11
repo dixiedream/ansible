@@ -16,7 +16,7 @@
     path: "{{ item.dir }}"
     state: directory
     owner: ale
-    group: ale 
+    group: ale
     mode: 0700
   with_items:
     - { dir: '/home/ale/.ssh' }
@@ -31,9 +31,10 @@
     path: /home/ale/.ssh/id_rsa
     owner: ale
     group: ale
-  when: not key_stat.stat.exists 
+  when: not key_stat.stat.exists
 
 - name: users | ale | download wallpaper collection
+  become_user: ale
   git:
     repo: https://github.com/dixiedream/wallpapers.git
     dest: /home/ale/wallpapers

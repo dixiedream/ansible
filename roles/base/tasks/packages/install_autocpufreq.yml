@@ -1,10 +1,8 @@
 - name: packages | auto-cpufreq | install AUR package (Archlinux)
-  pacman:
-    name:
-      - auto-cpufreq
-    state: present
-    executable: yay
-    extra_args: --builddir /var/cache/yay
+  become_user: ale
+  command: yay -S --noconfirm auto-cpufreq
+  args:
+    creates: /usr/bin/auto-cpufreq
   when: ansible_distribution == "Archlinux"
 
 - name: packages | auto-cpufreq | clone repo (Debian)
@@ -26,7 +24,7 @@
   when: ansible_os_family == "Debian"
 
 - name: packages | auto-cpufreq | check is started and enabled
-  service: 
+  service:
     name: auto-cpufreq
     state: started
     enabled: yes
