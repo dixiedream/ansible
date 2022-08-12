@@ -20,6 +20,13 @@
     state: stopped
     enabled: no
 
+- name: users | ale | ensure ale is in docker group (Debian)
+  user:
+    name: ale
+    groups: docker
+    append: yes
+  when: ansible_os_family == "Debian"
+
 # - name: packages | ensure php service is not enabled
 #   service:
 #     name: php8.1-fpm

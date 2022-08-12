@@ -11,6 +11,13 @@
     state: present
     shell: /usr/bin/zsh
 
+- name: users | ale | ensure ale is in video group (Debian)
+  user:
+    name: ale
+    groups: video
+    append: yes
+  when: ansible_os_family == "Debian"
+
 - name: users | ale | create .ssh directory
   file:
     path: "{{ item.dir }}"
