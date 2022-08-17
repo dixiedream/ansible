@@ -20,13 +20,13 @@
     value: false
 
 - name: system setup | mail | Display emails in threaded mode, sorted by date (oldest at the top)
-  command: defaults write com.apple.mail DraftsViewerAttributes -dict-add "DisplayInThreadedMode" -string "yes"
+  shell: defaults write com.apple.mail DraftsViewerAttributes -dict-add "DisplayInThreadedMode" -string "yes"
 
 - name: system setup | mail | Display emails in threaded mode, sorted by date (oldest at the top) 2
-  command: defaults write com.apple.mail DraftsViewerAttributes -dict-add "SortedDescending" -string "yes"
+  shell: defaults write com.apple.mail DraftsViewerAttributes -dict-add "SortedDescending" -string "yes"
 
 - name: system setup | mail | Display emails in threaded mode, sorted by date (oldest at the top) 3
-  command: defaults write com.apple.mail DraftsViewerAttributes -dict-add "SortOrder" -string "received-date"
+  shell: defaults write com.apple.mail DraftsViewerAttributes -dict-add "SortOrder" -string "received-date"
 
 - name: system setup | mail | Disable inline attachments (just show the icons)
   osx_defaults:

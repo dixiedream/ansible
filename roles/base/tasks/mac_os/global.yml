@@ -1,6 +1,6 @@
 - name: system setup | disable the sound effects on boot
   become: true
-  command: "nvram SystemAudioVolume=\" \""
+  shell: "nvram SystemAudioVolume=\" \""
 
 - name: system setup | disable transparency in the menu bar and elsewhere on Yosemite
   osx_defaults:
@@ -30,33 +30,20 @@
     type: float
     value: 0.001
 
-- name: system setup | expand save panel by default | step 1
-  osx_defaults:
-    domain: NSGlobalDomain
-    key: NSNavPanelExpandedStateForSaveMode
-    type: bool
-    value: true
+- name: system setup | expand save panel by default
+  command: "{{ item }}"
+  with_items:
+    - defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+    - defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+  changed_when: false
 
-- name: system setup | expand save panel by default | step 2
-  osx_defaults:
-    domain: NSGlobalDomain
-    key: NSNavPanelExpandedStateForSaveMode2
-    type: bool
-    value: true
 
-- name: system setup | expand print panel by default | step 1
-  osx_defaults:
-    domain: NSGlobalDomain
-    key: PMPrintingExpandedStateForPrint
-    type: bool
-    value: true
-
-- name: system setup | expand print panel by default | step 2
-  osx_defaults:
-    domain: NSGlobalDomain
-    key: PMPrintingExpandedStateForPrint2
-    type: bool
-    value: true
+- name: system setup | expand print panel by default
+  command: "{{ item }}"
+  with_items:
+    - defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+    - defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
+  changed_when: false
 
 - name: system setup | automatically quit printer app once the print jobs complete
   osx_defaults:
@@ -80,7 +67,7 @@
     value: false
 
 - name: system setup | remove duplicates in the Open with menu
-  command: /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user
+  shell: /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user
 
 - name: system setup | disable resume system wide
   osx_defaults:
@@ -97,7 +84,7 @@
     value: true
 
 - name: system setup | disable notification center
-  command: launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
+  shell: launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
 
 - name: system setup | disable auto correct
   osx_defaults:
@@ -105,12 +92,6 @@
     key: NSAutomaticSpellingCorrectionEnabled
     type: bool
     value: false
-
-# Set a custom wallpaper image. `DefaultDesktop.jpg` is already a symlink, and
-# all wallpapers are in `/Library/Desktop Pictures/`. The default is `Wave.jpg`.
-#rm -rf ~/Library/Application Support/Dock/desktoppicture.db
-#sudo rm -rf /System/Library/CoreServices/DefaultDesktop.jpg
-#sudo ln -s /path/to/your/image /System/Library/CoreServices/DefaultDesktop.jpg
 
 - name: system setup | increase sound quality for bluetooth headphones
   osx_defaults:
@@ -127,18 +108,11 @@
     value: 3
       
 - name: system setup | set fast keyboard repeat rate
-  osx_defaults:
-    domain: NSGlobalDomain
-    key: KeyRepeat
-    type: int
-    value: 1
-
-- name: system setup | set fast keyboard repeat rate 2
-  osx_defaults:
-    domain: NSGlobalDomain
-    key: InitialKeyRepeat
-    type: int
-    value: 10
+  command: "{{ item }}"
+  with_items:
+    - defaults write NSGlobalDomain KeyRepeat -int 1
+    - defaults write NSGlobalDomain InitialKeyRepeat -int 10
+  changed_when: false
 
 - name: system setup | stop itunes from responding to keyboard media keys
-  command: launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null
+  shell: launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null

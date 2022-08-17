@@ -1,4 +1,4 @@
-- name: system setup | address book | enable the debug menu in Address Book
+- name: system setup | address book | enable the debug menu
   osx_defaults:
     domain: com.apple.addressbook 
     key: ABShowDebugMenu 

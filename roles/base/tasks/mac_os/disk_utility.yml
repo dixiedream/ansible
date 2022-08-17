@@ -1,13 +1,7 @@
-- name: system setup | disk utility | Enable the debug menu in Disk Utility
-  osx_defaults:
-    domain: com.apple.DiskUtility 
-    key: DUDebugMenuEnabled 
-    type: bool 
-    value: true
+- name: system setup | disk utility | Enable the debug menu
+  command: "{{ item }}"
+  with_items:
+    - defaults write com.apple.DiskUtility DUDebugMenuEnabled -bool true
+    - defaults write com.apple.DiskUtility advanced-image-options -bool true
+  changed_when: false
 
-- name: system setup | disk utility | Enable the debug menu in Disk Utility 2
-  osx_defaults:
-    domain: com.apple.DiskUtility 
-    key: advanced-image-options 
-    type: bool 
-    value: true
