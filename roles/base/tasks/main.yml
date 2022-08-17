@@ -40,7 +40,7 @@
       # Only for laptops
     - import_tasks: system_setup/battery_threshold.yml
       when: ansible_form_factor == "Notebook"
-  when: ansible_os_family != "Darwin"
+  when: ansible_system == "Linux"
 
 - name: Setup MacOS
   block:

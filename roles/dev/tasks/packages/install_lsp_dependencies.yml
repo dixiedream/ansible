@@ -3,10 +3,10 @@
     global: yes
     name: vscode-langservers-extracted
   
-- name: packages | LSP | install gopls (Archlinux)
+- name: packages | LSP | install gopls (Archlinux, MacOS)
   become: no
   command: go install golang.org/x/tools/gopls@latest
-  when: ansible_os_family == "Archlinux"
+  when: ansible_os_family in ["Archlinux", "Darwin"]
 
 - name: packages | LSP | install gopls (Debian)
   become: no

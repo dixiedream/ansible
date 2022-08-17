@@ -2,7 +2,7 @@
 - hosts: all
   become: true
   pre_tasks:
-    - name: pre-run | update package cache (arch)
+    - name: pre-run | update package cache (Archlinux)
       pacman: 
         update_cache: yes
       changed_when: False
@@ -13,6 +13,13 @@
         update_cache: yes
       changed_when: False
       when: ansible_os_family == "Debian"
+
+    - name: pre-run | update package cache (MacOS)
+      homebrew:
+        update_homebrew: yes
+        upgrade_all: yes
+      changed_when: false
+      when: ansible_os_family == "Darwin"
 
   # run roles
 - hosts: all
