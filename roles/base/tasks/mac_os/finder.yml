@@ -1,9 +1,9 @@
-- name: system setup | finder | - name: system setup | finder | enable quitting
-- name: system setup | finder |   osx_defaults:
-- name: system setup | finder |     domain: com.apple.finder
-- name: system setup | finder |     key: QuitMenuitem
-- name: system setup | finder |     type: bool
-- name: system setup | finder |     value: true
+# - name: system setup | finder | - name: system setup | finder | enable quitting
+#   osx_defaults:
+#     domain: com.apple.finder
+#     key: QuitMenuitem
+#     type: bool
+#     value: true
 
 - name: system setup | finder | disable window animations
   osx_defaults:
