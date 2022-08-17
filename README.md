@@ -1,6 +1,6 @@
 # Ansible
 
-My playbooks created for setup my laptops and desktops (Linux and MacOS).
+Playbooks created for setup my laptops and desktops (Linux and MacOS).
 
 ## Requirements
 
