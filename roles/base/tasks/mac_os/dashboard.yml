@@ -1,0 +1,51 @@
+- name: system setup | dashboard | Speed up Mission Control animations
+  osx_defaults:
+    domain: com.apple.dock 
+    key: expose-animation-duration 
+    type: float 
+    value: 0.1
+
+- name: system setup | dashboard | Don’t group windows by application in Mission Control
+  osx_defaults:
+    domain: com.apple.dock 
+    key: expose-group-by-app 
+    type: bool 
+    value: false
+
+- name: system setup | dashboard | Disable Dashboard
+  osx_defaults:
+    domain: com.apple.dashboard 
+    key: mcx-disabled 
+    type: bool 
+    value: true
+
+- name: system setup | dashboard | Don’t show Dashboard as a Space
+  osx_defaults:
+    domain: com.apple.dock 
+    key: dashboard-in-overlay 
+    type: bool 
+    value: true
+
+- name: system setup | dashboard | enable Dashboard dev mode (allows keeping widgets on the desktop)
+  osx_defaults:
+    domain: com.apple.dashboard 
+    key: devmode 
+    type: bool 
+    value: true
+
+- name: system setup | dashboard | Don’t automatically rearrange Spaces based on most recent use
+  osx_defaults:
+    domain: com.apple.dock 
+    key: mru-spaces 
+    type: bool 
+    value: false
+
+- name: system setup | dashboard | Disable the Launchpad gesture (pinch with thumb and three fingers)
+  osx_defaults:
+    domain: com.apple.dock 
+    key: showLaunchpadGestureEnabled 
+    type: int 
+    value: 0
+
+- name: system setup | dashboard | Reset Launchpad, but keep the desktop wallpaper intact
+  command: find "${HOME}/Library/Application Support/Dock" -name "*-*.db" -maxdepth 1 -delete

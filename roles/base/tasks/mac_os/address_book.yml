@@ -1,0 +1,13 @@
+- name: system setup | address book | enable the debug menu in Address Book
+  osx_defaults:
+    domain: com.apple.addressbook 
+    key: ABShowDebugMenu 
+    type: bool
+    value: true
+
+- name: system setup | address book | enable the debug menu in iCal (pre-10.8)
+  osx_defaults:
+    domain: com.apple.iCal 
+    key: IncludeDebugMenu 
+    type: bool 
+    value: true

@@ -1,0 +1,19 @@
+- name: system setup | dotfiles | ensure yabai conf dir exists
+  file:
+    path: ~/.config/yabai
+    state: directory
+
+- name: system setup | dotfiles | copy yabai conf file
+  copy:
+    src: system_setup/yabairc
+    dest: ~/.config/yabai/yabairc
+
+- name: system setup | dotfiles | ensure skhd conf dir exists
+  file:
+    path: ~/.config/skhd
+    state: directory
+
+- name: system setup | dotfiles | copy skhd conf file
+  copy:
+    src: system_setup/skhdrc
+    dest: ~/.config/skhd/skhdrc

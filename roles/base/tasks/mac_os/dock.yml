@@ -1,0 +1,90 @@
+- name: system setup | dock | Enable highlight hover effect for the grid view of a stack (Dock)
+  osx_defaults:
+    domain: com.apple.dock 
+    keu: mouse-over-hilite-stack 
+    type: bool 
+    value: true
+
+- name: system setup | dock | Set the icon size of Dock items to 36 pixels
+  osx_defaults:
+    domain: com.apple.dock 
+    keu: tilesize 
+    type: int 
+    value: 36
+
+- name: system setup | dock | Change minimize/maximize window effect
+  osx_defaults:
+    domain: com.apple.dock 
+    key: mineffect 
+    type: string 
+    value: "scale"
+
+- name: system setup | dock | Minimize windows into their application’s icon
+  osx_defaults:
+    domain: com.apple.dock 
+    key: minimize-to-application 
+    type: bool 
+    value: true
+
+- name: system setup | dock | Enable spring loading for all Dock items
+  osx_defaults:
+    domain: com.apple.dock 
+    key: enable-spring-load-actions-on-all-items 
+    type: bool 
+    value: true
+
+- name: system setup | dock | Show indicator lights for open applications in the Dock
+  osx_defaults:
+    domain: com.apple.dock 
+    key: show-process-indicators 
+    type: bool 
+    value: true
+
+- name: system setup | dock | Wipe all (default) app icons from the Dock
+  osx_defaults:
+    domain: com.apple.dock 
+    key: persistent-apps 
+    type: array
+    value: 
+
+- name: system setup | dock | Don’t animate opening applications from the Dock
+  osx_defaults:
+    domain: com.apple.dock 
+    key: launchanim 
+    type: bool 
+    value: false
+
+- name: system setup | dock | Remove the auto-hiding Dock delay
+  osx_defaults:
+    domain: com.apple.dock 
+    key: autohide-delay 
+    type: float 
+    value: 0
+
+- name: system setup | dock | Remove the animation when hiding/showing the Dock
+  osx_defaults:
+    domain: com.apple.dock 
+    key: autohide-time-modifier 
+    type: float 
+    value: 0
+
+- name: system setup | dock | Automatically hide and show the Dock
+  osx_defaults:
+    domain: com.apple.dock 
+    key: autohide 
+    type: bool 
+    value: true
+
+- name: system setup | dock | Make Dock icons of hidden applications translucent
+  osx_defaults:
+    domain: com.apple.dock 
+    key: showhidden 
+    type: bool 
+    value: true
+
+- name: system setup | dock | Don’t show recent applications in Dock
+  osx_defaults:
+    domain: com.apple.dock 
+    key: show-recents 
+    type: bool 
+    value: false

@@ -1,0 +1,27 @@
+- name: system setup | hot corners | disable top left corner
+  osx_defaults:
+    domain: com.apple.dock 
+    key: wvous-tl-corner 
+    type: int 
+    value: 0
+
+- name: system setup | hot corners | disable top right corner
+  osx_defaults:
+    domain: com.apple.dock 
+    key: wvous-tr-corner 
+    type: int 
+    value: 0
+
+- name: system setup | hot corners | disable bottom left corner
+  osx_defaults:
+    domain: com.apple.dock 
+    key: wvous-bl-corner 
+    type: int 
+    value: 0
+
+- name: system setup | hot corners | disable bottom right corner
+  osx_defaults:
+    domain: com.apple.dock 
+    key: wvous-br-corner 
+    type: int 
+    value: 0

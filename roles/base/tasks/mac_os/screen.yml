@@ -1,0 +1,50 @@
+- name: system setup | require password after sleep or screensaver begins
+  osx_defaults:
+    domain: com.apple.screensaver
+    key: askForPassword
+    type: int
+    value: 1
+
+- name: system setup | require password after sleep or screensaver begins 2
+  osx_defaults:
+    domain: com.apple.screensaver
+    key: askForPasswordDelay
+    type: int
+    value: 0
+
+- name: system setup | save screenshots to desktop
+  osx_defaults:
+    domain: com.apple.screencapture
+    key: location
+    type: string
+    value: "${HOME}/Desktop"
+
+- name: system setup | save screenshots in PNG
+  osx_defaults:
+    domain: com.apple.screencapture
+    key: type
+    type: string
+    value: "png"
+
+- name: system setup | disable shadow in screenshots
+  osx_defaults:
+    domain: com.apple.screencapture
+    key: disable-shadow
+    type: bool
+    value: true
+
+- name: system setup | enable subpixel font rendering on non-Apple LCDs
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: AppleFontSmoothing
+    type: int
+    value: 1
+
+- name: system setup | enable HiDPI display modes
+  become: true
+  osx_defaults:
+    path: /Library/Preferences
+    domain: com.apple.windowserver
+    key: DisplayResolutionEnabled
+    type: bool
+    value: true
