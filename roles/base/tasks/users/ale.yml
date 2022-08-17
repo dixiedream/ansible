@@ -45,3 +45,4 @@
   git:
     repo: https://github.com/dixiedream/wallpapers.git
     dest: /home/ale/wallpapers
+  ignore_errors: yes
