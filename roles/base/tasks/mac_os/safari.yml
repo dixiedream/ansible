@@ -19,7 +19,7 @@
     - defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks -bool true
   changed_when: false
 
-- name: system setup | safari | Show the full URL in the address bar (note: this still hides the scheme)
+- name: system setup | safari | Show the full URL in the address bar 
   osx_defaults:
     domain: com.apple.Safari 
     key: ShowFullURLInSmartSearchField 
