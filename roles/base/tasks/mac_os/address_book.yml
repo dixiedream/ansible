@@ -11,3 +11,7 @@
     key: IncludeDebugMenu 
     type: bool 
     value: true
+
+- name: system setup | address book | restart 
+  shell: killall Address Book
+  changed_when: false

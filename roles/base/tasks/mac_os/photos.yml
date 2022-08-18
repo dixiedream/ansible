@@ -5,3 +5,7 @@
     key: disableHotPlug 
     type: bool 
     value: true
+
+- name: system setup | photos | restart
+  shell: killall Photos
+  changed_when: false

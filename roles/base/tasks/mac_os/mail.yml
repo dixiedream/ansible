@@ -41,3 +41,7 @@
     key: SpellCheckingBehavior 
     type: string 
     value: "NoSpellCheckingEnabled"
+
+- name: system setup | mail | restart
+  shell: killall Mail
+  changed_when: false

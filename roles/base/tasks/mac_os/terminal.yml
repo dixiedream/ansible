@@ -48,3 +48,7 @@
     - defaults write com.apple.terminal 'Startup Window Settings' -string Nord
   changed_when: false
   when: "'Nord' not in terminal_theme.stdout"
+
+- name: system setup | terminal | restart
+  shell: killall Terminal
+  changed_when: false

@@ -25,3 +25,7 @@
     key: PMPrintingExpandedStateForPrint2 
     type: bool 
     value: true
+
+- name: software | chrome | restart
+  shell: killall Google Chrome
+  changed_when: false

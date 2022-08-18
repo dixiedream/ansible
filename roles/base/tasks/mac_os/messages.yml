@@ -7,3 +7,6 @@
 - name: system setup | messages | Disable continuous spell checking
   command: defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "continuousSpellCheckingEnabled" -bool false
 
+- name: system setup | messages | restart
+  shell: killall Messages
+  changed_when: false

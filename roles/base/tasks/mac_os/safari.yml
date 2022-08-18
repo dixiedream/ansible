@@ -216,3 +216,7 @@
     key: InstallExtensionUpdatesAutomatically 
     type: bool 
     value: true
+
+- name: system setup | safari | restart
+  shell: killall Safari
+  changed_when: false

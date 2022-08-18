@@ -39,3 +39,7 @@
     key: RandomPort 
     type: bool 
     value: true
+
+- name: software | transmission | restart
+  shell: killall Transmission
+  changed_when: false

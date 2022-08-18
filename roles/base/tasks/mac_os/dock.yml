@@ -88,3 +88,7 @@
     key: show-recents 
     type: bool 
     value: false
+
+- name: system setup | dock | restart
+  shell: killall Dock
+  changed_when: false

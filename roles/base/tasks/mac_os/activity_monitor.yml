@@ -25,3 +25,7 @@
     - defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
     - defaults write com.apple.ActivityMonitor SortDirection -int 0
   changed_when: false
+
+- name: system setup | activity monitor | restart
+  shell: killall Activity Monitor
+  changed_when: false
