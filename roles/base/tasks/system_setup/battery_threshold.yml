@@ -35,10 +35,18 @@
     dest: /etc/conf.d/tpacpi
   when: ansible_system_vendor == "LENOVO"
 
-- name: system setup | battery threshold | enable service (Thinkpads)
+- name: system setup | battery threshold | enable service (Thinkpads Debian)
   service:
     name: tpacpi
     state: started
     enabled: yes
   ignore_errors: true
-  when: ansible_system_vendor == "LENOVO"
+  when: ansible_system_vendor == "LENOVO" and ansible_os_family == "Debian"
+
+- name: system setup | battery threshold | enable service (Thinkpads Debian)
+  service:
+    name: tpacpi-bat
+    state: started
+    enabled: yes
+  ignore_errors: true
+  when: ansible_system_vendor == "LENOVO" and ansible_distribution == "Archlinux"
