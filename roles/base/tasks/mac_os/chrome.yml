@@ -1,0 +1,27 @@
+- name: software | chrome | disable the all too sensitive backswipe on trackpads
+  osx_defaults:
+    domain: com.google.Chrome 
+    key: AppleEnableSwipeNavigateWithScrolls 
+    type: bool 
+    value: false
+
+- name: software | chrome | disable the all too sensitive backswipe on Magic Mouse
+  osx_defaults:
+    domain: com.google.Chrome 
+    key: AppleEnableMouseSwipeNavigateWithScrolls 
+    type: bool 
+    value: false
+
+- name: software | chrome | use the system-native print preview dialog
+  osx_defaults:
+    domain: com.google.Chrome 
+    key: DisablePrintPreview 
+    type: bool 
+    value: true
+
+- name: software | chrome | expand the print dialog by default
+  osx_defaults:
+    domain: com.google.Chrome 
+    key: PMPrintingExpandedStateForPrint2 
+    type: bool 
+    value: true

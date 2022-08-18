@@ -25,7 +25,7 @@
 
 - name: system setup | network | create wpa_supplicant template
   template:
-    src: system_setup/wpa_supplicant.conf
+    src: system_setup/wpa_supplicant.j2
     dest: /etc/wpa_supplicant/wpa_supplicant-example.conf
     owner: root
     group: root

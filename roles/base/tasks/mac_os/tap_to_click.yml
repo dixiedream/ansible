@@ -1,0 +1,69 @@
+- name: system setup | tap to click step 1
+  osx_defaults:
+    domain: com.apple.driver.AppleBluetoothMultitouch.trackpad
+    key: Clicking
+    type: bool
+    value: true
+
+- name: system setup | tap to click step 2
+  osx_defaults: 
+    domain: com.apple.AppleMultitouchTrackpad
+    key: Clicking
+    type: bool
+    value: true
+
+- name: system setup | tap to click | step 3
+  osx_defaults: 
+    domain: com.apple.driver.AppleMultitouch.trackpad 
+    key: Clicking
+    type: bool
+    value: true
+  become: true
+
+- name: system setup | tap to click | step 4
+  osx_defaults: 
+    domain: NSGlobalDomain 
+    key: com.apple.mouse.tapBehavior
+    type: int
+    value: 1
+    host: currentHost
+
+- name: system setup | tap to click | step 5
+  osx_defaults: 
+    domain: NSGlobalDomain 
+    key: com.apple.mouse.tapBehavior
+    type: int
+    value: 1
+
+- name: system setup | disable natural scrolling
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: com.apple.swipescrolldirection
+    type: bool
+    value: false
+
+
+###############################################################################
+# Kill affected applications                                                  #
+###############################################################################
+
+for app in "Activity Monitor" \
+	"Address Book" \
+	"Calendar" \
+	"cfprefsd" \
+	"Contacts" \
+	"Dock" \
+	"Finder" \
+	"Google Chrome Canary" \
+	"Google Chrome" \
+	"Mail" \
+	"Messages" \
+	"Photos" \
+	"Safari" \
+	"SystemUIServer" \
+	"Terminal" \
+	"Transmission" \
+	"iCal"; do
+	killall "${app}" &> /dev/null
+done
+echo "Done. Note that some of these changes require a logout/restart to take effect."

@@ -1,0 +1,50 @@
+- name: system setup | terminal | Only use UTF-8
+  osx_defaults:
+    domain: com.apple.Terminal 
+    key: StringEncodings 
+    type: array 
+    value:
+      - 4
+
+# - name: system setup | terminal | enable secure keyboard entry
+#   osx_defaults:
+#     domain: com.apple.Terminal
+#     key: SecureKeyboardEntry
+#     type: bool
+#     value: true
+
+- name: system setup | terminal | disable the annoying line marks
+  osx_defaults:
+    domain: com.apple.Terminal 
+    key: ShowLineMarks 
+    type: int 
+    value: 0
+
+- name: system setup | terminal | Get current Terminal profile.
+  osx_defaults:
+    domain: com.apple.Terminal
+    key: 'Default Window Settings'
+  register: terminal_theme
+  changed_when: false
+  check_mode: false
+
+- name: system setup | terminal | Ensure custom Terminal profile is added.
+  copy:
+    src: system_setup/terminal/Nord.terminal
+    dest: /tmp/Nord.terminal
+  changed_when: false
+  when: "'Nord' not in terminal_theme.stdout"
+
+- name: system setup | terminal | Ensure custom Terminal profile is added.
+  command: open /tmp/Nord.terminal
+  changed_when: false
+  when: "'Nord' not in terminal_theme.stdout"
+
+# TODO: This doesn't work in Yosemite. Consider a different solution?
+- name: system setup | terminal | Ensure custom Terminal profile is set as default.
+  command: "{{ item }}"
+  with_items:
+    - defaults write com.apple.terminal 'Default Window Settings' -string Nord
+    - defaults write com.apple.terminal 'Startup Window Settings' -string Nord
+  changed_when: false
+  when: "'Nord' not in terminal_theme.stdout"

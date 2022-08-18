@@ -1,0 +1,32 @@
+- name: mac os | install brews formulas
+  homebrew:
+    name: 
+      - atool
+      - fzf
+      - gzip
+      - htop
+      - lf
+      - ncdu
+      - neofetch
+      - neovim
+      - p7zip
+      - ripgrep
+      - skhd
+      - unrar
+      - unzip
+      - yabai
+      - yt-dlp
+      - zip
+    state: latest
+
+- name: mac os | install brew casks
+  homebrew:
+    name:
+      - alacritty
+      - appcleaner
+      - brave-browser
+      - mpv
+      - onyx
+      - the-unarchiver
+      - transmission
+    state: latest

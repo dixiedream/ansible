@@ -1,0 +1,7 @@
+- name: system setup | disk utility | Enable the debug menu
+  command: "{{ item }}"
+  with_items:
+    - defaults write com.apple.DiskUtility DUDebugMenuEnabled -bool true
+    - defaults write com.apple.DiskUtility advanced-image-options -bool true
+  changed_when: false
+

@@ -1,0 +1,51 @@
+- name: system setup | mission control | Speed up animations
+  osx_defaults:
+    domain: com.apple.dock 
+    key: expose-animation-duration 
+    type: float 
+    value: 0.1
+
+- name: system setup | mission control | Don’t group windows by application 
+  osx_defaults:
+    domain: com.apple.dock 
+    key: expose-group-by-app 
+    type: bool 
+    value: false
+
+- name: system setup | dashboard | Disable
+  osx_defaults:
+    domain: com.apple.dashboard 
+    key: mcx-disabled 
+    type: bool 
+    value: true
+
+- name: system setup | dashboard | Don’t show as a Space
+  osx_defaults:
+    domain: com.apple.dock 
+    key: dashboard-in-overlay 
+    type: bool 
+    value: true
+
+- name: system setup | dashboard | enable dev mode (allows keeping widgets on the desktop)
+  osx_defaults:
+    domain: com.apple.dashboard 
+    key: devmode 
+    type: bool 
+    value: true
+
+- name: system setup | dashboard | Don’t automatically rearrange Spaces based on most recent use
+  osx_defaults:
+    domain: com.apple.dock 
+    key: mru-spaces 
+    type: bool 
+    value: false
+
+- name: system setup | launchpad | Disable gesture (pinch with thumb and three fingers)
+  osx_defaults:
+    domain: com.apple.dock 
+    key: showLaunchpadGestureEnabled 
+    type: int 
+    value: 0
+
+- name: system setup | launchpad | Reset, but keep the desktop wallpaper intact
+  shell: find "${HOME}/Library/Application Support/Dock" -name "*-*.db" -maxdepth 1 -delete

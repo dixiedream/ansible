@@ -1,0 +1,211 @@
+# - name: system setup | finder | - name: system setup | finder | enable quitting
+#   osx_defaults:
+#     domain: com.apple.finder
+#     key: QuitMenuitem
+#     type: bool
+#     value: true
+
+- name: system setup | finder | disable window animations
+  osx_defaults:
+    domain: com.apple.finder
+    key: DisableAllAnimations
+    type: bool
+    value: true
+
+- name: system setup | finder | show icons for external hard drives
+  osx_defaults:
+    domain: com.apple.finder
+    key: ShowExternalHardDrivesOnDesktop
+    type: bool
+    value: true
+
+- name: system setup | finder | show icons for hard drives
+  osx_defaults:
+    domain: com.apple.finder
+    key: ShowHardDrivesOnDesktop
+    type: bool
+    value: true
+
+- name: system setup | finder | show servers icons
+  osx_defaults:
+    domain: com.apple.finder
+    key: ShowMountedServersOnDesktop
+    type: bool
+    value: true
+
+- name: system setup | finder | show removable media icons
+  osx_defaults:
+    domain: com.apple.finder
+    key: ShowRemovableMediaOnDesktop
+    type: bool
+    value: true
+
+- name: system setup | finder | hide hidden files
+  osx_defaults:
+    domain: com.apple.finder
+    key: AppleShowAllFiles
+    type: bool
+    value: false
+
+- name: system setup | finder | show file name extension
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: AppleShowAllExtensions
+    type: bool
+    value: true
+
+- name: system setup | finder | hide status bar
+  osx_defaults:
+    domain: com.apple.finder
+    key: ShowStatusBar
+    type: bool
+    value: false
+
+- name: system setup | finder | hide path bar
+  osx_defaults:
+    domain: com.apple.finder
+    key: ShowPathBar
+    type: bool
+    value: false
+
+- name: system setup | finder | show full POSIX path as window title
+  osx_defaults:
+    domain: com.apple.finder
+    key: _FXShowPosixPathInTitle
+    type: bool
+    value: true
+
+- name: system setup | finder | keep folders on top when sorting by name
+  osx_defaults:
+    domain: com.apple.finder
+    key: _FXSortFoldersFirst
+    type: bool
+    value: true
+
+- name: system setup | finder | search the current folder first
+  osx_defaults:
+    domain: com.apple.finder
+    key: FXDefaultSearchScope
+    type: string
+    value: "SCcf"
+
+- name: system setup | finder | disable the warning when changing a file extension
+  osx_defaults:
+    domain: com.apple.finder 
+    key: FXEnableExtensionChangeWarning 
+    type: bool 
+    value: false
+
+- name: system setup | finder | enable spring loading for directories
+  osx_defaults:
+    domain: NSGlobalDomain 
+    key: com.apple.springing.enabled 
+    type: bool 
+    value: true
+
+- name: system setup | finder | remove the spring loading delay for directories
+  osx_defaults:
+    domain: NSGlobalDomain 
+    key: com.apple.springing.delay 
+    type: float 
+    value: 0
+
+- name: system setup | finder | avoid creating .DS_Store files on network 
+  osx_defaults:
+    domain: com.apple.desktopservices 
+    key: DSDontWriteNetworkStores 
+    type: bool 
+    value: true
+
+- name: system setup | finder | avoid creating .DS_Store files on USB volumes
+  osx_defaults:
+    domain: com.apple.desktopservices 
+    key: DSDontWriteUSBStores 
+    type: bool 
+    value: true
+
+- name: system setup | finder | Disable disk image verification
+  osx_defaults:
+    domain: com.apple.frameworks.diskimages 
+    key: skip-verify 
+    type: bool 
+    value: true
+
+- name: system setup | finder | Disable disk image verification 2
+  osx_defaults:
+    domain: com.apple.frameworks.diskimages 
+    key: skip-verify-locked 
+    type: bool 
+    value: true
+
+- name: system setup | finder | Disable disk image verification 3
+  osx_defaults:
+    domain: com.apple.frameworks.diskimages 
+    key: skip-verify-remote 
+    type: bool 
+    value: true
+
+# - name: system setup | finder | Show item info near icons on the desktop and in other icon views
+#   shell: |
+#      /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:showItemInfo true" ~/Library/Preferences/com.apple.finder.plist
+#      /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:showItemInfo true" ~/Library/Preferences/com.apple.finder.plist
+#      /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:showItemInfo true" ~/Library/Preferences/com.apple.finder.plist
+ 
+# - name: system setup | finder | Show item info to the right of the icons on the desktop
+#   shell: /usr/libexec/PlistBuddy -c "Set DesktopViewSettings:IconViewSettings:labelOnBottom false" ~/Library/Preferences/com.apple.finder.plist
+
+- name: system setup | finder | Enable snap-to-grid for icons on the desktop and in other icon views
+  shell: |
+    /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+    /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+    /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+
+- name: system setup | finder | Increase grid spacing for icons on the desktop and in other icon views
+  shell: |
+    /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:gridSpacing 100" ~/Library/Preferences/com.apple.finder.plist
+    /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:gridSpacing 100" ~/Library/Preferences/com.apple.finder.plist
+    /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:gridSpacing 100" ~/Library/Preferences/com.apple.finder.plist
+
+# - name: system setup | finder | Increase the size of icons on the desktop and in other icon views
+#   shell:  |
+#     /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:iconSize 80" ~/Library/Preferences/com.apple.finder.plist
+#     /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:iconSize 80" ~/Library/Preferences/com.apple.finder.plist
+#     /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:iconSize 80" ~/Library/Preferences/com.apple.finder.plist
+
+- name: system setup | finder | Use list view in all windows by default
+  osx_defaults:
+    domain: com.apple.finder 
+    key: FXPreferredViewStyle 
+    type: string 
+    value: "Nlsv"
+
+- name: system setup | finder | Disable the warning before emptying the Trash
+  osx_defaults:
+    domain: com.apple.finder 
+    key: WarnOnEmptyTrash 
+    type: bool 
+    value: false
+
+- name: system setup | finder | Enable AirDrop over Ethernet and on unsupported Macs running Lion
+  osx_defaults:
+    domain: com.apple.NetworkBrowser 
+    key: BrowseAllInterfaces 
+    type: bool 
+    value: true
+
+- name: system setup | finder | Show the ~/Library folder
+  shell: chflags nohidden ~/Library && xattr -d com.apple.FinderInfo ~/Library
+
+- name: system setup | finder | Show the /Volumes folder
+  become: true
+  shell: chflags nohidden /Volumes
+
+- name: system setup | finder | Expand the following File Info panes:
+  shell: defaults write com.apple.finder FXInfoPanesExpanded -dict \
+	General -bool true \
+	OpenWith -bool true \
+	Privileges -bool true
+
+- name: system setup | finder | restart 
+  shell: killall Finder
+  changed_when: false

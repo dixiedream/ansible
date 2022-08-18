@@ -1,0 +1,41 @@
+- name: software | transmission | use `~/Downloads` to store completed downloads
+  osx_defaults:
+    domain: org.m0k.transmission 
+    key: DownloadLocationConstant 
+    type: bool 
+    value: true
+
+- name: software | transmission | don’t prompt for confirmation before removing non-downloading active transfers
+  osx_defaults:
+    domain: org.m0k.transmission 
+    key: CheckRemoveDownloading 
+    type: bool 
+    value: true
+
+- name: software | transmission | trash original torrent files
+  osx_defaults:
+    domain: org.m0k.transmission 
+    key: DeleteOriginalTorrent 
+    type: bool 
+    value: true
+
+- name: software | transmission | hide the donate message
+  osx_defaults:
+    domain: org.m0k.transmission 
+    key: WarningDonate 
+    type: bool 
+    value: false
+
+- name: software | transmission | hide the legal disclaimer
+  osx_defaults:
+    domain: org.m0k.transmission 
+    key: WarningLegal 
+    type: bool 
+    value: false
+
+- name: software | transmission | randomize port on launch
+  osx_defaults:
+    domain: org.m0k.transmission 
+    key: RandomPort 
+    type: bool 
+    value: true

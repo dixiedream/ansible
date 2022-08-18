@@ -24,7 +24,7 @@
     group: root
   when: ansible_os_family == "Debian"
 
-- name: packages | lua language serve | create alias script (Debian)
+- name: packages | lua language server | create alias script (Debian)
   copy:
     src: packages/install_lualanguageserver.sh
     dest: "{{ user_home }}/.local/bin/lua-language-server" 
@@ -32,3 +32,9 @@
     group: root
     mode: 0755
   when: ansible_os_family == "Debian"
+
+- name: packages | lua language server | install (MacOS)
+  homebrew:
+    name: lua-language-server
+    state: latest
+  when: ansible_os_family == "Darwin"
