@@ -18,6 +18,14 @@
     append: yes
   when: ansible_os_family == "Debian"
 
+- name: users | ale | add sudoers file
+  template:
+    src: users/sudoers_ale.j2
+    dest: /etc/sudoers.d/ale
+    owner: root
+    group: root
+    mode: 0400
+
 - name: users | ale | create .ssh directory
   file:
     path: "{{ item.dir }}"
@@ -39,10 +47,3 @@
     owner: ale
     group: ale
   when: not key_stat.stat.exists
-
-- name: users | ale | download wallpaper collection
-  become_user: ale
-  git:
-    repo: https://github.com/dixiedream/wallpapers.git
-    dest: /home/ale/wallpapers
-  ignore_errors: yes
