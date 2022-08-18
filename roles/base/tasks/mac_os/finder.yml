@@ -200,7 +200,7 @@
   become: true
   shell: chflags nohidden /Volumes
 
-- name: system setup | finder | Expand the following File Info panes:
+- name: system setup | finder | Expand the following File Info panes
   shell: "defaults write com.apple.finder FXInfoPanesExpanded -dict General -bool true OpenWith -bool true Privileges -bool true"
 
 - name: system setup | finder | restart 
