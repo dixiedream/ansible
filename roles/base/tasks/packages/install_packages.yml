@@ -75,6 +75,13 @@
     state: latest
   when: ansible_distribution == "Archlinux"
 
+- name: packages | install polkit package (Archlinux)
+  pacman:
+    name:
+      - polkit
+    state: latest
+  when: ansible_distribution == "Archlinux"
+
 - name: packages | install LF file manager (Archlinux)
   become_user: ale
   command: yay -S --noconfirm lf
