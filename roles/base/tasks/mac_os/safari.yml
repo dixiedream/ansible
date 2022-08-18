@@ -1,11 +1,11 @@
-- name: system setup | safari | Privacy: don’t send search queries to Apple
+- name: system setup | safari | privacy | don’t send search queries to Apple
   osx_defaults:
     domain: com.apple.Safari 
     key: UniversalSearchEnabled 
     type: bool 
     value: false
 
-- name: system setup | safari | Privacy: disable search suggestions
+- name: system setup | safari | Privacy | disable search suggestions
   osx_defaults:
     domain: com.apple.Safari 
     key: SuppressSearchSuggestions 
@@ -13,18 +13,11 @@
     value: true
 
 - name: system setup | safari | Press Tab to highlight each item on a web page
-  osx_defaults:
-    domain: com.apple.Safari 
-    key: WebKitTabToLinksPreferenceKey 
-    type: bool 
-    value: true
-
-- name: system setup | safari | Press Tab to highlight each item on a web page 2
-  osx_defaults:
-    domain: com.apple.Safari 
-    key: com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks 
-    type: bool 
-    value: true
+  command: "{{ item }}"
+  with_items:
+    - defaults write com.apple.Safari WebKitTabToLinksPreferenceKey -bool true
+    - defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks -bool true
+  changed_when: false
 
 - name: system setup | safari | Show the full URL in the address bar (note: this still hides the scheme)
   osx_defaults:
@@ -33,7 +26,7 @@
     type: bool 
     value: true
 
-- name: system setup | safari | Set home page to `about:blank` for faster loading
+- name: system setup | safari | Set home page to `about blank` for faster loading
   osx_defaults:
     domain: com.apple.Safari 
     key: HomePage 
@@ -97,25 +90,12 @@
     value: "()"
 
 - name: system setup | safari | Enable the Develop menu and the Web Inspector
-  osx_defaults:
-    domain: com.apple.Safari 
-    key: IncludeDevelopMenu 
-    type: bool 
-    value:true
-
-- name: system setup | safari | Enable the Develop menu and the Web Inspector 2
-  osx_defaults:
-    domain: com.apple.Safari 
-    key: WebKitDeveloperExtrasEnabledPreferenceKey 
-    type: bool 
-    value: true
-
-- name: system setup | safari | Enable the Develop menu and the Web Inspector 3
-  osx_defaults:
-    domain: com.apple.Safari 
-    key: com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled 
-    type: bool 
-    value: true
+  command: "defaults write com.apple.Safari {{ item }}"
+  with_items:
+    - IncludeDevelopMenu -bool true
+    - WebKitDeveloperExtrasEnabledPreferenceKey -bool true
+    - com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
+  changed_when: false
 
 - name: system setup | safari | Add a context menu item for showing the Web Inspector in web views
   osx_defaults:
@@ -174,53 +154,26 @@
     value: true
 
 - name: system setup | safari | Disable plug-ins
-  osx_defaults:
-    domain: com.apple.Safari 
-    key: WebKitPluginsEnabled 
-    type: bool 
-    value: false
-
-- name: system setup | safari | Disable plug-ins 2
-  osx_defaults:
-    domain: com.apple.Safari 
-    key: com.apple.Safari.ContentPageGroupIdentifier.WebKit2PluginsEnabled 
-    type: bool 
-    value: false
+  command: "defaults write com.apple.Safari {{ item }}"
+  with_items:
+    - WebKitPluginsEnabled -bool false
+    - com.apple.Safari.ContentPageGroupIdentifier.WebKit2PluginsEnabled -bool false
+  changed_when: false
 
 - name: system setup | safari | Disable Java
-  osx_defaults:
-    domain: com.apple.Safari 
-    key: WebKitJavaEnabled 
-    type: bool 
-    value: false
-
-- name: system setup | safari | Disable Java 2
-  osx_defaults:
-    domain: com.apple.Safari 
-    key: com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabled 
-    type: bool 
-    value: false
-
-- name: system setup | safari | Disable Java 3
-  osx_defaults:
-    domain: com.apple.Safari 
-    key: com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabledForLocalFiles 
-    type: bool 
-    value: false
+  command: "defaults write com.apple.Safari {{ item }}"
+  with_items:
+    - WebKitJavaEnabled -bool false
+    - com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabled -bool false
+    - com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabledForLocalFiles -bool false
+  changed_when: false
 
 - name: system setup | safari | Block pop-up windows
-  osx_defaults:
-    domain: com.apple.Safari 
-    key: WebKitJavaScriptCanOpenWindowsAutomatically 
-    type: bool 
-    value: false
-
-- name: system setup | safari | Block pop-up windows 2
-  osx_defaults:
-    domain: com.apple.Safari 
-    key: com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptCanOpenWindowsAutomatically 
-    type: bool 
-    value: false
+  command: "defaults write com.apple.Safari {{ item }}"
+  with_items:
+    - WebKitJavaScriptCanOpenWindowsAutomatically -bool false
+    - com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptCanOpenWindowsAutomatically -bool false
+  changed_when: false
 
 - name: system setup | safari | Disable auto-playing video
   osx_defaults:
