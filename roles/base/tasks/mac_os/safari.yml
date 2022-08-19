@@ -185,7 +185,7 @@
 - name: system setup | safari | Disable auto-playing video 2
   osx_defaults:
     domain: com.apple.SafariTechnologyPreview
-    kry: WebKitMediaPlaybackAllowsInline
+    key: WebKitMediaPlaybackAllowsInline
     type: bool
     value: false
 
