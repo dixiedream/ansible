@@ -61,7 +61,7 @@
     - import_tasks: mac_os/photos.yml
 
     - import_tasks: mac_os/power_management.yml
-      when: ansible_form_factor != undefined and ansible_form_factor == "Notebook"
+      when: ansible_form_factor is defined and ansible_form_factor == "Notebook"
 
     - import_tasks: mac_os/quicktime.yml
     - import_tasks: mac_os/safari.yml
