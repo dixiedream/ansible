@@ -49,7 +49,7 @@
     enabled: no
   ignore_errors: yes
 
-- name: system setup | network | remove old /etc/resolv.conf (Debian)
+- name: system setup | network | remove old /etc/resolv.conf
   file:
     path: /etc/resolv.conf
     state: absent
