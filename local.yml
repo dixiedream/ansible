@@ -3,13 +3,13 @@
   become: true
   pre_tasks:
     - name: pre-run | update package cache (Archlinux)
-      pacman: 
+      pacman:
         update_cache: yes
       changed_when: False
       when: ansible_distribution == "Archlinux"
 
     - name: pre-run | update package cache (Debian)
-      apt: 
+      apt:
         update_cache: yes
       changed_when: False
       when: ansible_os_family == "Debian"
@@ -23,7 +23,7 @@
 
   # run roles
 - hosts: all
-  become: true
+  # become: true
   roles:
     - base
 

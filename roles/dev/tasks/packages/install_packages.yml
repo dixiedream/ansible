@@ -1,4 +1,5 @@
 - name: packages | install required packages (Linux)
+  become: true
   package:
     name:
       - docker
@@ -22,20 +23,23 @@
   when: ansible_os_family == "Darwin"
 
 - name: packages | ensure docker service is not enabled (Linux)
-  service: 
+  become: true
+  service:
     name: docker
     state: stopped
     enabled: no
   when: ansible_system == "Linux"
 
 - name: packages | ensure containerd service is not enabled (Linux)
-  service: 
+  become: true
+  service:
     name: containerd
     state: stopped
     enabled: no
   when: ansible_system == "Linux"
 
 - name: users | ale | ensure ale is in docker group (Debian)
+  become: true
   user:
     name: ale
     groups: docker

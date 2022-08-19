@@ -1,5 +1,6 @@
 # Load distro specific variables
 - include_vars: "{{ ansible_distribution }}.yml"
+  when: ansible_system == "Linux"
 
 - block:
   - import_tasks: packages/install_packages.yml
