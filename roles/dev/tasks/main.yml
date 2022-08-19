@@ -7,3 +7,4 @@
   - import_tasks: packages/install_golang.yml
   - import_tasks: packages/install_lsp_dependencies.yml
   - import_tasks: packages/install_lualanguageserver.yml
+  - import_tasks: packages/install_qemu.yml

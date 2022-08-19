@@ -1,0 +1,34 @@
+- name: packages | qemu | install required packages (Archlinux)
+  become: true
+  pacman:
+    name:
+      - qemu
+      - dhclient
+      - virt-viewer
+      - libvirt
+      - dnsmasq
+      - ebtables
+      - virt-install
+      - virt-manager
+      - bridge-utils
+    state: present
+  when: ansible_os_family == "Archlinux"
+
+- name: packages | qemu | install required packages (Debian)
+  become: true
+  apt:
+    name:
+      - qemu-system
+      - qemu-utils
+      - qemu-kvm
+      - dhclient
+      - virt-viewer
+      - libvirt-clients
+      - libvirt-daemon-system
+      - dnsmasq
+      - ebtables
+      - virtinst
+      - virt-manager
+      - bridge-utils
+    state: present
+  when: ansible_os_family == "Debian"
