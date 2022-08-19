@@ -59,7 +59,10 @@
     - import_tasks: mac_os/mail.yml
     - import_tasks: mac_os/messages.yml
     - import_tasks: mac_os/photos.yml
+
     - import_tasks: mac_os/power_management.yml
+      when: ansible_form_factor == "Notebook"
+
     - import_tasks: mac_os/quicktime.yml
     - import_tasks: mac_os/safari.yml
     - import_tasks: mac_os/screen.yml
