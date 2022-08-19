@@ -3,7 +3,8 @@
     domain: NSGlobalDomain
     key: AppleLanguages
     type: array
-    value: "en"
+    value:
+      - "en"
 
 - name: system setup | locale
   osx_defaults:
