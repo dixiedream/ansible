@@ -1,10 +1,12 @@
 - name: system setup | time machine | Prevent from prompting to use new hard drives as backup volume
   osx_defaults:
-    domain: com.apple.TimeMachine 
-    key: DoNotOfferNewDisksForBackup 
-    type: bool 
+    domain: com.apple.TimeMachine
+    key: DoNotOfferNewDisksForBackup
+    type: bool
     value: true
 
+# TODO Not working in Catalina
 - name: system setup | time machine | Disable local backups
   become: true
   shell: hash tmutil &> /dev/null && sudo tmutil disablelocal
+  ignore_errors: true
