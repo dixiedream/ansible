@@ -30,6 +30,7 @@
       - the-unarchiver
       - transmission
     state: latest
+  ignore_errors: true
 
 - name: mac os | start required brews
   command: "{{ item }}"
