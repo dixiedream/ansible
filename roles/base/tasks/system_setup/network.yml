@@ -63,3 +63,12 @@
     owner: root
     group: root
   when: ansible_os_family == "Debian"
+
+- name: system setup | network | symlink systemd network resolv to resolv.con (Archlinux)
+  file:
+    src: /run/systemd/resolve/stub-resolv.conf
+    dest: /etc/resolv.conf
+    state: link
+    owner: root
+    group: root
+  when: ansible_os_family == "Archlinux"
