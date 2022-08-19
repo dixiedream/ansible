@@ -1,6 +1,6 @@
 - name: mac os | install brews formulas
   homebrew:
-    name: 
+    name:
       - atool
       - fzf
       - gzip
@@ -11,7 +11,7 @@
       - neovim
       - p7zip
       - ripgrep
-      - skhd
+      - koekeishiya/formulae/skhd
       - unrar
       - unzip
       - yabai
