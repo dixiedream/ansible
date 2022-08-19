@@ -53,7 +53,6 @@
   file:
     path: /etc/resolv.conf
     state: absent
-  when: ansible_os_family == "Debian"
 
 - name: system setup | network | symlink systemd network resolv to resolv.con (Debian)
   file:
