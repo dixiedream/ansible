@@ -1,18 +1,19 @@
 # Load distro specific variables
 - include_vars: "{{ ansible_distribution }}.yml"
+  when: ansible_system == "Linux"
 
 - name: Linux setup
   block:
     - import_tasks: users/ale.yml
-  
+
     - import_tasks: ansible_setup.yml
-  
+
     - import_tasks: packages/debloat_debian.yml
       when: ansible_os_family == "Debian"
-  
+
     - import_tasks: packages/install_aur_helper.yml
       when: ansible_os_family == "Archlinux"
-  
+
     - import_tasks: packages/install_packages.yml
     - import_tasks: packages/install_autocpufreq.yml
     - import_tasks: packages/install_brave.yml
@@ -21,22 +22,22 @@
     - import_tasks: packages/install_dwm.yml
     - import_tasks: packages/install_st.yml
     - import_tasks: packages/install_dmenu.yml
-  
+
     - import_tasks: system_setup/network.yml
     - import_tasks: system_setup/locale.yml
     - import_tasks: system_setup/microcode.yml # Need to set that as kernel par
     - import_tasks: system_setup/tap_to_click.yml
-  
+
     - import_tasks: system_setup/pacman.yml
       when: ansible_distribution == "Archlinux"
-  
+
     - import_tasks: system_setup/dotfiles.yml
     - import_tasks: system_setup/remove_beep.yml
     - import_tasks: system_setup/lock_on_suspend.yml
-  
+
     - import_tasks: system_setup/debian_systemctl_shortcuts.yml
       when: ansible_os_family == "Debian"
-  
+
       # Only for laptops
     - import_tasks: system_setup/battery_threshold.yml
       when: ansible_form_factor == "Notebook"
