@@ -70,7 +70,7 @@
 
     - import_tasks: mac_os/tap_to_click.yml
       when: ansible_form_factor is defined and ansible_form_factor == "Notebook"
-    - import_tasks: mac_os/terminal.yml
+    # - import_tasks: mac_os/terminal.yml
     - import_tasks: mac_os/text_edit.yml
     - import_tasks: mac_os/time_machine.yml
 
