@@ -193,8 +193,8 @@
     type: bool
     value: true
 
-- name: system setup | finder | Show the ~/Library folder
-  shell: chflags nohidden ~/Library && xattr -d com.apple.FinderInfo ~/Library
+# - name: system setup | finder | Show the ~/Library folder
+#   shell: chflags nohidden ~/Library && xattr -d com.apple.FinderInfo ~/Library
 
 - name: system setup | finder | Show the /Volumes folder
   become: true
