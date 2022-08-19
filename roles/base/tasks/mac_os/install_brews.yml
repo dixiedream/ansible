@@ -20,8 +20,8 @@
     state: latest
 
 - name: mac os | install brew casks
-  homebrew:
-    name:
+  command: "brew install --cask {{ item }}"
+  with_items:
       - alacritty
       - appcleaner
       - brave-browser
@@ -29,14 +29,13 @@
       - onyx
       - the-unarchiver
       - transmission
-    state: latest
   ignore_errors: true
 
 - name: mac os | start required brews
-  command: "{{ item }}"
+  command: "brew services start {{ item }}"
   with_items:
-    - brew services start skhd
-    - brew services start yabai
+    - skhd
+    - yabai
   changed_when: false
   ignore_errors: true
 
