@@ -1,15 +1,15 @@
 - name: system setup | safari | privacy | don’t send search queries to Apple
   osx_defaults:
-    domain: com.apple.Safari 
-    key: UniversalSearchEnabled 
-    type: bool 
+    domain: com.apple.Safari
+    key: UniversalSearchEnabled
+    type: bool
     value: false
 
 - name: system setup | safari | Privacy | disable search suggestions
   osx_defaults:
-    domain: com.apple.Safari 
-    key: SuppressSearchSuggestions 
-    type: bool 
+    domain: com.apple.Safari
+    key: SuppressSearchSuggestions
+    type: bool
     value: true
 
 - name: system setup | safari | Press Tab to highlight each item on a web page
@@ -19,73 +19,73 @@
     - defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks -bool true
   changed_when: false
 
-- name: system setup | safari | Show the full URL in the address bar 
+- name: system setup | safari | Show the full URL in the address bar
   osx_defaults:
-    domain: com.apple.Safari 
-    key: ShowFullURLInSmartSearchField 
-    type: bool 
+    domain: com.apple.Safari
+    key: ShowFullURLInSmartSearchField
+    type: bool
     value: true
 
 - name: system setup | safari | Set home page to `about blank` for faster loading
   osx_defaults:
-    domain: com.apple.Safari 
-    key: HomePage 
-    type: string 
+    domain: com.apple.Safari
+    key: HomePage
+    type: string
     value: "about:blank"
 
 - name: system setup | safari | Prevent from opening ‘safe’ files automatically after downloading
   osx_defaults:
-    domain: com.apple.Safari 
-    key: AutoOpenSafeDownloads 
-    type: bool 
+    domain: com.apple.Safari
+    key: AutoOpenSafeDownloads
+    type: bool
     value: false
 
 - name: system setup | safari | Allow hitting the Backspace key to go to the previous page in history
   osx_defaults:
-    domain: com.apple.Safari 
-    key: com.apple.Safari.ContentPageGroupIdentifier.WebKit2BackspaceKeyNavigationEnabled 
-    type: bool 
+    domain: com.apple.Safari
+    key: com.apple.Safari.ContentPageGroupIdentifier.WebKit2BackspaceKeyNavigationEnabled
+    type: bool
     value: true
 
 - name: system setup | safari | Hide bookmarks bar by default
   osx_defaults:
-    domain: com.apple.Safari 
-    key: ShowFavoritesBar 
-    type: bool 
+    domain: com.apple.Safari
+    key: ShowFavoritesBar
+    type: bool
     value: false
 
 - name: system setup | safari | Hide sidebar in Top Sites
   osx_defaults:
-    domain: com.apple.Safari 
-    key: ShowSidebarInTopSites 
-    type: bool 
+    domain: com.apple.Safari
+    key: ShowSidebarInTopSites
+    type: bool
     value: false
 
 - name: system setup | safari | Disable thumbnail cache for History and Top Sites
   osx_defaults:
-    domain: com.apple.Safari 
-    key: DebugSnapshotsUpdatePolicy 
-    type: int 
+    domain: com.apple.Safari
+    key: DebugSnapshotsUpdatePolicy
+    type: int
     value: 2
 
 - name: system setup | safari | Enable debug menu
   osx_defaults:
-    domain: com.apple.Safari 
-    key: IncludeInternalDebugMenu 
-    type: bool 
+    domain: com.apple.Safari
+    key: IncludeInternalDebugMenu
+    type: bool
     value: true
 
 - name: system setup | safari | Make search banners default to Contains instead of Starts With
   osx_defaults:
-    domain: com.apple.Safari 
-    key: FindOnPageMatchesWordStartsOnly 
-    type: bool 
+    domain: com.apple.Safari
+    key: FindOnPageMatchesWordStartsOnly
+    type: bool
     value: false
 
 - name: system setup | safari | Remove useless icons from bookmarks bar
   osx_defaults:
-    domain: com.apple.Safari 
-    key: ProxiesInBookmarksBar 
+    domain: com.apple.Safari
+    key: ProxiesInBookmarksBar
     type: string
     value: "()"
 
@@ -99,58 +99,58 @@
 
 - name: system setup | safari | Add a context menu item for showing the Web Inspector in web views
   osx_defaults:
-    domain: NSGlobalDomain 
-    key: WebKitDeveloperExtras 
-    type: bool 
+    domain: NSGlobalDomain
+    key: WebKitDeveloperExtras
+    type: bool
     value: true
 
 - name: system setup | safari | Enable continuous spellchecking
   osx_defaults:
-    domain: com.apple.Safari 
-    key: WebContinuousSpellCheckingEnabled 
-    type: bool 
+    domain: com.apple.Safari
+    key: WebContinuousSpellCheckingEnabled
+    type: bool
     value: true
 
 - name: system setup | safari | Disable auto-correct
   osx_defaults:
-    domain: com.apple.Safari 
-    key: WebAutomaticSpellingCorrectionEnabled 
-    type: bool 
+    domain: com.apple.Safari
+    key: WebAutomaticSpellingCorrectionEnabled
+    type: bool
     value: false
 
 - name: system setup | safari | Disable AutoFill from address book
   osx_defaults:
-    domain: com.apple.Safari 
-    key: AutoFillFromAddressBook 
-    type: bool 
+    domain: com.apple.Safari
+    key: AutoFillFromAddressBook
+    type: bool
     value: false
 
 - name: system setup | safari | Disable AutoFill from passwords
   osx_defaults:
-    domain: com.apple.Safari 
-    key: AutoFillPasswords 
-    type: bool 
+    domain: com.apple.Safari
+    key: AutoFillPasswords
+    type: bool
     value: false
 
 - name: system setup | safari | Disable AutoFill from credit card data
   osx_defaults:
-    domain: com.apple.Safari 
-    key: AutoFillCreditCardData 
-    type: bool 
+    domain: com.apple.Safari
+    key: AutoFillCreditCardData
+    type: bool
     value: false
 
 - name: system setup | safari | Disable AutoFill from miscellaneous forms
   osx_defaults:
-    domain: com.apple.Safari 
-    key: AutoFillMiscellaneousForms 
-    type: bool 
+    domain: com.apple.Safari
+    key: AutoFillMiscellaneousForms
+    type: bool
     value: false
 
 - name: system setup | safari | Warn about fraudulent websites
   osx_defaults:
-    domain: com.apple.Safari 
-    key: WarnAboutFraudulentWebsites 
-    type: bool 
+    domain: com.apple.Safari
+    key: WarnAboutFraudulentWebsites
+    type: bool
     value: true
 
 - name: system setup | safari | Disable plug-ins
@@ -177,46 +177,47 @@
 
 - name: system setup | safari | Disable auto-playing video
   osx_defaults:
-    domain: com.apple.Safari 
-    key: WebKitMediaPlaybackAllowsInline 
-    type: bool 
+    domain: com.apple.Safari
+    key: WebKitMediaPlaybackAllowsInline
+    type: bool
     value: false
 
 - name: system setup | safari | Disable auto-playing video 2
   osx_defaults:
-    domain: com.apple.SafariTechnologyPreview 
-    kry: WebKitMediaPlaybackAllowsInline 
-    type: bool 
+    domain: com.apple.SafariTechnologyPreview
+    kry: WebKitMediaPlaybackAllowsInline
+    type: bool
     value: false
 
 - name: system setup | safari | Disable auto-playing video 3
   osx_defaults:
-    domain: com.apple.Safari 
-    key: com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback 
-    type: bool 
+    domain: com.apple.Safari
+    key: com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback
+    type: bool
     value: false
 
 - name: system setup | safari | Disable auto-playing video 4
   osx_defaults:
-    domain: com.apple.SafariTechnologyPreview 
-    key: com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback 
-    type: bool 
+    domain: com.apple.SafariTechnologyPreview
+    key: com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback
+    type: bool
     value: false
 
 - name: system setup | safari | Enable “Do Not Track”
   osx_defaults:
-    domain: com.apple.Safari 
-    key: SendDoNotTrackHTTPHeader 
-    type: bool 
+    domain: com.apple.Safari
+    key: SendDoNotTrackHTTPHeader
+    type: bool
     value: true
 
 - name: system setup | safari | Update extensions automatically
   osx_defaults:
-    domain: com.apple.Safari 
-    key: InstallExtensionUpdatesAutomatically 
-    type: bool 
+    domain: com.apple.Safari
+    key: InstallExtensionUpdatesAutomatically
+    type: bool
     value: true
 
 - name: system setup | safari | restart
   shell: killall Safari
   changed_when: false
+  ignore_errors: true

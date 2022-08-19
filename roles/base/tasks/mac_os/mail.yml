@@ -1,22 +1,22 @@
 - name: system setup | mail | Disable reply animations
   osx_defaults:
-    domain: com.apple.mail 
-    key: DisableReplyAnimations 
-    type: bool 
+    domain: com.apple.mail
+    key: DisableReplyAnimations
+    type: bool
     value: true
 
 - name: system setup | mail | Disable send animations
   osx_defaults:
-    domain: com.apple.mail 
-    key: DisableSendAnimations 
-    type: bool 
+    domain: com.apple.mail
+    key: DisableSendAnimations
+    type: bool
     value: true
 
 - name: system setup | mail | Copy email addresses as `foo@example.com` instead of `Foo Bar <foo@example.com>`
   osx_defaults:
-    domain: com.apple.mail 
-    key: AddressesIncludeNameOnPasteboard 
-    type: bool 
+    domain: com.apple.mail
+    key: AddressesIncludeNameOnPasteboard
+    type: bool
     value: false
 
 - name: system setup | mail | Display emails in threaded mode, sorted by date (oldest at the top)
@@ -30,18 +30,19 @@
 
 - name: system setup | mail | Disable inline attachments (just show the icons)
   osx_defaults:
-    domain: com.apple.mail 
-    key: DisableInlineAttachmentViewing 
-    type: bool 
+    domain: com.apple.mail
+    key: DisableInlineAttachmentViewing
+    type: bool
     value: true
 
 - name: system setup | mail | Disable automatic spell checking
   osx_defaults:
-    domain: com.apple.mail 
-    key: SpellCheckingBehavior 
-    type: string 
+    domain: com.apple.mail
+    key: SpellCheckingBehavior
+    type: string
     value: "NoSpellCheckingEnabled"
 
 - name: system setup | mail | restart
   shell: killall Mail
   changed_when: false
+  ignore_errors: true

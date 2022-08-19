@@ -1,8 +1,8 @@
 - name: system setup | terminal | Only use UTF-8
   osx_defaults:
-    domain: com.apple.Terminal 
-    key: StringEncodings 
-    type: array 
+    domain: com.apple.Terminal
+    key: StringEncodings
+    type: array
     value:
       - 4
 
@@ -15,9 +15,9 @@
 
 - name: system setup | terminal | disable the annoying line marks
   osx_defaults:
-    domain: com.apple.Terminal 
-    key: ShowLineMarks 
-    type: int 
+    domain: com.apple.Terminal
+    key: ShowLineMarks
+    type: int
     value: 0
 
 - name: system setup | terminal | Get current Terminal profile.
@@ -52,3 +52,5 @@
 - name: system setup | terminal | restart
   shell: killall Terminal
   changed_when: false
+  ignore_errors: true
+

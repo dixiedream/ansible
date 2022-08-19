@@ -1,94 +1,96 @@
 - name: system setup | dock | Enable highlight hover effect for the grid view of a stack
   osx_defaults:
-    domain: com.apple.dock 
-    keu: mouse-over-hilite-stack 
-    type: bool 
+    domain: com.apple.dock
+    keu: mouse-over-hilite-stack
+    type: bool
     value: true
 
 - name: system setup | dock | Set the icon size of items to 36 pixels
   osx_defaults:
-    domain: com.apple.dock 
-    keu: tilesize 
-    type: int 
+    domain: com.apple.dock
+    keu: tilesize
+    type: int
     value: 36
 
 - name: system setup | dock | Change minimize/maximize window effect
   osx_defaults:
-    domain: com.apple.dock 
-    key: mineffect 
-    type: string 
+    domain: com.apple.dock
+    key: mineffect
+    type: string
     value: "scale"
 
 - name: system setup | dock | Minimize windows into their application’s icon
   osx_defaults:
-    domain: com.apple.dock 
-    key: minimize-to-application 
-    type: bool 
+    domain: com.apple.dock
+    key: minimize-to-application
+    type: bool
     value: true
 
 - name: system setup | dock | Enable spring loading for all items
   osx_defaults:
-    domain: com.apple.dock 
-    key: enable-spring-load-actions-on-all-items 
-    type: bool 
+    domain: com.apple.dock
+    key: enable-spring-load-actions-on-all-items
+    type: bool
     value: true
 
 - name: system setup | dock | Show indicator lights for open applications
   osx_defaults:
-    domain: com.apple.dock 
-    key: show-process-indicators 
-    type: bool 
+    domain: com.apple.dock
+    key: show-process-indicators
+    type: bool
     value: true
 
-- name: system setup | dock | Wipe all (default) app icons 
+- name: system setup | dock | Wipe all (default) app icons
   osx_defaults:
-    domain: com.apple.dock 
-    key: persistent-apps 
+    domain: com.apple.dock
+    key: persistent-apps
     type: array
-    value: 
+    value:
 
-- name: system setup | dock | Don’t animate opening applications 
+- name: system setup | dock | Don’t animate opening applications
   osx_defaults:
-    domain: com.apple.dock 
-    key: launchanim 
-    type: bool 
+    domain: com.apple.dock
+    key: launchanim
+    type: bool
     value: false
 
 - name: system setup | dock | Remove the auto-hiding delay
   osx_defaults:
-    domain: com.apple.dock 
-    key: autohide-delay 
-    type: float 
+    domain: com.apple.dock
+    key: autohide-delay
+    type: float
     value: 0
 
-- name: system setup | dock | Remove the animation when hiding/showing 
+- name: system setup | dock | Remove the animation when hiding/showing
   osx_defaults:
-    domain: com.apple.dock 
-    key: autohide-time-modifier 
-    type: float 
+    domain: com.apple.dock
+    key: autohide-time-modifier
+    type: float
     value: 0
 
-- name: system setup | dock | Automatically hide and show 
+- name: system setup | dock | Automatically hide and show
   osx_defaults:
-    domain: com.apple.dock 
-    key: autohide 
-    type: bool 
+    domain: com.apple.dock
+    key: autohide
+    type: bool
     value: true
 
 - name: system setup | dock | Make icons of hidden applications translucent
   osx_defaults:
-    domain: com.apple.dock 
-    key: showhidden 
-    type: bool 
+    domain: com.apple.dock
+    key: showhidden
+    type: bool
     value: true
 
-- name: system setup | dock | Don’t show recent applications 
+- name: system setup | dock | Don’t show recent applications
   osx_defaults:
-    domain: com.apple.dock 
-    key: show-recents 
-    type: bool 
+    domain: com.apple.dock
+    key: show-recents
+    type: bool
     value: false
 
 - name: system setup | dock | restart
   shell: killall Dock
   changed_when: false
+  ignore_errors: true
+

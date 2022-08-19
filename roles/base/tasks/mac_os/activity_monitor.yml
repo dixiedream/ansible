@@ -1,22 +1,22 @@
 - name: system setup | activity monitor | show the main window when launching
   osx_defaults:
-    domain: com.apple.ActivityMonitor 
-    key: OpenMainWindow 
-    type: bool 
+    domain: com.apple.ActivityMonitor
+    key: OpenMainWindow
+    type: bool
     value: true
 
 - name: system setup | activity monitor | visualize CPU usage in the Dock icon
   osx_defaults:
-    domain: com.apple.ActivityMonitor 
-    key: IconType 
-    type: int 
+    domain: com.apple.ActivityMonitor
+    key: IconType
+    type: int
     value: 5
 
-- name: system setup | activity monitor | show all processes in 
+- name: system setup | activity monitor | show all processes in
   osx_defaults:
-    domain: com.apple.ActivityMonitor 
-    key: ShowCategory 
-    type: int 
+    domain: com.apple.ActivityMonitor
+    key: ShowCategory
+    type: int
     value: 0
 
 - name: system setup | activity monitor | sort results by CPU usage
@@ -29,3 +29,4 @@
 - name: system setup | activity monitor | restart
   shell: killall Activity Monitor
   changed_when: false
+  ignore_errors: true

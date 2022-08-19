@@ -10,3 +10,4 @@
 - name: system setup | messages | restart
   shell: killall Messages
   changed_when: false
+  ignore_errors: true

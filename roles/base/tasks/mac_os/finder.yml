@@ -91,58 +91,58 @@
 
 - name: system setup | finder | disable the warning when changing a file extension
   osx_defaults:
-    domain: com.apple.finder 
-    key: FXEnableExtensionChangeWarning 
-    type: bool 
+    domain: com.apple.finder
+    key: FXEnableExtensionChangeWarning
+    type: bool
     value: false
 
 - name: system setup | finder | enable spring loading for directories
   osx_defaults:
-    domain: NSGlobalDomain 
-    key: com.apple.springing.enabled 
-    type: bool 
+    domain: NSGlobalDomain
+    key: com.apple.springing.enabled
+    type: bool
     value: true
 
 - name: system setup | finder | remove the spring loading delay for directories
   osx_defaults:
-    domain: NSGlobalDomain 
-    key: com.apple.springing.delay 
-    type: float 
+    domain: NSGlobalDomain
+    key: com.apple.springing.delay
+    type: float
     value: 0
 
-- name: system setup | finder | avoid creating .DS_Store files on network 
+- name: system setup | finder | avoid creating .DS_Store files on network
   osx_defaults:
-    domain: com.apple.desktopservices 
-    key: DSDontWriteNetworkStores 
-    type: bool 
+    domain: com.apple.desktopservices
+    key: DSDontWriteNetworkStores
+    type: bool
     value: true
 
 - name: system setup | finder | avoid creating .DS_Store files on USB volumes
   osx_defaults:
-    domain: com.apple.desktopservices 
-    key: DSDontWriteUSBStores 
-    type: bool 
+    domain: com.apple.desktopservices
+    key: DSDontWriteUSBStores
+    type: bool
     value: true
 
 - name: system setup | finder | Disable disk image verification
   osx_defaults:
-    domain: com.apple.frameworks.diskimages 
-    key: skip-verify 
-    type: bool 
+    domain: com.apple.frameworks.diskimages
+    key: skip-verify
+    type: bool
     value: true
 
 - name: system setup | finder | Disable disk image verification 2
   osx_defaults:
-    domain: com.apple.frameworks.diskimages 
-    key: skip-verify-locked 
-    type: bool 
+    domain: com.apple.frameworks.diskimages
+    key: skip-verify-locked
+    type: bool
     value: true
 
 - name: system setup | finder | Disable disk image verification 3
   osx_defaults:
-    domain: com.apple.frameworks.diskimages 
-    key: skip-verify-remote 
-    type: bool 
+    domain: com.apple.frameworks.diskimages
+    key: skip-verify-remote
+    type: bool
     value: true
 
 # - name: system setup | finder | Show item info near icons on the desktop and in other icon views
@@ -150,7 +150,7 @@
 #      /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:showItemInfo true" ~/Library/Preferences/com.apple.finder.plist
 #      /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:showItemInfo true" ~/Library/Preferences/com.apple.finder.plist
 #      /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:showItemInfo true" ~/Library/Preferences/com.apple.finder.plist
- 
+
 # - name: system setup | finder | Show item info to the right of the icons on the desktop
 #   shell: /usr/libexec/PlistBuddy -c "Set DesktopViewSettings:IconViewSettings:labelOnBottom false" ~/Library/Preferences/com.apple.finder.plist
 
@@ -174,23 +174,23 @@
 
 - name: system setup | finder | Use list view in all windows by default
   osx_defaults:
-    domain: com.apple.finder 
-    key: FXPreferredViewStyle 
-    type: string 
+    domain: com.apple.finder
+    key: FXPreferredViewStyle
+    type: string
     value: "Nlsv"
 
 - name: system setup | finder | Disable the warning before emptying the Trash
   osx_defaults:
-    domain: com.apple.finder 
-    key: WarnOnEmptyTrash 
-    type: bool 
+    domain: com.apple.finder
+    key: WarnOnEmptyTrash
+    type: bool
     value: false
 
 - name: system setup | finder | Enable AirDrop over Ethernet and on unsupported Macs running Lion
   osx_defaults:
-    domain: com.apple.NetworkBrowser 
-    key: BrowseAllInterfaces 
-    type: bool 
+    domain: com.apple.NetworkBrowser
+    key: BrowseAllInterfaces
+    type: bool
     value: true
 
 - name: system setup | finder | Show the ~/Library folder
@@ -203,6 +203,7 @@
 - name: system setup | finder | Expand the following File Info panes
   shell: "defaults write com.apple.finder FXInfoPanesExpanded -dict General -bool true OpenWith -bool true Privileges -bool true"
 
-- name: system setup | finder | restart 
+- name: system setup | finder | restart
   shell: killall Finder
   changed_when: false
+  ignore_errors: true

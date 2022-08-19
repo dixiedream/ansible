@@ -1,11 +1,12 @@
 - name: system setup | photos | Prevent from opening automatically when devices are plugged in
   osx_defaults:
     host: currentHost
-    domain: com.apple.ImageCapture 
-    key: disableHotPlug 
-    type: bool 
+    domain: com.apple.ImageCapture
+    key: disableHotPlug
+    type: bool
     value: true
 
 - name: system setup | photos | restart
   shell: killall Photos
   changed_when: false
+  ignore_errors: true
