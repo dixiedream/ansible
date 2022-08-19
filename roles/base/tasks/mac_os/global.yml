@@ -9,6 +9,13 @@
     type: bool
     value: true
 
+- name: system setup | reduce motion
+  osx_defaults:
+    domain: com.apple.universalaccess
+    key: reduceMotion
+    type: bool
+    value: true
+
 - name: system setup | set highlight color to green
   osx_defaults:
     domain: NSGlobalDomain
@@ -106,7 +113,7 @@
     key: AppleKeyboardUIMode
     type: int
     value: 3
-      
+
 - name: system setup | set fast keyboard repeat rate
   command: "{{ item }}"
   with_items:
