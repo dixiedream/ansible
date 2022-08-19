@@ -1,6 +1,6 @@
 - name: system setup | enable lid wakeup
   become: true
-  command: pmset -a lidwake
+  command: pmset -a lidwake 1
 
 - name: system setup | sleep the display after 15 minutes
   become: true
