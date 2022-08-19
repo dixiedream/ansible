@@ -3,6 +3,7 @@
     name:
       - atool
       - fzf
+      - git
       - gzip
       - htop
       - lf
