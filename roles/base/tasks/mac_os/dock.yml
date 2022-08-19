@@ -41,11 +41,7 @@
     value: true
 
 - name: system setup | dock | Wipe all (default) app icons
-  osx_defaults:
-    domain: com.apple.dock
-    key: persistent-apps
-    type: array
-    value:
+  shell: defaults write com.apple.dock persistent-apps -array ""
 
 - name: system setup | dock | Don’t animate opening applications
   osx_defaults:
