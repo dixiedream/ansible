@@ -21,6 +21,7 @@
 - name: system setup | remove sleep image file
   become: true
   command: rm /private/var/vm/sleepimage
+  ignore_errors: true
 
 - name: system setup | create 0 byte file instead
   become: true
