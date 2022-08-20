@@ -24,7 +24,7 @@
 - name: system setup | locale | set locale.gen file (Archlinux)
   lineinfile:
     dest: /etc/locale.gen
-    regexp: '^#en_US.UTF-8 UTF-8'
+    regexp: '^#en_US\.UTF-8 UTF-8'
     line: 'en_US.UTF-8 UTF-8'
   when: ansible_os_family == "Archlinux"
 
