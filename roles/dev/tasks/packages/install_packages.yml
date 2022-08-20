@@ -38,6 +38,14 @@
     enabled: no
   when: ansible_system == "Linux"
 
+- name: packages | ensure systemd networkd wait online service is not enabled (Linux)
+  become: true
+  service:
+    name: systemd-networkd-wait-online
+    state: stopped
+    enabled: no
+  when: ansible_system == "Linux"
+
 - name: users | ale | ensure ale is in docker group (Debian)
   become: true
   user:

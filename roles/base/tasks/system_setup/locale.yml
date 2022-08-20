@@ -1,3 +1,57 @@
+- name: system setup | locale | set time zone (Archlinux)
+  become: true
+  file:
+    src: /usr/share/zoneinfo/Europe/Rome
+    dest: /etc/localtime
+    state: link
+    owner: root
+    group: root
+    mode: 0700
+  when: ansible_os_family == "Archlinux"
+
+- name: system setup | locale | set ntp true (Archlinux)
+  command: timedatectl set-ntp true
+  changed_when: false
+  ignore_errors: true
+  when: ansible_os_family == "Archlinux"
+
+- name: system setup | locale | sync hardware clock and system clock (Archlinux)
+  command: hwclock --systohc
+  changed_when: false
+  ignore_errors: true
+  when: ansible_os_family == "Archlinux"
+
+- name: system setup | locale | set locale.gen file (Archlinux)
+  lineinfile:
+    dest: /etc/locale.gen
+    regexp: '^#en_US.UTF-8 UTF-8'
+    line: 'en_US.UTF-8 UTF-8'
+  when: ansible_os_family == "Archlinux"
+
+- name: system setup | locale | generate locale (Archlinux)
+  command: locale-gen
+  changed_when: false
+  ignore_errors: true
+  when: ansible_os_family == "Archlinux"
+
+- name: system setup | locale | create locale.conf (Archlinux)
+  copy:
+    src: system_setup/locale_locale.conf
+    dest: /etc/locale.conf
+    group: root
+    owner: root
+    mode: 0644
+  when: ansible_os_family == "Archlinux"
+
+- name: system setup | locale | create vconsole.conf (Archlinux)
+  copy:
+    src: system_setup/locale_vconsole.conf
+    dest: /etc/vconsole.conf
+    group: root
+    owner: root
+    mode: 0644
+  when: ansible_os_family == "Archlinux"
+
 - name: system setup | locale | set caps lock as ctrl
   become_user: ale
   command: localectl --no-convert set-x11-keymap it '' '' ctrl:nocaps
