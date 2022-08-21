@@ -1,9 +1,10 @@
-- name: packages | qemu | remove conflict between iptables and ebtables (Archlinux)
-  become: true
-  pacman:
-    name: iptables
-    state: absent
-  when: ansible_os_family == "Archlinux"
+# - name: packages | qemu | remove conflict between iptables and ebtables (Archlinux)
+#   become: true
+#   pacman:
+#     name: iptables
+#     state: absent
+#     force: yes
+#   when: ansible_os_family == "Archlinux"
 
 - name: packages | qemu | install required packages (Archlinux)
   become: true
@@ -13,11 +14,11 @@
       - dhclient
       - virt-viewer
       - libvirt
-      - dnsmasq
-      - ebtables
+      # - dnsmasq
+      # - ebtables
       - virt-install
       - virt-manager
-      - bridge-utils
+      # - bridge-utils
     state: present
   when: ansible_os_family == "Archlinux"
 
@@ -32,10 +33,10 @@
       - virt-viewer
       - libvirt-clients
       - libvirt-daemon-system
-      - dnsmasq
-      - ebtables
+      # - dnsmasq
+      # - ebtables
       - virtinst
       - virt-manager
-      - bridge-utils
+      # - bridge-utils
     state: present
   when: ansible_os_family == "Debian"
