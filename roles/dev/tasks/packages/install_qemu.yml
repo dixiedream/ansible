@@ -14,7 +14,7 @@
       - dhclient
       - virt-viewer
       - libvirt
-      # - dnsmasq
+      - dnsmasq
       # - ebtables
       - virt-install
       - virt-manager
@@ -33,7 +33,7 @@
       - virt-viewer
       - libvirt-clients
       - libvirt-daemon-system
-      # - dnsmasq
+      - dnsmasq
       # - ebtables
       - virtinst
       - virt-manager
