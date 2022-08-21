@@ -166,11 +166,13 @@
 #     /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:gridSpacing 100" ~/Library/Preferences/com.apple.finder.plist
 #     /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:gridSpacing 100" ~/Library/Preferences/com.apple.finder.plist
 
-# - name: system setup | finder | Increase the size of icons on the desktop and in other icon views
-#   shell:  |
-#     /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:iconSize 80" ~/Library/Preferences/com.apple.finder.plist
-#     /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:iconSize 80" ~/Library/Preferences/com.apple.finder.plist
-#     /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:iconSize 80" ~/Library/Preferences/com.apple.finder.plist
+- name: system setup | finder | Increase the size of icons on the desktop and in other icon views
+  command: "/usr/libexec/PlistBuddy -c \"Set :{{ item }} 40\" ~/Library/Preferences/com.apple.finder.plist"
+  with_items:
+    - DesktopViewSettings:IconViewSettings:iconSize
+    - FK_StandardViewSettings:IconViewSettings:iconSize
+    - StandardViewSettings:IconViewSettings:iconSize
+  changed_when: false
 
 - name: system setup | finder | Use list view in all windows by default
   osx_defaults:
