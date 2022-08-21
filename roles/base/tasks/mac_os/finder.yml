@@ -145,35 +145,6 @@
     type: bool
     value: true
 
-# - name: system setup | finder | Show item info near icons on the desktop and in other icon views
-#   shell: |
-#      /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:showItemInfo true" ~/Library/Preferences/com.apple.finder.plist
-#      /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:showItemInfo true" ~/Library/Preferences/com.apple.finder.plist
-#      /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:showItemInfo true" ~/Library/Preferences/com.apple.finder.plist
-
-# - name: system setup | finder | Show item info to the right of the icons on the desktop
-#   shell: /usr/libexec/PlistBuddy -c "Set DesktopViewSettings:IconViewSettings:labelOnBottom false" ~/Library/Preferences/com.apple.finder.plist
-
-# - name: system setup | finder | Enable snap-to-grid for icons on the desktop and in other icon views
-#   shell: |
-#     /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
-#     /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
-#     /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
-#
-# - name: system setup | finder | Increase grid spacing for icons on the desktop and in other icon views
-#   shell: |
-#     /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:gridSpacing 100" ~/Library/Preferences/com.apple.finder.plist
-#     /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:gridSpacing 100" ~/Library/Preferences/com.apple.finder.plist
-#     /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:gridSpacing 100" ~/Library/Preferences/com.apple.finder.plist
-
-- name: system setup | finder | Increase the size of icons on the desktop and in other icon views
-  command: "/usr/libexec/PlistBuddy -c \"Set :{{ item }} 40\" ~/Library/Preferences/com.apple.finder.plist"
-  with_items:
-    - DesktopViewSettings:IconViewSettings:iconSize
-    - FK_StandardViewSettings:IconViewSettings:iconSize
-    - StandardViewSettings:IconViewSettings:iconSize
-  changed_when: false
-
 - name: system setup | finder | Use list view in all windows by default
   osx_defaults:
     domain: com.apple.finder
