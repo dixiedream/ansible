@@ -10,22 +10,22 @@
   when: ansible_os_family == "Archlinux"
 
 - name: system setup | locale | set ntp true (Archlinux)
+  become: true
   command: timedatectl set-ntp true
   changed_when: false
   ignore_errors: true
   when: ansible_os_family == "Archlinux"
 
 - name: system setup | locale | sync hardware clock and system clock (Archlinux)
+  become: true
   command: hwclock --systohc
   changed_when: false
   ignore_errors: true
   when: ansible_os_family == "Archlinux"
 
 - name: system setup | locale | set locale.gen file (Archlinux)
-  lineinfile:
-    dest: /etc/locale.gen
-    regexp: '^#en_US\.UTF-8 UTF-8'
-    line: 'en_US.UTF-8 UTF-8'
+  become: true
+  shell: echo 'en_US.UTF-8 UTF-8' > /etc/locale.gen
   when: ansible_os_family == "Archlinux"
 
 - name: system setup | locale | generate locale (Archlinux)
