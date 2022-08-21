@@ -1,8 +1,9 @@
-- name: packages | LSP | install HTML 
+- name: packages | LSP | install HTML
+  become: true
   npm:
     global: yes
     name: vscode-langservers-extracted
-  
+
 - name: packages | LSP | install gopls (Archlinux, MacOS)
   become: no
   command: go install golang.org/x/tools/gopls@latest
@@ -13,27 +14,32 @@
   command: /usr/local/go/bin/go install golang.org/x/tools/gopls@latest
   when: ansible_os_family == "Debian"
 
-- name: packages | LSP | install GraphQl 
+- name: packages | LSP | install GraphQl
+  become: true
   npm:
     global: yes
     name: graphql-language-service-cli
 
 - name: packages | LSP | install Intelephense
+  become: true
   npm:
     global: yes
     name: intelephense
 
 - name: packages | LSP | install Typescript
+  become: true
   npm:
     global: yes
     name: typescript
 
 - name: packages | LSP | install Typescript Language Server
+  become: true
   npm:
     global: yes
     name: typescript-language-server
 
 - name: packages | LSP | install Vue Language Server
+  become: true
   npm:
     global: yes
     name: "@volar/vue-language-server"
