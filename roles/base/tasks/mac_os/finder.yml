@@ -40,6 +40,13 @@
     type: bool
     value: true
 
+- name: system setup | finder | hide recent tags on sidebar
+  osx_defaults:
+    domain: com.apple.finder
+    key: ShowRecentTags
+    type: bool
+    value: false
+
 - name: system setup | finder | hide hidden files
   osx_defaults:
     domain: com.apple.finder
