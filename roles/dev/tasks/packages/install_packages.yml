@@ -53,9 +53,3 @@
     groups: docker
     append: yes
   when: ansible_os_family == "Debian"
-
-# - name: packages | ensure php service is not enabled
-#   service:
-#     name: php8.1-fpm
-#     state: stopped
-#     enabled: no
