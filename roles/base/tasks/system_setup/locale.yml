@@ -25,9 +25,9 @@
   when: ansible_os_family == "Archlinux"
 
 - name: system setup | locale | refresh tzdata (Archlinux)
-  pacman:
-    name: tzdata
-    state: latest
+  command: pacman -S --noconfirm tzdata
+  changed_when: false
+  ignore_errors: true
   when: ansible_os_family == "Archlinux"
 
 - name: system setup | locale | set locale.gen file (Archlinux)
