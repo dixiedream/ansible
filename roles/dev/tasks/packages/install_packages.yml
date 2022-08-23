@@ -46,10 +46,10 @@
     enabled: no
   when: ansible_system == "Linux"
 
-- name: users | ale | ensure ale is in docker group (Debian)
+- name: users | ale | ensure ale is in docker group (Linux)
   become: true
   user:
     name: ale
     groups: docker
     append: yes
-  when: ansible_os_family == "Debian"
+  when: ansible_system == "Linux"
