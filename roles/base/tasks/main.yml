@@ -53,6 +53,7 @@
     - import_tasks: mac_os/disk_utility.yml
     - import_tasks: mac_os/dock.yml
     - import_tasks: mac_os/finder.yml
+    - import_tasks: mac_os/font.yml
     - import_tasks: mac_os/global.yml
     - import_tasks: mac_os/hot_corners.yml
     - import_tasks: mac_os/locale.yml

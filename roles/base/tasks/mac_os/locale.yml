@@ -20,6 +20,13 @@
     type: string
     value: "Centimeters"
 
+- name: system setup | temp unit
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: AppleTemperatureUnit
+    type: string
+    value: "Celsius"
+
 - name: system setup | metrics units
   osx_defaults:
     domain: NSGlobalDomain
