@@ -6,7 +6,7 @@
     group: root
 
 - name: system setup | lock screen on suspend | enable service
-  become_user: ale
+  become: true
   service:
     name: "slock@ale.service"
     enabled: yes
