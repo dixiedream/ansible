@@ -40,3 +40,19 @@
       # - bridge-utils
     state: present
   when: ansible_os_family == "Debian"
+
+- name: packages | qemu | ensure libvirtd service is not enabled (Debian)
+  become: true
+  service:
+    name: libvirtd
+    state: stopped
+    enabled: no
+  when: ansible_os_family == "Debian"
+
+- name: packages | qemu | ensure systemd-machined service is not enabled (Debian)
+  become: true
+  service:
+    name: systemd-machined
+    state: stopped
+    enabled: no
+  when: ansible_os_family == "Debian"
