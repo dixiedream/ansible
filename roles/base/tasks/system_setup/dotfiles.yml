@@ -26,7 +26,6 @@
         state: directory
         owner: ale
         group: ale
-
   when: ansible_system == "Linux"
 
 - name: system setup | dotfiles | MacOS
