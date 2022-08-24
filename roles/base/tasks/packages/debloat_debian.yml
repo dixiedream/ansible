@@ -4,7 +4,7 @@
     state: stopped
     enabled: no
 
-- name: packages | debloat Debian | remove unwanted packages 
+- name: packages | debloat Debian | remove unwanted packages
   apt:
     name:
       - apache2
@@ -16,12 +16,113 @@
       - iamerican
       - ibritish
       - ienglish-common
-      - nano 
+      - nano
       - powertop
       - pulseaudio
     state: absent
 
-- name: packages | debloat Debian | remove claimed non critical package 
+# https://github.com/terminalforlife/Extra/blob/master/source/simplify-ubuntu/simplify-ubuntu
+- name: packages | debloat Debian | remove claimed by simplify-ubuntu script
+  apt:
+    name:
+      - user-setup
+      - virtualbox-guest
+      - vmmouse
+      - vmware
+      - python-libvmdk
+      - libvmdk
+      - open-vm-tools
+      - xserver-xorg-video-qxl
+      - brltty
+      - brlapi
+      - redshift
+      - xcursor-themes
+      - xterm
+      - friendly-recovery
+      - dmraid
+      - xfonts-thai
+      - fonts-tlwg
+      - fonts-thai
+      - fonts-arphic-
+      - fonts-moe-standard-song
+      - xfonts-intl-chinese
+      - gufw
+      - hexchat
+      - indicator-status-provider-pidgin
+      - pidgin
+      - command-not-found
+      - python3-commandnotfound
+      - flatpak
+      - synaptic
+      - rhythmbox
+      - gparted
+      - tomboy
+      - unity-scope-tomboy
+      - timeshift
+      - xscreensaver
+      - duplicity
+      - gdebi
+      - mobile-broadband-provider-info
+      - gnome-disk-utility
+      - evince
+      - vino
+      - libdvd
+      - libcdr
+      - cd-discid
+      - libcdio
+      - libcdparanoia0
+      - dvd+rw-tools
+      - genisoimage
+      - brasero
+      - baobab
+      - libanyevent-i3-perl
+      - 'libabw-*'
+      - 'evolution-data-server*'
+      - '*caribou*'
+      - reiserfsprogs
+      - apport
+      - 'apport-*'
+      - python-apport
+      - python3-apport
+      - '*popularity-contest'
+      - '*-popcorn'
+    state: absent
+
+- name: packages | debloat Debian | remove laptop stuff (Debian desktop)
+  apt:
+    name:
+      - wmbattery
+      - whereami
+      - urfkill
+      - pommed
+      - hdapsd
+      - fnfxd
+      - xbattbar
+      - ibam
+      - radeontool
+      - toshset
+      - armada-backlight
+      - i8kutils
+      - fdpowermon
+      - batmon.app
+      - battery-stats
+      - claws-mail-acpi-notifier
+      - gkrellm
+      - laptop-detect
+      - laptop-mode-tools
+      - powerstat
+      - powertop
+      - xserver-xorg-input-wacom
+      - ubuntu-touch
+      - ubuntu-application-api3-touch
+      - x11-touchscreen-calibrator
+      - libfile-touch-perl
+      - autopilot-touch
+      - xserver-xorg-input-synaptics
+    state: absent
+  when: ansible_form_factor is undefined or ansible_form_factor != "Notebook"
+
+- name: packages | debloat Debian | remove claimed non critical package
   apt:
     name:
       - aptitude
@@ -31,7 +132,7 @@
       - avahi-daemon
       - bash-completion
       - bin86
-      #- bind9-host 
+      #- bind9-host
       #- ca-certificates
       - console-common
       - console-data
