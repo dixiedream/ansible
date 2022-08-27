@@ -49,6 +49,7 @@
     enabled: no
   with_items:
     - libvirtd
+    - libvirt-guests
     - systemd-machined
     - dnsmasq
   when: ansible_os_family == "Debian"
