@@ -16,12 +16,12 @@
     type: bool
     value: true
 
-- name: system setup | set highlight color to green
-  osx_defaults:
-    domain: NSGlobalDomain
-    key: AppleHighlightColor
-    type: string
-    value: "0.764700 0.976500 0.568600"
+# - name: system setup | set highlight color to green
+#   osx_defaults:
+#     domain: NSGlobalDomain
+#     key: AppleHighlightColor
+#     type: string
+#     value: "0.764700 0.976500 0.568600"
 
 - name: system setup | set sidebar icon size to medium
   osx_defaults:

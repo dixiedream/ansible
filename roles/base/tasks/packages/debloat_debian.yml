@@ -75,16 +75,10 @@
       - brasero
       - baobab
       - libanyevent-i3-perl
-        #- 'libabw-*'
-      # - 'evolution-data-server*'
-      # - '*caribou*'
       - reiserfsprogs
       - apport
-      # - 'apport-*'
       - python-apport
       - python3-apport
-      # - '*popularity-contest'
-      # - '*-popcorn'
     state: absent
 
 - name: packages | debloat Debian | remove laptop stuff (Debian desktop)
