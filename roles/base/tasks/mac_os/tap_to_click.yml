@@ -6,31 +6,31 @@
     value: true
 
 - name: system setup | tap to click step 2
-  osx_defaults: 
+  osx_defaults:
     domain: com.apple.AppleMultitouchTrackpad
     key: Clicking
     type: bool
     value: true
 
 - name: system setup | tap to click | step 3
-  osx_defaults: 
-    domain: com.apple.driver.AppleMultitouch.trackpad 
+  osx_defaults:
+    domain: com.apple.driver.AppleMultitouch.trackpad
     key: Clicking
     type: bool
     value: true
   become: true
 
 - name: system setup | tap to click | step 4
-  osx_defaults: 
-    domain: NSGlobalDomain 
+  osx_defaults:
+    domain: NSGlobalDomain
     key: com.apple.mouse.tapBehavior
     type: int
     value: 1
     host: currentHost
 
 - name: system setup | tap to click | step 5
-  osx_defaults: 
-    domain: NSGlobalDomain 
+  osx_defaults:
+    domain: NSGlobalDomain
     key: com.apple.mouse.tapBehavior
     type: int
     value: 1
