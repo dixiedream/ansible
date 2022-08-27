@@ -19,6 +19,7 @@
       - koekeishiya/formulae/yabai
       - yt-dlp
       - zip
+      - zsh
     state: latest
 
 - name: mac os | install brew casks
