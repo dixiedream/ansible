@@ -36,6 +36,12 @@
     state: started
     enabled: yes
 
+- name: system setup | network | ensure systemd-resolved package is installed (Debian)
+  package:
+    name: systemd-resolved
+    state: latest
+  when: ansible_os_family == "Debian"
+
 - name: system setup | network | ensure resolved service is running and enabled
   service:
     name: systemd-resolved
