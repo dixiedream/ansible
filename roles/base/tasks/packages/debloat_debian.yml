@@ -10,6 +10,7 @@
     name:
       - apache2
       - anacron
+      - chafa
       - cron-daemon-common
       - cron
       - debian-faq
@@ -17,6 +18,7 @@
       - iamerican
       - ibritish
       - ienglish-common
+      - jp2a
       - nano
       - powertop
       - pulseaudio
