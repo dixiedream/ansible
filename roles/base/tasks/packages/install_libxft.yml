@@ -7,6 +7,7 @@
   apt:
     name:
       - libxft2
+      - libtool
       # - autoconf
       # - xutils-dev
     state: latest
