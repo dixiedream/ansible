@@ -6,15 +6,30 @@
 - name: packages | libxft | install required dep (Debian)
   apt:
     name:
-      - libxft2
+      # - libxft2
       - libtool
-      # - autoconf
-      # - xutils-dev
+      - xutils-dev
     state: latest
   when: ansible_os_family == "Debian"
 
-# - name: packages | clone libxft patched version (Debian)
-#   git:
-#     repo: https://github.com/uditkarode/libxft-bgra
-#     dest: ~/src/libxft-bgra
-#   when: ansible_os_family == "Debian"
+- name: packages | clone libxft patched version (Debian)
+  git:
+    repo: https://gitlab.freedesktop.org/xorg/lib/libxft.git
+    dest: /tmp/libxft-bgra
+    force: yes
+  when: ansible_os_family == "Debian"
+#
+#
+#git clone https://gitlab.freedesktop.org/xorg/lib/libxft.git
+#cd libxft
+#sudo apt install xutils-dev libtool
+#sudo sh autogen.sh --sysconfdir=/etc --prefix=/usr --mandir=/usr/share/man
+#sudo make install
+#cd /usr/lib/x86_64-linux-gnu
+#sudo rm -f libXft.*
+#sudo ln -s /usr/lib/libXft.a libXft.a
+#sudo ln -s /usr/lib/libXft.so.2.3.4 libXft.so
+#sudo ln -s /usr/lib/libXft.so.2.3.4 libXft.so.2
+#sudo ln -s /usr/lib/libXft.so.2.3.4 libXft.so.2.3.4
+#sudo ldconfig
+
