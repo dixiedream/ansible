@@ -63,6 +63,7 @@
       - unity-scope-tomboy
       - timeshift
       - xscreensaver
+      - udisks2
       - duplicity
       - gdebi
       - mobile-broadband-provider-info

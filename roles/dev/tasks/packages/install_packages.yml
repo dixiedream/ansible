@@ -25,6 +25,14 @@
 - name: packages | ensure docker service is not enabled (Linux)
   become: true
   service:
+    name: 'docker.socket'
+    state: stopped
+    enabled: no
+  when: ansible_system == "Linux"
+
+- name: packages | ensure docker service is not enabled (Linux)
+  become: true
+  service:
     name: docker
     state: stopped
     enabled: no
