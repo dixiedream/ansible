@@ -94,3 +94,9 @@
     name: lf
     state: latest
   when: ansible_os_family == "Debian"
+
+- name: packages | install libnotify (Debian)
+  apt:
+    name: libnotify-bin
+    state: latest
+  when: ansible_os_family == "Debian"
