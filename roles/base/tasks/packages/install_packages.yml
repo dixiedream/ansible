@@ -24,6 +24,7 @@
       - gzip
       - htop
       - imagemagick
+      - "{{ libnotify_package }}"
       - maim
       - man-db
       - mpv
@@ -92,11 +93,5 @@
 - name: packages | install LF file manager (Debian)
   apt:
     name: lf
-    state: latest
-  when: ansible_os_family == "Debian"
-
-- name: packages | install libnotify (Debian)
-  apt:
-    name: libnotify-bin
     state: latest
   when: ansible_os_family == "Debian"
