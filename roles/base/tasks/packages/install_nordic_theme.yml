@@ -1,13 +1,5 @@
-- name: packages | install Nordic theme (Archlinux)
-  become_user: ale
-  command: yay -S --noconfirm nordic-theme-git
-  args:
-    creates: /usr/share/themes/Nordic
-  when: ansible_distribution == "Archlinux"
-
-- name: packages | download and install Nordic theme (Debian)
+- name: packages | download and install Nordic theme
   unarchive:
     src: "https://github.com/EliverLara/Nordic/releases/download/{{ nordic_theme_version }}/Nordic.tar.xz"
     dest: /usr/share/themes
     remote_src: yes
-  when: ansible_os_family == "Debian"

@@ -1,6 +1,9 @@
 # Common vars
 sudo_group: wheel
 
+# Nordic theme version
+nordic_theme_version: v2.2.0
+
 # Package names
 acpi_call_package: acpi_call
 amd_microcode_package: amd-ucode
