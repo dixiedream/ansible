@@ -19,13 +19,13 @@
     - name: system setup | dotfiles | Setup repo
       command: "git --git-dir={{ dotfile_src }} --work-tree='{{ user_home }}' config remote.origin.fetch 'refs/heads/*:refs/remotes/origin/*'"
 
-    - name: system setup | dotfiles | Check file permissions
-      file:
-        path: '/home/ale'
-        recurse: yes
-        state: directory
-        owner: ale
-        group: ale
+    # - name: system setup | dotfiles | Check file permissions
+    #   file:
+    #     path: '/home/ale'
+    #     recurse: yes
+    #     state: directory
+    #     owner: ale
+    #     group: ale
   when: ansible_system == "Linux"
 
 - name: system setup | dotfiles | MacOS
