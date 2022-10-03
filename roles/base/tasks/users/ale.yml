@@ -48,10 +48,12 @@
     group: ale
   when: not key_stat.stat.exists
 
-- name: users | ale | remove .bashrc
+- name: users | ale | remove bash related files
   file:
     path: "{{ item }}"
     state: absent
   with_items:
     - '/home/ale/.bash_logout'
+    - '/home/ale/.bash_history'
+    - '/home/ale/.bash_profile'
     - '/home/ale/.bashrc'
