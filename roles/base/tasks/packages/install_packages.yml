@@ -90,6 +90,15 @@
     creates: /usr/bin/lf
   when: ansible_distribution == "Archlinux"
 
+- name: packages | install Bluetooth related stuff (Debian)
+  apt:
+    name:
+      - bluetooth
+      - bluez-firmware
+      - libspa-0.2-bluetooth
+    state: latest
+  when: ansible_os_family == "Debian"
+
 - name: packages | install LF file manager (Debian)
   apt:
     name: lf

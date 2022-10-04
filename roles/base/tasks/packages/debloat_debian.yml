@@ -22,6 +22,7 @@
       - nano
       - powertop
       - pulseaudio
+      - pulseaudio-module-bluetooth
     state: absent
 
 # https://github.com/terminalforlife/Extra/blob/master/source/simplify-ubuntu/simplify-ubuntu
@@ -130,8 +131,6 @@
       - avahi-daemon
       - bash-completion
       - bin86
-      #- bind9-host
-      #- ca-certificates
       - console-common
       - console-data
       - console-tools
