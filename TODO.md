@@ -1,1 +1,2 @@
 - remove become true from global scope, task file is a better place to declare
+- set bluetooth task only for debian as arch doesn't required it, old story
