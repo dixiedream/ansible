@@ -42,6 +42,8 @@
       # Only for laptops
     - import_tasks: system_setup/battery_threshold.yml
       when: ansible_form_factor is defined and ansible_form_factor == "Notebook"
+
+    - import_tasks: system_setup/bluetooth.yml
   when: ansible_system == "Linux"
 
 - name: Setup MacOS
