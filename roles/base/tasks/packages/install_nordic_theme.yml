@@ -1,4 +1,5 @@
 - name: packages | download and install Nordic theme
+  become: true
   unarchive:
     src: "https://github.com/EliverLara/Nordic/releases/download/{{ nordic_theme_version }}/Nordic.tar.xz"
     dest: /usr/share/themes

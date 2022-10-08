@@ -1,12 +1,14 @@
-- name: packages | dwm | clone repo 
+- name: packages | dwm | clone repo
+  become: true
   git:
     repo: https://github.com/dixiedream/dwm
     dest: /tmp/dwm
     force: yes
 
-- name: packages | dwm | install required dependencies (Debian) 
+- name: packages | dwm | install required dependencies (Debian)
+  become: true
   package:
-    name: 
+    name:
       - build-essential
       - make
       - gcc
@@ -20,7 +22,8 @@
     state: present
   when: ansible_os_family == "Debian"
 
-- name: packages | dwm | install dwm 
+- name: packages | dwm | install dwm
+  become: true
   make:
     target: install
     chdir: /tmp/dwm

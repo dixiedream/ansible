@@ -1,10 +1,12 @@
-- name: packages | dmenu | clone repo 
+- name: packages | dmenu | clone repo
+  become: true
   git:
     repo: https://github.com/dixiedream/dmenu
     dest: /tmp/dmenu
     force: yes
 
-- name: packages | dmenu | install dmenu 
+- name: packages | dmenu | install dmenu
+  become: true
   make:
     target: install
     chdir: /tmp/dmenu

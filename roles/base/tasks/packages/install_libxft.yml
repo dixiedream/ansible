@@ -4,6 +4,7 @@
   when: ansible_distribution == "Archlinux"
 
 - name: packages | libxft | install required dep (Debian)
+  become: true
   apt:
     name:
       # - libxft2
@@ -13,6 +14,7 @@
   when: ansible_os_family == "Debian"
 
 - name: packages | clone libxft patched version (Debian)
+  become: true
   git:
     repo: https://gitlab.freedesktop.org/xorg/lib/libxft.git
     dest: /tmp/libxft-bgra

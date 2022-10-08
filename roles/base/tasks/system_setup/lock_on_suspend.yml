@@ -1,4 +1,5 @@
 - name: system setup | lock screen on suspend | copy conf file
+  become: true
   copy:
     src: system_setup/lock_on_suspend.conf
     dest: /etc/systemd/system/slock@.service

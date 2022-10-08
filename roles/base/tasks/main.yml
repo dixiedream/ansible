@@ -3,18 +3,11 @@
   when: ansible_system == "Linux"
 
 - name: Linux setup
-  become: true
   block:
     - import_tasks: users/ale.yml
-
     - import_tasks: ansible_setup.yml
-
     - import_tasks: packages/debloat_debian.yml
-      when: ansible_os_family == "Debian"
-
     - import_tasks: packages/install_aur_helper.yml
-      when: ansible_os_family == "Archlinux"
-
     - import_tasks: packages/install_packages.yml
     - import_tasks: packages/install_autocpufreq.yml
     - import_tasks: packages/install_brave.yml
@@ -23,30 +16,20 @@
     - import_tasks: packages/install_dwm.yml
     - import_tasks: packages/install_st.yml
     - import_tasks: packages/install_dmenu.yml
-
     # - import_tasks: system_setup/network.yml
     - import_tasks: system_setup/locale.yml
     - import_tasks: system_setup/microcode.yml # Need to set that as kernel par
     - import_tasks: system_setup/tap_to_click.yml
-
     - import_tasks: system_setup/pacman.yml
-      when: ansible_distribution == "Archlinux"
-
     - import_tasks: system_setup/dotfiles.yml
     - import_tasks: system_setup/remove_beep.yml
     - import_tasks: system_setup/lock_on_suspend.yml
-
     - import_tasks: system_setup/debian_systemctl_shortcuts.yml
-      when: ansible_os_family == "Debian"
-
-      # Only for laptops
     - import_tasks: system_setup/battery_threshold.yml
-      when: ansible_form_factor is defined and ansible_form_factor == "Notebook"
-
     - import_tasks: system_setup/bluetooth.yml
   when: ansible_system == "Linux"
 
-- name: Setup MacOS
+- name: MacOS Setup
   block:
     - import_tasks: mac_os/install_brews.yml
     - import_tasks: mac_os/activity_monitor.yml
@@ -63,9 +46,7 @@
     - import_tasks: mac_os/mail.yml
     - import_tasks: mac_os/messages.yml
     - import_tasks: mac_os/photos.yml
-
     - import_tasks: mac_os/power_management.yml
-
     - import_tasks: mac_os/quicktime.yml
     - import_tasks: mac_os/safari.yml
     - import_tasks: mac_os/screen.yml

@@ -1,10 +1,12 @@
-- name: packages | st | clone repo 
+- name: packages | st | clone repo
+  become: true
   git:
     repo: https://github.com/dixiedream/st
     dest: /tmp/st
     force: yes
 
-- name: packages | st | install st 
+- name: packages | st | install st
+  become: true
   make:
     target: install
     chdir: /tmp/st

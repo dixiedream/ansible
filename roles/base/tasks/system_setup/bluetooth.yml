@@ -6,6 +6,7 @@
     owner: root
     group: root
     mode: 0755
+  when: ansible_os_family == "Debian"
 
 - name: system setup | bluetooth | copy headphones audio quality and mic conf
   become: true
@@ -15,3 +16,5 @@
     owner: root
     group: root
     mode: 0755
+  when: ansible_os_family == "Debian"
+
