@@ -30,31 +30,6 @@
     owner: root
     group: root
 
-- name: system setup | network | ensure networkd service is running and enabled
-  service:
-    name: systemd-networkd
-    state: started
-    enabled: yes
-
-- name: system setup | network | ensure systemd-resolved package is installed (Debian)
-  package:
-    name: systemd-resolved
-    state: latest
-  when: ansible_os_family == "Debian"
-
-- name: system setup | network | ensure resolved service is running and enabled
-  service:
-    name: systemd-resolved
-    state: started
-    enabled: yes
-
-- name: system setup | network | ensure wpa_supplicant service is not running
-  service:
-    name: wpa_supplicant
-    state: stopped
-    enabled: no
-  ignore_errors: yes
-
 - name: system setup | network | remove old /etc/resolv.conf
   file:
     path: /etc/resolv.conf

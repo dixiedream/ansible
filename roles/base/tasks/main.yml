@@ -16,9 +16,8 @@
     - import_tasks: packages/install_dwm.yml
     - import_tasks: packages/install_st.yml
     - import_tasks: packages/install_dmenu.yml
-    # - import_tasks: system_setup/network.yml
+    - import_tasks: system_setup/network.yml
     - import_tasks: system_setup/locale.yml
-    - import_tasks: system_setup/microcode.yml # Need to set that as kernel par
     - import_tasks: system_setup/tap_to_click.yml
     - import_tasks: system_setup/pacman.yml
     - import_tasks: system_setup/dotfiles.yml
