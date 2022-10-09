@@ -1,2 +1,1 @@
-- microcode, add copy template to bootctl arch.conf, but what if grub instead?
-- var registration for skipping uneeded steps
+- find a way to make git and file tasks say Ok when already done
