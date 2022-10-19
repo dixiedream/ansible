@@ -24,6 +24,7 @@
           - jp2a
           - nano
           - powertop
+          - packagekit
           - pulseaudio
           - pulseaudio-module-bluetooth
         state: absent

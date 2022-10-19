@@ -16,6 +16,7 @@
     - import_tasks: packages/install_dwm.yml
     - import_tasks: packages/install_st.yml
     - import_tasks: packages/install_dmenu.yml
+    - import_tasks: system_setup/apt.yml
     - import_tasks: system_setup/network.yml
     - import_tasks: system_setup/locale.yml
     - import_tasks: system_setup/tap_to_click.yml

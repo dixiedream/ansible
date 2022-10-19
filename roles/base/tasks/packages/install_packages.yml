@@ -22,7 +22,7 @@
           - cmus
           - dosfstools
           - dunst
-          - "{{ exfat_utils_package }}"
+          - exfatprogs
           - fzf
           - gzip
           - htop

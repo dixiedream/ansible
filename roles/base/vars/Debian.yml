@@ -8,7 +8,6 @@ nordic_theme_version: v2.2.0
 acpi_call_package: acpi-call
 amd_microcode_package: amd64-microcode
 bluez_utils_package: bluez-tools
-exfat_utils_package: exfat-fuse
 intel_microcode_package: intel-microcode
 libnotify_package: libnotify-bin
 noto_fonts_package: fonts-noto
