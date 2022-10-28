@@ -1,0 +1,25 @@
+- name: system setup | pacman
+  become: true
+  block:
+    - name: system setup | pacman | make pacman pacman (Archlinux)
+      lineinfile:
+        dest: /etc/pacman.conf
+        regexp: '^ILoveCandy'
+        line: 'ILoveCandy'
+        insertafter: '^#VerbosePkgLists'
+
+    - name: system setup | pacman | setup parallel downloads (Archlinux)
+      lineinfile:
+        dest: /etc/pacman.conf
+        regexp: '^#ParallelDownloads ='
+        line: 'ParallelDownloads = 5'
+
+    - name: system setup | pacman | setup color (Archlinux)
+      lineinfile:
+        dest: /etc/pacman.conf
+        regexp: '^#Color'
+        line: 'Color'
+
+    - name: system setup | pacman | multicore compilation (Archlinux)
+      command: sed -i "s/-j2/-j$(nproc)/;/^#MAKEFLAGS/s/^#//" /etc/makepkg.conf
+  when: ansible_distribution == "Archlinux"

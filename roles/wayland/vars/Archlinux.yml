@@ -1,0 +1,17 @@
+# Common vars
+sudo_group: wheel
+
+# Nordic theme version
+nordic_theme_version: v2.2.0
+
+# Package names
+acpi_call_package: acpi_call
+amd_microcode_package: amd-ucode
+bluez_utils_package: bluez-utils
+intel_microcode_package: intel-ucode
+libnotify_package: libnotify
+noto_fonts_package: noto-fonts
+noto_fonts_emoji_package: noto-fonts-emoji
+unrar_package: unrar
+wpa_supplicant_package: wpa_supplicant
+zathura_pdf_support_package: zathura-pdf-mupdf

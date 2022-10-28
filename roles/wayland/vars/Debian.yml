@@ -1,0 +1,17 @@
+# Common vars
+sudo_group: sudo
+
+# Nordic theme version
+nordic_theme_version: v2.2.0
+
+# Package names
+acpi_call_package: acpi-call
+amd_microcode_package: amd64-microcode
+bluez_utils_package: bluez-tools
+intel_microcode_package: intel-microcode
+libnotify_package: libnotify-bin
+noto_fonts_package: fonts-noto
+noto_fonts_emoji_package: fonts-noto-color-emoji
+unrar_package: unrar-free
+wpa_supplicant_package: wpasupplicant
+zathura_pdf_support_package: zathura-pdf-poppler

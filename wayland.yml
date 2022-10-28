@@ -1,0 +1,35 @@
+---
+- hosts: all
+  become: true
+  pre_tasks:
+    - name: pre-run | update package cache (Archlinux)
+      pacman:
+        update_cache: yes
+      changed_when: False
+      when: ansible_distribution == "Archlinux"
+
+    - name: pre-run | update package cache (Debian)
+      apt:
+        update_cache: yes
+      changed_when: False
+      when: ansible_os_family == "Debian"
+
+  # run roles
+- hosts: all
+  roles:
+    - wayland
+
+- hosts: all
+  become: true
+  tasks:
+  - name: cleanup package cache (Debian)
+    apt:
+      autoclean: yes
+    changed_when: false
+    when: ansible_os_family == "Debian"
+
+  - name: autoremove orphan packages (debian)
+    apt:
+      autoremove: yes
+      purge: yes
+    when: ansible_os_family == "Debian"

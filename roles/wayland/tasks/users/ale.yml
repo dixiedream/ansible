@@ -1,0 +1,62 @@
+- name: users | ale
+  become: true
+  block:
+    - name: users | ale | create group
+      group:
+        name: ale
+        state: present
+
+    - name: users | ale | create user
+      user:
+        name: ale
+        group: ale
+        groups: "{{ sudo_group }}"
+        state: present
+        shell: /usr/bin/zsh
+
+    - name: users | ale | ensure ale is in video group (Debian)
+      user:
+        name: ale
+        groups: video
+        append: yes
+      when: ansible_os_family == "Debian"
+
+    - name: users | ale | add sudoers file
+      template:
+        src: users/sudoers_ale.j2
+        dest: /etc/sudoers.d/ale
+        owner: root
+        group: root
+        mode: 0400
+
+    - name: users | ale | create .ssh directory
+      file:
+        path: "{{ item.dir }}"
+        state: directory
+        owner: ale
+        group: ale
+        mode: 0700
+      with_items:
+        - { dir: '/home/ale/.ssh' }
+
+    - name: users | ale | check if key already exists
+      stat:
+        path: /home/ale/.ssh/id_rsa
+      register: key_stat
+
+    - name: users | ale | generate ssh key
+      openssh_keypair:
+        path: /home/ale/.ssh/id_rsa
+        owner: ale
+        group: ale
+      when: not key_stat.stat.exists
+
+    - name: users | ale | remove bash related files
+      file:
+        path: "{{ item }}"
+        state: absent
+      with_items:
+        - '/home/ale/.bash_logout'
+        - '/home/ale/.bash_history'
+        - '/home/ale/.bash_profile'
+        - '/home/ale/.bashrc'

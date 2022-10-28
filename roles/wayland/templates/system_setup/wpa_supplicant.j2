@@ -1,0 +1,8 @@
+# Use as a template for generating wpa_supplicant-WIFIINTERFACE.conf
+ctrl_interface=/run/wpa_supplicant
+ctrl_interface_group={{ sudo_group }}
+update_config=1
+
+ap_scan=1
+
+# Begin network section

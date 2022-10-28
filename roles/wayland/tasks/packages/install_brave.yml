@@ -1,0 +1,44 @@
+- name: packages | brave
+  become: true
+  block:
+    - name: packages | brave | install (Archlinux)
+      become_user: ale
+      command: yay -S --noconfirm brave-bin
+      args:
+        creates: /usr/bin/brave
+      when: ansible_distribution == "Archlinux"
+
+    - name: packages | brave | install required dependencies (Debian)
+      package:
+        name:
+          - apt-transport-https
+          - curl
+      when: ansible_os_family == "Debian"
+
+    - name: packages | brave | setup keyring (Debian)
+      get_url:
+        url: https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+        dest: /usr/share/keyrings/brave-browser-archive-keyring.gpg
+      when: ansible_os_family == "Debian"
+
+    - name: packages | brave | setup repo (Debian)
+      apt_repository:
+        repo: deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main
+        state: present
+        filename: brave-browser-release
+      when: ansible_os_family == "Debian"
+
+    - name: packages | brave | install (Debian)
+      apt:
+        name: brave-browser
+        update_cache: yes
+      when: ansible_os_family == "Debian"
+
+    - name: packages | brave | copy brave binary to /usr/bin (Debian)
+      file:
+        src: /opt/brave.com/brave/brave
+        dest: /usr/bin/brave
+        state: link
+        owner: root
+        group: root
+      when: ansible_os_family == "Debian"

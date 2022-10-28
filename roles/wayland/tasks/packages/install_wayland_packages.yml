@@ -1,0 +1,17 @@
+- name: install wayland packages
+  become: true
+  block:
+    - name: packages | install packages
+      package:
+        name:
+          - sway
+        state: latest
+
+
+    # - name: packages | install LF file manager (Archlinux)
+    #   become_user: ale
+    #   command: yay -S --noconfirm lf
+    #   args:
+    #     creates: /usr/bin/lf
+    #   when: ansible_distribution == "Archlinux"
+

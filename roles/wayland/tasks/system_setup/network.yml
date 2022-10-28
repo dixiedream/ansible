@@ -1,0 +1,57 @@
+- name: system setup | network
+  become: true
+  block:
+    - name: system setup | network | remove ifupdown (Debian)
+      package:
+        name: ifupdown
+        state: absent
+      when: ansible_os_family == "Debian"
+
+    - name: system setup | network | create basic ethernet conf
+      copy:
+        src: system_setup/network_ethernet.network
+        dest: /etc/systemd/network/en.network
+        owner: root
+        group: root
+
+    - name: system setup | network | create basic wireless conf
+      copy:
+        src: system_setup/network_wireless.network
+        dest: /etc/systemd/network/wl.network
+        owner: root
+        group: root
+
+    - name: system setup | network | check if wpa_supplicant folder exists
+      file:
+        path: /etc/wpa_supplicant
+        state: directory
+
+    - name: system setup | network | create wpa_supplicant template
+      template:
+        src: system_setup/wpa_supplicant.j2
+        dest: /etc/wpa_supplicant/wpa_supplicant-example.conf
+        owner: root
+        group: root
+
+    - name: system setup | network | remove old /etc/resolv.conf
+      file:
+        path: /etc/resolv.conf
+        state: absent
+
+    - name: system setup | network | symlink systemd network resolv to resolv.con (Debian)
+      file:
+        src: /run/systemd/resolve/resolv.conf
+        dest: /etc/resolv.conf
+        state: link
+        owner: root
+        group: root
+      when: ansible_os_family == "Debian"
+
+    - name: system setup | network | symlink systemd network resolv to resolv.con (Archlinux)
+      file:
+        src: /run/systemd/resolve/stub-resolv.conf
+        dest: /etc/resolv.conf
+        state: link
+        owner: root
+        group: root
+      when: ansible_os_family == "Archlinux"

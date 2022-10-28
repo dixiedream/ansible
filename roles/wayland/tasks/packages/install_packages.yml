@@ -1,0 +1,107 @@
+- name: packages
+  become: true
+  block:
+    - name: packages | ensure pipewire-media-session is not present
+      package:
+        name: pipewire-media-session
+        state: absent
+      ignore_errors: yes
+
+    - name: packages | install packages
+      package:
+        name:
+          - "{{ acpi_call_package }}"
+          - atool
+          - bc
+          - bleachbit
+          - bluez
+          - "{{ bluez_utils_package }}"
+          # - brightnessctl
+          - cmus
+          - dosfstools
+          # - dunst
+          - exfatprogs
+          - fzf
+          - gzip
+          - htop
+          - imagemagick
+          # - "{{ libnotify_package }}"
+          - maim
+          - man-db
+          - mpv
+          - ncdu
+          - neofetch
+          - neovim
+          - "{{ noto_fonts_package }}"
+          - "{{ noto_fonts_emoji_package }}"
+          - ntfs-3g
+          - p7zip
+          # - pavucontrol
+          - pipewire
+          - pipewire-alsa
+          - pipewire-pulse
+          - playerctl
+          - ripgrep
+          - s-tui
+          - slock
+          # - sxiv
+          # - unclutter
+          - "{{ unrar_package }}"
+          - unzip
+          - wireplumber
+          - "{{ wpa_supplicant_package }}"
+          - yt-dlp
+          # - xclip
+          # - xcompmgr
+          # - "{{ xorg_server_package }}"
+          # - "{{ xorg_xinit_package }}"
+          # - "{{ xorg_xrandr_package }}"
+          # - xwallpaper
+          - zathura
+          - "{{ zathura_pdf_support_package }}"
+          - zip
+          - zsh
+        state: latest
+
+    # - name: packages | install Xsetroot (Archlinux)
+    #   pacman:
+    #     name:
+    #       - xorg-xsetroot
+    #     state: latest
+    #   when: ansible_distribution == "Archlinux"
+
+    - name: packages | install Pacman Contrib package (Archlinux)
+      pacman:
+        name:
+          - pacman-contrib
+        state: latest
+      when: ansible_distribution == "Archlinux"
+
+    - name: packages | install polkit package (Archlinux)
+      pacman:
+        name:
+          - polkit
+        state: latest
+      when: ansible_distribution == "Archlinux"
+
+    - name: packages | install LF file manager (Archlinux)
+      become_user: ale
+      command: yay -S --noconfirm lf
+      args:
+        creates: /usr/bin/lf
+      when: ansible_distribution == "Archlinux"
+
+    - name: packages | install Bluetooth related stuff (Debian)
+      apt:
+        name:
+          - bluetooth
+          - bluez-firmware
+          - libspa-0.2-bluetooth
+        state: latest
+      when: ansible_os_family == "Debian"
+
+    - name: packages | install LF file manager (Debian)
+      apt:
+        name: lf
+        state: latest
+      when: ansible_os_family == "Debian"
