@@ -16,7 +16,7 @@
           - bleachbit
           - bluez
           - "{{ bluez_utils_package }}"
-          # - brightnessctl
+          - brightnessctl
           - cmus
           - dosfstools
           # - dunst
