@@ -9,7 +9,7 @@
     - name: packages | AUR helper | clone Yay repo (Archlinux)
       become_user: ale
       git:
-        repo: https://aur.archlinux.org/yay.git
+        repo: https://aur.archlinux.org/yay-bin.git
         dest: /tmp/yay
       when: not yay_is_present.stat.exists
 

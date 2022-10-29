@@ -14,6 +14,12 @@
         state: present
         shell: /usr/bin/zsh
 
+    - name: users | ale | ensure ale is in seat group
+      user:
+        name: ale
+        groups: seat
+        append: yes
+
     - name: users | ale | ensure ale is in video group (Debian)
       user:
         name: ale

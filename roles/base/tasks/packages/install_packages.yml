@@ -83,7 +83,7 @@
       pacman:
         name:
           - polkit
-        state: latest
+        state: absent
       when: ansible_distribution == "Archlinux"
 
     - name: packages | install LF file manager (Archlinux)

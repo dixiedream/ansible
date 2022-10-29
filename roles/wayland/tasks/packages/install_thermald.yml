@@ -1,0 +1,15 @@
+- name: packages | thermald
+  become: true
+  block:
+    - name: packages | thermald | install package
+      package:
+        name:
+          - thermald
+        state: latest
+
+    - name: packages | thermald | ensure service is enabled
+      service:
+        name: thermald
+        state: started
+        enabled: yes
+  when: ansible_form_factor is defined and ansible_form_factor == "Notebook"
