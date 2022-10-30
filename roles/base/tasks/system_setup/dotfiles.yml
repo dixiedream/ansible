@@ -1,23 +1,23 @@
 - name: system setup | dotfiles | Linux
   become_user: ale
   block:
-    # - name: system setup | dotfiles | Clone repo
-    #   git:
-    #     bare: yes
-    #     repo: https://github.com/dixiedream/dotfiles.git
-    #     dest: "{{ dotfile_src }}"
-    #
-    # - name: system setup | dotfiles | Setup repo
-    #   command: "git --git-dir={{ dotfile_src }} --work-tree='{{ user_home }}' checkout -f master"
-    #
-    # - name: system setup | dotfiles | Setup repo
-    #   command: "git --git-dir={{ dotfile_src }} --work-tree='{{ user_home }}' config --local status.showUntrackedFiles no"
-    #
-    # - name: system setup | dotfiles | Setup repo
-    #   command: "git --git-dir={{ dotfile_src }} --work-tree='{{ user_home }}' config remote.origin.url 'git@github.com:dixiedream/dotfiles.git'"
-    #
-    # - name: system setup | dotfiles | Setup repo
-    #   command: "git --git-dir={{ dotfile_src }} --work-tree='{{ user_home }}' config remote.origin.fetch 'refs/heads/*:refs/remotes/origin/*'"
+    - name: system setup | dotfiles | Clone repo
+      git:
+        bare: yes
+        repo: https://github.com/dixiedream/dotfiles.git
+        dest: "{{ dotfile_src }}"
+
+    - name: system setup | dotfiles | Setup repo
+      command: "git --git-dir={{ dotfile_src }} --work-tree='{{ user_home }}' checkout -f {{ dotfiles_branch }}"
+
+    - name: system setup | dotfiles | Setup repo
+      command: "git --git-dir={{ dotfile_src }} --work-tree='{{ user_home }}' config --local status.showUntrackedFiles no"
+
+    - name: system setup | dotfiles | Setup repo
+      command: "git --git-dir={{ dotfile_src }} --work-tree='{{ user_home }}' config remote.origin.url 'git@github.com:dixiedream/dotfiles.git'"
+
+    - name: system setup | dotfiles | Setup repo
+      command: "git --git-dir={{ dotfile_src }} --work-tree='{{ user_home }}' config remote.origin.fetch 'refs/heads/*:refs/remotes/origin/*'"
 
     # - name: system setup | dotfiles | Check file permissions
     #   file:
@@ -27,16 +27,4 @@
     #     owner: ale
     #     group: ale
     #
-    - name: system setup | dotfiles | create sway conf directory
-      file:
-        path: /home/ale/.config/sway
-        recurse: yes
-        state: directory
-        owner: ale
-        group: ale
-
-    - name: system setup | dotfiles | install sway conf
-      copy:
-        src: system_setup/dotfiles_sway.conf
-        dest: /home/ale/.config/sway/config
   when: ansible_system == "Linux"

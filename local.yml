@@ -16,8 +16,11 @@
 
   # run roles
 - hosts: all
+  vars:
+    dotfiles_branch: "master"
   roles:
     - base
+    - X11
 
 - hosts: all
   become: true

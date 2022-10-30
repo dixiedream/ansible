@@ -1,5 +1,0 @@
-- name: ansible setup | ensure ansible is the latest version
-  become: true
-  package:
-    name: ansible
-    state: latest

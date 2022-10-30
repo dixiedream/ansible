@@ -16,7 +16,10 @@
 
   # run roles
 - hosts: all
+  vars:
+    dotfiles_branch: "feature/wayland"
   roles:
+    - base
     - wayland
 
 - hosts: all

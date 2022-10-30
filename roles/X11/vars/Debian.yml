@@ -1,0 +1,4 @@
+# Package names
+xorg_server_package: xserver-xorg-core
+xorg_xinit_package: xinit
+xorg_xrandr_package: x11-xserver-utils

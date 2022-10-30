@@ -11,9 +11,7 @@
       package:
         name:
           - "{{ acpi_call_package }}"
-          - arandr
           - atool
-          - autorandr
           - bc
           - bleachbit
           - bluez
@@ -21,14 +19,12 @@
           - brightnessctl
           - cmus
           - dosfstools
-          - dunst
           - exfatprogs
           - fzf
           - gzip
           - htop
           - imagemagick
           - "{{ libnotify_package }}"
-          - maim
           - man-db
           - mpv
           - ncdu
@@ -45,32 +41,16 @@
           - playerctl
           - ripgrep
           - s-tui
-          - slock
-          - sxiv
-          - unclutter
           - "{{ unrar_package }}"
           - unzip
           - wireplumber
           - "{{ wpa_supplicant_package }}"
           - yt-dlp
-          - xclip
-          - xcompmgr
-          - "{{ xorg_server_package }}"
-          - "{{ xorg_xinit_package }}"
-          - "{{ xorg_xrandr_package }}"
-          - xwallpaper
           - zathura
           - "{{ zathura_pdf_support_package }}"
           - zip
           - zsh
         state: latest
-
-    - name: packages | install Xsetroot (Archlinux)
-      pacman:
-        name:
-          - xorg-xsetroot
-        state: latest
-      when: ansible_distribution == "Archlinux"
 
     - name: packages | install Pacman Contrib package (Archlinux)
       pacman:
@@ -83,14 +63,7 @@
       pacman:
         name:
           - polkit
-        state: absent
-      when: ansible_distribution == "Archlinux"
-
-    - name: packages | install LF file manager (Archlinux)
-      become_user: ale
-      command: yay -S --noconfirm lf
-      args:
-        creates: /usr/bin/lf
+        state: latest
       when: ansible_distribution == "Archlinux"
 
     - name: packages | install Bluetooth related stuff (Debian)
@@ -101,6 +74,13 @@
           - libspa-0.2-bluetooth
         state: latest
       when: ansible_os_family == "Debian"
+
+    - name: packages | install LF file manager (Archlinux)
+      become_user: ale
+      command: yay -S --noconfirm lf
+      args:
+        creates: /usr/bin/lf
+      when: ansible_distribution == "Archlinux"
 
     - name: packages | install LF file manager (Debian)
       apt:
