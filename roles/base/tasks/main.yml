@@ -9,6 +9,7 @@
     - import_tasks: packages/debloat_debian.yml
     - import_tasks: packages/install_aur_helper.yml
     - import_tasks: packages/install_packages.yml
+    # - import_tasks: packages/install_drivers.yml
     - import_tasks: packages/install_autocpufreq.yml
     - import_tasks: packages/install_thermald.yml
     - import_tasks: packages/install_brave.yml
