@@ -6,10 +6,10 @@
         name:
           - alacritty
           - bemenu
+          - dunst
           - grim
           - i3status-rust
           - kanshi
-          - mako
           - slurp
           - sway
           - swaybg
@@ -17,6 +17,8 @@
           - swayimg
           - swaylock
           - wl-clipboard
+          - xdg-desktop-portal
+          - xdg-desktop-portal-wlr
         state: latest
 
     - name: packages | install wayland packages | wdisplays
