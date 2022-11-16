@@ -14,7 +14,4 @@ noto_fonts_package: fonts-noto
 noto_fonts_emoji_package: fonts-noto-color-emoji
 unrar_package: unrar-free
 wpa_supplicant_package: wpasupplicant
-xorg_server_package: xserver-xorg-core
-xorg_xinit_package: xinit
-xorg_xrandr_package: x11-xserver-utils
 zathura_pdf_support_package: zathura-pdf-poppler

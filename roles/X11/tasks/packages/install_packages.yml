@@ -1,0 +1,27 @@
+- name: packages
+  become: true
+  block:
+    - name: packages | install packages
+      package:
+        name:
+          - arandr
+          - autorandr
+          - dunst
+          - maim
+          - slock
+          - sxiv
+          - unclutter
+          - xclip
+          - xcompmgr
+          - "{{ xorg_server_package }}"
+          - "{{ xorg_xinit_package }}"
+          - "{{ xorg_xrandr_package }}"
+          - xwallpaper
+        state: latest
+
+    - name: packages | install Xsetroot (Archlinux)
+      pacman:
+        name:
+          - xorg-xsetroot
+        state: latest
+      when: ansible_distribution == "Archlinux"

@@ -1,0 +1,28 @@
+- name: install wayland packages
+  become: true
+  block:
+    - name: packages | install wayland packages
+      package:
+        name:
+          - alacritty
+          - bemenu
+          - dunst
+          - grim
+          - i3status-rust
+          - kanshi
+          - slurp
+          - sway
+          - swaybg
+          - swayidle
+          - swayimg
+          - swaylock
+          - wl-clipboard
+          - xdg-desktop-portal
+          - xdg-desktop-portal-wlr
+        state: latest
+
+    - name: packages | install wayland packages | wdisplays
+      become_user: ale
+      shell: yes | yay -S --removemake wdisplays
+      when: ansible_distribution == "Archlinux"
+

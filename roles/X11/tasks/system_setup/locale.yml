@@ -1,0 +1,7 @@
+- name: system setup | locale
+  become: true
+  block:
+    - name: system setup | locale | set caps lock as ctrl
+      become_user: ale
+      command: localectl --no-convert set-x11-keymap it '' '' ctrl:nocaps
+      ignore_errors: yes

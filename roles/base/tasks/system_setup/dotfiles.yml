@@ -8,7 +8,7 @@
         dest: "{{ dotfile_src }}"
 
     - name: system setup | dotfiles | Setup repo
-      command: "git --git-dir={{ dotfile_src }} --work-tree='{{ user_home }}' checkout -f master"
+      command: "git --git-dir={{ dotfile_src }} --work-tree='{{ user_home }}' checkout -f {{ dotfiles_branch }}"
 
     - name: system setup | dotfiles | Setup repo
       command: "git --git-dir={{ dotfile_src }} --work-tree='{{ user_home }}' config --local status.showUntrackedFiles no"
@@ -26,4 +26,5 @@
     #     state: directory
     #     owner: ale
     #     group: ale
+    #
   when: ansible_system == "Linux"
