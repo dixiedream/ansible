@@ -10,6 +10,7 @@
   become: true
   pacman:
     name:
+      - dmidecode
       - qemu
         #- dhclient
       - virt-viewer
@@ -53,3 +54,11 @@
     - systemd-machined
     - dnsmasq
   when: ansible_os_family == "Debian"
+
+- name: users | ale | ensure ale is in libvirt group (Linux)
+  become: true
+  user:
+    name: ale
+    groups: libvirt
+    append: yes
+  when: ansible_system == "Linux"
