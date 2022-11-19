@@ -1,7 +1,7 @@
 - name: packages | install drivers
   block:
     - name: packages | install drivers | X230 Bluetooth firmware
-      become_user: ale
+      become_user: "{{ user }}"
       command: yay -S --noconfirm bcm20702a1-firmware
       args:
         creates: /usr/bin/auto-cpufreq

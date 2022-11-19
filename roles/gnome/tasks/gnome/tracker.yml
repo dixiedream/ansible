@@ -1,5 +1,5 @@
 - name: gnome | tracker
-  become_user: ale
+  become_user: "{{ user }}"
   block:
     # Uncomment the following to disable tracker if the below tweaks aren't enough
     #- name: gnome | tracker | disable monitors
@@ -17,7 +17,4 @@
     - name: gnome | tracker | set ignored directories
       dconf:
         key: "/org/freedesktop/tracker/miner/files/ignored-directories"
-        value: "['po', 'CVS', 'core-dumps', '/home/ale/Downloads', 'lost+found']"
-      notify:
-        - gnome_tracker_clean_cache
-        - gnome_tracker_clean_local_cache
+        value: "['po', 'CVS', 'core-dumps', '/home/{{ user }}/Downloads', 'lost+found']"

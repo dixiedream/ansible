@@ -30,7 +30,7 @@
   when: ansible_os_family == "Debian"
 
 - name: packages | golang | update $PATH var (Debian)
-  become_user: ale
+  become_user: "{{ user }}"
   lineinfile:
     dest: "/home/{{ user }}/.zprofile"
     regexp: '^export PATH=\$PATH:\$GOROOT/bin:\$GOPATH/bin'

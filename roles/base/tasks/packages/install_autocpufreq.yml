@@ -2,7 +2,7 @@
   become: true
   block:
     - name: packages | auto-cpufreq | install AUR package (Archlinux)
-      become_user: ale
+      become_user: "{{ user }}"
       command: yay -S --noconfirm auto-cpufreq
       args:
         creates: /usr/bin/auto-cpufreq
