@@ -4,6 +4,7 @@
     - import_tasks: packages/install_lf.yml
     - import_tasks: packages/install_zsh.yml
     - import_tasks: packages/install_psutil.yml
+    - import_tasks: system_setup/aliases.yml
     - import_tasks: gnome/keybindings.yml
     - import_tasks: gnome/input-sources.yml
     - import_tasks: gnome/tracker.yml
