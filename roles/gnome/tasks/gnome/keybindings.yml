@@ -42,7 +42,7 @@
         value: "{{ item.value }}"
       with_items:
         - { key: "{{ base_key }}/activate-window-menu", value: "@as []" }
-        - { key: "{{ base_key }}/close", value: "['<Alt>F4']" }
+        - { key: "{{ base_key }}/close", value: "['<Alt>F4', '<Shift><Super>C']" }
         - { key: "{{ base_key }}/cycle-group", value: "@as []" }
         - { key: "{{ base_key }}/cycle-group-backward", value: "@as []" }
         - { key: "{{ base_key }}/cycle-panels", value: "@as []" }
