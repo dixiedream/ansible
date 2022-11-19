@@ -14,6 +14,12 @@
         group: "{{ user }}"
         shell: /usr/bin/zsh
 
+    - name: packages | zsh | copy profile file
+      become_user: "{{ user }}"
+      copy:
+        src: packages/zprofile
+        dest: "/home/{{ user }}/.zprofile"
+
     - name: packages | zsh | check if zsh config folder exists
       stat:
        path: "{{ zsh_dir }}"
