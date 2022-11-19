@@ -22,3 +22,8 @@
         mode: '0755'
       when: ansible_distribution not in ["Archlinux", "Debian", "Ubuntu"]
 
+    - name: packages | lf | copy conf file
+      become_user: "{{ user }}"
+      copy:
+        src: packages/lfrc
+        dst: "/home/{{ user }}/.config/lf/lfrc"
