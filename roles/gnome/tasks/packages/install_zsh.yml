@@ -11,4 +11,21 @@
         name: "{{ user }}"
         group: "{{ user }}"
         shell: /usr/bin/zsh
+
+    - name: packages | zsh | copy conf file
+      become_user: "{{ user }}"
+      vars:
+        user_home: "/home/{{ user }}"
+      copy:
+        src: packages/zshrc
+        dest: "{{ user_home }}/.config/zsh/.zshrc"
+
+    - name: packages | zsh | copy nvm plugin
+      become_user: "{{ user }}"
+      vars:
+        user_home: "/home/{{ user }}"
+      copy:
+        src: packages/zsh-nvm.plugin.zsh
+        dest: "{{ user_home }}/.config/zsh/zsh-nvm/zsh-nvm.plugin.zsh"
+
   when: ansible_os_family in ["Archlinux", "Debian"]
