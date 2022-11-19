@@ -1,0 +1,11 @@
+- name: gnome | input sources
+  vars:
+    base_key: "org/gnome/desktop/input-sources"
+  dconf:
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+  with_items:
+    - { key: "{{ base_key }}/current", value: "uint32 0" }
+    - { key: "{{ base_key }}/per-window", value: "false" }
+    - { key: "{{ base_key }}/sources", value: "[('xkb', 'it')]" }
+    - { key: "{{ base_key }}/xkb-options", value: "['caps:ctrl_modifier']" }
