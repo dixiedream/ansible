@@ -1,2 +1,5 @@
-user_home: /home/ale
-dotfile_src: /home/ale/.cfg
+# Nordic theme version
+nordic_theme_version: v2.2.0
+# LF file manager version
+lf_version: r27
+

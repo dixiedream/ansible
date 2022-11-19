@@ -1,0 +1,6 @@
+- name: Gnome setup
+  block:
+    - import_tasks: packages/install_neovim.yml
+    - import_tasks: packages/install_zsh.yml
+    - import_tasks: gnome/keybindings.yml
+  when: ansible_system == "Linux"

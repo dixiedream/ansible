@@ -1,0 +1,14 @@
+- name: packages | zsh
+  become: true
+  block:
+    - name: packages | zsh | install package (Arch and debian)
+      package:
+        name: zsh
+        state: latest
+
+    - name: packages | zsh | change user default shell
+      user:
+        name: "{{ user }}"
+        group: "{{ user }}"
+        shell: /usr/bin/zsh
+  when: ansible_os_family in ["Archlinux", "Debian"]

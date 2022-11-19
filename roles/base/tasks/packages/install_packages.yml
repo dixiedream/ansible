@@ -29,7 +29,6 @@
           - mpv
           - ncdu
           - neofetch
-          - neovim
           - "{{ noto_fonts_package }}"
           - "{{ noto_fonts_emoji_package }}"
           - ntfs-3g
@@ -72,18 +71,5 @@
           - bluetooth
           - bluez-firmware
           - libspa-0.2-bluetooth
-        state: latest
-      when: ansible_os_family == "Debian"
-
-    - name: packages | install LF file manager (Archlinux)
-      become_user: ale
-      command: yay -S --noconfirm lf
-      args:
-        creates: /usr/bin/lf
-      when: ansible_distribution == "Archlinux"
-
-    - name: packages | install LF file manager (Debian)
-      apt:
-        name: lf
         state: latest
       when: ansible_os_family == "Debian"

@@ -32,7 +32,7 @@
   become: true
   copy:
     src: packages/install_lualanguageserver.sh
-    dest: "{{ user_home }}/.local/bin/lua-language-server"
+    dest: "/home/{{ user }}/.local/bin/lua-language-server"
     owner: ale
     group: root
     mode: 0755

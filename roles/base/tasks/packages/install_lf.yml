@@ -1,0 +1,24 @@
+- name: packages | install LF file manager
+  become: true
+  block:
+    - name: packages | lf | install (Archlinux)
+      become_user: ale
+      command: yay -S --noconfirm lf
+      args:
+        creates: /usr/bin/lf
+      when: ansible_os_family == "Archlinux"
+
+    - name: packages | lf | install (Debian)
+      apt:
+        name: lf
+        state: latest
+      when: ansible_distribution in ["Debian", "Ubuntu"]
+
+    - name: packages | lf | install (Other Linux distros)
+      unarchive:
+        src: "https://github.com/gokcehan/lf/releases/download/{{ lf_version }}/lf-linux-amd64.tar.gz"
+        dest: /usr/local/bin
+        remote_src: yes
+        mode: '0755'
+      when: ansible_distribution not in ["Archlinux", "Debian", "Ubuntu"]
+

@@ -1,64 +1,63 @@
-# - name: packages | qemu | remove conflict between iptables and ebtables (Archlinux)
-#   become: true
-#   pacman:
-#     name: iptables
-#     state: absent
-#     force: yes
-#   when: ansible_os_family == "Archlinux"
-
-- name: packages | qemu | install required packages (Archlinux)
+- name: packages | qemu
   become: true
-  pacman:
-    name:
-      - dmidecode
-      - qemu
-        #- dhclient
-      - virt-viewer
-      - libvirt
-      - dnsmasq
-      # - ebtables
-      - virt-install
-      - virt-manager
-      # - bridge-utils
-    state: present
-  when: ansible_os_family == "Archlinux"
+  block:
+    # - name: packages | qemu | remove conflict between iptables and ebtables (Archlinux)
+    #   pacman:
+    #     name: iptables
+    #     state: absent
+    #     force: yes
+    #   when: ansible_os_family == "Archlinux"
 
-- name: packages | qemu | install required packages (Debian)
-  become: true
-  apt:
-    name:
-      - qemu-system
-      - qemu-utils
-      - qemu-kvm
-        #- dhclient
-      - virt-viewer
-      - libvirt-clients
-      - libvirt-daemon-system
-      - dnsmasq
-      # - ebtables
-      - virtinst
-      - virt-manager
-      # - bridge-utils
-    state: present
-  when: ansible_os_family == "Debian"
+    - name: packages | qemu | install required packages (Archlinux)
+      pacman:
+        name:
+          - dmidecode
+          - qemu
+            #- dhclient
+          - virt-viewer
+          - libvirt
+          - dnsmasq
+          # - ebtables
+          - virt-install
+          - virt-manager
+          # - bridge-utils
+        state: present
+      when: ansible_os_family == "Archlinux"
 
-- name: packages | qemu | ensure qemu related services are not enabled (Debian)
-  become: true
-  service:
-    name: "{{ item }}"
-    state: stopped
-    enabled: no
-  with_items:
-    - libvirtd
-    - libvirt-guests
-    - systemd-machined
-    - dnsmasq
-  when: ansible_os_family == "Debian"
+    - name: packages | qemu | install required packages (Debian)
+      apt:
+        name:
+          - qemu-system
+          - qemu-utils
+          - qemu-kvm
+            #- dhclient
+          - virt-viewer
+          - libvirt-clients
+          - libvirt-daemon-system
+          - dnsmasq
+          # - ebtables
+          - virtinst
+          - virt-manager
+          # - bridge-utils
+        state: present
+      when: ansible_os_family == "Debian"
 
-- name: users | ale | ensure ale is in libvirt group (Linux)
-  become: true
-  user:
-    name: ale
-    groups: libvirt
-    append: yes
-  when: ansible_system == "Linux"
+    - name: packages | qemu | ensure qemu related services are not enabled (Debian)
+      service:
+        name: "{{ item }}"
+        state: stopped
+        enabled: no
+      with_items:
+        - libvirtd
+        - libvirt-guests
+        - systemd-machined
+        - dnsmasq
+      when: ansible_os_family == "Debian"
+
+    - name: users | ale | ensure ale is in libvirt group (Linux)
+      become: true
+      user:
+        name: ale
+        groups: libvirt
+        append: yes
+      when: ansible_system == "Linux"

@@ -1,0 +1,113 @@
+- name: gnome | keybindings
+  become_user: ale
+  block:
+    - name: gnome | keybindings | disable default browser key binding
+      dconf:
+        key: "{{ item.key }}"
+        value: "{{ item.value }}"
+      with_items:
+        - { key: "/org/gnome/settings-daemon/plugins/media-keys/www", value: "@as []" }
+
+    - name: gnome | keybindings | disable default file manager binding
+      dconf:
+        key: "{{ item.key }}"
+        value: "{{ item.value }}"
+      with_items:
+        - { key: "/org/gnome/settings-daemon/plugins/media-keys/home", value: "@as []" }
+
+    - name: gnome | keybindings | disable default email client binding
+      dconf:
+        key: "{{ item.key }}"
+        value: "{{ item.value }}"
+      with_items:
+        - { key: "/org/gnome/settings-daemon/plugins/media-keys/email", value: "@as []" }
+
+    - name: gnome | keybindings | disable default terminal key binding
+      dconf:
+        key: "{{ item.key }}"
+        value: "{{ item.value }}"
+      with_items:
+        - { key: "/org/gnome/settings-daemon/plugins/media-keys/terminal", value: "@as []" }
+
+    - name: gnome | keybindings | set custom-keybindings
+      dconf:
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
+        value: "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/']"
+
+    - name: gnome | keybindings | set primary browser keybinding
+      dconf:
+        key: "{{ item.key }}"
+        value: "{{ item.value}}"
+      with_items:
+        - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name", value: "'browser'" }
+        - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding", value: "'<Super>q'" }
+        - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command", value: "'{{ web_browser }}'" }
+      when: web_browser is defined
+
+    - name: gnome | keybindings | set primary browser keybinding
+      dconf:
+        key: "{{ item.key }}"
+        value: "{{ item.value}}"
+      with_items:
+        - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name", value: "'browser'" }
+        - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding", value: "'<Super>q'" }
+        - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command", value: "'firefox'" }
+      when: web_browser is not defined
+
+    - name: gnome | keybindings | set file manager keybinding
+      dconf:
+        key: "{{ item.key }}"
+        value: "{{ item.value}}"
+      with_items:
+        - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/name", value: "'file manager'" }
+        - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/binding", value: "'<Super>n'" }
+        - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/command", value: "'{{ terminal_emulator }} -e lf'" }
+      when: terminal_emulator is defined
+
+    - name: gnome | keybindings | set terminal keybinding
+      dconf:
+        key: "{{ item.key }}"
+        value: "{{ item.value}}"
+      with_items:
+        - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/name", value: "'terminal'" }
+        - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/binding", value: "'<Super>Enter'" }
+        - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/command", value: "'{{ terminal_emulator }}'" }
+      when: terminal_emulator is defined
+
+    - name: gnome | keybindings | set terminal keybinding
+      dconf:
+        key: "{{ item.key }}"
+        value: "{{ item.value}}"
+      with_items:
+        - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/name", value: "'terminal'" }
+        - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/binding", value: "'<Super>Enter'" }
+        - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/command", value: "'gnome-terminal'" }
+      when: terminal_emulator is not defined
+
+    # Uncommenting the below plays will restore the default GNOME shortcuts for these actions:
+    #- name: gnome | keybindings | set keybindings for switching between workspaces
+    #  become_user: jay
+    #  dconf:
+    #    key: "{{ item.key }}"
+    #    value: "{{ item.value}}"
+    #  with_items:
+    #      - { key: "/org/gnome/desktop/wm/keybindings/switch-to-workspace-down", value: "['<Super>Page_Down']" }
+    #      - { key: "/org/gnome/desktop/wm/keybindings/switch-to-workspace-up", value: "['<Super>Page_Up']" }
+
+    #- name: gnome | keybindings | set key binding for moving windows to other workspaces
+    #  become_user: jay
+    #  dconf:
+    #    key: "{{ item.key }}"
+    #    value: "{{ item.value}}"
+    #  with_items:
+    #      - { key: "/org/gnome/desktop/wm/keybindings/move-to-workspace-down", value: "['<Shift><Super>Page_Down']" }
+    #      - { key: "/org/gnome/desktop/wm/keybindings/move-to-workspace-up", value: "['<Shift><Super>Page_Up']" }
+
+    #- name: gnome | keybindings | set maximize/minimize key bindings
+    #  become_user: jay
+    #  dconf:
+    #    key: "/org/gnome/desktop/wm/keybindings/{{ item.key }}"
+    #    value: "{{ item.value}}"
+    #  with_items:
+    #      - { key: maximize, value: "'<Super>Up'" }
+    #      - { key: unmaximize, value: "'<Super>Down'" }
