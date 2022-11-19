@@ -1,5 +1,7 @@
 - name: packages | zsh
   become: true
+  vars:
+    zsh_dir: "/home/{{ user }}/.config/zsh"
   block:
     - name: packages | zsh | install package (Arch and debian)
       package:
@@ -12,20 +14,39 @@
         group: "{{ user }}"
         shell: /usr/bin/zsh
 
+    - name: packages | zsh | check if zsh config folder exists
+      stat:
+       path: "{{ zsh_dir }}"
+      register: zsh_folder
+
+    - name: packages | zsh | create zsh config folder
+      become_user: "{{ user }}"
+      file:
+        path: "{{ zsh_dir }}"
+        state: directory
+      when: zsh_folder.stat.exists == false
+
     - name: packages | zsh | copy conf file
       become_user: "{{ user }}"
-      vars:
-        user_home: "/home/{{ user }}"
       copy:
         src: packages/zshrc
-        dest: "{{ user_home }}/.config/zsh/.zshrc"
+        dest: "{{ zsh_dir }}/.zshrc"
+
+    - name: packages | zsh | check if zsh nvm plugin folder exists
+      stat:
+       path: "{{ zsh_dir }}/zsh-nvm"
+      register: nvm_folder
+
+    - name: packages | zsh | create zsh nvm plugin folder
+      become_user: "{{ user }}"
+      file:
+        path: "{{ zsh_dir }}/zsh-nvm"
+        state: directory
+      when: nvm_folder.stat.exists == false
 
     - name: packages | zsh | copy nvm plugin
       become_user: "{{ user }}"
-      vars:
-        user_home: "/home/{{ user }}"
       copy:
         src: packages/zsh-nvm.plugin.zsh
-        dest: "{{ user_home }}/.config/zsh/zsh-nvm/zsh-nvm.plugin.zsh"
-
+        dest: "{{ zsh_dir }}/zsh-nvm/zsh-nvm.plugin.zsh"
   when: ansible_os_family in ["Archlinux", "Debian"]

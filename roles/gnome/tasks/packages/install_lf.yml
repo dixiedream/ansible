@@ -1,5 +1,7 @@
 - name: packages | install LF file manager
   become: true
+  vars:
+    lf_dir: "/home/{{ user }}/.config/lf"
   block:
     - name: packages | lf | install (Archlinux)
       become_user: "{{ user }}"
@@ -21,6 +23,18 @@
         remote_src: yes
         mode: '0755'
       when: ansible_distribution not in ["Archlinux", "Debian", "Ubuntu"]
+
+    - name: packages | lf | check if lf config folder exists
+      stat:
+       path: "{{ lf_dir }}"
+      register: lf_folder
+
+    - name: packages | lf | create lf config folder
+      become_user: "{{ user }}"
+      file:
+        path: "{{ lf_dir }}"
+        state: directory
+      when: lf_folder.stat.exists == false
 
     - name: packages | lf | copy conf file
       become_user: "{{ user }}"
