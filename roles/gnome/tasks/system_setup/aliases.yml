@@ -1,0 +1,5 @@
+- name: system setup | aliases
+  become_user: "{{ user }}"
+  copy:
+    src: system_setup/aliases
+    dest: "/home/{{ user }}/.config/aliases"
