@@ -1,5 +1,5 @@
 - name: gnome | keybindings
-  become_user: ale
+  become_user: "{{ user }}"
   block:
     - name: gnome | keybindings | disable default browser key binding
       dconf:
