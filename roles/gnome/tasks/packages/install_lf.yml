@@ -26,4 +26,4 @@
       become_user: "{{ user }}"
       copy:
         src: packages/lfrc
-        dst: "/home/{{ user }}/.config/lf/lfrc"
+        dest: "/home/{{ user }}/.config/lf/lfrc"
