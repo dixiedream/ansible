@@ -1,7 +1,7 @@
 - name: packages | psutil
   block:
     - name: packages | psutil ensure pip is installed
-      become_user: "{{ user }}"
+      become: true
       package:
         name: python3-pip
         state: latest
