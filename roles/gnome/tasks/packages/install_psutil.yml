@@ -1,9 +1,11 @@
-- name: packages | ensure pip is installed
-  package:
-    name: python3-pip
-    state: latest
-  when: ansible_distribution == "Ubuntu"
+- name: packages | psutil
+  block:
+    - name: packages | psutil ensure pip is installed
+      package:
+        name: python3-pip
+        state: latest
 
-- name: packages | install psutil
-  pip:
-    name: psutil
+    - name: packages | install psutil
+      pip:
+        name: psutil
+  when: ansible_distribution in ["Ubuntu", "Pop!_OS"]
