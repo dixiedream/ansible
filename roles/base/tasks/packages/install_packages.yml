@@ -72,4 +72,4 @@
           - bluez-firmware
           - libspa-0.2-bluetooth
         state: latest
-      when: ansible_os_family == "Debian"
+      when: ansible_distribution == "Debian"
