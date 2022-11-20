@@ -3,7 +3,7 @@
     - import_tasks: packages/install_neovim.yml
     - import_tasks: packages/install_lf.yml
     - import_tasks: packages/install_zsh.yml
-    # - import_tasks: packages/install_psutil.yml
+    - import_tasks: packages/install_psutil.yml
     - import_tasks: packages/debloat.yml
     - import_tasks: system_setup/dotfiles.yml
     - import_tasks: gnome/disable_extensions.yml
