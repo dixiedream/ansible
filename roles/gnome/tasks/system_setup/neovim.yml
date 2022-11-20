@@ -1,0 +1,7 @@
+- name: packages | neovim
+  block:
+    - name: packages | neovim | copy conf files
+      become_user: "{{ user }}"
+      copy:
+        src: packages/nvim
+        dest: "/home/{{ user }}/.config/"
