@@ -20,13 +20,4 @@
 
     - name: system setup | dotfiles | Setup repo
       command: "git --git-dir={{ dotfile_src }} --work-tree='/home/{{ user }}' config remote.origin.fetch 'refs/heads/*:refs/remotes/origin/*'"
-
-    # - name: system setup | dotfiles | Check file permissions
-    #   file:
-    #     path: '/home/ale'
-    #     recurse: yes
-    #     state: directory
-    #     owner: "{{ user }}"
-    #     group: "{{ user }}"
-    #
   when: ansible_system == "Linux"

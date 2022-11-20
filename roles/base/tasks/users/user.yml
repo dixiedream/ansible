@@ -19,7 +19,7 @@
         name: "{{ user }}"
         groups: video
         append: yes
-      when: ansible_os_family == "Debian"
+      when: ansible_distribution == "Debian"
 
     - name: users | "{{ user }}" | add sudoers file
       template:

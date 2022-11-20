@@ -19,6 +19,7 @@
   vars:
     dotfiles_branch: "master"
   roles:
+    - base
     - gnome
 
 - hosts: all

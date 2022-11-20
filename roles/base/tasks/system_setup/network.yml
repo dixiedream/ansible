@@ -55,3 +55,4 @@
         owner: root
         group: root
       when: ansible_os_family == "Archlinux"
+  when: ansible_distribution in ["Archlinux", "Debian"]
