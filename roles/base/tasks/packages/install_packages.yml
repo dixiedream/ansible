@@ -56,7 +56,7 @@
           - wireplumber
           - "{{ wpa_supplicant_package }}"
         state: latest
-        when: ansible_distribution in ["Archlinux", "Debian"]
+      when: ansible_distribution in ["Archlinux", "Debian"]
 
     - name: packages | install Pacman Contrib package (Archlinux)
       pacman:
