@@ -5,12 +5,12 @@
     name: vscode-langservers-extracted
 
 - name: packages | LSP | install gopls (Archlinux, MacOS)
-  become: no
+  become_user: "{{ user }}"
   command: go install golang.org/x/tools/gopls@latest
   when: ansible_os_family in ["Archlinux", "Darwin"]
 
 - name: packages | LSP | install gopls (Debian)
-  become: no
+  become_user: "{{ user }}"
   command: /usr/local/go/bin/go install golang.org/x/tools/gopls@latest
   when: ansible_os_family == "Debian"
 

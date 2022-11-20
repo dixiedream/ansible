@@ -54,10 +54,10 @@
     enabled: no
   when: ansible_system == "Linux"
 
-- name: users | ale | ensure ale is in docker group (Linux)
+- name: "users | {{ user }} | ensure {{ user }} is in docker group (Linux)"
   become: true
   user:
-    name: ale
+    name: "{{ user }}"
     groups: docker
     append: yes
   when: ansible_system == "Linux"

@@ -4,7 +4,7 @@
 
 - name: Linux setup
   block:
-    - import_tasks: users/ale.yml
+    - import_tasks: users/user.yml
     - import_tasks: ansible_setup.yml
     - import_tasks: packages/debloat_debian.yml
     - import_tasks: packages/install_aur_helper.yml

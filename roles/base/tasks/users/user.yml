@@ -23,7 +23,7 @@
 
     - name: users | "{{ user }}" | add sudoers file
       template:
-        src: users/sudoers_user.j2
+        src: users/sudoers.j2
         dest: "/etc/sudoers.d/{{ user }}"
         owner: root
         group: root

@@ -10,35 +10,29 @@
         owner: root
         group: root
         mode: 0700
-      when: ansible_os_family == "Archlinux"
 
     - name: system setup | locale | set ntp true (Archlinux)
       command: timedatectl set-ntp true
       changed_when: false
       ignore_errors: true
-      when: ansible_os_family == "Archlinux"
 
     - name: system setup | locale | sync hardware clock and system clock (Archlinux)
       command: hwclock --systohc
       changed_when: false
       ignore_errors: true
-      when: ansible_os_family == "Archlinux"
 
     - name: system setup | locale | refresh tzdata (Archlinux)
       command: pacman -S --noconfirm tzdata
       changed_when: false
       ignore_errors: true
-      when: ansible_os_family == "Archlinux"
 
     - name: system setup | locale | set locale.gen file (Archlinux)
       shell: echo 'en_US.UTF-8 UTF-8' > /etc/locale.gen
-      when: ansible_os_family == "Archlinux"
 
     - name: system setup | locale | generate locale (Archlinux)
       command: locale-gen
       changed_when: false
       ignore_errors: true
-      when: ansible_os_family == "Archlinux"
 
     - name: system setup | locale | create locale.conf (Archlinux)
       copy:
@@ -47,7 +41,6 @@
         group: root
         owner: root
         mode: 0644
-      when: ansible_os_family == "Archlinux"
 
     - name: system setup | locale | create vconsole.conf (Archlinux)
       copy:
@@ -56,4 +49,4 @@
         group: root
         owner: root
         mode: 0644
-      when: ansible_os_family == "Archlinux"
+  when: ansible_os_family == "Archlinux"

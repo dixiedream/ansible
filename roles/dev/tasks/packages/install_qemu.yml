@@ -1,13 +1,6 @@
 - name: packages | qemu
   become: true
   block:
-    # - name: packages | qemu | remove conflict between iptables and ebtables (Archlinux)
-    #   pacman:
-    #     name: iptables
-    #     state: absent
-    #     force: yes
-    #   when: ansible_os_family == "Archlinux"
-
     - name: packages | qemu | install required packages (Archlinux)
       pacman:
         name:
@@ -54,10 +47,10 @@
         - dnsmasq
       when: ansible_os_family == "Debian"
 
-    - name: users | ale | ensure ale is in libvirt group (Linux)
+    - name: "users | {{ user }} | ensure {{ user }} is in libvirt group (Linux)"
       become: true
       user:
-        name: ale
+        name: "{{ user }}"
         groups: libvirt
         append: yes
       when: ansible_system == "Linux"

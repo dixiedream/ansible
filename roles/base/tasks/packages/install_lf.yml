@@ -12,7 +12,7 @@
       apt:
         name: lf
         state: latest
-      when: ansible_distribution in ["Debian", "Ubuntu"]
+      when: ansible_distribution == "Debian"
 
     - name: packages | lf | install (Other Linux distros)
       unarchive:
@@ -20,5 +20,5 @@
         dest: /usr/local/bin
         remote_src: yes
         mode: '0755'
-      when: ansible_distribution not in ["Archlinux", "Debian", "Ubuntu"]
+      when: ansible_distribution in ["Ubuntu", "Pop!_OS"]
 
