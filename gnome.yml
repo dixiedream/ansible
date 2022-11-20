@@ -20,6 +20,7 @@
     dotfiles_branch: "master"
   roles:
     - base
+    - X11
     - gnome
 
 - hosts: all
