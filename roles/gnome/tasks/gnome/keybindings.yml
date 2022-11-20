@@ -67,6 +67,7 @@
         - { key: "{{ base_key }}/switch-to-workspace-up", value: "@as []" }
         - { key: "{{ base_key }}/switch-to-workspace-down", value: "@as []" }
         - { key: "{{ base_key }}/switch-to-workspace-last", value: "@as []" }
+        - { key: "{{ base_key }}/toggle-fullscreen", value: "['<Super>f']" }
 
     - name: gnome | keybindings | pop shell
       vars:
