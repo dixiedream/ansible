@@ -22,7 +22,7 @@
         state: latest
 
     - name: packages | install wayland packages | wdisplays
-      become_user: ale
+      become_user: "{{ user }}"
       shell: yes | yay -S --removemake wdisplays
       when: ansible_distribution == "Archlinux"
 

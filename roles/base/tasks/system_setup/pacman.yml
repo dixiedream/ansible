@@ -22,4 +22,4 @@
 
     - name: system setup | pacman | multicore compilation (Archlinux)
       command: sed -i "s/-j2/-j$(nproc)/;/^#MAKEFLAGS/s/^#//" /etc/makepkg.conf
-  when: ansible_distribution == "Archlinux"
+  when: ansible_os_family == "Archlinux"

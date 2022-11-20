@@ -1,29 +1,30 @@
-- name: packages | dwm | clone repo
+- name: packages | dwm
   become: true
-  git:
-    repo: https://github.com/dixiedream/dwm
-    dest: /tmp/dwm
-    force: yes
+  block:
+    - name: packages | dwm | clone repo
+      git:
+        repo: https://github.com/dixiedream/dwm
+        dest: /tmp/dwm
+        force: yes
 
-- name: packages | dwm | install required dependencies (Debian)
-  become: true
-  package:
-    name:
-      - build-essential
-      - make
-      - gcc
-      - libharfbuzz-dev
-      - libx11-dev
-      - libxft-dev
-      - libxinerama-dev
-      - xinit
-      - xserver-xorg
-      - x11-xserver-utils
-    state: present
-  when: ansible_os_family == "Debian"
+    - name: packages | dwm | install required dependencies (Debian)
+      package:
+        name:
+          - build-essential
+          - make
+          - gcc
+          - libharfbuzz-dev
+          - libx11-dev
+          - libxft-dev
+          - libxinerama-dev
+          - xinit
+          - xserver-xorg
+          - x11-xserver-utils
+        state: present
+      when: ansible_os_family == "Debian"
 
-- name: packages | dwm | install dwm
-  become: true
-  make:
-    target: install
-    chdir: /tmp/dwm
+    - name: packages | dwm | install dwm
+      make:
+        target: install
+        chdir: /tmp/dwm
+  when: ansible_distribution in ["Debian", "Archlinux"]

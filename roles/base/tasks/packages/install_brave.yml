@@ -2,7 +2,7 @@
   become: true
   block:
     - name: packages | brave | install (Archlinux)
-      become_user: ale
+      become_user: "{{ user }}"
       command: yay -S --noconfirm brave-bin
       args:
         creates: /usr/bin/brave

@@ -6,17 +6,14 @@
         name: pipewire-media-session
         state: absent
       ignore_errors: yes
+      when: ansible_distribution in ["Archlinux", "Debian"]
 
-    - name: packages | install packages
+    - name: packages | install common packages
       package:
         name:
-          - "{{ acpi_call_package }}"
           - atool
           - bc
           - bleachbit
-          - bluez
-          - "{{ bluez_utils_package }}"
-          - brightnessctl
           - cmus
           - dosfstools
           - exfatprogs
@@ -24,33 +21,42 @@
           - gzip
           - htop
           - imagemagick
-          - "{{ libnotify_package }}"
-          - man-db
           - mpv
           - ncdu
           - neofetch
-          - neovim
-          - "{{ noto_fonts_package }}"
-          - "{{ noto_fonts_emoji_package }}"
           - ntfs-3g
           - p7zip
-          - pavucontrol
-          - pipewire
-          - pipewire-alsa
-          - pipewire-pulse
-          - playerctl
           - ripgrep
           - s-tui
           - "{{ unrar_package }}"
           - unzip
-          - wireplumber
-          - "{{ wpa_supplicant_package }}"
           - yt-dlp
           - zathura
           - "{{ zathura_pdf_support_package }}"
           - zip
           - zsh
         state: latest
+
+    - name: packages | install packages for window managers
+      package:
+        name:
+          - "{{ acpi_call_package }}"
+          - bluez
+          - "{{ bluez_utils_package }}"
+          - brightnessctl
+          - "{{ libnotify_package }}"
+          - man-db
+          - "{{ noto_fonts_package }}"
+          - "{{ noto_fonts_emoji_package }}"
+          - pavucontrol
+          - pipewire
+          - pipewire-alsa
+          - pipewire-pulse
+          - playerctl
+          - wireplumber
+          - "{{ wpa_supplicant_package }}"
+        state: latest
+      when: ansible_distribution in ["Archlinux", "Debian"]
 
     - name: packages | install Pacman Contrib package (Archlinux)
       pacman:
@@ -73,17 +79,4 @@
           - bluez-firmware
           - libspa-0.2-bluetooth
         state: latest
-      when: ansible_os_family == "Debian"
-
-    - name: packages | install LF file manager (Archlinux)
-      become_user: ale
-      command: yay -S --noconfirm lf
-      args:
-        creates: /usr/bin/lf
-      when: ansible_distribution == "Archlinux"
-
-    - name: packages | install LF file manager (Debian)
-      apt:
-        name: lf
-        state: latest
-      when: ansible_os_family == "Debian"
+      when: ansible_distribution == "Debian"

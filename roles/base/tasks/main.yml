@@ -1,14 +1,16 @@
 # Load distro specific variables
-- include_vars: "{{ ansible_distribution }}.yml"
+- include_vars: "{{ ansible_os_family }}.yml"
   when: ansible_system == "Linux"
 
 - name: Linux setup
   block:
-    - import_tasks: users/ale.yml
+    - import_tasks: users/user.yml
     - import_tasks: ansible_setup.yml
     - import_tasks: packages/debloat_debian.yml
     - import_tasks: packages/install_aur_helper.yml
     - import_tasks: packages/install_packages.yml
+    - import_tasks: packages/install_neovim.yml
+    - import_tasks: packages/install_lf.yml
     # - import_tasks: packages/install_drivers.yml
     - import_tasks: packages/install_autocpufreq.yml
     - import_tasks: packages/install_thermald.yml

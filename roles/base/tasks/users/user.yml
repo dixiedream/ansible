@@ -1,0 +1,62 @@
+- name: users | "{{ user }}"
+  become: true
+  block:
+    - name: users | "{{ user }}" | create group
+      group:
+        name: "{{ user }}"
+        state: present
+
+    - name: users | "{{ user }}" | create user
+      user:
+        name: "{{ user }}"
+        group: "{{ user }}"
+        groups: "{{ sudo_group }}"
+        state: present
+        shell: /usr/bin/zsh
+
+    - name: users | "{{ user }}" | ensure "{{ user }}" is in video group (Debian)
+      user:
+        name: "{{ user }}"
+        groups: video
+        append: yes
+      when: ansible_distribution == "Debian"
+
+    - name: users | "{{ user }}" | add sudoers file
+      template:
+        src: users/sudoers.j2
+        dest: "/etc/sudoers.d/{{ user }}"
+        owner: root
+        group: root
+        mode: 0400
+
+    - name: users | "{{ user }}" | create .ssh directory
+      file:
+        path: "{{ item.dir }}"
+        state: directory
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: 0700
+      with_items:
+        - { dir: "/home/{{ user }}/.ssh" }
+
+    - name: users | "{{ user }}" | check if key already exists
+      stat:
+        path: "/home/{{ user }}/.ssh/id_rsa"
+      register: key_stat
+
+    - name: users | "{{ user }}" | generate ssh key
+      openssh_keypair:
+        path: "/home/{{ user }}/.ssh/id_rsa"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+      when: not key_stat.stat.exists
+
+    - name: users | "{{ user }}" | remove bash related files
+      file:
+        path: "{{ item }}"
+        state: absent
+      with_items:
+        - "/home/{{ user }}/.bash_logout"
+        - "/home/{{ user }}/.bash_history"
+        - "/home/{{ user }}/.bash_profile"
+        - "/home/{{ user }}/.bashrc"
