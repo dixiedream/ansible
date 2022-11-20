@@ -32,8 +32,8 @@
   become: true
   copy:
     src: packages/install_lualanguageserver.sh
-    dest: "{{ user_home }}/.local/bin/lua-language-server"
-    owner: ale
+    dest: "/home/{{ user }}/.local/bin/lua-language-server"
+    owner: "{{ user }}"
     group: root
     mode: 0755
   when: ansible_os_family == "Debian"

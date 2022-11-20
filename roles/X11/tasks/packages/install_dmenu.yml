@@ -1,12 +1,14 @@
-- name: packages | dmenu | clone repo
+- name: packages | dmenu
   become: true
-  git:
-    repo: https://github.com/dixiedream/dmenu
-    dest: /tmp/dmenu
-    force: yes
+  block:
+    - name: packages | dmenu | clone repo
+      git:
+        repo: https://github.com/dixiedream/dmenu
+        dest: /tmp/dmenu
+        force: yes
 
-- name: packages | dmenu | install dmenu
-  become: true
-  make:
-    target: install
-    chdir: /tmp/dmenu
+    - name: packages | dmenu | install dmenu
+      make:
+        target: install
+        chdir: /tmp/dmenu
+  when: ansible_distribution in ["Debian", "Archlinux"]

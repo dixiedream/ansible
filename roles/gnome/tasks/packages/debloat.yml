@@ -1,0 +1,10 @@
+- name: packages | debloat Gnome
+  become: true
+  block:
+    - name: packages | debloat Gnome | remove unwanted packages
+      apt:
+        name:
+          - totem
+          - evince
+        state: absent
+  when: ansible_os_family == "Debian"

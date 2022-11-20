@@ -1,7 +1,14 @@
 - name: packages
   become: true
   block:
-    - name: packages | install packages
+    - name: packages | install common packages
+      package:
+        name:
+          - sxiv
+        state: latest
+      when: ansible_distribution in ["Ubuntu", "Pop!_OS"]
+
+    - name: packages | install window managers required packages
       package:
         name:
           - arandr
@@ -9,7 +16,6 @@
           - dunst
           - maim
           - slock
-          - sxiv
           - unclutter
           - xclip
           - xcompmgr
@@ -18,6 +24,7 @@
           - "{{ xorg_xrandr_package }}"
           - xwallpaper
         state: latest
+      when: ansible_distribution in ["Archlinux", "Debian"]
 
     - name: packages | install Xsetroot (Archlinux)
       pacman:

@@ -1,0 +1,98 @@
+- name: gnome | keybindings
+  become_user: "{{ user }}"
+  block:
+    - name: gnome | keybindings | media keys
+      vars:
+        base_key: "/org/gnome/settings-daemon/plugins/media-keys"
+      dconf:
+        key: "{{ item.key }}"
+        value: "{{ item.value }}"
+      with_items:
+        - { key: "{{ base_key }}/custom-keybindings", value: "['{{ base_key }}/custom-keybindings/custom0/']" }
+        - { key: "{{ base_key }}/email", value: "@as []" }
+        - { key: "{{ base_key }}/help", value: "@as []" }
+        - { key: "{{ base_key }}/home", value: "@as []" }
+        - { key: "{{ base_key }}/logout", value: "['<Shift><Super>q']" }
+        - { key: "{{ base_key }}/next", value: "['<Primary><Alt>Right']" }
+        - { key: "{{ base_key }}/play", value: "['<Primary><Alt>Up']" }
+        - { key: "{{ base_key }}/previous", value: "['<Primary><Alt>Left']" }
+        - { key: "{{ base_key }}/screensaver", value: "['<Alt><Super>l']" }
+        - { key: "{{ base_key }}/terminal", value: "['<Super>Return']" }
+        - { key: "{{ base_key }}/volume-down", value: "['<Alt>Down']" }
+        - { key: "{{ base_key }}/volume-mute", value: "['<Alt>m']" }
+        - { key: "{{ base_key }}/volume-up", value: "['<Alt>Up']" }
+        - { key: "{{ base_key }}/www", value: "['<Super>q']" }
+
+    - name: gnome | keybindings | LF
+      vars:
+        base_key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0"
+      dconf:
+        key: "{{ item.key }}"
+        value: "{{ item.value }}"
+      with_items:
+        - { key: "{{ base_key }}/binding", value: "'<Super>n'" }
+        - { key: "{{ base_key }}/command", value: "'alacritty -e lf'" }
+        - { key: "{{ base_key }}/name", value: "'LF'" }
+
+    - name: gnome | keybindings | window management
+      vars:
+        base_key: "/org/gnome/desktop/wm/keybindings"
+      dconf:
+        key: "{{ item.key }}"
+        value: "{{ item.value }}"
+      with_items:
+        - { key: "{{ base_key }}/activate-window-menu", value: "@as []" }
+        - { key: "{{ base_key }}/close", value: "['<Alt>F4', '<Shift><Super>C']" }
+        - { key: "{{ base_key }}/cycle-group", value: "@as []" }
+        - { key: "{{ base_key }}/cycle-group-backward", value: "@as []" }
+        - { key: "{{ base_key }}/cycle-panels", value: "@as []" }
+        - { key: "{{ base_key }}/cycle-panels-backward", value: "@as []" }
+        - { key: "{{ base_key }}/cycle-windows", value: "@as []" }
+        - { key: "{{ base_key }}/cycle-windows-backward", value: "@as []" }
+        - { key: "{{ base_key }}/move-to-workspace-1", value: "['<Shift><Super>Home', '<Shift><Super>exclam']" }
+        - { key: "{{ base_key }}/move-to-workspace-2", value: "['<Shift><Super>quotedbl']" }
+        - { key: "{{ base_key }}/move-to-workspace-3", value: "['<Shift><Super>sterling']" }
+        - { key: "{{ base_key }}/move-to-workspace-4", value: "['<Shift><Super>dollar']" }
+        - { key: "{{ base_key }}/move-to-workspace-last", value: "@as []" }
+        - { key: "{{ base_key }}/switch-group", value: "@as []" }
+        - { key: "{{ base_key }}/switch-group-backward", value: "@as []" }
+        - { key: "{{ base_key }}/switch-input-source", value: "@as []" }
+        - { key: "{{ base_key }}/switch-input-source-backward", value: "@as []" }
+        - { key: "{{ base_key }}/switch-panels", value: "@as []" }
+        - { key: "{{ base_key }}/switch-panels-backward", value: "@as []" }
+        - { key: "{{ base_key }}/switch-to-workspace-1", value: "['<Super>1']" }
+        - { key: "{{ base_key }}/switch-to-workspace-2", value: "['<Super>2']" }
+        - { key: "{{ base_key }}/switch-to-workspace-3", value: "['<Super>3']" }
+        - { key: "{{ base_key }}/switch-to-workspace-4", value: "['<Super>4']" }
+        - { key: "{{ base_key }}/switch-to-workspace-up", value: "@as []" }
+        - { key: "{{ base_key }}/switch-to-workspace-down", value: "@as []" }
+        - { key: "{{ base_key }}/switch-to-workspace-last", value: "@as []" }
+        - { key: "{{ base_key }}/toggle-fullscreen", value: "['<Super>f']" }
+
+    - name: gnome | keybindings | pop shell
+      vars:
+        base_key: "/org/gnome/shell/extensions/pop-shell"
+      dconf:
+        key: "{{ item.key }}"
+        value: "{{ item.value }}"
+      with_items:
+        - { key: "{{ base_key }}/activate-launcher", value: "@as []" }
+        - { key: "{{ base_key }}/management-orientation", value: "@as []" }
+        - { key: "{{ base_key }}/pop-monitor-right", value: "['<Shift><Super>Right', '<Shift><Super>KP_Right', '<Shift><Super>l', '<Super>o']" }
+        - { key: "{{ base_key }}/tile-enter", value: "@as []" }
+        - { key: "{{ base_key }}/tile-orientation", value: "@as []" }
+        - { key: "{{ base_key }}/toggle-tiling", value: "['<Super>y', '<Super>space']" }
+
+    - name: gnome | keybindings | shell
+      vars:
+        base_key: "/org/gnome/shell/keybindings"
+      dconf:
+        key: "{{ item.key }}"
+        value: "{{ item.value }}"
+      with_items:
+        - { key: "{{ base_key }}/focus-active-notifications", value: "@as []" }
+        - { key: "{{ base_key }}/screenshot", value: "@as []" }
+        - { key: "{{ base_key }}/screenshot-window", value: "@as []" }
+        - { key: "{{ base_key }}/show-screen-recording-ui", value: "@as []" }
+        - { key: "{{ base_key }}/toggle-message-tray", value: "['<Shift><Super>d']" }
+        - { key: "{{ base_key }}/toggle-overview", value: "@as []" }

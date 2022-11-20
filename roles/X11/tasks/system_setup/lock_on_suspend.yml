@@ -1,13 +1,15 @@
-- name: system setup | lock screen on suspend | copy conf file
+- name: system setup | lock screen on suspend
   become: true
-  copy:
-    src: system_setup/lock_on_suspend.conf
-    dest: /etc/systemd/system/slock@.service
-    owner: root
-    group: root
+  block:
+    - name: system setup | lock screen on suspend | copy conf file
+      copy:
+        src: system_setup/lock_on_suspend.conf
+        dest: /etc/systemd/system/slock@.service
+        owner: root
+        group: root
 
-- name: system setup | lock screen on suspend | enable service
-  become: true
-  service:
-    name: "slock@ale.service"
-    enabled: yes
+    - name: system setup | lock screen on suspend | enable service
+      service:
+        name: "slock@ale.service"
+        enabled: yes
+  when: ansible_distribution in ["Archlinux", "Debian"]

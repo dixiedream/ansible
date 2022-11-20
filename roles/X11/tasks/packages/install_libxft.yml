@@ -1,5 +1,5 @@
 - name: packages | libxft | install (Archlinux)
-  become_user: ale
+  become_user: "{{ user }}"
   shell: yes | yay -S --removemake libxft-git
   when: ansible_distribution == "Archlinux"
 
@@ -11,7 +11,7 @@
       - libtool
       - xutils-dev
     state: latest
-  when: ansible_os_family == "Debian"
+  when: ansible_distribution == "Debian"
 
 - name: packages | clone libxft patched version (Debian)
   become: true
@@ -19,7 +19,7 @@
     repo: https://gitlab.freedesktop.org/xorg/lib/libxft.git
     dest: /tmp/libxft-bgra
     force: yes
-  when: ansible_os_family == "Debian"
+  when: ansible_distribution == "Debian"
 #
 #
 #git clone https://gitlab.freedesktop.org/xorg/lib/libxft.git

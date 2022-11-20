@@ -13,26 +13,27 @@
     dest: /tmp/golang.tar.gz
   when: ansible_os_family == "Debian"
 
-- name: packages | golang | creates dir if not exists (Debian)
-  become: true
-  file:
-    path: /usr/local/go
-    state: directory
-  when: ansible_os_family == "Debian"
+# - name: packages | golang | creates dir if not exists (Debian)
+#   become: true
+#   file:
+#     path: /usr/local/go
+#     state: directory
+#   when: ansible_os_family == "Debian"
 
 - name: packages | golang | extract archive (Debian)
   become: true
   unarchive:
     src: /tmp/golang.tar.gz
-    dest: /usr/local
+    # dest: /usr/local
+    dest: /usr/local/
     owner: root
     group: root
   when: ansible_os_family == "Debian"
 
 - name: packages | golang | update $PATH var (Debian)
-  become_user: ale
+  become_user: "{{ user }}"
   lineinfile:
-    dest: "{{ user_home }}/.zprofile"
+    dest: "/home/{{ user }}/.zprofile"
     regexp: '^export PATH=\$PATH:\$GOROOT/bin:\$GOPATH/bin'
     line: "export PATH=$PATH:$GOROOT/bin:$GOPATH/bin:/usr/local/go/bin"
   when: ansible_os_family == "Debian"

@@ -1,12 +1,14 @@
-- name: packages | st | clone repo
+- name: packages | st
   become: true
-  git:
-    repo: https://github.com/dixiedream/st
-    dest: /tmp/st
-    force: yes
+  block:
+    - name: packages | st | clone repo
+      git:
+        repo: https://github.com/dixiedream/st
+        dest: /tmp/st
+        force: yes
 
-- name: packages | st | install st
-  become: true
-  make:
-    target: install
-    chdir: /tmp/st
+    - name: packages | st | install st
+      make:
+        target: install
+        chdir: /tmp/st
+  when: ansible_distribution in ["Archlinux", "Debian"]

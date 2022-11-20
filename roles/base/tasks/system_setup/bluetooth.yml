@@ -1,20 +1,19 @@
-- name: system setup | bluetooth | create wireplumber folder
+- name: system setup | bluetooth
   become: true
-  file:
-    path: /etc/wireplumber/policy.lua.d
-    state: directory
-    owner: root
-    group: root
-    mode: 0755
-  when: ansible_os_family == "Debian"
+  block:
+    - name: system setup | bluetooth | create wireplumber folder
+      file:
+        path: /etc/wireplumber/policy.lua.d
+        state: directory
+        owner: root
+        group: root
+        mode: 0755
 
-- name: system setup | bluetooth | copy headphones audio quality and mic conf
-  become: true
-  copy:
-    src: system_setup/bluetooth_policy.lua
-    dest: /etc/wireplumber/policy.lua.d/11-bluetooth-policy.lua
-    owner: root
-    group: root
-    mode: 0755
-  when: ansible_os_family == "Debian"
-
+    - name: system setup | bluetooth | copy headphones audio quality and mic conf
+      copy:
+        src: system_setup/bluetooth_policy.lua
+        dest: /etc/wireplumber/policy.lua.d/11-bluetooth-policy.lua
+        owner: root
+        group: root
+        mode: 0755
+  when: ansible_distribution == "Debian"

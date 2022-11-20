@@ -1,15 +1,14 @@
 ---
 - hosts: all
+  become: true
   pre_tasks:
     - name: pre-run | update package cache (Archlinux)
-      become: true
       pacman:
         update_cache: yes
       changed_when: False
       when: ansible_distribution == "Archlinux"
 
-    - name: pre-run | update package cache (debian)
-      become: true
+    - name: pre-run | update package cache (Debian)
       apt:
         update_cache: yes
       changed_when: False
@@ -22,12 +21,12 @@
   roles:
     - base
     - X11
-    - dev
+    - gnome
 
 - hosts: all
   become: true
   tasks:
-  - name: cleanup package cache (debian)
+  - name: cleanup package cache (Debian)
     apt:
       autoclean: yes
     changed_when: false
