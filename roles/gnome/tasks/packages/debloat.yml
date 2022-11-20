@@ -5,5 +5,7 @@
       apt:
         name:
           - totem
+          - evince
+          - '^libreoffice*'
         state: absent
   when: ansible_os_family == "Debian"
