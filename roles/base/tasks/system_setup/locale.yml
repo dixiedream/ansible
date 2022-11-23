@@ -49,4 +49,4 @@
         group: root
         owner: root
         mode: 0644
-  when: ansible_os_family == "Archlinux"
+  when: ansible_os_family in ["Archlinux", "Artix Linux"]

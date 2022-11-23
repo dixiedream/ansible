@@ -5,4 +5,4 @@
       become_user: "{{ user }}"
       command: localectl --no-convert set-x11-keymap it '' '' ctrl:nocaps
       ignore_errors: yes
-  when: ansible_distribution in ["Archlinux", "Debian"]
+  when: ansible_distribution in ["Archlinux", "Artix Linux", "Debian"]

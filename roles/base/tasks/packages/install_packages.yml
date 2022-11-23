@@ -6,7 +6,7 @@
         name: pipewire-media-session
         state: absent
       ignore_errors: yes
-      when: ansible_distribution in ["Archlinux", "Debian"]
+      when: ansible_system == "Linux"
 
     - name: packages | install common packages
       package:
@@ -56,21 +56,21 @@
           - wireplumber
           - "{{ wpa_supplicant_package }}"
         state: latest
-      when: ansible_distribution in ["Archlinux", "Debian"]
+      when: ansible_system == "Linux"
 
     - name: packages | install Pacman Contrib package (Archlinux)
       pacman:
         name:
           - pacman-contrib
         state: latest
-      when: ansible_distribution == "Archlinux"
+      when: ansible_distribution in ["Archlinux", "Artix Linux"]
 
     - name: packages | install polkit package (Archlinux)
       pacman:
         name:
           - polkit
         state: latest
-      when: ansible_distribution == "Archlinux"
+      when: ansible_distribution in ["Archlinux", "Artix Linux"]
 
     - name: packages | install Bluetooth related stuff (Debian)
       apt:

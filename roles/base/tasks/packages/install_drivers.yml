@@ -5,4 +5,4 @@
       command: yay -S --noconfirm bcm20702a1-firmware
       args:
         creates: /usr/bin/auto-cpufreq
-      when: ansible_distribution == "Archlinux" and ansible_product_version == "ThinkPad X230"
+      when: ansible_distribution in ["Archlinux", "Artix Linux"] and ansible_product_version == "ThinkPad X230"

@@ -3,7 +3,7 @@
   pacman:
     name: go
     state: latest
-  when: ansible_os_family == "Archlinux"
+  when: ansible_os_family in ["Archlinux", "Artix Linux"]
 
 - name: packages | golang | download archive (Debian)
   become: true
