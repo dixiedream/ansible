@@ -1,4 +1,5 @@
 - name: packages | add arch repos (Artix)
+  become: true
   block:
     - name: packages | add arch repos (Artix) | check pacman.conf
       lineinfile:
