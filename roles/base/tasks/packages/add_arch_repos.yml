@@ -8,7 +8,7 @@
         state: absent
       check_mode: yes
       changed_when: false
-      register: out
+      register: universe
 
     - name: packages | add arch repos (Artix) | add universe repos
       shell: |
@@ -19,12 +19,13 @@
         Server = https://artixlinux.qontinuum.space/artixlinux/universe/os/$arch
         Server = https://mirror1.cl.netactuate.com/artix/universe/$arch
         Server = https://ftp.crifo.org/artix-universe/' >> /etc/pacman.conf
-      when: not out.found
+      when: not universe.found
 
     - name: update package cache
       pacman:
         update_cache: yes
       changed_when: False
+      when: not universe.found
 
     - name: packages | add arch repos (Artix) | install arch support
       package:
@@ -59,5 +60,11 @@
       shell: |
         echo '[community]
           Include = /etc/pacman.d/mirrorlist-arch' >> /etc/pacman.conf
+      when: not community.found
+
+    - name: update package cache
+      pacman:
+        update_cache: yes
+      changed_when: False
       when: not community.found
   when: ansible_distribution == "Artix Linux"
