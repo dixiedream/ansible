@@ -1,11 +1,15 @@
 - name: system setup | network
   become: true
   block:
+    - name: system setup | network | check if systemd exists
+      command: readlink -f /sbin/init
+      register: readlink
+
     - name: system setup | network | remove ifupdown (Debian)
       package:
         name: ifupdown
         state: absent
-      when: ansible_distribution == "Debian"
+      when: ansible_distribution == "Debian" and readlink.stdout.find('systemd') != -1
 
     - name: system setup | network | create basic ethernet conf
       copy:
@@ -13,6 +17,7 @@
         dest: /etc/systemd/network/en.network
         owner: root
         group: root
+      when: readlink.stdout.find('systemd') != -1
 
     - name: system setup | network | create basic wireless conf
       copy:
@@ -20,11 +25,13 @@
         dest: /etc/systemd/network/wl.network
         owner: root
         group: root
+      when: readlink.stdout.find('systemd') != -1
 
     - name: system setup | network | check if wpa_supplicant folder exists
       file:
         path: /etc/wpa_supplicant
         state: directory
+      when: readlink.stdout.find('systemd') != -1
 
     - name: system setup | network | create wpa_supplicant template
       template:
@@ -32,11 +39,13 @@
         dest: /etc/wpa_supplicant/wpa_supplicant-example.conf
         owner: root
         group: root
+      when: readlink.stdout.find('systemd') != -1
 
     - name: system setup | network | remove old /etc/resolv.conf
       file:
         path: /etc/resolv.conf
         state: absent
+      when: readlink.stdout.find('systemd') != -1
 
     - name: system setup | network | symlink systemd network resolv to resolv.con (Debian)
       file:
@@ -45,7 +54,7 @@
         state: link
         owner: root
         group: root
-      when: ansible_distribution == "Debian"
+      when: ansible_distribution == "Debian" and readlink.stdout.find('systemd') != -1
 
     - name: system setup | network | symlink systemd network resolv to resolv.con (Archlinux)
       file:
@@ -54,5 +63,5 @@
         state: link
         owner: root
         group: root
-      when: ansible_os_family in ["Archlinux", "Artix Linux"]
+      when: ansible_os_family in ["Archlinux", "Artix Linux"] and readlink.stdout.find('systemd') != -1
   when: ansible_distribution in ["Archlinux", "Artix Linux", "Debian"]

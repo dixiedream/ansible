@@ -27,6 +27,9 @@
       changed_when: False
       when: not universe.found
 
+    # FUNNY YET SCARY THING...
+    # After this package will be installed Ansible will no longer
+    # see this distro as Artix Linux but as a standard Archlinux
     - name: packages | add arch repos (Artix) | install arch support
       package:
         name: artix-archlinux-support
