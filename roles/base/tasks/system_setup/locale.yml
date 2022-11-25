@@ -23,7 +23,7 @@
 
     - name: system setup | locale | set ntp (Artix)
       runit:
-        service: ntpd
+        name: ntpd
         state: started
         enabled: true
       when: readlink.stdout.find('runit') != -1
