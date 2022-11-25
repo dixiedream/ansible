@@ -52,7 +52,7 @@
     name: systemd-networkd-wait-online
     state: stopped
     enabled: no
-  when: ansible_distribution in ["Debian", "Archlinux"]
+  when: ansible_distribution in ["Artix Linux", "Archlinux", "Debian"]
 
 - name: "users | {{ user }} | ensure {{ user }} is in docker group (Linux)"
   become: true

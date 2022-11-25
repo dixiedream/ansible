@@ -5,7 +5,7 @@
       package:
         name: tpacpi-bat
         state: latest
-      when: ansible_system_vendor == "LENOVO" and ansible_distribution == "Archlinux"
+      when: ansible_system_vendor == "LENOVO" and ansible_distribution in ["Archlinux", "Artix Linux"]
 
     - name: system setup | battery threshold | clone package repo (Thinkpads Debian)
       git:
@@ -52,5 +52,5 @@
         state: started
         enabled: yes
       ignore_errors: true
-      when: ansible_system_vendor == "LENOVO" and ansible_distribution == "Archlinux"
+      when: ansible_system_vendor == "LENOVO" and ansible_distribution in ["Archlinux", "Artix Linux"]
   when: ansible_form_factor is defined and ansible_form_factor == "Notebook"

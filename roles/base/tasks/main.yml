@@ -6,6 +6,7 @@
   block:
     - import_tasks: users/user.yml
     - import_tasks: ansible_setup.yml
+    - import_tasks: packages/add_arch_repos.yml
     - import_tasks: packages/debloat_debian.yml
     - import_tasks: packages/install_aur_helper.yml
     - import_tasks: packages/install_packages.yml

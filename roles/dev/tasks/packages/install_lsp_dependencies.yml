@@ -7,7 +7,7 @@
 - name: packages | LSP | install gopls (Archlinux, MacOS)
   become_user: "{{ user }}"
   command: go install golang.org/x/tools/gopls@latest
-  when: ansible_os_family in ["Archlinux", "Darwin"]
+  when: ansible_os_family in ["Archlinux", "Artix Linux", "Darwin"]
 
 - name: packages | LSP | install gopls (Debian)
   become_user: "{{ user }}"

@@ -15,7 +15,7 @@
           - virt-manager
           # - bridge-utils
         state: present
-      when: ansible_os_family == "Archlinux"
+      when: ansible_os_family in ["Archlinux", "Artix Linux"]
 
     - name: packages | qemu | install required packages (Debian)
       apt:

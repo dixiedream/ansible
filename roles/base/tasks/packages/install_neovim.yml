@@ -3,7 +3,7 @@
   package:
     name: neovim
     state: latest
-  when: ansible_distribution in ["Archlinux", "Debian"]
+  when: ansible_distribution in ["Archlinux", "Artix Linux", "Debian"]
 
 - name: packages | neovim | install package (ubuntu)
   become: true
