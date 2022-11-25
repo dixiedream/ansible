@@ -3,7 +3,7 @@
   package:
     name: lua-language-server
     state: latest
-  when: ansible_os_family == "Archlinux"
+  when: ansible_os_family in ["Archlinux", "Artix Linux"]
 
 - name: packages | lua language server | download release (Debian)
   become: true

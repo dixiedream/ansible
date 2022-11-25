@@ -2,7 +2,11 @@
   become: true
   block:
     - name: system setup | locale | set caps lock as ctrl
-      become_user: "{{ user }}"
-      command: localectl --no-convert set-x11-keymap it '' '' ctrl:nocaps
-      ignore_errors: yes
-  when: ansible_distribution in ["Archlinux", "Debian"]
+      copy:
+        src: system_setup/locale_keymap.conf
+        dest: /etc/X11/xorg.conf.d/00-keyboard.conf
+    # - name: system setup | locale | set caps lock as ctrl
+    #   become_user: "{{ user }}"
+    #   command: localectl --no-convert set-x11-keymap it '' '' ctrl:nocaps
+    #   ignore_errors: yes
+  when: ansible_distribution in ["Archlinux", "Artix Linux", "Debian"]

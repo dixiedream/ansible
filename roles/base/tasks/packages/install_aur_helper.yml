@@ -18,4 +18,4 @@
         chdir: /tmp/yay
         creates: /usr/bin/yay
       when: not yay_is_present.stat.exists
-  when: ansible_os_family == "Archlinux"
+  when: ansible_os_family in ["Archlinux", "Artix Linux"]

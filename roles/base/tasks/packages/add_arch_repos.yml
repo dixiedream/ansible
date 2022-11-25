@@ -1,0 +1,73 @@
+- name: packages | add arch repos (Artix)
+  become: true
+  block:
+    - name: packages | add arch repos (Artix) | check pacman.conf
+      lineinfile:
+        path: /etc/pacman.conf
+        regexp: '^\[universe\]'
+        state: absent
+      check_mode: yes
+      changed_when: false
+      register: universe
+
+    - name: packages | add arch repos (Artix) | add universe repos
+      shell: |
+        echo '[universe]
+        Server = https://universe.artixlinux.org/$arch
+        Server = https://mirror1.artixlinux.org/universe/$arch
+        Server = https://mirror.pascalpuffke.de/artix-universe/$arch
+        Server = https://artixlinux.qontinuum.space/artixlinux/universe/os/$arch
+        Server = https://mirror1.cl.netactuate.com/artix/universe/$arch
+        Server = https://ftp.crifo.org/artix-universe/' >> /etc/pacman.conf
+      when: not universe.found
+
+    - name: update package cache
+      pacman:
+        update_cache: yes
+      changed_when: False
+      when: not universe.found
+
+    # FUNNY YET SCARY THING...
+    # After this package will be installed Ansible will no longer
+    # see this distro as Artix Linux but as a standard Archlinux
+    - name: packages | add arch repos (Artix) | install arch support
+      package:
+        name: artix-archlinux-support
+        state: latest
+
+    - name: packages | add arch repos (Artix) | check extra repos
+      lineinfile:
+        path: /etc/pacman.conf
+        regexp: '^\[extra\]'
+        state: absent
+      check_mode: yes
+      changed_when: false
+      register: extra
+
+    - name: packages | add arch repos (Artix) | add extra repos
+      shell: |
+        echo '[extra]
+          Include = /etc/pacman.d/mirrorlist-arch' >> /etc/pacman.conf
+      when: not extra.found
+
+    - name: packages | add arch repos (Artix) | check community repos
+      lineinfile:
+        path: /etc/pacman.conf
+        regexp: '^\[community\]'
+        state: absent
+      check_mode: yes
+      changed_when: false
+      register: community
+
+    - name: packages | add arch repos (Artix) | add community repos
+      shell: |
+        echo '[community]
+          Include = /etc/pacman.d/mirrorlist-arch' >> /etc/pacman.conf
+      when: not community.found
+
+    - name: update package cache
+      pacman:
+        update_cache: yes
+      changed_when: False
+      when: not community.found
+  when: ansible_distribution == "Artix Linux"

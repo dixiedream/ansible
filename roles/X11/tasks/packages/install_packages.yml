@@ -24,11 +24,11 @@
           - "{{ xorg_xrandr_package }}"
           - xwallpaper
         state: latest
-      when: ansible_distribution in ["Archlinux", "Debian"]
+      when: ansible_distribution in ["Archlinux", "Artix Linux", "Debian"]
 
     - name: packages | install Xsetroot (Archlinux)
       pacman:
         name:
           - xorg-xsetroot
         state: latest
-      when: ansible_distribution == "Archlinux"
+      when: ansible_distribution in ["Archlinux", "Artix Linux"]

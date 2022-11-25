@@ -6,7 +6,7 @@
       command: yay -S --noconfirm lf
       args:
         creates: /usr/bin/lf
-      when: ansible_os_family == "Archlinux"
+      when: ansible_os_family in ["Archlinux", "Artix Linux"]
 
     - name: packages | lf | install (Debian)
       apt:
