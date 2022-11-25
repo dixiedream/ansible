@@ -3,7 +3,7 @@
   block:
     - name: system setup | locale | set caps lock as ctrl
       copy:
-        src: system_setup/locale_vconsole.conf
+        src: system_setup/locale_keymap.conf
         dest: /etc/X11/xorg.conf.d/00-keyboard.conf
     # - name: system setup | locale | set caps lock as ctrl
     #   become_user: "{{ user }}"
