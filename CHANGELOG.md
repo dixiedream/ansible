@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.4.0
+- Readme updated with usage section
+
 ## 1.3.0
 - Add initial support for Runit init systems (Artix linux)
 
