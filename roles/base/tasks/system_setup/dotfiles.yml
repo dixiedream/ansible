@@ -1,4 +1,5 @@
 - name: system setup | dotfiles | Linux
+  become: true
   become_user: "{{ user }}"
   vars:
     - dotfile_src: "/home/{{ user }}/.cfg"

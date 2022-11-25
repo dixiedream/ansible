@@ -11,10 +11,22 @@
         group: root
         mode: 0700
 
-    - name: system setup | locale | set ntp true (Archlinux)
+    - name: system setup | locale | check if systemd exists
+      command: readlink -f /sbin/init
+      register: readlink
+
+    - name: system setup | locale | set ntp (Archlinux)
       command: timedatectl set-ntp true
       changed_when: false
       ignore_errors: true
+      when: readlink.stdout.find('systemd') != -1
+
+    - name: system setup | locale | set ntp (Artix)
+      runit:
+        service: ntpd
+        state: started
+        enabled: true
+      when: readlink.stdout.find('runit') != -1
 
     - name: system setup | locale | sync hardware clock and system clock (Archlinux)
       command: hwclock --systohc
