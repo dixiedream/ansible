@@ -11,10 +11,6 @@
         group: root
         mode: 0700
 
-    - name: system setup | locale | check if systemd exists
-      command: readlink -f /sbin/init
-      register: readlink
-
     - name: system setup | locale | set ntp (Archlinux)
       command: timedatectl set-ntp true
       changed_when: false

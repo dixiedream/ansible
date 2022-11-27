@@ -1,10 +1,6 @@
 - name: system setup | lock screen on suspend
   become: true
   block:
-    - name: system setup | lock screen on suspend | check if systemd exists
-      command: readlink -f /sbin/init
-      register: readlink
-
     - name: system setup | lock screen on suspend | copy conf file (Systemd)
       copy:
         src: system_setup/systemd_lock_on_suspend.conf
