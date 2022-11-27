@@ -2,6 +2,10 @@
 - include_vars: "{{ ansible_os_family }}.yml"
   when: ansible_system == "Linux"
 
+- name: Check if systemd exists
+  command: readlink -f /sbin/init
+  register: readlink2
+
 - name: Linux setup
   block:
     - import_tasks: users/user.yml
