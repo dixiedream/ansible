@@ -50,7 +50,7 @@
         - name: packages | auto-cpufreq | enable service
           file:
             src: /etc/runit/sv/auto-cpufreq
-            dest: /run/runit/services/
+            dest: /run/runit/service/
             state: link
             owner: root
             group: root
