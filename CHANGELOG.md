@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.5.0
+- More runit stuff (pipewire, auto-cpufreq)
+- Sxiv fix
+- Openssh fix
+
 ## 1.4.0
 - Readme updated with usage section
 
