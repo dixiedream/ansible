@@ -14,6 +14,7 @@
     - import_tasks: packages/debloat_debian.yml
     - import_tasks: packages/install_aur_helper.yml
     - import_tasks: packages/install_packages.yml
+    - import_tasks: packages/install_pipewire.yml
     - import_tasks: packages/install_neovim.yml
     - import_tasks: packages/install_lf.yml
     # - import_tasks: packages/install_drivers.yml
