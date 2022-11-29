@@ -1,0 +1,54 @@
+- name: packages | pipewire
+  become: true
+  block:
+    - name: packages | pipewire | ensure pipewire-media-session is not present
+      package:
+        name: pipewire-media-session
+        state: absent
+      ignore_errors: yes
+      when: ansible_distribution in ["Archlinux", "Artix Linux", "Debian"]
+
+    - name: packages | pipewire | install packages
+      package:
+        name:
+          - pavucontrol
+          - pipewire
+          - pipewire-alsa
+          - pipewire-pulse
+          - wireplumber
+        state: latest
+      when: ansible_distribution in ["Archlinux", "Artix Linux", "Debian"]
+
+    - name: packages | pipewire | runit setup
+      block:
+        - name: packages | pipewire | copy conf files (Runit)
+          copy:
+            src: "/usr/share/pipewire/{{ item }}"
+            dest: /etc/pipewire/
+          with_items:
+            - "pipewire.conf"
+            - "pipewire-pulse.conf"
+
+        - name: packages | pipewire | check pipewire.conf (Runit)
+          lineinfile:
+            path: /etc/pipewire/pipewire.conf
+            regexp: '^{ path = "/usr/bin/pipewire" args = "-c pipewire-pulse.conf" }'
+            state: absent
+          check_mode: yes
+          changed_when: false
+          register: pipewireArgs
+
+        - name: packages | pipewire | setup (Runit)
+          lineinfile:
+            path: /etc/pipewire/pipewire.conf
+            line: '{ path = "/usr/bin/pipewire" args = "-c pipewire-pulse.conf" }'
+            insertafter: '^context.exec = \['
+          when: not pipewireArgs.found
+
+        - name: packages | pipewire | setup wireplumber (Runit)
+          lineinfile:
+            path: /etc/pipewire/pipewire.conf
+            line: '{ path = "/usr/bin/wireplumber" args = "" }'
+            insertafter: '^context.exec = \['
+          when: not pipewireArgs.found
+      when: readlink.stdout.find('runit') != -1

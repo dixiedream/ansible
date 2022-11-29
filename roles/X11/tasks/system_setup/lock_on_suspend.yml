@@ -1,10 +1,6 @@
 - name: system setup | lock screen on suspend
   become: true
   block:
-    - name: system setup | lock screen on suspend | check if systemd exists
-      command: readlink -f /sbin/init
-      register: readlink
-
     - name: system setup | lock screen on suspend | copy conf file (Systemd)
       copy:
         src: system_setup/systemd_lock_on_suspend.conf
@@ -23,7 +19,7 @@
     - name: system setup | lock screen on suspend | copy conf file (Runit)
       template:
         src: system_setup/runit_lock_on_suspend.j2
-        dest: "/etc/elogind/system-sleep"
+        dest: "/etc/elogind/system-sleep/lock.sh"
         owner: root
         group: root
         mode: 0400

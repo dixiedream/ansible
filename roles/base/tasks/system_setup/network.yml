@@ -1,10 +1,6 @@
 - name: system setup | network
   become: true
   block:
-    - name: system setup | network | check if systemd exists
-      command: readlink -f /sbin/init
-      register: readlink
-
     - name: system setup | network | remove ifupdown (Debian)
       package:
         name: ifupdown

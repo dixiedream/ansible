@@ -6,7 +6,7 @@
       command: yay -S --noconfirm auto-cpufreq
       args:
         creates: /usr/bin/auto-cpufreq
-      when: ansible_distribution in ["Archlinux", "Artix Linux"]
+      when: ansible_distribution in ["Archlinux", "Artix Linux"] and readlink.stdout.find('systemd') != -1
 
     - name: packages | auto-cpufreq | clone repo (Debian)
       git:
@@ -26,9 +26,22 @@
       ignore_errors: yes
       when: ansible_os_family == "Debian"
 
-    - name: packages | auto-cpufreq | check is started and enabled
+    - name: packages | auto-cpufreq | start and enable (Systemd)
       service:
         name: auto-cpufreq
         state: started
         enabled: yes
+      when: readlink.stdout.find('systemd') != -1
+
+    - name: packages | auto-cpufreq | Runit
+      block:
+        - name: packages | auto-cpufreq | clone repo
+          git:
+            repo: https://github.com/AdnanHodzic/auto-cpufreq
+            dest: /tmp/auto-cpufreq
+            force: yes
+
+        - name: packages | auto-cpufreq | create conf file
+          shell: sh /tmp/auto-cpufreq/auto-cpufreq-installer --install
+      when: readlink.stdout.find('runit') != -1
   when: ansible_form_factor is defined and ansible_form_factor == "Notebook"
