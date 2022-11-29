@@ -38,7 +38,17 @@
           changed_when: false
           register: pipewireArgs
 
-        # TODO: need to continue
-        # - name: packages | pipewire | setup (Runit)
+        - name: packages | pipewire | setup (Runit)
+          lineinfile:
+            path: /etc/pipewire/pipewire.conf
+            line: '{ path = "/usr/bin/pipewire" args = "-c pipewire-pulse.conf" }'
+            insertafter: '^context.exec = ['
+          when: not pipewireArgs.found
 
+        - name: packages | pipewire | setup wireplumber (Runit)
+          lineinfile:
+            path: /etc/pipewire/pipewire.conf
+            line: '{ path = "/usr/bin/wireplumber" args = "" }'
+            insertafter: '^context.exec = ['
+          when: not pipewireArgs.found
       when: readlink.stdout.find('runit') != -1
