@@ -1,5 +1,4 @@
 - find a way to make git and file tasks say Ok when already done
-- [Runit] Pipewire, copy conf from user share to /etc/pipewire and setup wireplumber
 - [Runit] Slock not triggered before sleep
 - [Runit] Auto-cpufreq
 - [Runit] Autorandr
