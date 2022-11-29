@@ -25,6 +25,7 @@
           - ncdu
           - neofetch
           - ntfs-3g
+          - openssh
           - p7zip
           - ripgrep
           - s-tui
