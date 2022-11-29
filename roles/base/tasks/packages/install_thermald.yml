@@ -12,4 +12,5 @@
         name: thermald
         state: started
         enabled: yes
+      when: readlink.stdout.find('systemd') != -1
   when: ansible_form_factor is defined and ansible_form_factor == "Notebook"
