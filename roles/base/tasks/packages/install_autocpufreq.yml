@@ -6,7 +6,7 @@
       command: yay -S --noconfirm auto-cpufreq
       args:
         creates: /usr/bin/auto-cpufreq
-      when: ansible_distribution in ["Archlinux", "Artix Linux"]
+      when: ansible_distribution in ["Archlinux", "Artix Linux"] and readlink.stdout.find('systemd') != -1
 
     - name: packages | auto-cpufreq | clone repo (Debian)
       git:
@@ -33,31 +33,15 @@
         enabled: yes
       when: readlink.stdout.find('systemd') != -1
 
-    # - name: packages | auto-cpufreq | Runit
-    #   block:
-    #     - name: packages | auto-cpufreq | create folder
-    #       file:
-    #         path: /etc/runit/sv/auto-cpufreq
-    #         state: directory
-    #         owner: root
-    #         group: root
-    #
-    #     - name: packages | auto-cpufreq | create conf file
-    #       shell: |
-    #         echo '#!/bin/sh
-    #         exec /usr/bin/auto-cpufreq --daemon 2>&1' > /etc/runit/sv/auto-cpufreq/run
-    #
-    #     - name: packages | auto-cpufreq | enable service
-    #       file:
-    #         src: /etc/runit/sv/auto-cpufreq
-    #         dest: /run/runit/service/
-    #         state: link
-    #         owner: root
-    #         group: root
-    #
-    #     # - name: packages | auto-cpufreq | start and enable (Runit)
-    #     #   runit:
-    #     #     name: auto-cpufreq
-    #     #     state: started
-    #   when: readlink.stdout.find('runit') != -1
+    - name: packages | auto-cpufreq | Runit
+      block:
+        - name: packages | auto-cpufreq | clone repo
+          git:
+            repo: https://github.com/AdnanHodzic/auto-cpufreq
+            dest: /tmp/auto-cpufreq
+            force: yes
+
+        - name: packages | auto-cpufreq | create conf file
+          shell: sh /tmp/auto-cpufreq/auto-cpufreq-installer --install
+      when: readlink.stdout.find('runit') != -1
   when: ansible_form_factor is defined and ansible_form_factor == "Notebook"
