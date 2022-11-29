@@ -19,7 +19,7 @@
     - name: system setup | lock screen on suspend | copy conf file (Runit)
       template:
         src: system_setup/runit_lock_on_suspend.j2
-        dest: "/etc/elogind/system-sleep"
+        dest: "/etc/elogind/system-sleep/lock.sh"
         owner: root
         group: root
         mode: 0400
