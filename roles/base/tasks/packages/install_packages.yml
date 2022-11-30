@@ -18,7 +18,7 @@
           - ncdu
           - neofetch
           - ntfs-3g
-          - openssh
+          - "{{ openssh_package }}"
           - p7zip
           - ripgrep
           - s-tui
