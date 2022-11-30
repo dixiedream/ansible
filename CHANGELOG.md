@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.6.0
+- Pop!\_OS refinements and further testing
+- Naming refactoring
+- Fixed user task would wipe every other default user groups
+
 ## 1.5.0
 - More runit stuff (pipewire, auto-cpufreq)
 - Sxiv fix

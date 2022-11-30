@@ -7,10 +7,21 @@
           - thermald
         state: latest
 
-    - name: packages | thermald | ensure service is enabled
+    - name: packages | thermald | install runit package
+      package:
+        name:
+          - thermald-runit
+        state: latest
+      when: readlink.stdout.find('runit') != -1
+
+    - name: packages | thermald | enable service (Runit)
+      shell: ln --symbolic --force /etc/runit/sv/thermald /run/runit/service/
+      when: readlink.stdout.find('runit') != -1
+
+    - name: packages | thermald | enable service (Systemd)
       service:
         name: thermald
         state: started
         enabled: yes
       when: readlink.stdout.find('systemd') != -1
-  when: ansible_form_factor is defined and ansible_form_factor == "Notebook"
+  when: ansible_form_factor is defined and ansible_form_factor == "Notebook" and ansible_distribution != 'Pop!_OS'

@@ -1,0 +1,9 @@
+# Common vars
+sudo_group: sudo
+
+# Package names
+amd_microcode_package: amd64-microcode
+intel_microcode_package: intel-microcode
+openssh_package: openssh-client
+unrar_package: unrar
+zathura_pdf_support_package: zathura-pdf-poppler

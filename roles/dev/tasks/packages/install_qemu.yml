@@ -33,7 +33,7 @@
           - virt-manager
           # - bridge-utils
         state: present
-      when: ansible_os_family == "Debian"
+      when: ansible_distribution in ["Debian", "Pop!_OS"]
 
     - name: packages | qemu | ensure qemu related services are not enabled (Debian)
       service:
@@ -45,7 +45,7 @@
         - libvirt-guests
         - systemd-machined
         - dnsmasq
-      when: ansible_os_family == "Debian"
+      when: ansible_distribution in ["Debian", "Pop!_OS"]
 
     - name: "users | {{ user }} | ensure {{ user }} is in libvirt group (Linux)"
       become: true

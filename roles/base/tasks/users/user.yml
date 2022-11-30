@@ -6,11 +6,13 @@
         name: "{{ user }}"
         state: present
 
+    # TODO Pop!_OS set default groups as user adm sudo lpadmin, add missing groups
     - name: users | "{{ user }}" | create user
       user:
         name: "{{ user }}"
         group: "{{ user }}"
         groups: "{{ sudo_group }}"
+        append: true
         state: present
         shell: /usr/bin/zsh
 
