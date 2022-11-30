@@ -1,15 +1,16 @@
 - name: system setup | remove beep | remove pcspkr
   become: true
-  command: rmmod pcspkr
-  ignore_errors: yes
+  block:
+    - name: system setup | remove beep | remove pcspkr
+      command: rmmod pcspkr
+      ignore_errors: yes
 
-- name: system setup | remove beep | check if already blacklisted
-  become: true
-  stat:
-    path: /etc/modprobe.d/nobeep.conf
-  register: nobeep_check
+    - name: system setup | remove beep | check if already blacklisted
+      stat:
+        path: /etc/modprobe.d/nobeep.conf
+      register: nobeep_check
 
-- name: system setup | remove beep | blacklist pcspkr
-  become: true
-  shell: echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
-  when: not nobeep_check.stat.exists
+    - name: system setup | remove beep | blacklist pcspkr
+      shell: echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
+      when: not nobeep_check.stat.exists
+  when: ansible_distribution in ["Archlinux", "Artix Linux", "Debian"]

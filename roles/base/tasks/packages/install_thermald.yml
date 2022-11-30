@@ -24,4 +24,4 @@
         state: started
         enabled: yes
       when: readlink.stdout.find('systemd') != -1
-  when: ansible_form_factor is defined and ansible_form_factor == "Notebook"
+  when: ansible_form_factor is defined and ansible_form_factor == "Notebook" and ansible_distribution != 'Pop!_OS'

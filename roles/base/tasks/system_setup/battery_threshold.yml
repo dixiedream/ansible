@@ -54,4 +54,4 @@
         enabled: yes
       ignore_errors: true
       when: ansible_system_vendor == "LENOVO" and ansible_distribution in ["Archlinux", "Artix Linux"] and readlink.stdout.find('systemd') != -1
-  when: ansible_form_factor is defined and ansible_form_factor == "Notebook"
+  when: ansible_form_factor is defined and ansible_form_factor == "Notebook" and ansible_distribution != 'Pop!_OS'
