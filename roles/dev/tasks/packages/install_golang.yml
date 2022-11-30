@@ -11,7 +11,7 @@
     checksum: "{{ golang_checksum }}"
     url: "https://go.dev/dl/go{{ golang_version }}.linux-amd64.tar.gz"
     dest: /tmp/golang.tar.gz
-  when: ansible_os_family == "Debian"
+  when: ansible_distribution in ["Debian", "Pop!_OS"]
 
 # - name: packages | golang | creates dir if not exists (Debian)
 #   become: true
@@ -28,7 +28,7 @@
     dest: /usr/local/
     owner: root
     group: root
-  when: ansible_os_family == "Debian"
+  when: ansible_distribution in ["Debian", "Pop!_OS"]
 
 - name: packages | golang | update $PATH var (Debian)
   become_user: "{{ user }}"
@@ -36,7 +36,7 @@
     dest: "/home/{{ user }}/.zprofile"
     regexp: '^export PATH=\$PATH:\$GOROOT/bin:\$GOPATH/bin'
     line: "export PATH=$PATH:$GOROOT/bin:$GOPATH/bin:/usr/local/go/bin"
-  when: ansible_os_family == "Debian"
+  when: ansible_distribution in ["Debian", "Pop!_OS"]
 
 - name: packages | golang | install (MacOS)
   homebrew:

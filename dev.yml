@@ -13,7 +13,7 @@
       apt:
         update_cache: yes
       changed_when: False
-      when: ansible_os_family == "Debian"
+      when: ansible_distribution in ["Debian", "Pop!_OS"]
 
   # run roles
 - hosts: all
@@ -31,10 +31,10 @@
     apt:
       autoclean: yes
     changed_when: false
-    when: ansible_os_family == "Debian"
+    when: ansible_distribution in ["Debian", "Pop!_OS"]
 
   - name: autoremove orphan packages (debian)
     apt:
       autoremove: yes
       purge: yes
-    when: ansible_os_family == "Debian"
+    when: ansible_distribution in ["Debian", "Pop!_OS"]

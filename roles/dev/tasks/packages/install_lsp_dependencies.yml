@@ -12,7 +12,7 @@
 - name: packages | LSP | install gopls (Debian)
   become_user: "{{ user }}"
   command: /usr/local/go/bin/go install golang.org/x/tools/gopls@latest
-  when: ansible_os_family == "Debian"
+  when: ansible_distribution in ["Debian", "Pop!_OS"]
 
 - name: packages | LSP | install GraphQl
   become: true

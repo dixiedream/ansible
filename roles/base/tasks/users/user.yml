@@ -12,6 +12,7 @@
         name: "{{ user }}"
         group: "{{ user }}"
         groups: "{{ sudo_group }}"
+        append: true
         state: present
         shell: /usr/bin/zsh
 
