@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.7.0
+- Artix linux stable
+
 ## 1.6.0
 - Pop!\_OS refinements and further testing
 - Naming refactoring
