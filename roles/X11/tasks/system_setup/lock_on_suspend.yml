@@ -15,13 +15,12 @@
         enabled: yes
       when: readlink.stdout.find('systemd') != -1
 
-    # TODO Ensure the mode is correct
     - name: system setup | lock screen on suspend | copy conf file (Runit)
       template:
         src: system_setup/runit_lock_on_suspend.j2
         dest: "/etc/elogind/system-sleep/lock.sh"
         owner: root
         group: root
-        mode: 0400
+        mode: 0700
       when: readlink.stdout.find('runit') != -1
   when: ansible_distribution in ["Archlinux", "Artix Linux", "Debian"]
