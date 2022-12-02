@@ -21,4 +21,11 @@
 
     - name: system setup | dotfiles | Setup repo
       command: "git --git-dir={{ dotfile_src }} --work-tree='/home/{{ user }}' config remote.origin.fetch 'refs/heads/*:refs/remotes/origin/*'"
+
+    - name: system setup | dotfiles | Add pipewire to X autostart (Runit)
+      lineinfile:
+        dest: "/home/{{ user }}/.xinitrc"
+        regexp: '^autostart="dunst xcompmgr unclutter dwm_status"'
+        line: 'autostart="dunst xcompmgr unclutter pipewire dwm_status"'
+      when: readlink.stdout.find('runit') != -1
   when: ansible_system == "Linux"
