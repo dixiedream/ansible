@@ -6,7 +6,6 @@
         name: "{{ user }}"
         state: present
 
-    # TODO Pop!_OS set default groups as user adm sudo lpadmin, add missing groups
     - name: users | "{{ user }}" | create user
       user:
         name: "{{ user }}"
@@ -21,7 +20,7 @@
         name: "{{ user }}"
         groups: video
         append: yes
-      when: ansible_distribution == "Debian"
+      when: ansible_distribution == "Debian" and readlink.stdout.find('runit') != -1
 
     - name: users | "{{ user }}" | add sudoers file
       template:
