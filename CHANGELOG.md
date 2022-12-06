@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.8.0
+- Artix fix for backlight change
+
 ## 1.7.0
 - Artix linux stable
 
