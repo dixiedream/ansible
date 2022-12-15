@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.9.0
+- Add tmux configuration
+
 ## 1.8.0
 - Artix fix for backlight change
 
