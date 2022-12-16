@@ -21,6 +21,7 @@
           - "{{ openssh_package }}"
           - p7zip
           - ripgrep
+          - "{{ fd_package }}"
           - s-tui
           - "{{ unrar_package }}"
           - unzip
