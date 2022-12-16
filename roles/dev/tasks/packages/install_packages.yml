@@ -6,7 +6,6 @@
       - docker-compose
       - npm
       - php
-      - ripgrep
     state: latest
   when: ansible_system == "Linux"
 
@@ -19,6 +18,7 @@
       - npm
       - php
       - ripgrep
+      - fd
     state: latest
   when: ansible_os_family == "Darwin"
 
