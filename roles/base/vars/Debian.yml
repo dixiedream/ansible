@@ -5,6 +5,7 @@ sudo_group: sudo
 acpi_call_package: acpi-call
 amd_microcode_package: amd64-microcode
 bluez_utils_package: bluez-tools
+fd_package: fd-find
 intel_microcode_package: intel-microcode
 libnotify_package: libnotify-bin
 noto_fonts_package: fonts-noto
