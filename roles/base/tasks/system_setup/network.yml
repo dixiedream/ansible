@@ -37,12 +37,6 @@
         group: root
       when: readlink.stdout.find('systemd') != -1
 
-    - name: system setup | network | remove old /etc/resolv.conf
-      file:
-        path: /etc/resolv.conf
-        state: absent
-      when: readlink.stdout.find('systemd') != -1
-
     - name: system setup | network | symlink systemd network resolv to resolv.con (Debian)
       file:
         src: /run/systemd/resolve/resolv.conf

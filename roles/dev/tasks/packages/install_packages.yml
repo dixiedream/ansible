@@ -4,6 +4,7 @@
     name:
       - docker
       - docker-compose
+      - lazygit
       - npm
       - php
     state: latest

@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.10.0
+- Resolv.conf tasks cleaning
+- Install lazygit as a dev package
+
 ## 1.9.0
 - Add tmux configuration
 
