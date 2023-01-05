@@ -15,6 +15,7 @@
           - htop
           - imagemagick
           - mpv
+          - mpv-mpris
           - ncdu
           - neofetch
           - ntfs-3g
