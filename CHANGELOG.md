@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.11.0
+- Add mpv-mpris package installation for controlling mpv with playerctl
+
 ## 1.10.0
 - Resolv.conf tasks cleaning
 - Install lazygit as a dev package
