@@ -5,7 +5,7 @@
       package:
         name:
           - alacritty
-          - bemenu
+          - bemenu-wayland
           - dunst
           - grim
           - i3status-rust
