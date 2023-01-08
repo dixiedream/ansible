@@ -54,4 +54,5 @@
         owner: root
         group: root
       when: ansible_os_family in ["Archlinux", "Artix Linux"] and readlink.stdout.find('systemd') != -1
+      ignore_errors: yes
   when: ansible_distribution in ["Archlinux", "Artix Linux", "Debian"]
