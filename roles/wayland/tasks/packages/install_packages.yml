@@ -9,6 +9,7 @@
           - dunst
           - grim
           - kanshi
+          - playerctl
           - slurp
           - swaybg
           - swayidle
