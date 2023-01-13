@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.12.0
+- NPM now will install global packages into user workspace and without root permission
+
 ## 1.11.0
 - Add mpv-mpris package installation for controlling mpv with playerctl
 

@@ -46,8 +46,7 @@
       ignore_errors: true
       when: ansible_system_vendor == "LENOVO" and ansible_distribution == "Debian" and readlink.stdout.find('systemd') != -1
 
-    # TODO Find a runit solution
-    - name: system setup | battery threshold | enable service (Thinkpads Debian)
+    - name: system setup | battery threshold | enable service (Thinkpads Archlinux)
       service:
         name: tpacpi-bat
         state: started
