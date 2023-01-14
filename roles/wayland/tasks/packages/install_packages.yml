@@ -8,10 +8,9 @@
           - bemenu-wayland
           - dunst
           - grim
-          - i3status-rust
           - kanshi
+          - playerctl
           - slurp
-          - sway
           - swaybg
           - swayidle
           - swayimg
@@ -20,6 +19,16 @@
           - xdg-desktop-portal
           - xdg-desktop-portal-wlr
         state: latest
+
+    - name: packages | install wayland packages | Hyprland
+      become_user: "{{ user }}"
+      shell: yes | yay -S --removemake hyprland-bin
+      when: ansible_distribution in ["Archlinux", "Artix Linux"]
+
+    - name: packages | install wayland packages | Waybar
+      become_user: "{{ user }}"
+      shell: yes | yay -S --removemake waybar-hyprland-git
+      when: ansible_distribution in ["Archlinux", "Artix Linux"]
 
     - name: packages | install wayland packages | wdisplays
       become_user: "{{ user }}"

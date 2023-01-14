@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.13.0
+- Switched from sway to hyprland
+
 ## 1.12.0
 - NPM now will install global packages into user workspace and without root permission
 
