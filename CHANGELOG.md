@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.14.0
+- Fix for volar language server with my npm custom conf
+
 ## 1.13.0
 - Switched from sway to hyprland
 
