@@ -20,11 +20,11 @@ Install `homebrew` and `ansible`
 ### A few info
 In the scripts folder there are different launching options depending on your setup... here are some clarification:
 
-- `baseInstall.sh` Install a very resource friendly Xorg DWM window manager (tested on **Archlinux**, **Debian testing**, **Artix Linux**)
+- `baseInstall.sh` Install a very resource friendly Xorg environment (tested on **Archlinux**, **Debian testing**, **Artix Linux**)
 - `devInstall.sh` Install other dependencies on top of base needed for my workflow
 - `gnome.sh` It's the base Install but targeted towards Gnome desktop environment (tested on **Pop OS**)
-- `wayland.sh` It's the base install but instead of using Xorg server it's using Wayland
-- `gnome.sh` **BETA** it's the devInstall targeted towards Apple machines with **MacOS** (please submit issues if you test)
+- `wayland.sh` It's the wayland variant of the base install
+- `macInstall.sh` **BETA** it's the devInstall targeted towards Apple machines with **MacOS** (issues are welcome)
 
 ### Steps
 1. Change the user var in `group_vars/all.yml` accordingly

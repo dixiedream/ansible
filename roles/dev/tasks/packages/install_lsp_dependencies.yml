@@ -37,3 +37,11 @@
   npm:
     global: yes
     name: "@volar/vue-language-server"
+
+# Hoping to be a temp fix
+- name: packages | LSP | setup tsserver for volar
+  lineinfile:
+    dest: "/home/{{ user }}/.config/nvim/after/plugin/lspconfig.lua"
+    regexp: "^      tsdk"
+    line: "      tsdk = '/home/{{ user }}/.local/lib/node_modules/typescript/lib'"
+
