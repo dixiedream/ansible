@@ -4,4 +4,3 @@
 - Setup a firewall such as ufw or firewalld
 - Install and configure reflector to frequently update the mirrorlist automatically
 - Install a backup kernel like LTS or Zen kernel
-- For NVIDIA users, create a pacman hook to ensure initramfs gets updated on every nvidia or kernel upgrade
