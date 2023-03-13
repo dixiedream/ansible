@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.15.0
+- Removed cmus from installed packages for base role
+
 ## 1.14.0
 - Fix for volar language server with my npm custom conf
 
