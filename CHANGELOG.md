@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.16.0
+- Removed PHP and Neovim LSP PHP extension cause I'm not using it anymore
+
 ## 1.15.0
 - Removed cmus from installed packages for base role
 
