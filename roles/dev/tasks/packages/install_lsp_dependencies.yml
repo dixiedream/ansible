@@ -18,11 +18,6 @@
     global: yes
     name: graphql-language-service-cli
 
-- name: packages | LSP | install Intelephense
-  npm:
-    global: yes
-    name: intelephense
-
 - name: packages | LSP | install Typescript
   npm:
     global: yes
