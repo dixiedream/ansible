@@ -6,7 +6,6 @@
       - docker-compose
       - lazygit
       - npm
-      - php
     state: latest
   when: ansible_system == "Linux"
 
@@ -17,7 +16,6 @@
       - docker-compose
       - node
       - npm
-      - php
       - ripgrep
       - fd
     state: latest
