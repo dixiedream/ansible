@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.0
+- [BC] dwmblocks is now the new status bar for Xorg setups
+- Readme cleaning and clearness
+- Dev role now installs only the "dev" stuff instead of base + dev
+
 ## 1.16.0
 - Removed PHP and Neovim LSP PHP extension cause I'm not using it anymore
 
