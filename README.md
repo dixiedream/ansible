@@ -11,7 +11,6 @@ Install `git` and `ansible`
 For some strange reason on Pop!\_OS the Ansible version shipped in the repo is not as updated as Debian version.
 Please install Ansible through [official documentation](https://docs.ansible.com/ansible/latest/installation_guide/installation_distros.html#installing-ansible-on-ubuntu)
 
-
 ### Mac OS
 Install `homebrew` and `ansible`
 
@@ -20,10 +19,10 @@ Install `homebrew` and `ansible`
 ### A few info
 In the scripts folder there are different launching options depending on your setup... here are some clarification:
 
-- `baseInstall.sh` Install a very resource friendly Xorg environment (tested on **Archlinux**, **Debian testing**, **Artix Linux**)
-- `devInstall.sh` Install other dependencies on top of base needed for my workflow
+- `baseInstall.sh` Install a very resource friendly [Xorg](https://wiki.archlinux.org/title/Xorg) environment (tested on **Archlinux**, **Debian testing**, **Artix Linux**)
+- `devInstall.sh` Install dependencies needed for my workflow (*Requires a base role installation like base, wayland or gnome*)
 - `gnome.sh` It's the base Install but targeted towards Gnome desktop environment (tested on **Pop OS**)
-- `wayland.sh` It's the wayland variant of the base install
+- `wayland.sh` It's the [Wayland](https://wiki.archlinux.org/title/Wayland) variant of the base install
 - `macInstall.sh` **BETA** it's the devInstall targeted towards Apple machines with **MacOS** (issues are welcome)
 
 ### Steps

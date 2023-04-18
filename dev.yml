@@ -20,8 +20,6 @@
   vars:
     dotfiles_branch: "master"
   roles:
-    - base
-    - X11
     - dev
 
 - hosts: all

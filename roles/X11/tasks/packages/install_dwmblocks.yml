@@ -1,13 +1,13 @@
-- name: packages | dwm
+- name: packages | dwmblocks
   become: true
   block:
-    - name: packages | dwm | clone repo
+    - name: packages | dwmblocks | clone repo
       git:
-        repo: https://github.com/dixiedream/dwm
-        dest: /tmp/dwm
+        repo: https://github.com/dixiedream/dwmblocks
+        dest: /tmp/dwmblocks
         force: yes
 
-    - name: packages | dwm | install required dependencies (Debian)
+    - name: packages | dwmblocks | install required dependencies (Debian)
       package:
         name:
           - build-essential
@@ -23,8 +23,8 @@
         state: present
       when: ansible_os_family == "Debian"
 
-    - name: packages | dwm | install
+    - name: packages | dwmblocks | install
       make:
         target: install
-        chdir: /tmp/dwm
+        chdir: /tmp/dwmblocks
   when: ansible_distribution in ["Archlinux", "Artix Linux", "Debian"]
