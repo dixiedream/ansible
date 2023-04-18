@@ -7,6 +7,7 @@
     - import_tasks: packages/install_packages.yml
     - import_tasks: packages/install_libxft.yml
     - import_tasks: packages/install_dwm.yml
+    - import_tasks: packages/install_dwmblocks.yml
     - import_tasks: packages/install_st.yml
     - import_tasks: packages/install_dmenu.yml
     - import_tasks: system_setup/locale.yml
