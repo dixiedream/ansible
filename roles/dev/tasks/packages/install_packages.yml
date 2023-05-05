@@ -4,8 +4,8 @@
     name:
       - docker
       - docker-compose
-      - lazygit
       - npm
+      - sshpass
     state: latest
   when: ansible_system == "Linux"
 

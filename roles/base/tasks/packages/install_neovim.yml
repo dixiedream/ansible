@@ -7,6 +7,13 @@
 
 - name: packages | neovim | install package (ubuntu)
   become: true
-  apt:
-    deb: https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.deb
+  block:
+    - name: packages | neovim | add repo
+      apt_repository:
+        repo: ppa:neovim-ppa/unstable
+
+    - name: packages | neovim | install package (Arch and debian)
+      package:
+        name: neovim
+        state: latest
   when: ansible_distribution in ["Pop!_OS", "Ubuntu"]
