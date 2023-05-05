@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.1.0
+- Base, gnome and dev role re-tested on PopOS
+
 ## 2.0.0
 - [BC] dwmblocks is now the new status bar for Xorg setups
 - Readme cleaning and clearness
