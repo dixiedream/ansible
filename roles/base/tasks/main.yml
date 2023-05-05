@@ -16,6 +16,7 @@
     - import_tasks: packages/install_packages.yml
     - import_tasks: packages/install_pipewire.yml
     - import_tasks: packages/install_neovim.yml
+    - import_tasks: packages/install_lazygit.yml
     - import_tasks: packages/install_lf.yml
     # - import_tasks: packages/install_drivers.yml
     - import_tasks: packages/install_autocpufreq.yml

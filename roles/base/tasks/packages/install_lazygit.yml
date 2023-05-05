@@ -1,0 +1,16 @@
+- name: packages | lazygit
+  become: true
+  block:
+    - name: packages | lazygit | install
+      package:
+        name: lazygit
+        state: latest
+      when: ansible_distribution in ["Artix Linux", "Archlinux", "Debian"]
+
+    - name: packages | lazygit | ubuntu
+      unarchive:
+        src: "https://github.com/jesseduffield/lazygit/releases/download/v{{ lazygit_version }}/lazygit_{{ lazygit_version }}_Linux_x86_64.tar.gz"
+        dest: /usr/local/bin
+        remote_src: yes
+        mode: "0755"
+      when: ansible_distribution in ["Ubuntu", "Pop!_OS"]

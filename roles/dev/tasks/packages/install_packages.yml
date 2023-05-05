@@ -4,11 +4,10 @@
     name:
       - docker
       - docker-compose
-      - lazygit
       - npm
       - sshpass
     state: latest
-  when: ansible_system == "Linux"
+  when: ansible_distribution in ["Artix Linux", "Archlinux", "Debian"]
 
 - name: packages | install required packages (MacOS)
   homebrew:
