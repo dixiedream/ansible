@@ -1,0 +1,28 @@
+- name: gnome | disable unwanted notifications
+  become_user: "{{ user }}"
+  vars:
+    base_key: "/org/gnome/desktop/notifications/application"
+  dconf:
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+  with_items:
+    - { key: "{{ base_key }}/display-im6-q16", value: "false" }
+    - { key: "{{ base_key }}/htop", value: "false" }
+    - { key: "{{ base_key }}/com-github-donadigo-eddy", value: "false" }
+    - { key: "{{ base_key }}/gnome-language-selector", value: "false" }
+    - { key: "{{ base_key }}/gnome-session-properties", value: "false" }
+    - { key: "{{ base_key }}/gucharmap", value: "false" }
+    - { key: "{{ base_key }}/info", value: "false" }
+    - { key: "{{ base_key }}/libreoffice-calc", value: "false" }
+    - { key: "{{ base_key }}/libreoffice-draw", value: "false" }
+    - { key: "{{ base_key }}/libreoffice-impress", value: "false" }
+    - { key: "{{ base_key }}/libreoffice-math", value: "false" }
+    - { key: "{{ base_key }}/libreoffice-startcenter", value: "false" }
+    - { key: "{{ base_key }}/libreoffice-writer", value: "false" }
+    - { key: "{{ base_key }}/org-gnome-calculator", value: "false" }
+    - { key: "{{ base_key }}/org-gnome-contacts", value: "false" }
+    - { key: "{{ base_key }}/org-gnome-font-viewer", value: "false" }
+    - { key: "{{ base_key }}/org-gnome-geary", value: "false" }
+    - { key: "{{ base_key }}/org-gnome-gedit", value: "false" }
+    - { key: "{{ base_key }}/org-pwmt-zathura", value: "false" }
+    - { key: "{{ base_key }}/yelp", value: "false" }
