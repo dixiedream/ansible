@@ -20,7 +20,7 @@
         name: "{{ user }}"
         groups: video
         append: yes
-      when: ansible_distribution == "Debian" and readlink.stdout.find('runit') != -1
+      when: ansible_distribution == "Debian" and "ansible_service_mgr != 'systemd'"
 
     - name: users | "{{ user }}" | add sudoers file
       template:
