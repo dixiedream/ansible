@@ -4,6 +4,7 @@
     - name: packages | debloat Gnome | remove unwanted packages
       apt:
         name:
+          - geary
           - totem
           - evince
         state: absent
