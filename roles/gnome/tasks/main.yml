@@ -4,6 +4,7 @@
     - import_tasks: packages/install_alacritty.yml
     - import_tasks: packages/debloat.yml
     - import_tasks: gnome/disable_extensions.yml
+    - import_tasks: gnome/disable_notifications.yml
     - import_tasks: gnome/appearance.yml
     - import_tasks: gnome/keybindings.yml
     - import_tasks: gnome/input-sources.yml

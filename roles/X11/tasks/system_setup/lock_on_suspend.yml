@@ -7,13 +7,13 @@
         dest: /etc/systemd/system/slock@.service
         owner: root
         group: root
-      when: readlink.stdout.find('systemd') != -1
+      when: "ansible_service_mgr == 'systemd'"
 
     - name: system setup | lock screen on suspend | enable service (Systemd)
       service:
         name: "slock@{{ user }}.service"
         enabled: yes
-      when: readlink.stdout.find('systemd') != -1
+      when: "ansible_service_mgr == 'systemd'"
 
     - name: system setup | lock screen on suspend | copy conf file (Runit)
       template:
@@ -22,5 +22,5 @@
         owner: root
         group: root
         mode: 0700
-      when: readlink.stdout.find('runit') != -1
+      when: "ansible_service_mgr != 'systemd'"
   when: ansible_distribution in ["Archlinux", "Artix Linux", "Debian"]

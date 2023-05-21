@@ -15,14 +15,14 @@
       command: timedatectl set-ntp true
       changed_when: false
       ignore_errors: true
-      when: readlink.stdout.find('systemd') != -1
+      when: "ansible_service_mgr == 'systemd'"
 
     # - name: system setup | locale | set ntp (Artix)
     #   runit:
     #     name: ntpd
     #     state: started
     #     enabled: true
-    #   when: readlink.stdout.find('runit') != -1
+    #   when: "ansible_service_mgr != 'systemd'"
 
     - name: system setup | locale | sync hardware clock and system clock (Archlinux)
       command: hwclock --systohc

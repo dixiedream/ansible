@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.2.0
+- Updated LF version to 30
+- Add Geary to the Gnome debloat stuff
+- Improved check for init process
+- Removed unwanted app notification in Gnome role
+
 ## 2.1.0
 - Base, gnome and dev role re-tested on PopOS
 

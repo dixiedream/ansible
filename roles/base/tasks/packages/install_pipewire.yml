@@ -49,5 +49,5 @@
             line: '{ path = "/usr/bin/wireplumber" args = "" }'
             insertafter: '^context.exec = \['
           when: not pipewireArgs.found
-      when: readlink.stdout.find('runit') != -1
+      when: "ansible_service_mgr != 'systemd'"
   when: ansible_distribution in ["Artix Linux", "Archlinux", "Debian"]
