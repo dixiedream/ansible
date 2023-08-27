@@ -20,7 +20,7 @@
       command: "git --git-dir={{ dotfile_src }} --work-tree='/home/{{ user }}' config remote.origin.url 'git@github.com:dixiedream/dotfiles.git'"
 
     - name: system setup | dotfiles | Setup repo
-      command: "git --git-dir={{ dotfile_src }} --work-tree='/home/{{ user }}' config remote.origin.fetch 'refs/heads/*:refs/remotes/origin/*'"
+      command: "git --git-dir={{ dotfile_src }} --work-tree='/home/{{ user }}' config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'"
 
     - name: system setup | dotfiles | Add pipewire to X autostart (Runit)
       lineinfile:
