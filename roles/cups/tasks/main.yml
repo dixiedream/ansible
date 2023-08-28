@@ -1,7 +1,6 @@
 # Print server
 - name: CUPS | Archlinux
   become: true
-  become_user: "{{ user }}"
   block:
     - name: CUPS | install needed packages
       pacman:
