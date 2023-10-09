@@ -1,0 +1,60 @@
+# Samba share client
+- name: samba
+  become: true
+  block:
+    - name: samba | install client
+      package:
+        name:
+          - smbclient
+        state: latest
+
+    - name: samba | create etc directory
+      file:
+        path: /etc/samba
+        state: directory
+
+    - name: samba | create configuration file
+      file:
+        path: /etc/samba/smb.conf
+        state: touch
+        modification_time: preserve
+        access_time: preserve
+
+    - name: samba | create credential directory
+      file:
+        path: /etc/samba/credentials
+        state: directory
+        owner: root
+        mode: '0700'
+
+    - name: samba | copy credential file
+      template:
+        src: credentials.j2
+        dest: /etc/samba/credentials/share
+        owner: root
+        mode: '0600'
+
+    - name: samba | create localAliases if not found
+      file:
+        path: "/home/{{ user }}/.config/localAliases"
+        state: touch
+        modification_time: preserve
+        access_time: preserve
+        owner: "{{ user }}"
+
+    - name: packages | pipewire | check pipewire.conf
+      lineinfile:
+        path: "/home/{{ user }}/.config/localAliases"
+        regexp: '^alias mount-'
+        state: absent
+      check_mode: yes
+      changed_when: false
+      register: sambaAlias
+
+    - name: samba | add alias example
+      lineinfile:
+        path: "/home/{{ user }}/.config/localAliases"
+        regexp: '^alias mount-'
+        line: 'alias mount-public="sudo mount --mkdir -t cifs //SERVER/sharename /mnt/mountpoint -o iocharset=utf8,credentials=/etc/samba/credentials/share"'
+      when: not sambaAlias.found
+  when: ansible_distribution in ["Archlinux", "Artix Linux"]
