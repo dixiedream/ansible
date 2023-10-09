@@ -1,6 +1,0 @@
-- find a way to make git and file tasks say Ok when already done
-- Enable paccache.timer to clear the package cache weekly
-- If using an SSD, enable fstrim.timer to discard unused blocks periodically
-- Setup a firewall such as ufw or firewalld
-- Install and configure reflector to frequently update the mirrorlist automatically
-- Install a backup kernel like LTS or Zen kernel
