@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.3.0
+- New Samba role for installing client and basic Arch Linux configuration
+
 ## 2.2.0
 - Updated LF version to 30
 - Add Geary to the Gnome debloat stuff
