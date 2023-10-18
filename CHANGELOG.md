@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.4.0
+- Wayland role now installs Hyprland and waybar from official repo instead of AUR
+
 ## 2.3.0
 - New Samba role for installing client and basic Arch Linux configuration
 
