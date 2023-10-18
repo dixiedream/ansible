@@ -21,13 +21,17 @@
         state: latest
 
     - name: packages | install wayland packages | Hyprland
-      become_user: "{{ user }}"
-      shell: yes | yay -S --removemake hyprland-bin
+      package:
+        name:
+          - hyprland
+        state: latest
       when: ansible_distribution in ["Archlinux", "Artix Linux"]
 
     - name: packages | install wayland packages | Waybar
-      become_user: "{{ user }}"
-      shell: yes | yay -S --removemake waybar-hyprland-git
+      package:
+        name:
+          - waybar
+        state: latest
       when: ansible_distribution in ["Archlinux", "Artix Linux"]
 
     - name: packages | install wayland packages | wdisplays
