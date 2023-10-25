@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.5.0
+- Samba role improved using an encrypted vault and better task
+
 ## 2.4.0
 - Wayland role now installs Hyprland and waybar from official repo instead of AUR
 
