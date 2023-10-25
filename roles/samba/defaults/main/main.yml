@@ -1,0 +1,3 @@
+---
+samba_password: "{{ vault_samba_password }}"
+samba_server: "{{ vault_samba_server }}"
