@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.5.1
+- Installed firefox as it is the new default browser for my dotfiles
+- Fixed issue in the dev role which was unable to install gopls lsp dependency
+
 ## 2.5.0
 - Samba role improved using an encrypted vault and better task
 
