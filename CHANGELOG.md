@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.6.0
+- Changed samba password
+
 ## 2.5.1
 - Installed firefox as it is the new default browser for my dotfiles
 - Fixed issue in the dev role which was unable to install gopls lsp dependency
