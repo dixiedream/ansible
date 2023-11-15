@@ -45,8 +45,8 @@
     - name: samba | add alias
       lineinfile:
         path: "/home/{{ user }}/.config/localAliases"
-        regexp: "^alias mount-{{ item }}=\"sudo mount --mkdir -t cifs //{{ samba_server }}/{{ item }} /mnt/fileserver/{{ item }} -o iocharset=utf8,credentials=/etc/samba/credentials/share,uid=1000\""
-        line: "alias mount-{{ item }}=\"sudo mount --mkdir -t cifs //{{ samba_server }}/{{ item }} /mnt/fileserver/{{ item }} -o iocharset=utf8,credentials=/etc/samba/credentials/share,uid=1000\""
+        regexp: "^alias mount-{{ item }}=\"sudo mount --mkdir -t cifs //{{ samba_server }}/{{ item }} /mnt/fileserver/{{ item }} -o iocharset=utf8,credentials=/etc/samba/credentials/share,uid=1000,gid=1001\""
+        line: "alias mount-{{ item }}=\"sudo mount --mkdir -t cifs //{{ samba_server }}/{{ item }} /mnt/fileserver/{{ item }} -o iocharset=utf8,credentials=/etc/samba/credentials/share,uid=1000,gid=1001\""
       with_items:
         - media
         - private
