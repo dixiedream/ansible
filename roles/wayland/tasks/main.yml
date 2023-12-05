@@ -5,4 +5,5 @@
 - name: Linux setup
   block:
     - import_tasks: packages/install_packages.yml
+    - import_tasks: system_setup/kanshi.yml
   when: ansible_system == "Linux"
