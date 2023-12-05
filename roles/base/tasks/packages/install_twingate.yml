@@ -20,4 +20,4 @@
             name: twingate
             update_cache: yes
       when: ansible_os_family == "Debian"
-  when: ansible_form_factor is defined and ansible_form_factor == "Notebook"
+  when: ansible_form_factor is defined and ansible_form_factor in ["Notebook", "Other"]
