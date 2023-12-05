@@ -4,7 +4,12 @@
     - name: packages | debloat Gnome | remove unwanted packages
       apt:
         name:
+          - baobab
+          - eog
           - geary
+          - popsicle
+          - popsicle-gtk
+          - simple-scan
           - totem
           - evince
         state: absent
