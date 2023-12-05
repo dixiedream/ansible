@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.8.0
+- Wayland role now prevent swayidle from going sleep when consuming media content
+- Wayland kanshi config converted as a simple template
+
 ## 2.7.0
 - Install twingate client on notebooks and VMs
 
