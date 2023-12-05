@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.7.0
+- Install twingate client on notebooks and VMs
+
 ## 2.6.0
 - Changed samba password
 
