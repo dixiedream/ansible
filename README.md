@@ -25,6 +25,8 @@ In the scripts folder there are different launching options depending on your se
 - `wayland.sh` It's the [Wayland](https://wiki.archlinux.org/title/Wayland) variant of the base install
 - `macInstall.sh` **BETA** it's the devInstall targeted towards Apple machines with **MacOS** (issues are welcome)
 
+*Other scripts found in the dedicated folder are very specific to my needs and require some tweaks to use*
+
 ### Steps
 1. Change the user var in `group_vars/all.yml` accordingly
 2. Run one of the scripts in `scripts`, for example `sh ./scripts/baseInstall.sh`
