@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.8.1
+- Changed Vue language server package in dev role
+
 ## 2.8.0
 - Wayland role now prevent swayidle from going sleep when consuming media content
 - Wayland kanshi config converted as a simple template
