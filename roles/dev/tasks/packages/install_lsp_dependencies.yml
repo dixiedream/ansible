@@ -38,7 +38,7 @@
 - name: packages | LSP | install Vue Language Server
   npm:
     global: yes
-    name: "@volar/vue-language-server"
+    name: "@vue/language-service"
 
 # Hoping to be a temp fix
 - name: packages | LSP | setup tsserver for volar
