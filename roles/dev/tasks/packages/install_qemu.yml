@@ -5,7 +5,7 @@
       pacman:
         name:
           - dmidecode
-          - qemu
+          - qemu-base
             #- dhclient
           - virt-viewer
           - libvirt
