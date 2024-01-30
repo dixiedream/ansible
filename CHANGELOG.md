@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.8.2
+- Fix wrong package names
+
 ## 2.8.1
 - Changed Vue language server package in dev role
 
