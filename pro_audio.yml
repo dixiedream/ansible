@@ -1,0 +1,36 @@
+---
+- hosts: all
+  become: true
+  pre_tasks:
+    - name: pre-run | update package cache (Pacman)
+      pacman:
+        update_cache: yes
+      changed_when: False
+      when: ansible_distribution in ["Archlinux", "Artix Linux"]
+
+    - name: pre-run | update package cache (Apt)
+      apt:
+        update_cache: yes
+      changed_when: False
+      when: ansible_distribution in ["Debian", "Pop!_OS"]
+
+  # run roles
+- hosts: all
+  roles:
+    - pro_audio
+
+- hosts: all
+  become: true
+  tasks:
+  - name: cleanup package cache (Apt)
+    apt:
+      autoclean: yes
+    changed_when: false
+    when: ansible_distribution in ["Debian", "Pop!_OS"]
+
+  - name: autoremove orphan packages (Apt)
+    apt:
+      autoremove: yes
+      purge: yes
+    when: ansible_distribution in ["Debian", "Pop!_OS"]
+
