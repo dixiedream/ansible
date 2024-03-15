@@ -3,7 +3,9 @@
   block:
     - name: packages | pipewire | ensure pipewire-media-session is not present
       package:
-        name: pipewire-media-session
+        name:
+          - pipewire-media-session
+          - jack2
         state: absent
       ignore_errors: yes
 
@@ -14,6 +16,7 @@
           - pipewire
           - pipewire-alsa
           - pipewire-pulse
+          - pipewire-jack
           - wireplumber
         state: latest
 

@@ -1,5 +1,6 @@
 #!/bin/sh
 
-hostname="${1:-127.0.0.1}"
+hosts=${1:-127.0.0.1}
+output=${2:-facts.json}
 
-ansible $hostname -m ansible.builtin.setup --connection=local
+ansible $hosts -m ansible.builtin.setup > $output

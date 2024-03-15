@@ -1,0 +1,16 @@
+---
+- name: Pro audio
+  become: true
+  block:
+    - name: Pro audio | Install required packages
+      package:
+        name:
+          - reaper
+          - reapack
+
+    - name: Pro audio | Add environment variable
+      lineinfile:
+        dest: "/home/{{ user }}/.zprofile"
+        regexp: '^export PIPEWIRE_LATENCY'
+        line: 'export PIPEWIRE_LATENCY="512/48000"'
+        insertafter: '^# App specs'

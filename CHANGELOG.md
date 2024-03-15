@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.9.0
+- New ProAudio playbook which installs the reaper DAW and setup pipewire with JACK for low latency
+
 ## 2.8.2
 - Fix wrong package names
 
