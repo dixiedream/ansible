@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.9.1
+- Better latency
+
 ## 2.9.0
 - New ProAudio playbook which installs the reaper DAW and setup pipewire with JACK for low latency
 
