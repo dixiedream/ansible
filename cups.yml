@@ -2,19 +2,19 @@
 - hosts: all
   become: true
   pre_tasks:
-    - name: pre-run | update package cache (Pacman)
-      pacman:
-        update_cache: yes
-      changed_when: False
+    - name: pre-run | Update package cache (Pacman)
+      community.general.pacman:
+        update_cache: true
+      changed_when: false
       when: ansible_distribution in ["Archlinux", "Artix Linux"]
 
-    - name: pre-run | update package cache (Apt)
-      apt:
-        update_cache: yes
-      changed_when: False
+    - name: pre-run | Update package cache (Apt)
+      ansible.builtin.apt:
+        update_cache: true
+      changed_when: false
       when: ansible_distribution in ["Debian", "Pop!_OS"]
 
-  # run roles
+# run roles
 - hosts: all
   roles:
     - cups
@@ -22,14 +22,14 @@
 - hosts: all
   become: true
   tasks:
-  - name: cleanup package cache (Apt)
-    apt:
-      autoclean: yes
-    changed_when: false
-    when: ansible_distribution in ["Debian", "Pop!_OS"]
+    - name: Cleanup package cache (Apt)
+      ansible.builtin.apt:
+        autoclean: true
+      changed_when: false
+      when: ansible_distribution in ["Debian", "Pop!_OS"]
 
-  - name: autoremove orphan packages (Apt)
-    apt:
-      autoremove: yes
-      purge: yes
-    when: ansible_distribution in ["Debian", "Pop!_OS"]
+    - name: Autoremove orphan packages (Apt)
+      ansible.builtin.apt:
+        autoremove: true
+        purge: true
+      when: ansible_distribution in ["Debian", "Pop!_OS"]

@@ -11,4 +11,4 @@
       make:
         target: install
         chdir: /tmp/dmenu
-  when: ansible_distribution in ["Debian", "Archlinux", "Artix Linux"]
+  when: ansible_distribution in ["Debian", "Archlinux", "Artix Linux", "Ubuntu"]

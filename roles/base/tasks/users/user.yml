@@ -14,6 +14,7 @@
         append: true
         state: present
         shell: /usr/bin/zsh
+      ignore_errors: true # prevent issues dealing with ldap users
 
     - name: users | "{{ user }}" | ensure "{{ user }}" is in video group (Debian)
       user:
