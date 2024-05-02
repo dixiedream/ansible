@@ -165,4 +165,4 @@
           - vim-tiny
           - w3m
         state: absent
-  when: ansible_distribution in ["Debian", "Ubuntu"]
+  when: ansible_distribution in ["Debian"]
