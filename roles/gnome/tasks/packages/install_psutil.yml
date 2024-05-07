@@ -4,7 +4,7 @@
       become: true
       package:
         # name: python3-pip
-        name: python-psutil
+        name: python3-psutil
         state: latest
 
     # - name: packages | install psutil
