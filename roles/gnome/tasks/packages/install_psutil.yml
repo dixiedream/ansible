@@ -3,10 +3,10 @@
     - name: packages | psutil ensure pip is installed
       become: true
       package:
-        name: python3-pip
+        name: pipx
         state: latest
 
     - name: packages | install psutil
-      pip:
+      pipx:
         name: psutil
   when: ansible_distribution in ["Ubuntu", "Pop!_OS"]
