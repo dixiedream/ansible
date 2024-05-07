@@ -27,4 +27,4 @@
       make:
         target: install
         chdir: /tmp/dwm
-  when: ansible_distribution in ["Archlinux", "Artix Linux", "Debian", "Ubuntu"]
+  when: ansible_system == "Linux"
