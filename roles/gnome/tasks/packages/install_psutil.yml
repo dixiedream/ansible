@@ -1,13 +1,8 @@
 - name: packages | psutil
   block:
-    - name: packages | psutil ensure pip is installed
+    - name: packages | install psutil
       become: true
       package:
-        # name: python3-pip
         name: python3-psutil
         state: latest
-
-    # - name: packages | install psutil
-    #   pip:
-    #     name: psutil
-  when: ansible_distribution in ["Ubuntu", "Pop!_OS"]
+  when: ansible_os_family == "Debian"
