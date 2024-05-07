@@ -7,6 +7,6 @@
         state: latest
 
     - name: packages | install psutil
-      pipx:
+      community.general.pipx:
         name: psutil
   when: ansible_distribution in ["Ubuntu", "Pop!_OS"]
