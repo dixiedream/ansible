@@ -12,7 +12,6 @@
           - playerctl
           - slurp
           - swaybg
-          - swayidle
           - swayimg
           - swaylock
           - wl-clipboard
@@ -24,6 +23,7 @@
       package:
         name:
           - hyprland
+          - hypridle
         state: latest
       when: ansible_distribution in ["Archlinux", "Artix Linux"]
 
@@ -39,7 +39,7 @@
       shell: yes | yay -S --removemake wdisplays
       when: ansible_distribution in ["Archlinux", "Artix Linux"]
 
-    - name: packages | install wayland packages | sway-audio-idle-inhibit-git
-      become_user: "{{ user }}"
-      shell: yes | yay -S --removemake sway-audio-idle-inhibit-git
-      when: ansible_distribution in ["Archlinux", "Artix Linux"]
+    # - name: packages | install wayland packages | sway-audio-idle-inhibit-git
+    #   become_user: "{{ user }}"
+    #   shell: yes | yay -S --removemake sway-audio-idle-inhibit-git
+    #   when: ansible_distribution in ["Archlinux", "Artix Linux"]
