@@ -5,4 +5,10 @@
       package:
         name: alacritty
         state: latest
-  when: ansible_distribution in ["Ubuntu", "Pop!_OS"]
+      when: ansible_distribution in ["Pop!_OS"]
+
+    - name: packages | alacritty | install terminal emulator
+      community.general.snap:
+        name: alacritty
+        state: latest
+      when: ansible_distribution in ["Ubuntu"]

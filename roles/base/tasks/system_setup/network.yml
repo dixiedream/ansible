@@ -5,7 +5,7 @@
       package:
         name: ifupdown
         state: absent
-      when: ansible_distribution == "Debian" and "ansible_service_mgr == 'systemd'"
+      when: ansible_distribution in ["Debian", "Ubuntu"] and "ansible_service_mgr == 'systemd'"
 
     - name: system setup | network | create basic ethernet conf
       copy:
@@ -44,7 +44,7 @@
         state: link
         owner: root
         group: root
-      when: ansible_distribution == "Debian" and "ansible_service_mgr == 'systemd'"
+      when: ansible_distribution in ["Debian", "Ubuntu"] and "ansible_service_mgr == 'systemd'"
 
     - name: system setup | network | symlink systemd network resolv to resolv.con (Archlinux)
       file:
@@ -55,4 +55,4 @@
         group: root
       when: ansible_os_family in ["Archlinux", "Artix Linux"] and "ansible_service_mgr == 'systemd'"
       ignore_errors: yes
-  when: ansible_distribution in ["Archlinux", "Artix Linux", "Debian"]
+  when: ansible_distribution in ["Archlinux", "Artix Linux", "Debian", "Ubuntu"]

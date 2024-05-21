@@ -46,7 +46,7 @@
           - "{{ noto_fonts_emoji_package }}"
           - "{{ wpa_supplicant_package }}"
         state: latest
-      when: ansible_distribution in ["Archlinux", "Artix Linux", "Debian"]
+      when: ansible_distribution in ["Archlinux", "Artix Linux", "Debian", "Ubuntu"]
 
     - name: packages | install Pacman Contrib package (Archlinux)
       pacman:
@@ -69,4 +69,4 @@
           - bluez-firmware
           - libspa-0.2-bluetooth
         state: latest
-      when: ansible_distribution == "Debian"
+      when: ansible_os_family in ["Debian"]

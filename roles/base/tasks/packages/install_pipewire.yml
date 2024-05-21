@@ -5,7 +5,6 @@
       package:
         name:
           - pipewire-media-session
-          - jack2
         state: absent
       ignore_errors: yes
 
@@ -16,7 +15,6 @@
           - pipewire
           - pipewire-alsa
           - pipewire-pulse
-          - pipewire-jack
           - wireplumber
         state: latest
 

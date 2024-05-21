@@ -23,4 +23,4 @@
         group: root
         mode: 0700
       when: "ansible_service_mgr != 'systemd'"
-  when: ansible_distribution in ["Archlinux", "Artix Linux", "Debian"]
+  when: ansible_distribution in ["Archlinux", "Artix Linux", "Debian", "Ubuntu"]

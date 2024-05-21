@@ -6,4 +6,4 @@
     owner: root
     group: root
     mode: 0644
-  when: ansible_distribution in ["Archlinux", "Artix Linux", "Debian"]
+  when: ansible_distribution in ["Archlinux", "Artix Linux", "Debian", "Ubuntu"]
