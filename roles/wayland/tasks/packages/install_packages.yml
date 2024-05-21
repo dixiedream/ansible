@@ -15,8 +15,7 @@
           - swayimg
           - swaylock
           - wl-clipboard
-          - xdg-desktop-portal
-          - xdg-desktop-portal-wlr
+          # - xdg-desktop-portal-wlr
         state: latest
 
     - name: packages | install wayland packages | Hyprland
@@ -24,6 +23,7 @@
         name:
           - hyprland
           - hypridle
+          - xdg-desktop-portal-hyprland
         state: latest
       when: ansible_distribution in ["Archlinux", "Artix Linux"]
 
