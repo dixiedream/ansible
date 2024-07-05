@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.10.0
+- Initial Ubuntu support
+- Install `python-passlib` for ansible password hashing
+- Cleaning and refactoring
+
 ## 2.9.1
 - Better latency
 

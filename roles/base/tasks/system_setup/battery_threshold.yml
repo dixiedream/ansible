@@ -53,4 +53,4 @@
         enabled: yes
       ignore_errors: true
       when: ansible_system_vendor == "LENOVO" and ansible_distribution in ["Archlinux", "Artix Linux"] and "ansible_service_mgr == 'systemd'"
-  when: ansible_form_factor is defined and ansible_form_factor == "Notebook" and ansible_distribution != 'Pop!_OS'
+  when: ansible_form_factor is defined and ansible_form_factor == "Notebook" and ansible_distribution not in ['Pop!_OS', 'Ubuntu']

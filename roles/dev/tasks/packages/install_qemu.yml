@@ -6,14 +6,11 @@
         name:
           - dmidecode
           - qemu-base
-            #- dhclient
           - virt-viewer
           - libvirt
           - dnsmasq
-          # - ebtables
           - virt-install
           - virt-manager
-          # - bridge-utils
         state: present
       when: ansible_os_family in ["Archlinux", "Artix Linux"]
 
@@ -23,15 +20,12 @@
           - qemu-system
           - qemu-utils
           - qemu-kvm
-            #- dhclient
           - virt-viewer
           - libvirt-clients
           - libvirt-daemon-system
           - dnsmasq
-          # - ebtables
           - virtinst
           - virt-manager
-          # - bridge-utils
         state: present
       when: ansible_distribution in ["Debian", "Pop!_OS"]
 

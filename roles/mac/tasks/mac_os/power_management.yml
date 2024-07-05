@@ -1,34 +1,30 @@
-- name: system setup | enable lid wakeup
+---
+- name: system setup | Enable lid wakeup
   become: true
-  command: pmset -a lidwake 1
-
-- name: system setup | sleep the display after 15 minutes
+  ansible.builtin.command: pmset -a lidwake 1
+- name: system setup | Sleep the display after 15 minutes
   become: true
-  command: pmset -a displaysleep 15
-
-- name: system setup | disable machine sleep while charging
+  ansible.builtin.command: pmset -a displaysleep 15
+- name: system setup | Disable machine sleep while charging
   become: true
-  command: pmset -c sleep 0
-
-- name: system setup | set machine sleep to 5 minutes on battery
+  ansible.builtin.command: pmset -c sleep 0
+- name: system setup | Set machine sleep to 5 minutes on battery
   become: true
-  command: pmset -b sleep 5
-
-- name: system setup | disable hibernation
+  ansible.builtin.command: pmset -b sleep 5
+- name: system setup | Disable hibernation
   become: true
-  command: pmset -a hibernatemode 0
-
-- name: system setup | remove sleep image file
+  ansible.builtin.command: pmset -a hibernatemode 0
+- name: system setup | Remove sleep image file
   become: true
-  command: rm /private/var/vm/sleepimage
+  ansible.builtin.command: rm /private/var/vm/sleepimage
   ignore_errors: true
 
-- name: system setup | create 0 byte file instead
+- name: system setup | Create 0 byte file instead
   become: true
-  command: touch /private/var/vm/sleepimage
+  ansible.builtin.command: touch /private/var/vm/sleepimage
   args:
     creates: /private/var/vm/sleepimage
 
-- name: system setup | setup permission for sleepimage
+- name: system setup | Setup permission for sleepimage
   become: true
-  command: chflags uchg /private/var/vm/sleepimage
+  ansible.builtin.command: chflags uchg /private/var/vm/sleepimage

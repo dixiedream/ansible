@@ -11,7 +11,7 @@
       - libtool
       - xutils-dev
     state: latest
-  when: ansible_distribution == "Debian"
+  when: ansible_distribution in ["Debian", "Ubuntu"]
 
 - name: packages | clone libxft patched version (Debian)
   become: true
@@ -19,7 +19,7 @@
     repo: https://gitlab.freedesktop.org/xorg/lib/libxft.git
     dest: /tmp/libxft-bgra
     force: yes
-  when: ansible_distribution == "Debian"
+  when: ansible_distribution in ["Debian", "Ubuntu"]
 #
 #
 #git clone https://gitlab.freedesktop.org/xorg/lib/libxft.git

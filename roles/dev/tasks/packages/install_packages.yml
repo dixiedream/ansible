@@ -9,6 +9,13 @@
     state: latest
   when: ansible_system == "Linux"
 
+- name: packages | enable Docker buildx (ArchLinux)
+  become: true
+  package:
+    name: docker-buildx
+    state: latest
+  when: ansible_distribution in ["Artix Linux", "Archlinux"]
+
 - name: packages | install required packages (MacOS)
   homebrew:
     name:
