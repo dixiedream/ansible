@@ -1,5 +1,7 @@
 - name: ansible setup | ensure ansible is the latest version
   become: true
   package:
-    name: ansible
+    name:
+      - ansible
+      - python-passlib # Used to create password hashes in ansible
     state: latest
