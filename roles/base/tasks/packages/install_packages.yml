@@ -26,6 +26,7 @@
           - s-tui
           - "{{ unrar_package }}"
           - unzip
+          - usbutils
           - yt-dlp
           - zathura
           - "{{ zathura_pdf_support_package }}"
