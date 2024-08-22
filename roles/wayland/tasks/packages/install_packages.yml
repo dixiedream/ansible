@@ -4,7 +4,7 @@
     - name: packages | install wayland packages
       package:
         name:
-          - alacritty
+          - foot
           - bemenu-wayland
           - dunst
           - grim
