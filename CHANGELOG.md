@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.11.0
+- Ditched `alacritty` in favor of `foot`
+- Installed `usb-utils` for the `ls-usb` command
+
 ## 2.10.0
 - Initial Ubuntu support
 - Install `python-passlib` for ansible password hashing
