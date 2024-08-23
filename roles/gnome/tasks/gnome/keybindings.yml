@@ -31,7 +31,7 @@
         value: "{{ item.value }}"
       with_items:
         - { key: "{{ base_key }}/binding", value: "'<Super>n'" }
-        - { key: "{{ base_key }}/command", value: "'alacritty -e lf'" }
+        - { key: "{{ base_key }}/command", value: "'foot -e lf'" }
         - { key: "{{ base_key }}/name", value: "'LF'" }
 
     - name: gnome | keybindings | window management
