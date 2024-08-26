@@ -4,28 +4,27 @@
     - name: packages | qemu | install required packages (Archlinux)
       pacman:
         name:
-          - dmidecode
           - qemu-base
-          - virt-viewer
           - libvirt
-          - dnsmasq
           - virt-install
           - virt-manager
+          - virt-viewer
+          - edk2-ovmf
+          - swtpm
         state: present
       when: ansible_os_family in ["Archlinux", "Artix Linux"]
 
     - name: packages | qemu | install required packages (Debian)
       apt:
         name:
-          - qemu-system
-          - qemu-utils
-          - qemu-kvm
-          - virt-viewer
-          - libvirt-clients
+          - qemu-system-x86
           - libvirt-daemon-system
-          - dnsmasq
           - virtinst
           - virt-manager
+          - virt-viewer
+          - qemu-utils
+          - ovmf
+          - swtpm
         state: present
       when: ansible_distribution in ["Debian", "Pop!_OS"]
 
