@@ -9,23 +9,10 @@
           - virt-install
           - virt-manager
           - virt-viewer
-          # New tutorial
           - edk2-ovmf
           - swtpm
-          # - qemu-img
-          # - guestfs-tools
-          # - libosinfo
-          # OLD
-          # - dnsmasq
-          # - dmidecode
         state: present
       when: ansible_os_family in ["Archlinux", "Artix Linux"]
-
-    # new tutorial
-    - name: packages | qemu | install tuned (Archlinux)
-      become_user: "{{ user }}"
-      shell: yes | yay -S --removemake tuned
-      when: ansible_distribution in ["Archlinux", "Artix Linux"]
 
     - name: packages | qemu | install required packages (Debian)
       apt:
@@ -36,16 +23,8 @@
           - virt-manager
           - virt-viewer
           - qemu-utils
-          # New tutorial
-          # - guestfs-tools
-          # - libosinfo-bin
-          # - tuned
           - ovmf
           - swtpm
-          # OLD
-          # - libvirt-clients
-          # - qemu-kvm
-          # - dnsmasq
         state: present
       when: ansible_distribution in ["Debian", "Pop!_OS"]
 
