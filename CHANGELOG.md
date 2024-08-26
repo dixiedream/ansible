@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.12.0
+- Fixed QEMU network not working on Arch
+
 ## 2.11.0
 - Ditched `alacritty` in favor of `foot`
 - Installed `usb-utils` for the `ls-usb` command
