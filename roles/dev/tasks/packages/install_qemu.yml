@@ -42,8 +42,8 @@
           # - tuned
           - ovmf
           - swtpm
-          # - libvirt-clients
           # OLD
+          # - libvirt-clients
           # - qemu-kvm
           # - dnsmasq
         state: present
