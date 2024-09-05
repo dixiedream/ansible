@@ -28,5 +28,6 @@ In the scripts folder there are different launching options depending on your se
 *Other scripts found in the dedicated folder are very specific to my needs and require some tweaks to use*
 
 ### Steps
-1. Change the user var in `group_vars/all.yml` accordingly
-2. Run one of the scripts in `scripts`, for example `sh ./scripts/baseInstall.sh`
+- Create a vault key file in your home at `~/.config/ansible` with your decrypt password. If you don't want to use secrets just comment the line in `ansible.cfg` file
+- Change the user var in `group_vars/all.yml` accordingly
+- Run one of the scripts in `scripts`, for example `sh ./scripts/baseInstall.sh`
