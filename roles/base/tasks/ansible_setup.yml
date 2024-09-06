@@ -3,5 +3,5 @@
   package:
     name:
       - ansible
-      - python-passlib # Used to create password hashes in ansible
+      - "{{ python_passlib_package }}" # Used to create password hashes in ansible
     state: latest
