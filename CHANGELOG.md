@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.13.1
+- Fixed issue with aur installation
+
 ## 2.13.0
 - Easy AUR helper switch using variables (tested with `yay` and `paru`)
 - Better latency set for pro-audio role

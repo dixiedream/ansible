@@ -1,5 +1,5 @@
 - name: packages | AUR helper
-  become: true
+  become_user: "{{ user }}"
   block:
     - name: packages | AUR helper | check if already cloned
       stat:
