@@ -1,5 +1,6 @@
 # Common vars
 sudo_group: wheel
+aur_helper_name: yay
 
 # Package names
 acpi_call_package: acpi_call
