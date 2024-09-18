@@ -25,5 +25,5 @@
 # Printers specific stuff
 - name: Canon MG3650 | Archlinux
   become_user: "{{ user }}"
-  shell: yay -S --noconfirm --removemake cnijfilter2-mg3600
+  shell: "{{ aur_helper_name }} -S --noconfirm --removemake cnijfilter2-mg3600"
   when: ansible_distribution in ["Archlinux", "Artix Linux"]

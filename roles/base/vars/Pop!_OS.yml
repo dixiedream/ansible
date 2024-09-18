@@ -6,5 +6,6 @@ amd_microcode_package: amd64-microcode
 fd_package: fd-find
 intel_microcode_package: intel-microcode
 openssh_package: openssh-client
+python_passlib_package: python3-passlib
 unrar_package: unrar
 zathura_pdf_support_package: zathura-pdf-poppler

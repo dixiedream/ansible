@@ -11,6 +11,7 @@ libnotify_package: libnotify-bin
 noto_fonts_package: fonts-noto
 noto_fonts_emoji_package: fonts-noto-color-emoji
 openssh_package: openssh-client
+python_passlib_package: python3-passlib
 unrar_package: unrar-free
 wpa_supplicant_package: wpasupplicant
 zathura_pdf_support_package: zathura-pdf-poppler

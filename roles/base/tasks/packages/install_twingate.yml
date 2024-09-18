@@ -3,7 +3,7 @@
   block:
     - name: packages | twingate | install package (Archlinux)
       become_user: "{{ user }}"
-      shell: yay -S --noconfirm --removemake twingate-client
+      shell: "{{ aur_helper_name }} -S --noconfirm --removemake twingate-client"
       when: ansible_distribution in ["Archlinux", "Artix Linux"]
 
     - name: packages | twingate | debian

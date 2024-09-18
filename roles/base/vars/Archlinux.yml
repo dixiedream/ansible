@@ -1,5 +1,6 @@
 # Common vars
 sudo_group: wheel
+aur_helper_name: yay
 
 # Package names
 acpi_call_package: acpi_call
@@ -11,6 +12,7 @@ libnotify_package: libnotify
 noto_fonts_package: noto-fonts
 noto_fonts_emoji_package: noto-fonts-emoji
 openssh_package: openssh
+python_passlib_package: python-passlib
 unrar_package: unrar
 wpa_supplicant_package: wpa_supplicant
 zathura_pdf_support_package: zathura-pdf-mupdf

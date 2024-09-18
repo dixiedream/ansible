@@ -5,6 +5,7 @@
     - name: Pro audio | Install required packages
       package:
         name:
+          - pipewire-jack
           - reaper
           - reapack
 
@@ -12,5 +13,5 @@
       lineinfile:
         dest: "/home/{{ user }}/.zprofile"
         regexp: '^export PIPEWIRE_LATENCY'
-        line: 'export PIPEWIRE_LATENCY="256/48000"'
+        line: 'export PIPEWIRE_LATENCY="128/48000"'
         insertafter: '^# App specs'

@@ -35,5 +35,5 @@
 
     - name: packages | install wayland packages | wdisplays
       become_user: "{{ user }}"
-      shell: yes | yay -S --removemake wdisplays
+      shell: "yes | {{ aur_helper_name }} -S --removemake wdisplays"
       when: ansible_distribution in ["Archlinux", "Artix Linux"]
