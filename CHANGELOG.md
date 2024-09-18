@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.13.0
+- Easy AUR helper switch using variables (tested with `yay` and `paru`)
+- Better latency set for pro-audio role
+- `python-passlib` support for Debian based distros
+
 ## 2.12.0
 - Fixed QEMU network not working on Arch
 
