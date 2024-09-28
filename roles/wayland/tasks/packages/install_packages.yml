@@ -13,7 +13,6 @@
           - slurp
           - swaybg
           - swayimg
-          - swaylock
           - wl-clipboard
         state: latest
 
@@ -22,6 +21,7 @@
         name:
           - hyprland
           - hypridle
+          - hyprlock
           - xdg-desktop-portal-hyprland
         state: latest
       when: ansible_distribution in ["Archlinux", "Artix Linux"]
