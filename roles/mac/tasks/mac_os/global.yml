@@ -8,13 +8,23 @@
     key: reduceTransparency
     type: bool
     value: true
+  ignore_errors: true
 
-- name: system setup | reduce motion
+- name: system setup | reduce motion (Yosemite)
   osx_defaults:
     domain: com.apple.universalaccess
     key: reduceMotion
     type: bool
     value: true
+  ignore_errors: true
+
+- name: system setup | reduce motion (Monterey and later)
+  osx_defaults:
+    domain: com.apple.Accessibility
+    key: reduceMotionEnabled
+    type: bool
+    value: true
+  ignore_errors: true
 
 # - name: system setup | set highlight color to green
 #   osx_defaults:
