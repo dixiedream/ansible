@@ -1,0 +1,8 @@
+- name: mac os | aerospace
+  block:
+    - name: mac os | aerospace | install cask
+      command: "brew install --cask {{ item }}"
+      with_items:
+          - nikitabobko/tap/aerospace
+      ignore_errors: true
+

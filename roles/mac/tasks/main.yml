@@ -1,6 +1,6 @@
 - name: MacOS Setup
   block:
-    - import_tasks: mac_os/install_brews.yml
+    - import_tasks: packages/install_brews.yml
     - import_tasks: mac_os/activity_monitor.yml
     - import_tasks: mac_os/address_book.yml
     - import_tasks: mac_os/dashboard.yml

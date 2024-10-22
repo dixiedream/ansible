@@ -9,14 +9,11 @@
       - jq
       - lf
       - ncdu
-      - neofetch
       - neovim
       - p7zip
       - ripgrep
-      - koekeishiya/formulae/skhd
       - unar
       - unzip
-      - koekeishiya/formulae/yabai
       - yt-dlp
       - zip
       - zsh
@@ -33,12 +30,3 @@
       - the-unarchiver
       - transmission
   ignore_errors: true
-
-- name: mac os | start required brews
-  command: "brew services start {{ item }}"
-  with_items:
-    - skhd
-    - yabai
-  changed_when: false
-  ignore_errors: true
-
