@@ -6,3 +6,8 @@
           - nikitabobko/tap/aerospace
       ignore_errors: true
 
+    - name: mac os | aerospace | copy configuration
+      copy:
+        src: packages/aerospace-config.toml
+        dest: "$HOME/.config/aerospace/aerospace.toml"
+
