@@ -9,8 +9,8 @@
     - import_tasks: mac_os/dock.yml
     - import_tasks: mac_os/finder.yml
     - import_tasks: mac_os/font.yml
-    # - import_tasks: mac_os/global.yml
-    # - import_tasks: mac_os/hot_corners.yml
+    - import_tasks: mac_os/global.yml
+    - import_tasks: mac_os/hot_corners.yml
     - import_tasks: mac_os/locale.yml
     - import_tasks: mac_os/mac_app_store.yml
     - import_tasks: mac_os/mail.yml
@@ -18,11 +18,9 @@
     - import_tasks: mac_os/photos.yml
     # - import_tasks: mac_os/power_management.yml
     - import_tasks: mac_os/quicktime.yml
-    # - import_tasks: mac_os/safari.yml
     # - import_tasks: mac_os/screen.yml
     # - import_tasks: mac_os/spotlight.yml
     - import_tasks: mac_os/tap_to_click.yml
-    # - import_tasks: mac_os/terminal.yml
     - import_tasks: mac_os/text_edit.yml
     - import_tasks: mac_os/time_machine.yml
 

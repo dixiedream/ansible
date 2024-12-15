@@ -21,7 +21,7 @@
 - name: system setup | reduce motion (Monterey and later)
   osx_defaults:
     domain: com.apple.Accessibility
-    key: reduceMotionEnabled
+    key: ReduceMotionEnabled
     type: bool
     value: true
   ignore_errors: true
