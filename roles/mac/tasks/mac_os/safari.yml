@@ -5,12 +5,12 @@
 #     type: bool
 #     value: false
 
-- name: system setup | safari | Privacy | disable search suggestions
-  osx_defaults:
-    domain: com.apple.Safari
-    key: SuppressSearchSuggestions
-    type: bool
-    value: true
+# - name: system setup | safari | Privacy | disable search suggestions
+#   osx_defaults:
+#     domain: com.apple.Safari
+#     key: SuppressSearchSuggestions
+#     type: bool
+#     value: true
 
 - name: system setup | safari | Press Tab to highlight each item on a web page
   command: "{{ item }}"
