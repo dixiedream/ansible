@@ -29,7 +29,6 @@
       - firefox
       - mpv
       - onyx
-      - spacelauncher
       - the-unarchiver
       - transmission
   ignore_errors: true
