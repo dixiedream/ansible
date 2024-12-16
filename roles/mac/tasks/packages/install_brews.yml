@@ -7,6 +7,7 @@
       - gzip
       - htop
       - jq
+      - lazygit
       - lf
       - ncdu
       - neovim
@@ -25,6 +26,7 @@
       - alacritty
       - appcleaner
       - brave-browser
+      - firefox
       - mpv
       - onyx
       - the-unarchiver
