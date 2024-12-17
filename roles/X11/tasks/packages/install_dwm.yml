@@ -27,4 +27,4 @@
       make:
         target: install
         chdir: /tmp/dwm
-  when: ansible_system == "Linux"
+  when: ansible_system == "Linux" and (x11_install_type is not defined or x11_install_type == 'wm')

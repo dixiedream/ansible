@@ -11,4 +11,4 @@
       make:
         target: install
         chdir: /tmp/dmenu
-  when: ansible_distribution in ["Debian", "Archlinux", "Artix Linux", "Ubuntu"]
+  when: ansible_system == "Linux" and (x11_install_type is not defined or x11_install_type == 'wm')

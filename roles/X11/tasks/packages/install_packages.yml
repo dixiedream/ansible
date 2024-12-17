@@ -6,30 +6,31 @@
         name:
           - sxiv
         state: latest
-      when: ansible_distribution in ["Ubuntu", "Pop!_OS"]
 
-    - name: packages | install window managers required packages
-      package:
-        name:
-          - arandr
-          - autorandr
-          - dunst
-          - maim
-          - slock
-          - sxiv
-          - unclutter
-          - xclip
-          - xcompmgr
-          - "{{ xorg_server_package }}"
-          - "{{ xorg_xinit_package }}"
-          - "{{ xorg_xrandr_package }}"
-          - xwallpaper
-        state: latest
-      when: ansible_distribution in ["Archlinux", "Artix Linux", "Debian", "Ubuntu"]
+    - name: packages | window manager
+      when: x11_install_type is not defined or x11_install_type == 'wm'
+      block:
+        - name: packages | install window managers required packages
+          package:
+            name:
+              - arandr
+              - autorandr
+              - dunst
+              - maim
+              - slock
+              - unclutter
+              - xclip
+              - xcompmgr
+              - "{{ xorg_server_package }}"
+              - "{{ xorg_xinit_package }}"
+              - "{{ xorg_xrandr_package }}"
+              - xwallpaper
+            state: latest
+          when: ansible_distribution in ["Archlinux", "Artix Linux", "Debian", "Ubuntu"]
 
-    - name: packages | install Xsetroot (Archlinux)
-      pacman:
-        name:
-          - xorg-xsetroot
-        state: latest
-      when: ansible_distribution in ["Archlinux", "Artix Linux"]
+        - name: packages | install Xsetroot (Archlinux)
+          pacman:
+            name:
+              - xorg-xsetroot
+            state: latest
+          when: ansible_distribution in ["Archlinux", "Artix Linux"]
