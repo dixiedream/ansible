@@ -1,12 +1,14 @@
 - name: gnome | disable extensions
   become_user: "{{ user }}"
   block:
-    - name: gnome | disable extensions | remove desktop icons
+    - name: gnome | disable extensions | remove desktop icons and dock
       vars:
         base_key: "/org/gnome/shell"
       dconf:
         key: "{{ item.key }}"
         value: "{{ item.value }}"
       with_items:
-        - { key: "{{ base_key }}/disabled-extensions", value: "['ding@rastersoft.com']" }
+        - { key: "{{ base_key }}/disabled-extensions", value: "['ding@rastersoft.com','ubuntu-dock@ubuntu.com']" }
         - { key: "{{ base_key }}/enable-animations", value: "false" }
+        - { key: "{{ base_key }}/favorite-apps", value: "@as []" }
+

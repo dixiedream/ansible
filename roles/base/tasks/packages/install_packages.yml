@@ -9,7 +9,6 @@
           - bleachbit
           - dosfstools
           - exfatprogs
-          - firefox
           - fzf
           - gzip
           - htop

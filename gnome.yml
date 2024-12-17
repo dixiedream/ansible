@@ -19,7 +19,10 @@
     dotfiles_branch: "master"
   roles:
     - base
-    - X11
+    # - role: X11
+    #   x11_install_type: gnome
+    - role: wayland
+      wayland_install_type: gnome
     - gnome
 
 - hosts: all

@@ -4,6 +4,7 @@
 ---
 - name: system setup | kanshi
   become_user: "{{ user }}"
+  when: wayland_install_type is not defined or wayland_install_type == 'wm'
   block:
     - name: system setup | kanshi | create config template
       blockinfile:
