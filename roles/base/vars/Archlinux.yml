@@ -7,7 +7,6 @@ acpi_call_package: acpi_call
 amd_microcode_package: amd-ucode
 bluez_utils_package: bluez-utils
 fd_package: fd
-firefox_package: firefox
 intel_microcode_package: intel-ucode
 libnotify_package: libnotify
 noto_fonts_package: noto-fonts
