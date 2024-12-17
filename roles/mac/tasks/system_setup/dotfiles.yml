@@ -18,4 +18,11 @@
 
     - name: system setup | dotfiles | Setup repo
       command: "git --git-dir=$HOME/.cfg --work-tree=$HOME config remote.origin.fetch 'refs/heads/*:refs/remotes/origin/*'"
+
+    - name: system setup | enable home brew binaries on zsh
+      lineinfile:
+        dest: "/home/{{ user }}/.config/zsh/.zshrc"
+        regexp: '^eval "$(/opt/homebrew/bin/brew shellenv)"'
+        line: 'eval "$(/opt/homebrew/bin/brew shellenv)"'
+        insertafter: '^_comp_options'
   when: ansible_system == "Darwin"

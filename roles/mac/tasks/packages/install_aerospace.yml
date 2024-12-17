@@ -1,0 +1,18 @@
+- name: mac os | aerospace
+  block:
+    - name: mac os | aerospace | install cask
+      command: "brew install --cask {{ item }}"
+      with_items:
+          - nikitabobko/tap/aerospace
+      ignore_errors: true
+
+    - name: mac os | aerospace | create conf directory
+      file:
+        path: "$HOME/.config/aerospace"
+        state: directory
+
+    - name: mac os | aerospace | copy configuration
+      copy:
+        src: packages/aerospace-config.toml
+        dest: "$HOME/.config/aerospace/aerospace.toml"
+
