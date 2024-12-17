@@ -1,8 +1,9 @@
 - name: packages | debloat Ubuntu
+  become: true
   block:
     - name: packages | debloat Ubuntu | remove snaps
-      snap:
-        name:
+      command: "snap remove --purge {{ item }}"
+      with_items:
           - firefox
           - snap-store
           - firmware-updater
@@ -12,16 +13,27 @@
           - bare
           - core22
           - snapd
-        state: absent
+
+    # - name: packages | debloat Ubuntu | remove snaps
+    #   snap:
+    #     name:
+    #       - firefox
+    #       - snap-store
+    #       - firmware-updater
+    #       - gnome-42-2204
+    #       - gtk-common-themes
+    #       - snapd-desktop-integration
+    #       - bare
+    #       - core22
+    #       - snapd
+    #     state: absent
 
     - name: packages | debloat Ubuntu | remove snapd
-      become: true
       apt:
         name: snapd
         state: absent
 
     - name: packages | debloat Ubuntu | prevent snap reinstall
-      become: true
       ansible.builtin.copy:
         src: nosnap.pref
         dest: /etc/apt/preferences.d/nosnap.pref
