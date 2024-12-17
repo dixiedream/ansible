@@ -21,7 +21,7 @@
 
         - name: Set apt preferences for Firefox
           ansible.builtin.copy:
-            src: firefox-apt-preferences
+            src: packages/firefox-apt-preferences
             dest: /etc/apt/preferences.d/mozilla-firefox
             owner: root
             group: root
