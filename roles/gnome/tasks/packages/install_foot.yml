@@ -5,10 +5,4 @@
       package:
         name: foot
         state: latest
-      when: ansible_distribution in ["Pop!_OS"]
-
-    - name: packages | foot | install terminal emulator
-      community.general.snap:
-        name: foot
-        state: latest
-      when: ansible_distribution in ["Ubuntu"]
+      when: ansible_distribution in ["Pop!_OS", "Ubuntu"]
