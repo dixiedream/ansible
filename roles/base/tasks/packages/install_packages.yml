@@ -9,7 +9,7 @@
           - bleachbit
           - dosfstools
           - exfatprogs
-          - firefox
+          - "{{ firefox_package }}"
           - fzf
           - gzip
           - htop

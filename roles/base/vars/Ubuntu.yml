@@ -4,7 +4,7 @@ sudo_group: sudo
 # Package names
 amd_microcode_package: amd64-microcode
 fd_package: fd-find
-firefox_package: firefox
+firefox_package: firefox-esr
 intel_microcode_package: intel-microcode
 openssh_package: openssh-client
 python_passlib_package: python3-passlib
