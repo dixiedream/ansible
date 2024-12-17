@@ -20,3 +20,12 @@
       with_items:
         - { key: "{{ base_key }}/night-light-enabled", value: "true" }
         - { key: "{{ base_key }}/night-light-temperature", value: "uint32 3223" }
+
+    - name: gnome | appearance | auto hide sidebar
+      vars:
+        base_key: "/org/gnome/shell/extensions/dash-to-dock"
+      dconf:
+        key: "{{ item.key }}"
+        value: "{{ item.value }}"
+      with_items:
+        - { key: "{{ base_key }}/dock-fixed", value: "false" }

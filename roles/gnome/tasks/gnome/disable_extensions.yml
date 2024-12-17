@@ -11,11 +11,3 @@
         - { key: "{{ base_key }}/disabled-extensions", value: "['ding@rastersoft.com']" }
         - { key: "{{ base_key }}/enable-animations", value: "false" }
 
-    - name: gnome | disable extensions | auto hide sidebar
-      vars:
-        base_key: "/org/gnome/shell/extensions/dash-to-dock"
-      dconf:
-        key: "{{ item.key }}"
-        value: "{{ item.value }}"
-      with_items:
-        - { key: "{{ base_key }}/dock-fixed", value: "false" }
