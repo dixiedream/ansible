@@ -1,5 +1,4 @@
 - name: packages | debloat Ubuntu
-  become: true
   block:
     - name: packages | debloat Ubuntu | remove snaps
       snap:
@@ -16,11 +15,13 @@
         state: absent
 
     - name: packages | debloat Ubuntu | remove snapd
+      become: true
       apt:
         name: snapd
         state: absent
 
     - name: packages | debloat Ubuntu | prevent snap reinstall
+      become: true
       ansible.builtin.copy:
         src: nosnap.pref
         dest: /etc/apt/preferences.d/nosnap.pref
