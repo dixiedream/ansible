@@ -14,20 +14,6 @@
           - core22
           - snapd
 
-    # - name: packages | debloat Ubuntu | remove snaps
-    #   snap:
-    #     name:
-    #       - firefox
-    #       - snap-store
-    #       - firmware-updater
-    #       - gnome-42-2204
-    #       - gtk-common-themes
-    #       - snapd-desktop-integration
-    #       - bare
-    #       - core22
-    #       - snapd
-    #     state: absent
-
     - name: packages | debloat Ubuntu | remove snapd
       apt:
         name: snapd
@@ -35,6 +21,6 @@
 
     - name: packages | debloat Ubuntu | prevent snap reinstall
       ansible.builtin.copy:
-        src: nosnap.pref
+        src: packages/nosnap.pref
         dest: /etc/apt/preferences.d/nosnap.pref
   when: ansible_distribution in ["Ubuntu"]
