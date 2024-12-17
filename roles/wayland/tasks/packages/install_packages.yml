@@ -5,35 +5,43 @@
       package:
         name:
           - foot
-          - bemenu-wayland
-          - dunst
-          - grim
-          - kanshi
-          - playerctl
-          - slurp
-          - swaybg
-          - swayimg
-          - wl-clipboard
         state: latest
 
-    - name: packages | install wayland packages | Hyprland
-      package:
-        name:
-          - hyprland
-          - hypridle
-          - hyprlock
-          - xdg-desktop-portal-hyprland
-        state: latest
-      when: ansible_distribution in ["Archlinux", "Artix Linux"]
+    - name: packages | install wayland wm packages
+      when: wayland_install_type is not defined or wayland_install_type == 'wm'
+      block:
+        - name: packages | install wayland packages
+          package:
+            name:
+              - bemenu-wayland
+              - dunst
+              - grim
+              - kanshi
+              - playerctl
+              - slurp
+              - swaybg
+              - swayimg
+              - wl-clipboard
+            state: latest
 
-    - name: packages | install wayland packages | Waybar
-      package:
-        name:
-          - waybar
-        state: latest
-      when: ansible_distribution in ["Archlinux", "Artix Linux"]
+        - name: packages | install wayland packages | Hyprland
+          package:
+            name:
+              - hyprland
+              - hypridle
+              - hyprlock
+              - xdg-desktop-portal-hyprland
+            state: latest
+          when: ansible_distribution in ["Archlinux", "Artix Linux"]
 
-    - name: packages | install wayland packages | wdisplays
-      become_user: "{{ user }}"
-      shell: "yes | {{ aur_helper_name }} -S --removemake wdisplays"
-      when: ansible_distribution in ["Archlinux", "Artix Linux"]
+        - name: packages | install wayland packages | Waybar
+          package:
+            name:
+              - waybar
+            state: latest
+          when: ansible_distribution in ["Archlinux", "Artix Linux"]
+
+        - name: packages | install wayland packages | wdisplays
+          become_user: "{{ user }}"
+          shell: "yes | {{ aur_helper_name }} -S --removemake wdisplays"
+          when: ansible_distribution in ["Archlinux", "Artix Linux"]
