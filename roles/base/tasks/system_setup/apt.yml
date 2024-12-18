@@ -7,4 +7,4 @@
         dest: /etc/apt/apt.conf.d/99norec
         owner: root
         group: root
-  when: ansible_distribution in ["Debian", "Ubuntu"]
+  when: ansible_distribution in ["Debian"]

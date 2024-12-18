@@ -18,9 +18,8 @@
   vars:
     dotfiles_branch: "master"
   roles:
-    - base
-    # - role: X11
-    #   x11_install_type: gnome
+    - role: base
+      base_install_type: gnome
     - role: wayland
       wayland_install_type: gnome
     - gnome
