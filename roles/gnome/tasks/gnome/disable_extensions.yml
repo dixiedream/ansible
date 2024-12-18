@@ -8,7 +8,50 @@
         key: "{{ item.key }}"
         value: "{{ item.value }}"
       with_items:
-        - { key: "{{ base_key }}/disabled-extensions", value: "['ding@rastersoft.com','ubuntu-dock@ubuntu.com']" }
-        - { key: "{{ base_key }}/enable-animations", value: "false" }
         - { key: "{{ base_key }}/favorite-apps", value: "@as []" }
+
+    - name: gnome | disable extensions | remove desktop icons and dock | Pop OS
+      vars:
+        base_key: "/org/gnome/shell"
+      dconf:
+        key: "{{ item.key }}"
+        value: "{{ item.value }}"
+      with_items:
+        - { key: "{{ base_key }}/disabled-extensions", value: "['ding@rastersoft.com']" }
+        - { key: "{{ base_key }}/enable-animations", value: "false" }
+      when: ansible_distribution in ["Pop!_OS"]
+
+    - name: gnome | disable extensions | Ubuntu
+      block:
+        - name: gnome | disable extensions | remove desktop icons and dock | Ubuntu
+          vars:
+            base_key: "/org/gnome/shell"
+          dconf:
+            key: "{{ item.key }}"
+            value: "{{ item.value }}"
+          with_items:
+            - { key: "{{ base_key }}/disabled-extensions", value: "['tiling-assistant@ubuntu.com', 'ubuntu-dock@ubuntu.com']" }
+            - { key: "{{ base_key }}/enabled-extensions", value: "['ding@rastersoft.com', 'tilingshell@ferrarodomenico.com']" }
+
+        - name: gnome | disable extensions | dock | Ubuntu
+          vars:
+            base_key: "/org/gnome/shell/extensions/dash-to-dock"
+          dconf:
+            key: "{{ item.key }}"
+            value: "{{ item.value }}"
+          with_items:
+            - { key: "{{ base_key }}/dock-fixed", value: "false" }
+            - { key: "{{ base_key }}/extend-height", value: "false" }
+            - { key: "{{ base_key }}/isolate-monitors", value: "true" }
+            - { key: "{{ base_key }}/isolate-workspaces", value: "true" }
+
+        - name: gnome | disable extensions | tiling assistant | Ubuntu
+          vars:
+            base_key: "/org/gnome/shell/extensions/tiling-assistant"
+          dconf:
+            key: "{{ item.key }}"
+            value: "{{ item.value }}"
+          with_items:
+            - { key: "{{ base_key }}/auto-tile", value: "@as []" }
+      when: ansible_distribution in ["Ubuntu"]
 

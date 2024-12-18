@@ -1,0 +1,9 @@
+- name: gnome | packages | install packages
+  become: true
+  block:
+    - name: gnome | packages | install packages (Ubuntu)
+      package:
+        name:
+          - gnome-extension-manager
+        state: latest
+      when: ansible_distribution in ["Ubuntu"]
