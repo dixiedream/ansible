@@ -38,7 +38,7 @@
         - libvirtd
         - libvirt-guests
         - systemd-machined
-        - dnsmasq
+        # - dnsmasq
       when: ansible_os_family in ["Debian"]
 
     - name: "users | {{ user }} | ensure {{ user }} is in libvirt group (Linux)"
