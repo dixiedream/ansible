@@ -5,6 +5,7 @@
       pacman:
         name:
           - qemu-base
+          # - dnsmasq
           - libvirt
           - virt-install
           - virt-manager
@@ -26,7 +27,7 @@
           - ovmf
           - swtpm
         state: present
-      when: ansible_distribution in ["Debian", "Pop!_OS"]
+      when: ansible_family in ["Debian"]
 
     - name: packages | qemu | ensure qemu related services are not enabled (Debian)
       service:
@@ -38,7 +39,7 @@
         - libvirt-guests
         - systemd-machined
         - dnsmasq
-      when: ansible_distribution in ["Debian", "Pop!_OS"]
+      when: ansible_family in ["Debian"]
 
     - name: "users | {{ user }} | ensure {{ user }} is in libvirt group (Linux)"
       become: true
