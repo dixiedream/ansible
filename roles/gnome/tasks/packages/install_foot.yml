@@ -1,8 +1,14 @@
 - name: packages | foot
+  become: true
   block:
     - name: packages | foot | install terminal emulator
-      become: true
       package:
         name: foot
         state: latest
-      when: ansible_distribution in ["Pop!_OS", "Ubuntu"]
+
+    - name: packages | foot | set as default
+      community.general.alternatives:
+        name: x-terminal-emulator
+        path: /usr/bin/foot
+        state: auto
+  when: ansible_distribution in ["Pop!_OS", "Ubuntu"]
