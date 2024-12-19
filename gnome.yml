@@ -17,7 +17,7 @@
   # run roles
 - hosts: all
   vars:
-    dotfiles_branch: "feature/gnome"
+    dotfiles_branch: "master"
   roles:
     - role: base
       base_install_type: gnome

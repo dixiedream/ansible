@@ -10,5 +10,4 @@
       community.general.alternatives:
         name: x-terminal-emulator
         path: /usr/bin/foot
-        state: auto
   when: ansible_distribution in ["Pop!_OS", "Ubuntu"]
