@@ -27,5 +27,5 @@
         dest: "/home/{{ user }}/.xinitrc"
         regexp: '^autostart="dunst xcompmgr unclutter dwm_status"'
         line: 'autostart="dunst xcompmgr unclutter pipewire dwm_status"'
-      when: "ansible_service_mgr != 'systemd'"
+      when: ansible_service_mgr != 'systemd'
   when: ansible_system == "Linux"

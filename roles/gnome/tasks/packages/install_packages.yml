@@ -1,0 +1,10 @@
+- name: gnome | packages | install packages
+  become: true
+  block:
+    - name: gnome | packages | install packages (Ubuntu)
+      package:
+        name:
+          - gnome-shell-extension-manager
+          - gnome-shell-extension-ubuntu-tiling-assistant
+        state: latest
+      when: ansible_distribution in ["Ubuntu"]
