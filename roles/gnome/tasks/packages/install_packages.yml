@@ -4,6 +4,7 @@
     - name: gnome | packages | install packages (Ubuntu)
       package:
         name:
-          - gnome-extension-manager
+          - gnome-shell-extension-manager
+          - gnome-shell-extension-ubuntu-tiling-assistant
         state: latest
       when: ansible_distribution in ["Ubuntu"]
