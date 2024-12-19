@@ -14,12 +14,12 @@
             name: gpg-agent
             state: present
 
-        - name:packages | firefox | add Mozilla PPA repository (Ubuntu)
+        - name: packages | firefox | add Mozilla PPA repository (Ubuntu)
           ansible.builtin.apt_repository:
             repo: ppa:mozillateam/ppa
             state: present
 
-        - name:packages | firefox | set apt preferences (Ubuntu)
+        - name: packages | firefox | set apt preferences (Ubuntu)
           ansible.builtin.copy:
             src: packages/firefox-apt-preferences
             dest: /etc/apt/preferences.d/mozilla-firefox
@@ -27,7 +27,7 @@
             group: root
             mode: "0644"
 
-        - name:packages | firefox | install (Ubuntu)
+        - name: packages | firefox | install (Ubuntu)
           ansible.builtin.apt:
             name: firefox
             state: present
