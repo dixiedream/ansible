@@ -13,10 +13,11 @@
         update_cache: yes
       changed_when: False
       when: ansible_os_family == "Debian"
+
   # run roles
 - hosts: all
   vars:
-    dotfiles_branch: "master"
+    dotfiles_branch: "feature/gnome"
   roles:
     - role: base
       base_install_type: gnome
