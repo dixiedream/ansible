@@ -2,68 +2,17 @@
   become: true
   package:
     name:
-      - docker
-      - docker-compose
       - npm
       - sshpass
     state: latest
   when: ansible_system == "Linux"
 
-- name: packages | enable Docker buildx (ArchLinux)
-  become: true
-  package:
-    name: docker-buildx
-    state: latest
-  when: ansible_distribution in ["Artix Linux", "Archlinux"]
-
 - name: packages | install required packages (MacOS)
   homebrew:
     name:
-      - docker
-      - docker-compose
       - node
       - npm
       - ripgrep
       - fd
     state: latest
   when: ansible_os_family == "Darwin"
-
-- name: packages | ensure docker service is not enabled (Linux)
-  become: true
-  service:
-    name: 'docker.socket'
-    state: stopped
-    enabled: no
-  when: ansible_system == "Linux"
-
-- name: packages | ensure docker service is not enabled (Linux)
-  become: true
-  service:
-    name: docker
-    state: stopped
-    enabled: no
-  when: ansible_system == "Linux"
-
-- name: packages | ensure containerd service is not enabled (Linux)
-  become: true
-  service:
-    name: containerd
-    state: stopped
-    enabled: no
-  when: ansible_system == "Linux"
-
-- name: packages | ensure systemd networkd wait online service is not enabled (Linux)
-  become: true
-  service:
-    name: systemd-networkd-wait-online
-    state: stopped
-    enabled: no
-  when: ansible_distribution in ["Artix Linux", "Archlinux", "Debian"]
-
-- name: "users | {{ user }} | ensure {{ user }} is in docker group (Linux)"
-  become: true
-  user:
-    name: "{{ user }}"
-    groups: docker
-    append: yes
-  when: ansible_system == "Linux"
