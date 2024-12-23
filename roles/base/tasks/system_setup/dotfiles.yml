@@ -2,7 +2,7 @@
   become: true
   become_user: "{{ user }}"
   vars:
-    - dotfile_src: "/home/{{ user }}/.cfg"
+    dotfile_src: "/home/{{ user }}/.cfg"
   block:
     - name: system setup | dotfiles | Clone repo
       git:
