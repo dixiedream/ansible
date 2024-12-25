@@ -5,37 +5,33 @@
     state: latest
   when: ansible_os_family in ["Archlinux", "Artix Linux"]
 
-- name: packages | lua language server | download release (Debian)
+- name: packages | lua language server (Debian)
   become: true
-  get_url:
-    url: "https://github.com/sumneko/lua-language-server/releases/download/{{ lua_language_server_version }}/lua-language-server-{{ lua_language_server_version }}-linux-x64.tar.gz"
-    dest: /tmp/lua-language-server.tar.gz
-  when: ansible_os_family in ["Debian"]
+  block:
+    - name: packages | lua language server | download release (Debian)
+      get_url:
+        url: "https://github.com/sumneko/lua-language-server/releases/download/{{ lua_language_server_version }}/lua-language-server-{{ lua_language_server_version }}-linux-x64.tar.gz"
+        dest: /tmp/lua-language-server.tar.gz
 
-- name: packages | lua language server | ensure dir exists (Debian)
-  become: true
-  file:
-    path: /opt/lua-language-server
-    state: directory
-  when: ansible_os_family in ["Debian"]
+    - name: packages | lua language server | ensure dir exists (Debian)
+      file:
+        path: /opt/lua-language-server
+        state: directory
 
-- name: packages | lua language server | extract archive (Debian)
-  become: true
-  unarchive:
-    src: /tmp/lua-language-server.tar.gz
-    dest: /opt/lua-language-server
-    owner: root
-    group: root
-  when: ansible_os_family in ["Debian"]
+    - name: packages | lua language server | extract archive (Debian)
+      unarchive:
+        src: /tmp/lua-language-server.tar.gz
+        dest: /opt/lua-language-server
+        owner: root
+        group: root
 
-- name: packages | lua language server | create alias script (Debian)
-  become: true
-  copy:
-    src: packages/install_lualanguageserver.sh
-    dest: "/home/{{ user }}/.local/bin/lua-language-server"
-    owner: "{{ user }}"
-    group: root
-    mode: 0755
+    - name: packages | lua language server | create alias script (Debian)
+      copy:
+        src: packages/install_lualanguageserver.sh
+        dest: "/home/{{ user }}/.local/bin/lua-language-server"
+        owner: "{{ user }}"
+        group: root
+        mode: 0755
   when: ansible_os_family in ["Debian"]
 
 - name: packages | lua language server | install (MacOS)

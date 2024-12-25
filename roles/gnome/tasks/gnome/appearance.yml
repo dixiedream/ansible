@@ -20,3 +20,18 @@
       with_items:
         - { key: "{{ base_key }}/night-light-enabled", value: "true" }
         - { key: "{{ base_key }}/night-light-temperature", value: "uint32 3223" }
+
+    - name: gnome | appearance | profile cleaning
+      lineinfile:
+        dest: "/home/{{ user }}/.zprofile"
+        regexp: "^{{ item }}"
+        line: "#{{ item }}"
+      with_items:
+        - 'export GTK_THEME'
+        - 'export GTK2_RC_FILES'
+        - 'export PASSWORD_STORE_DIR'
+        - 'export QT_QPA_PLATFORMTHEME'
+        - 'export SUDO_ASKPASS'
+
+
+

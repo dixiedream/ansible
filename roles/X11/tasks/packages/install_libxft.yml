@@ -1,25 +1,28 @@
-- name: packages | libxft | install (Archlinux)
-  become_user: "{{ user }}"
-  shell: "yes | {{ aur_helper_name }} -S --removemake libxft-git"
-  when: ansible_distribution in ["Archlinux", "Artix Linux"]
+- name: packages | libxft
+  when: x11_install_type is not defined or x11_install_type == 'wm'
+  block:
+    - name: packages | libxft | install (Archlinux)
+      become_user: "{{ user }}"
+      shell: "yes | {{ aur_helper_name }} -S --removemake libxft-git"
+      when: ansible_distribution in ["Archlinux", "Artix Linux"]
 
-- name: packages | libxft | install required dep (Debian)
-  become: true
-  apt:
-    name:
-      # - libxft2
-      - libtool
-      - xutils-dev
-    state: latest
-  when: ansible_distribution in ["Debian", "Ubuntu"]
+    - name: packages | libxft | install required dep (Debian)
+      become: true
+      apt:
+        name:
+          # - libxft2
+          - libtool
+          - xutils-dev
+        state: latest
+      when: ansible_distribution in ["Debian", "Ubuntu"]
 
-- name: packages | clone libxft patched version (Debian)
-  become: true
-  git:
-    repo: https://gitlab.freedesktop.org/xorg/lib/libxft.git
-    dest: /tmp/libxft-bgra
-    force: yes
-  when: ansible_distribution in ["Debian", "Ubuntu"]
+    - name: packages | clone libxft patched version (Debian)
+      become: true
+      git:
+        repo: https://gitlab.freedesktop.org/xorg/lib/libxft.git
+        dest: /tmp/libxft-bgra
+        force: yes
+      when: ansible_distribution in ["Debian", "Ubuntu"]
 #
 #
 #git clone https://gitlab.freedesktop.org/xorg/lib/libxft.git

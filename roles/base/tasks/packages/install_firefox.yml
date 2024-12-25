@@ -1,0 +1,34 @@
+- name: packages | firefox
+  become: true
+  block:
+    - name: packages | firefox | install
+      package:
+        name: firefox
+        state: latest
+      when: ansible_distribution in ["Artix Linux", "Archlinux", "Debian", "Pop!_OS"]
+
+    - name: packages | firefox
+      block:
+        - name: packages | firefox | ensure GPG is installed (Ubuntu)
+          ansible.builtin.apt:
+            name: gpg-agent
+            state: present
+
+        - name: packages | firefox | add Mozilla PPA repository (Ubuntu)
+          ansible.builtin.apt_repository:
+            repo: ppa:mozillateam/ppa
+            state: present
+
+        - name: packages | firefox | set apt preferences (Ubuntu)
+          ansible.builtin.copy:
+            src: packages/firefox-apt-preferences
+            dest: /etc/apt/preferences.d/mozilla-firefox
+            owner: root
+            group: root
+            mode: "0644"
+
+        - name: packages | firefox | install (Ubuntu)
+          ansible.builtin.apt:
+            name: firefox
+            state: present
+      when: ansible_distribution in ["Ubuntu"]

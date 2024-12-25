@@ -1,0 +1,99 @@
+- name: packages | docker
+  block:
+    - name: packages | install required packages (Linux)
+      become: true
+      package:
+        name:
+          - docker
+          - docker-compose
+        state: latest
+      when: ansible_distribution in ["Artix Linux", "Archlinux", "Debian"]
+
+    - name: packages | enable Docker buildx (ArchLinux)
+      block:
+        - name: Docker | Install dependencies
+          become: true
+          ansible.builtin.package:
+            name:
+              - curl
+              - ca-certificates
+            state: present
+
+        - name: Docker | check executable
+          ansible.builtin.stat:
+            path: /usr/bin/docker
+          register: docker_executable
+
+        - name: Docker | Download convenience script
+          shell: curl -fsSL https://get.docker.com -o get-docker.sh
+          when: not docker_executable.stat.exists
+
+        - name: Docker | Run convenience script
+          become: true
+          shell: CHANNEL=stable sh get-docker.sh
+          when: not docker_executable.stat.exists
+
+        - name: Docker | Remove convenience script
+          file:
+            path: get-docker.sh
+            state: absent
+      when: ansible_distribution in ["Ubuntu", "Pop!_OS"]
+
+    - name: packages | enable Docker buildx (Linux)
+      become: true
+      package:
+        name: "{{ docker_buildx_package }}"
+        state: latest
+      when: ansible_system == "Linux"
+
+    - name: packages | install required packages (MacOS)
+      homebrew:
+        name:
+          - docker
+          - docker-compose
+          - node
+          - npm
+          - ripgrep
+          - fd
+        state: latest
+      when: ansible_os_family == "Darwin"
+
+    - name: packages | ensure docker service is not enabled (Linux)
+      become: true
+      service:
+        name: 'docker.socket'
+        state: stopped
+        enabled: no
+      when: ansible_system == "Linux"
+
+    - name: packages | ensure docker service is not enabled (Linux)
+      become: true
+      service:
+        name: docker
+        state: stopped
+        enabled: no
+      when: ansible_system == "Linux"
+
+    - name: packages | ensure containerd service is not enabled (Linux)
+      become: true
+      service:
+        name: containerd
+        state: stopped
+        enabled: no
+      when: ansible_system == "Linux"
+
+    - name: packages | ensure systemd networkd wait online service is not enabled (Linux)
+      become: true
+      service:
+        name: systemd-networkd-wait-online
+        state: stopped
+        enabled: no
+      when: ansible_distribution in ["Artix Linux", "Archlinux", "Debian"]
+
+    - name: "users | {{ user }} | ensure {{ user }} is in docker group (Linux)"
+      become: true
+      user:
+        name: "{{ user }}"
+        groups: docker
+        append: yes
+      when: ansible_system == "Linux"

@@ -13,13 +13,16 @@
         update_cache: yes
       changed_when: False
       when: ansible_os_family == "Debian"
+
   # run roles
 - hosts: all
   vars:
     dotfiles_branch: "master"
   roles:
-    - base
-    - X11
+    - role: base
+      base_install_type: gnome
+    - role: wayland
+      wayland_install_type: gnome
     - gnome
 
 - hosts: all

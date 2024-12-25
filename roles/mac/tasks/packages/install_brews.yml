@@ -4,19 +4,18 @@
       - atool
       - fzf
       - git
+      - git-flow
       - gzip
       - htop
       - jq
+      - lazygit
       - lf
       - ncdu
-      - neofetch
       - neovim
       - p7zip
       - ripgrep
-      - koekeishiya/formulae/skhd
       - unar
       - unzip
-      - koekeishiya/formulae/yabai
       - yt-dlp
       - zip
       - zsh
@@ -28,17 +27,9 @@
       - alacritty
       - appcleaner
       - brave-browser
+      - firefox
       - mpv
       - onyx
       - the-unarchiver
       - transmission
   ignore_errors: true
-
-- name: mac os | start required brews
-  command: "brew services start {{ item }}"
-  with_items:
-    - skhd
-    - yabai
-  changed_when: false
-  ignore_errors: true
-

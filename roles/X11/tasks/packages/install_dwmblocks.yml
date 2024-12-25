@@ -27,4 +27,5 @@
       make:
         target: install
         chdir: /tmp/dwmblocks
-  when: ansible_distribution in ["Archlinux", "Artix Linux", "Debian", "Ubuntu"]
+  when: ansible_system == "Linux" and (x11_install_type is not defined or x11_install_type == 'wm')
+

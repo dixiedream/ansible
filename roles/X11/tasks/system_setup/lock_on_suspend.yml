@@ -23,4 +23,5 @@
         group: root
         mode: 0700
       when: "ansible_service_mgr != 'systemd'"
-  when: ansible_distribution in ["Archlinux", "Artix Linux", "Debian", "Ubuntu"]
+  when: ansible_system == "Linux" and (x11_install_type is not defined or x11_install_type == 'wm')
+

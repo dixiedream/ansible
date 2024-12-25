@@ -9,7 +9,6 @@
           - bleachbit
           - dosfstools
           - exfatprogs
-          - firefox
           - fzf
           - gzip
           - htop
@@ -47,7 +46,7 @@
           - "{{ noto_fonts_emoji_package }}"
           - "{{ wpa_supplicant_package }}"
         state: latest
-      when: ansible_distribution in ["Archlinux", "Artix Linux", "Debian", "Ubuntu"]
+      when: ansible_distribution in ["Archlinux", "Artix Linux", "Debian", "Ubuntu"] and (base_install_type is not defined or base_install_type == 'wm')
 
     - name: packages | install Pacman Contrib package (Archlinux)
       pacman:
@@ -70,4 +69,5 @@
           - bluez-firmware
           - libspa-0.2-bluetooth
         state: latest
-      when: ansible_os_family in ["Debian"]
+      when: ansible_os_family in ["Debian"] and (base_install_type is not defined or base_install_type == 'wm')
+

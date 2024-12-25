@@ -11,12 +11,10 @@
   when: ansible_os_family in ["Archlinux", "Artix Linux"]
 
 - name: packages | LSP | install gopls (MacOS)
-  become_user: "{{ user }}"
   command: go install golang.org/x/tools/gopls@latest
   when: ansible_os_family in ["Darwin"]
 
 - name: packages | LSP | install gopls (Debian)
-  become_user: "{{ user }}"
   command: /usr/local/go/bin/go install golang.org/x/tools/gopls@latest
   when: ansible_os_family in ["Debian"]
 
@@ -39,11 +37,3 @@
   npm:
     global: yes
     name: "@vue/language-server"
-
-# Hoping to be a temp fix
-# - name: packages | LSP | setup tsserver for volar
-#   lineinfile:
-#     dest: "/home/{{ user }}/.config/nvim/after/plugin/lspconfig.lua"
-#     regexp: "^      tsdk"
-#     line: "      tsdk = '/home/{{ user }}/.local/lib/node_modules/typescript/lib'"
-

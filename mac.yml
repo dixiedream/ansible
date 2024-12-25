@@ -1,6 +1,5 @@
 ---
 - hosts: all
-  become: true
   pre_tasks:
     - name: pre-run | update package cache (MacOS)
       homebrew:

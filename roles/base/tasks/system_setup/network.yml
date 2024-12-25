@@ -37,22 +37,22 @@
         group: root
       when: "ansible_service_mgr == 'systemd'"
 
-    - name: system setup | network | symlink systemd network resolv to resolv.con (Debian)
+    - name: system setup | network | symlink resolv.conf (Debian)
       file:
         src: /run/systemd/resolve/resolv.conf
         dest: /etc/resolv.conf
         state: link
         owner: root
         group: root
-      when: ansible_distribution in ["Debian", "Ubuntu"] and "ansible_service_mgr == 'systemd'"
+      when: ansible_distribution in ["Debian"] and "ansible_service_mgr == 'systemd'"
 
-    - name: system setup | network | symlink systemd network resolv to resolv.con (Archlinux)
+    - name: system setup | network | symlink resolv.conf (Archlinux/Ubuntu)
       file:
         src: /run/systemd/resolve/stub-resolv.conf
         dest: /etc/resolv.conf
         state: link
         owner: root
         group: root
-      when: ansible_os_family in ["Archlinux", "Artix Linux"] and "ansible_service_mgr == 'systemd'"
+      when: ansible_os_family in ["Archlinux", "Artix Linux", "Ubuntu"] and "ansible_service_mgr == 'systemd'"
       ignore_errors: yes
   when: ansible_distribution in ["Archlinux", "Artix Linux", "Debian", "Ubuntu"]
