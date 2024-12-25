@@ -1,5 +1,4 @@
 - name: system setup | dotfiles | MacOS
-  become: true
   block:
     - name: system setup | dotfiles | Clone repo
       git:
