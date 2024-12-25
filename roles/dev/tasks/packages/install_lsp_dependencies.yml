@@ -11,12 +11,10 @@
   when: ansible_os_family in ["Archlinux", "Artix Linux"]
 
 - name: packages | LSP | install gopls (MacOS)
-  become_user: "{{ user }}"
   command: go install golang.org/x/tools/gopls@latest
   when: ansible_os_family in ["Darwin"]
 
 - name: packages | LSP | install gopls (Debian)
-  become_user: "{{ user }}"
   command: /usr/local/go/bin/go install golang.org/x/tools/gopls@latest
   when: ansible_os_family in ["Debian"]
 
