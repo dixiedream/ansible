@@ -4,6 +4,7 @@
       - atool
       - fzf
       - git
+      - git-flow
       - gzip
       - htop
       - jq
