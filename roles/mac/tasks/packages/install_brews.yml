@@ -24,10 +24,10 @@
 - name: mac os | install brew casks
   command: "brew install --cask {{ item }}"
   with_items:
-      - alacritty
       - appcleaner
       - brave-browser
       - firefox
+      - ghostty
       - mpv
       - onyx
       - the-unarchiver
