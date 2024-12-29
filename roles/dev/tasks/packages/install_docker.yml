@@ -46,17 +46,20 @@
         state: latest
       when: ansible_system == "Linux"
 
-    - name: packages | install required packages (MacOS)
-      homebrew:
-        name:
+    - name: packages | install Docker Desktop (MacOS)
+      command: "brew install --cask {{ item }}"
+      with_items:
           - docker
-          - docker-compose
-          - node
-          - npm
-          - ripgrep
-          - fd
-        state: latest
+      ignore_errors: true
       when: ansible_os_family == "Darwin"
+
+    # - name: packages | install Docker packages (MacOS)
+    #   homebrew:
+    #     name:
+    #       - docker-buildx
+    #       - docker-compose
+    #     state: latest
+    #   when: ansible_os_family == "Darwin"
 
     - name: packages | ensure docker service is not enabled (Linux)
       become: true
