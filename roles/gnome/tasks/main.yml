@@ -3,6 +3,7 @@
     - import_tasks: packages/install_packages.yml
     - import_tasks: packages/install_psutil.yml
     - import_tasks: packages/install_foot.yml
+    - import_tasks: packages/install_pop_shell.yml
     - import_tasks: packages/debloat.yml
     - import_tasks: gnome/disable_extensions.yml
     - import_tasks: gnome/disable_notifications.yml
