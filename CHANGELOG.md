@@ -1,7 +1,11 @@
 # Changelog
 
+## 2.15.0
+- Gnome improvements now using Pop-Shell as a tiling solution
+- MacOs small improvements
+
 ## 2.14.0
-- Finally a proper Mac Os tested (M1)
+- Finally a proper MacOs tested (M1)
 - Major refactoring for base and dev role due to Ubuntu support
 - Gnome better support
 - Minor tweaks and fixes
