@@ -5,6 +5,7 @@
       package:
         name:
           - foot
+          - wl-clipboard
         state: latest
 
     - name: packages | install wayland wm packages
@@ -20,7 +21,6 @@
               - slurp
               - swaybg
               - swayimg
-              - wl-clipboard
             state: latest
 
         - name: packages | install wayland packages | Hyprland
