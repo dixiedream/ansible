@@ -48,3 +48,11 @@
         groups: libvirt
         append: yes
       when: ansible_system == "Linux"
+
+    - name: "users | {{ user }} | ensure {{ user }} is in kvm group (Ubuntu)"
+      become: true
+      user:
+        name: "{{ user }}"
+        groups: kvm
+        append: yes
+      when: ansible_distribution in ["Ubuntu"]

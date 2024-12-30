@@ -11,4 +11,5 @@
         - { key: "{{ base_key }}/gap-inner", value: "uint32 1"}
         - { key: "{{ base_key }}/gap-outer", value: "uint32 1"}
         - { key: "{{ base_key }}/show-title", value: "false"}
-  when: ansible_distribution in ["Pop!_OS"]
+        - { key: "{{ base_key }}/show-skip-taskbar", value: "false"}
+  when: ansible_distribution in ["Pop!_OS", "Ubuntu"]

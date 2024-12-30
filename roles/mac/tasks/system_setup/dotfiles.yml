@@ -24,4 +24,10 @@
         regexp: '^eval "$(/opt/homebrew/bin/brew shellenv)"'
         line: 'eval "$(/opt/homebrew/bin/brew shellenv)"'
         insertafter: '^_comp_options'
+
+    - name: system setup | comment dmenupass
+      lineinfile:
+        dest: "/home/{{ user }}/.zprofile"
+        regexp: '^export SUDO_ASKPASS='
+        state: absent
   when: ansible_system == "Darwin"
