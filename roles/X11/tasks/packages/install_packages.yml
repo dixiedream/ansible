@@ -17,6 +17,7 @@
               - autorandr
               - dunst
               - maim
+              - playerctl
               - slock
               - unclutter
               - xclip
