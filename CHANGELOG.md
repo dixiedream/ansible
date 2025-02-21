@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.15.2
+- `tmux` install
+- Gitflow new package
+
 ## 2.15.1
 - MacOs Aerospace config updated
 - Fixed missing `playerctl` package to be installed on X11 setup
