@@ -24,6 +24,7 @@
           - "{{ fd_package }}"
           - s-tui
           - "{{ unrar_package }}"
+          - tmux
           - unzip
           - usbutils
           - yt-dlp

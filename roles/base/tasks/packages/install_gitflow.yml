@@ -2,7 +2,7 @@
   block:
     - name: packages | gitflow | install (Archlinux)
       become_user: "{{ user }}"
-      shell: "yes |  {{ aur_helper_name }} -S --removemake gitflow-avh"
+      shell: "yes |  {{ aur_helper_name }} -S --removemake gitflow-cjs"
       when: ansible_distribution in ["Archlinux", "Artix Linux"]
 
     - name: packages | gitflow | install (Debian)
