@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.15.3
+- Install `ghostscript` in cups role as a required package for some printers
+
 ## 2.15.2
 - `tmux` install
 - Gitflow new package
