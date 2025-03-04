@@ -6,6 +6,7 @@
       pacman:
         name:
           - cups
+          - ghostscript
           - system-config-printer
         state: latest
 
