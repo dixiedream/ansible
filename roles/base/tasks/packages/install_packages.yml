@@ -16,7 +16,7 @@
           - mpv
           - mpv-mpris
           - ncdu
-          - neofetch
+          - screenfetch
           - ntfs-3g
           - "{{ openssh_package }}"
           - p7zip
