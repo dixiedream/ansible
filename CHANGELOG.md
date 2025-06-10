@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.16.0
+- Using `screenfetch` instead of the unfortunately unmantained `neofetch`
+
 ## 2.15.3
 - Install `ghostscript` in cups role as a required package for some printers
 
