@@ -1,16 +1,22 @@
+- name: mac os | install taps
+  command: "brew tap {{ item }}"
+  with_items:
+      - "CJ-Systems/homebrew-gitflow-cjs"
+  ignore_errors: true
+
 - name: mac os | install brews formulas
   homebrew:
     name:
       - atool
       - fzf
       - git
-      - git-flow
       - gzip
       - htop
       - jq
       - lazygit
       - lf
       - ncdu
+      - git-flow-cjs
       - neovim
       - p7zip
       - ripgrep
