@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.17.0
+- No more `wdisplays` package on Wayland role
+- Turn off display if on getty for more than 5 minutes
+- New GitFlow package
+- Conditionals rewrites
+
 ## 2.16.0
 - Using `screenfetch` instead of the unfortunately unmantained `neofetch`
 
