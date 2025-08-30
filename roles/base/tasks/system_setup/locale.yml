@@ -15,7 +15,7 @@
       command: timedatectl set-ntp true
       changed_when: false
       ignore_errors: true
-      when: "ansible_service_mgr == 'systemd'"
+      when: ansible_service_mgr == 'systemd'
 
     # - name: system setup | locale | set ntp (Artix)
     #   runit:

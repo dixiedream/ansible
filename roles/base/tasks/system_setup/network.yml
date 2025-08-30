@@ -5,7 +5,7 @@
       package:
         name: ifupdown
         state: absent
-      when: ansible_distribution in ["Debian", "Ubuntu"] and "ansible_service_mgr == 'systemd'"
+      when: ansible_distribution in ["Debian", "Ubuntu"] and ansible_service_mgr == 'systemd'
 
     - name: system setup | network | create basic ethernet conf
       copy:
@@ -13,7 +13,7 @@
         dest: /etc/systemd/network/en.network
         owner: root
         group: root
-      when: "ansible_service_mgr == 'systemd'"
+      when: ansible_service_mgr == 'systemd'
 
     - name: system setup | network | create basic wireless conf
       copy:
@@ -21,13 +21,13 @@
         dest: /etc/systemd/network/wl.network
         owner: root
         group: root
-      when: "ansible_service_mgr == 'systemd'"
+      when: ansible_service_mgr == 'systemd'
 
     - name: system setup | network | check if wpa_supplicant folder exists
       file:
         path: /etc/wpa_supplicant
         state: directory
-      when: "ansible_service_mgr == 'systemd'"
+      when: ansible_service_mgr == 'systemd'
 
     - name: system setup | network | create wpa_supplicant template
       template:
@@ -35,7 +35,7 @@
         dest: /etc/wpa_supplicant/wpa_supplicant-example.conf
         owner: root
         group: root
-      when: "ansible_service_mgr == 'systemd'"
+      when: ansible_service_mgr == 'systemd'
 
     - name: system setup | network | symlink resolv.conf (Debian)
       file:
@@ -44,7 +44,7 @@
         state: link
         owner: root
         group: root
-      when: ansible_distribution in ["Debian"] and "ansible_service_mgr == 'systemd'"
+      when: ansible_distribution in ["Debian"] and ansible_service_mgr == 'systemd'
 
     - name: system setup | network | symlink resolv.conf (Archlinux/Ubuntu)
       file:
@@ -53,6 +53,6 @@
         state: link
         owner: root
         group: root
-      when: ansible_os_family in ["Archlinux", "Artix Linux", "Ubuntu"] and "ansible_service_mgr == 'systemd'"
+      when: ansible_os_family in ["Archlinux", "Artix Linux", "Ubuntu"] and ansible_service_mgr == 'systemd'
       ignore_errors: yes
   when: ansible_distribution in ["Archlinux", "Artix Linux", "Debian", "Ubuntu"]

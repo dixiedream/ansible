@@ -12,16 +12,16 @@
         name:
           - thermald-runit
         state: latest
-      when: "ansible_service_mgr != 'systemd'"
+      when: ansible_service_mgr != 'systemd'
 
     - name: packages | thermald | enable service (Runit)
       shell: ln --symbolic --force /etc/runit/sv/thermald /run/runit/service/
-      when: "ansible_service_mgr != 'systemd'"
+      when: ansible_service_mgr != 'systemd'
 
     - name: packages | thermald | enable service (Systemd)
       service:
         name: thermald
         state: started
         enabled: yes
-      when: "ansible_service_mgr == 'systemd'"
+      when: ansible_service_mgr == 'systemd'
   when: ansible_form_factor is defined and ansible_form_factor == "Notebook" and ansible_distribution not in ['Pop!_OS', 'Ubuntu']

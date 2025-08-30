@@ -23,6 +23,7 @@
     - import_tasks: packages/install_brave.yml
     - import_tasks: packages/install_nordic_theme.yml
     - import_tasks: packages/install_twingate.yml
+    - import_tasks: system_setup/tty_display_off.yml
     - import_tasks: system_setup/apt.yml
     - import_tasks: system_setup/network.yml
     - import_tasks: system_setup/locale.yml
