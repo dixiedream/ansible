@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.17.1
+- AUR installs permissions improvements
+- Fix invalid value replaced inside `makepkg.conf`
+
 ## 2.17.0
 - No more `wdisplays` package on Wayland role
 - Turn off display if on getty for more than 5 minutes
