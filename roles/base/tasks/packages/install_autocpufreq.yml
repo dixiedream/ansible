@@ -3,7 +3,7 @@
   block:
     - name: packages | auto-cpufreq | install AUR package (Archlinux)
       become_user: "{{ user }}"
-      command: "{{ aur_helper_name }} -S --noconfirm auto-cpufreq"
+      shell: "{{ aur_helper_name }} -S --noconfirm auto-cpufreq"
       args:
         creates: /usr/bin/auto-cpufreq
       when: ansible_distribution in ["Archlinux", "Artix Linux"] and ansible_service_mgr == 'systemd'

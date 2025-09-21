@@ -2,8 +2,9 @@
   when: x11_install_type is not defined or x11_install_type == 'wm'
   block:
     - name: packages | libxft | install (Archlinux)
+      become: true
       become_user: "{{ user }}"
-      shell: "yes | {{ aur_helper_name }} -S --removemake libxft-git"
+      shell: "yes | {{ aur_helper_name }} -S --removemake --noconfirm libxft-git"
       when: ansible_distribution in ["Archlinux", "Artix Linux"]
 
     - name: packages | libxft | install required dep (Debian)

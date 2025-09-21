@@ -1,8 +1,9 @@
 - name: packages | install drivers
   block:
     - name: packages | install drivers | X230 Bluetooth firmware
+      become: true
       become_user: "{{ user }}"
-      command: "{{ aur_helper_name }} -S --noconfirm bcm20702a1-firmware"
+      command: "{{ aur_helper_name }} -S --noconfirm --removemake bcm20702a1-firmware"
       args:
         creates: /usr/bin/auto-cpufreq
       when: ansible_distribution in ["Archlinux", "Artix Linux"] and ansible_product_version == "ThinkPad X230"

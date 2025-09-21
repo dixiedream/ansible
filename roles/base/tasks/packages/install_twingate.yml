@@ -1,5 +1,6 @@
 ---
 - name: packages | twingate
+  become: true
   block:
     - name: packages | twingate | install package (Archlinux)
       become_user: "{{ user }}"
@@ -7,7 +8,6 @@
       when: ansible_distribution in ["Archlinux", "Artix Linux"]
 
     - name: packages | twingate | debian
-      become: true
       block:
         - name: packages | twingate | add repo to sources list
           apt_repository:
