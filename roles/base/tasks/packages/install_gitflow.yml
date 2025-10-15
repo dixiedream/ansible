@@ -1,10 +1,15 @@
 - name: packages | gitflow
   become: true
   block:
+    - name: packages | gitflow | check if already installed
+      stat:
+        path: /usr/bin/git-flow
+      register: helper_is_present
+
     - name: packages | gitflow | install (Archlinux)
       become_user: "{{ user }}"
       shell: "yes |  {{ aur_helper_name }} -S --removemake --noconfirm gitflow-cjs"
-      when: ansible_distribution in ["Archlinux", "Artix Linux"]
+      when: (not helper_is_present.stat.exists) and ansible_distribution in ["Archlinux", "Artix Linux"]
 
     - name: packages | gitflow | install (Debian)
       package:

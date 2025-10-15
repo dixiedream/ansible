@@ -1,7 +1,7 @@
 - name: packages | AUR helper
-  become: true
+  become_user: "{{ user }}"
   block:
-    - name: packages | AUR helper | check if already cloned
+    - name: packages | AUR helper | check if already installed
       stat:
         path: /usr/bin/{{ aur_helper_name }}
       register: helper_is_present
