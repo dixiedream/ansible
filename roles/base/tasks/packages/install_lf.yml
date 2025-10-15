@@ -3,7 +3,7 @@
     - name: packages | lf | install (Archlinux)
       become: true
       become_user: "{{ user }}"
-      command: "{{ aur_helper_name }} -S --noconfirm lf"
+      command: "-S {{ aur_helper_name }} -S --noconfirm lf"
       args:
         creates: /usr/bin/lf
       when: ansible_os_family in ["Archlinux", "Artix Linux"]
