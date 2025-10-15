@@ -1,6 +1,8 @@
 - name: packages | install LF file manager
   block:
     - name: packages | lf | install (Archlinux)
+      become: true
+      become_user: "{{ user }}"
       command: "{{ aur_helper_name }} -S --noconfirm lf"
       args:
         creates: /usr/bin/lf
