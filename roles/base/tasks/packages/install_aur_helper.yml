@@ -3,7 +3,7 @@
   block:
     - name: packages | AUR helper | check if already cloned
       stat:
-        path: /tmp/{{ aur_helper_name }}
+        path: /usr/bin/{{ aur_helper_name }}
       register: helper_is_present
 
     - name: packages | AUR helper | clone repo (Archlinux)
