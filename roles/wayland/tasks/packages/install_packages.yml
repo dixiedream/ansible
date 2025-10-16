@@ -1,18 +1,21 @@
-- name: install wayland packages
+---
+- name: Install wayland packages
   become: true
   block:
-    - name: packages | install wayland packages
-      package:
+    - name: packages | Install wayland packages
+      ansible.builtin.package:
         name:
           - foot
           - wl-clipboard
         state: latest
 
-    - name: packages | install wayland wm packages
+    - name: packages | Install wayland wm packages
+      when: wayland_install_type is not defined or wayland_install_type == 'wm'
       block:
-        - name: packages | install wayland packages
-          package:
+        - name: packages | Install wayland packages
+          ansible.builtin.package:
             name:
+              # General stuff
               - bemenu-wayland
               - dunst
               - grim
@@ -21,28 +24,44 @@
               - slurp
               - swaybg
               - swayimg
-            state: latest
-
-        - name: packages | install wayland packages | Hyprland
-          package:
-            name:
+              - waybar
+              # Hyprland stuff
               - hyprland
               - hypridle
               - hyprlock
               - xdg-desktop-portal-hyprland
               - uwsm
             state: latest
-          when: ansible_distribution in ["Archlinux", "Artix Linux"]
 
         - name: packages | install wayland packages | App2Unit
-          become_user: "{{ user }}"
-          shell: "yes | {{ aur_helper_name }} -S --removemake app2unit-git"
           when: ansible_distribution in ["Archlinux", "Artix Linux"]
+          block:
+            - name: packages | app2unit | check if already installed
+              ansible.builtin.stat:
+                path: /usr/bin/app2unit
+              register: pkg_is_present
 
-        - name: packages | install wayland packages | Waybar
-          package:
-            name:
-              - waybar
-            state: latest
-          when: ansible_distribution in ["Archlinux", "Artix Linux"]
-      when: wayland_install_type is not defined or wayland_install_type == 'wm'
+            - name: packages | app2unit | enable passwordless pacman
+              become: true
+              ansible.builtin.replace:
+                path: "/etc/sudoers.d/{{ user }}"
+                regexp: "^(Cmnd_Alias.*)$"
+                replace: "\\1, /usr/bin/pacman"
+                validate: "visudo -cf %s"
+              when: not pkg_is_present.stat.exists
+
+            - name: packages | app2unit | App2Unit
+              become_user: "{{ user }}"
+              ansible.builtin.command: "{{ aur_helper_name }} -S --noconfirm --removemake app2unit-git"
+              args:
+                creates: /usr/bin/app2unit
+              when: not pkg_is_present.stat.exists
+
+            - name: packages | app2unit | disable passwordless pacman
+              become: true
+              ansible.builtin.replace:
+                path: "/etc/sudoers.d/{{ user }}"
+                regexp: "^(Cmnd_Alias[^\\n]*?)(?:\\s*,\\s*/usr/bin/pacman)?\\s*$"
+                replace: "\\1"
+                validate: "visudo -cf %s"
+              when: not pkg_is_present.stat.exists

@@ -1,9 +1,10 @@
+---
 - name: system setup | xorg | block tty access and lock X
   become: true
-  copy:
+  ansible.builtin.copy:
     src: system_setup/xorg_security.conf
     dest: /etc/X11/xorg.conf.d/40-slock.conf
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   when: ansible_distribution in ["Archlinux", "Artix Linux", "Debian", "Ubuntu"]

@@ -1,14 +1,15 @@
-- name: packages | install required packages (Linux)
+---
+- name: packages | Install required packages (Linux)
   become: true
-  package:
+  ansible.builtin.package:
     name:
       - npm
       - sshpass
     state: latest
   when: ansible_system == "Linux"
 
-- name: packages | install required packages (MacOS)
-  homebrew:
+- name: packages | Install required packages (MacOS)
+  community.general.homebrew:
     name:
       - node
       - npm

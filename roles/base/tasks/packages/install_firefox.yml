@@ -1,13 +1,15 @@
-- name: packages | firefox
+---
+- name: packages | Firefox
   become: true
   block:
     - name: packages | firefox | install
-      package:
+      ansible.builtin.package:
         name: firefox
         state: latest
       when: ansible_distribution in ["Artix Linux", "Archlinux", "Debian", "Pop!_OS"]
 
-    - name: packages | firefox
+    - name: packages | Firefox
+      when: ansible_distribution in ["Ubuntu"]
       block:
         - name: packages | firefox | ensure GPG is installed (Ubuntu)
           ansible.builtin.apt:
@@ -31,4 +33,3 @@
           ansible.builtin.apt:
             name: firefox
             state: present
-      when: ansible_distribution in ["Ubuntu"]

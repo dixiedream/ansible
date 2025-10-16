@@ -1,15 +1,16 @@
-- name: gnome | pop-shell
+---
+- name: gnome | Pop-shell
   become_user: "{{ user }}"
+  when: ansible_distribution in ["Pop!_OS", "Ubuntu"]
   block:
     - name: gnome | pop-shell | setup
       vars:
         base_key: "/org/gnome/shell/extensions/pop-shell"
-      dconf:
+      community.general.dconf:
         key: "{{ item.key }}"
         value: "{{ item.value }}"
       with_items:
-        - { key: "{{ base_key }}/gap-inner", value: "uint32 1"}
-        - { key: "{{ base_key }}/gap-outer", value: "uint32 1"}
-        - { key: "{{ base_key }}/show-title", value: "false"}
-        - { key: "{{ base_key }}/show-skip-taskbar", value: "false"}
-  when: ansible_distribution in ["Pop!_OS", "Ubuntu"]
+        - { key: "{{ base_key }}/gap-inner", value: "uint32 1" }
+        - { key: "{{ base_key }}/gap-outer", value: "uint32 1" }
+        - { key: "{{ base_key }}/show-title", value: "false" }
+        - { key: "{{ base_key }}/show-skip-taskbar", value: "false" }

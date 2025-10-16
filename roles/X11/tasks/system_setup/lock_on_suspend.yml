@@ -1,8 +1,11 @@
-- name: system setup | lock screen on suspend
+---
+- name: system setup | Lock screen on suspend
   become: true
+  when: ansible_system == "Linux" and (x11_install_type is not defined or x11_install_type == 'wm')
+
   block:
     - name: system setup | lock screen on suspend | copy conf file (Systemd)
-      copy:
+      ansible.builtin.copy:
         src: system_setup/systemd_lock_on_suspend.conf
         dest: /etc/systemd/system/slock@.service
         owner: root
@@ -10,18 +13,16 @@
       when: "ansible_service_mgr == 'systemd'"
 
     - name: system setup | lock screen on suspend | enable service (Systemd)
-      service:
+      ansible.builtin.service:
         name: "slock@{{ user }}.service"
-        enabled: yes
+        enabled: true
       when: "ansible_service_mgr == 'systemd'"
 
     - name: system setup | lock screen on suspend | copy conf file (Runit)
-      template:
+      ansible.builtin.template:
         src: system_setup/runit_lock_on_suspend.j2
         dest: "/etc/elogind/system-sleep/lock.sh"
         owner: root
         group: root
-        mode: 0700
+        mode: "0700"
       when: "ansible_service_mgr != 'systemd'"
-  when: ansible_system == "Linux" and (x11_install_type is not defined or x11_install_type == 'wm')
-

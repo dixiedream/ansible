@@ -1,8 +1,9 @@
-- name: system setup | locale
+---
+- name: system setup | Locale
   become: true
+  when: ansible_distribution in ["Archlinux", "Artix Linux", "Debian", "Ubuntu"]
   block:
     - name: system setup | locale | set caps lock as ctrl
-      copy:
+      ansible.builtin.copy:
         src: system_setup/locale_keymap.conf
         dest: /etc/X11/xorg.conf.d/00-keyboard.conf
-  when: ansible_distribution in ["Archlinux", "Artix Linux", "Debian", "Ubuntu"]

@@ -1,18 +1,42 @@
-- name: packages | gitflow
+---
+- name: packages | Gitflow
   become: true
   block:
-    - name: packages | gitflow | check if already installed
-      stat:
-        path: /usr/bin/git-flow
-      register: helper_is_present
+    - name: packages | gitflow | Archlinux
+      when: ansible_distribution in ["Archlinux", "Artix Linux"]
 
-    - name: packages | gitflow | install (Archlinux)
-      become_user: "{{ user }}"
-      shell: "yes |  {{ aur_helper_name }} -S --removemake --noconfirm gitflow-cjs"
-      when: (not helper_is_present.stat.exists) and ansible_distribution in ["Archlinux", "Artix Linux"]
+      block:
+        - name: packages | gitflow | check if already installed
+          ansible.builtin.stat:
+            path: /usr/bin/git-flow
+          register: pkg_is_present
 
+        - name: packages | gitflow | enable passwordless pacman
+          become: true
+          ansible.builtin.replace:
+            path: "/etc/sudoers.d/{{ user }}"
+            regexp: "^(Cmnd_Alias.*)$"
+            replace: "\\1, /usr/bin/pacman"
+            validate: "visudo -cf %s"
+          when: not pkg_is_present.stat.exists
+
+        - name: packages | gitflow | install (Archlinux)
+          become_user: "{{ user }}"
+          ansible.builtin.command: "{{ aur_helper_name }} -S --removemake --noconfirm gitflow-cjs"
+          args:
+            creates: /usr/bin/git-flow
+          when: not pkg_is_present.stat.exists
+
+        - name: packages | gitflow | disable passwordless pacman
+          become: true
+          ansible.builtin.replace:
+            path: "/etc/sudoers.d/{{ user }}"
+            regexp: "^(Cmnd_Alias[^\\n]*?)(?:\\s*,\\s*/usr/bin/pacman)?\\s*$"
+            replace: "\\1"
+            validate: "visudo -cf %s"
+          when: not pkg_is_present.stat.exists
     - name: packages | gitflow | install (Debian)
-      package:
+      ansible.builtin.package:
         name: git-flow
         state: latest
       when: ansible_distribution in ["Ubuntu", "Debian", "Pop!_OS"]

@@ -1,8 +1,10 @@
-- name: packages | debloat Gnome
+---
+- name: packages | Debloat Gnome
   become: true
+  when: ansible_os_family == "Debian"
   block:
     - name: packages | debloat Gnome | remove unwanted packages
-      apt:
+      ansible.builtin.apt:
         name:
           - baobab
           - eog
@@ -13,4 +15,3 @@
           - totem
           - evince
         state: absent
-  when: ansible_os_family == "Debian"

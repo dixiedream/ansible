@@ -1,7 +1,8 @@
-- name: gnome | input sources
+---
+- name: gnome | Input sources
   vars:
     base_key: "/org/gnome/desktop/input-sources"
-  dconf:
+  community.general.dconf:
     key: "{{ item.key }}"
     value: "{{ item.value }}"
   with_items:

@@ -1,21 +1,40 @@
+---
 - name: packages | AUR helper
-  become_user: "{{ user }}"
+  when: ansible_os_family in ["Archlinux", "Artix Linux"]
   block:
     - name: packages | AUR helper | check if already installed
-      stat:
+      ansible.builtin.stat:
         path: /usr/bin/{{ aur_helper_name }}
       register: helper_is_present
 
     - name: packages | AUR helper | clone repo (Archlinux)
-      git:
+      ansible.builtin.git:
         repo: https://aur.archlinux.org/{{ aur_helper_name }}-bin.git
         dest: /tmp/{{ aur_helper_name }}
       when: not helper_is_present.stat.exists
 
+    - name: packages | AUR helper | enable passwordless pacman
+      become: true
+      ansible.builtin.replace:
+        path: "/etc/sudoers.d/{{ user }}"
+        regexp: "^(Cmnd_Alias.*)$"
+        replace: "\\1, /usr/bin/pacman"
+        validate: "visudo -cf %s"
+      when: not helper_is_present.stat.exists
+
     - name: packages | AUR helper | install (Archlinux)
-      command: makepkg --noconfirm -si
+      become_user: "{{ user }}"
+      ansible.builtin.command: makepkg --noconfirm -si
       args:
         chdir: /tmp/{{ aur_helper_name }}
         creates: /usr/bin/{{ aur_helper_name }}
       when: not helper_is_present.stat.exists
-  when: ansible_os_family in ["Archlinux", "Artix Linux"]
+
+    - name: packages | AUR helper | disable passwordless pacman
+      become: true
+      ansible.builtin.replace:
+        path: "/etc/sudoers.d/{{ user }}"
+        regexp: "^(Cmnd_Alias[^\\n]*?)(?:\\s*,\\s*/usr/bin/pacman)?\\s*$"
+        replace: "\\1"
+        validate: "visudo -cf %s"
+      when: not helper_is_present.stat.exists

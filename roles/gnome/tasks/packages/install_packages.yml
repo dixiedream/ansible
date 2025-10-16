@@ -1,8 +1,9 @@
+---
 - name: gnome | packages | install packages
   become: true
   block:
     - name: gnome | packages | install packages (Ubuntu)
-      package:
+      ansible.builtin.package:
         name:
           - gnome-shell-extension-manager
         state: latest

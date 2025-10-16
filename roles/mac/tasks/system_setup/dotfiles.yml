@@ -1,33 +1,30 @@
+---
 - name: system setup | dotfiles | MacOS
+  when: ansible_system == "Darwin"
   block:
     - name: system setup | dotfiles | Clone repo
-      git:
-        bare: yes
+      ansible.builtin.git:
+        bare: true
         repo: https://github.com/dixiedream/dotfiles.git
         dest: "$HOME/.cfg"
 
     - name: system setup | dotfiles | Setup repo
-      command: "git --git-dir=$HOME/.cfg --work-tree=$HOME checkout -f master"
-
+      ansible.builtin.command: "git --git-dir=$HOME/.cfg --work-tree=$HOME checkout -f master"
     - name: system setup | dotfiles | Setup repo
-      command: "git --git-dir=$HOME/.cfg --work-tree=$HOME config --local status.showUntrackedFiles no"
-
+      ansible.builtin.command: "git --git-dir=$HOME/.cfg --work-tree=$HOME config --local status.showUntrackedFiles no"
     - name: system setup | dotfiles | Setup repo
-      command: "git --git-dir=$HOME/.cfg --work-tree=$HOME config remote.origin.url 'git@github.com:dixiedream/dotfiles.git'"
-
+      ansible.builtin.command: "git --git-dir=$HOME/.cfg --work-tree=$HOME config remote.origin.url 'git@github.com:dixiedream/dotfiles.git'"
     - name: system setup | dotfiles | Setup repo
-      command: "git --git-dir=$HOME/.cfg --work-tree=$HOME config remote.origin.fetch 'refs/heads/*:refs/remotes/origin/*'"
-
-    - name: system setup | enable home brew binaries on zsh
-      lineinfile:
+      ansible.builtin.command: "git --git-dir=$HOME/.cfg --work-tree=$HOME config remote.origin.fetch 'refs/heads/*:refs/remotes/origin/*'"
+    - name: system setup | Enable home brew binaries on zsh
+      ansible.builtin.lineinfile:
         dest: "/home/{{ user }}/.config/zsh/.zshrc"
         regexp: '^eval "$(/opt/homebrew/bin/brew shellenv)"'
         line: 'eval "$(/opt/homebrew/bin/brew shellenv)"'
-        insertafter: '^_comp_options'
+        insertafter: "^_comp_options"
 
-    - name: system setup | comment dmenupass
-      lineinfile:
+    - name: system setup | Comment dmenupass
+      ansible.builtin.lineinfile:
         dest: "/home/{{ user }}/.zprofile"
-        regexp: '^export SUDO_ASKPASS='
+        regexp: "^export SUDO_ASKPASS="
         state: absent
-  when: ansible_system == "Darwin"

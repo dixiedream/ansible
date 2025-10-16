@@ -1,5 +1,6 @@
+---
 - name: system setup | photos | Prevent from opening automatically when devices are plugged in
-  osx_defaults:
+  community.general.osx_defaults:
     host: currentHost
     domain: com.apple.ImageCapture
     key: disableHotPlug
@@ -7,6 +8,6 @@
     value: true
 
 - name: system setup | photos | restart
-  shell: killall Photos
+  ansible.builtin.command: killall Photos
   changed_when: false
   ignore_errors: true

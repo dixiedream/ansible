@@ -1,24 +1,25 @@
+---
 - name: packages | neovim | install package
   become: true
-  package:
+  ansible.builtin.package:
     name: neovim
     state: latest
   when: ansible_distribution in ["Archlinux", "Artix Linux"]
 
-- name: packages | neovim (Debian)
+- name: packages | Neovim (Debian)
   become: true
+  when: ansible_distribution in ["Ubuntu", "Debian", "Pop!_OS"]
   block:
     - name: packages | neovim (Debian) | add "unstable" repository
-      apt_repository:
-        repo: 'ppa:neovim-ppa/unstable'
+      ansible.builtin.apt_repository:
+        repo: "ppa:neovim-ppa/unstable"
         state: present
 
     - name: packages | neovim (Debian) | update apt cache
-      apt:
-        update_cache: yes
+      ansible.builtin.apt:
+        update_cache: true
 
     - name: packages | neovim (Debian) | install
-      apt:
+      ansible.builtin.apt:
         name: neovim
         state: latest
-  when: ansible_distribution in ["Ubuntu", "Debian", "Pop!_OS"]

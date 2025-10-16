@@ -1,13 +1,14 @@
+---
 - name: users | "{{ user }}"
   become: true
   block:
     - name: users | "{{ user }}" | create group
-      group:
+      ansible.builtin.group:
         name: "{{ user }}"
         state: present
 
     - name: users | "{{ user }}" | create user
-      user:
+      ansible.builtin.user:
         name: "{{ user }}"
         group: "{{ user }}"
         groups: "{{ sudo_group }}"
@@ -17,44 +18,44 @@
       ignore_errors: true # prevent issues dealing with ldap users
 
     - name: users | "{{ user }}" | ensure "{{ user }}" is in video group (Debian)
-      user:
+      ansible.builtin.user:
         name: "{{ user }}"
         groups: video
-        append: yes
+        append: true
       when: ansible_distribution == "Debian" and "ansible_service_mgr != 'systemd'"
 
     - name: users | "{{ user }}" | add sudoers file
-      template:
+      ansible.builtin.template:
         src: users/sudoers.j2
         dest: "/etc/sudoers.d/{{ user }}"
         owner: root
         group: root
-        mode: 0400
+        mode: "0440"
 
     - name: users | "{{ user }}" | create .ssh directory
-      file:
+      ansible.builtin.file:
         path: "{{ item.dir }}"
         state: directory
         owner: "{{ user }}"
         group: "{{ user }}"
-        mode: 0700
+        mode: "0700"
       with_items:
         - { dir: "/home/{{ user }}/.ssh" }
 
     - name: users | "{{ user }}" | check if key already exists
-      stat:
+      ansible.builtin.stat:
         path: "/home/{{ user }}/.ssh/id_rsa"
       register: key_stat
 
     - name: users | "{{ user }}" | generate ssh key
-      openssh_keypair:
+      community.crypto.openssh_keypair:
         path: "/home/{{ user }}/.ssh/id_rsa"
         owner: "{{ user }}"
         group: "{{ user }}"
       when: not key_stat.stat.exists
 
     - name: users | "{{ user }}" | remove bash related files
-      file:
+      ansible.builtin.file:
         path: "{{ item }}"
         state: absent
       with_items:

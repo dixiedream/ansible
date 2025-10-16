@@ -1,23 +1,51 @@
 ---
-- name: packages | twingate
+- name: packages | Twingate
   become: true
+  when: ansible_form_factor is defined and ansible_form_factor in ["Notebook", "Other"]
   block:
-    - name: packages | twingate | install package (Archlinux)
-      become_user: "{{ user }}"
-      shell: "{{ aur_helper_name }} -S --noconfirm --removemake twingate-client"
+    - name: packages | twingate | Archlinux
       when: ansible_distribution in ["Archlinux", "Artix Linux"]
 
-    - name: packages | twingate | debian
       block:
-        - name: packages | twingate | add repo to sources list
-          apt_repository:
+        - name: packages | twingate | check if already installed
+          ansible.builtin.stat:
+            path: /usr/bin/twingate
+          register: pkg_is_present
+
+        - name: packages | twingate | enable passwordless pacman
+          become: true
+          ansible.builtin.replace:
+            path: "/etc/sudoers.d/{{ user }}"
+            regexp: "^(Cmnd_Alias.*)$"
+            replace: "\\1, /usr/bin/pacman"
+            validate: "visudo -cf %s"
+          when: not pkg_is_present.stat.exists
+
+        - name: packages | twingate | install package (Archlinux)
+          become_user: "{{ user }}"
+          ansible.builtin.command: "{{ aur_helper_name }} -S --noconfirm --removemake twingate-client"
+          args:
+            creates: /usr/bin/twingate
+          when: not pkg_is_present.stat.exists
+
+        - name: packages | twingate | disable passwordless pacman
+          become: true
+          ansible.builtin.replace:
+            path: "/etc/sudoers.d/{{ user }}"
+            regexp: "^(Cmnd_Alias[^\\n]*?)(?:\\s*,\\s*/usr/bin/pacman)?\\s*$"
+            replace: "\\1"
+            validate: "visudo -cf %s"
+          when: not pkg_is_present.stat.exists
+    - name: packages | twingate | debian
+      when: ansible_os_family == "Debian"
+      block:
+        - name: packages | twingate | add repo to sources list (Debian)
+          ansible.builtin.apt_repository:
             repo: deb [trusted=yes] https://packages.twingate.com/apt/ /
             state: present
             filename: twingate
 
-        - name: packages | twingate | install package
-          package:
+        - name: packages | twingate | install package (Debian)
+          ansible.builtin.package:
             name: twingate
-            update_cache: yes
-      when: ansible_os_family == "Debian"
-  when: ansible_form_factor is defined and ansible_form_factor in ["Notebook", "Other"]
+            update_cache: true

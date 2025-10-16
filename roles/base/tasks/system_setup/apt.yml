@@ -1,10 +1,11 @@
-- name: system setup | apt
+---
+- name: system setup | Apt
   become: true
+  when: ansible_distribution in ["Debian"]
   block:
     - name: system setup | apt | disable recommended and suggested package installation (Debian)
-      copy:
+      ansible.builtin.copy:
         src: system_setup/apt.conf
         dest: /etc/apt/apt.conf.d/99norec
         owner: root
         group: root
-  when: ansible_distribution in ["Debian"]

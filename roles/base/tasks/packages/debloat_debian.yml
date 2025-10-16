@@ -1,15 +1,17 @@
-- name: packages | debloat Debian
+---
+- name: packages | Debloat Debian
   become: true
+  when: ansible_distribution in ["Debian"]
   block:
     - name: packages | debloat Debian | remove unwanted services
-      service:
+      ansible.builtin.service:
         name: bluetooth
         state: stopped
-        enabled: no
+        enabled: false
       ignore_errors: true
 
     - name: packages | debloat Debian | remove unwanted packages
-      apt:
+      ansible.builtin.apt:
         name:
           - apache2
           - anacron
@@ -31,7 +33,7 @@
 
     # https://github.com/terminalforlife/Extra/blob/master/source/simplify-ubuntu/simplify-ubuntu
     - name: packages | debloat Debian | remove claimed by simplify-ubuntu script
-      apt:
+      ansible.builtin.apt:
         name:
           - user-setup
           - virtualbox-guest
@@ -92,7 +94,7 @@
         state: absent
 
     - name: packages | debloat Debian | remove laptop stuff (Debian desktop)
-      apt:
+      ansible.builtin.apt:
         name:
           - wmbattery
           - whereami
@@ -126,7 +128,7 @@
       when: ansible_form_factor is undefined or ansible_form_factor != "Notebook"
 
     - name: packages | debloat Debian | remove claimed non critical package
-      apt:
+      ansible.builtin.apt:
         name:
           - aptitude
           - at
@@ -165,4 +167,3 @@
           - vim-tiny
           - w3m
         state: absent
-  when: ansible_distribution in ["Debian"]

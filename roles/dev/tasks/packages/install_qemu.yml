@@ -1,8 +1,9 @@
-- name: packages | qemu
+---
+- name: packages | Qemu
   become: true
   block:
     - name: packages | qemu | install required packages (Archlinux)
-      pacman:
+      community.general.pacman:
         name:
           - qemu-base
           # - dnsmasq
@@ -16,7 +17,7 @@
       when: ansible_os_family in ["Archlinux", "Artix Linux"]
 
     - name: packages | qemu | install required packages (Debian)
-      apt:
+      ansible.builtin.apt:
         name:
           - qemu-system-x86
           - libvirt-daemon-system
@@ -30,10 +31,10 @@
       when: ansible_os_family in ["Debian"]
 
     - name: packages | qemu | ensure qemu related services are not enabled (Debian)
-      service:
+      ansible.builtin.service:
         name: "{{ item }}"
         state: stopped
-        enabled: no
+        enabled: false
       with_items:
         - libvirtd
         - libvirt-guests
@@ -43,16 +44,16 @@
 
     - name: "users | {{ user }} | ensure {{ user }} is in libvirt group (Linux)"
       become: true
-      user:
+      ansible.builtin.user:
         name: "{{ user }}"
         groups: libvirt
-        append: yes
+        append: true
       when: ansible_system == "Linux"
 
     - name: "users | {{ user }} | ensure {{ user }} is in kvm group (Ubuntu)"
       become: true
-      user:
+      ansible.builtin.user:
         name: "{{ user }}"
         groups: kvm
-        append: yes
+        append: true
       when: ansible_distribution in ["Ubuntu"]

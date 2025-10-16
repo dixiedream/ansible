@@ -1,14 +1,16 @@
-- name: packages | dwm
+---
+- name: packages | Dwm
   become: true
+  when: ansible_system == "Linux" and (x11_install_type is not defined or x11_install_type == 'wm')
   block:
     - name: packages | dwm | clone repo
-      git:
+      ansible.builtin.git:
         repo: https://github.com/dixiedream/dwm
         dest: /tmp/dwm
-        force: yes
+        force: true
 
     - name: packages | dwm | install required dependencies (Debian)
-      package:
+      ansible.builtin.package:
         name:
           - build-essential
           - make
@@ -24,7 +26,6 @@
       when: ansible_os_family == "Debian"
 
     - name: packages | dwm | install
-      make:
+      community.general.make:
         target: install
         chdir: /tmp/dwm
-  when: ansible_system == "Linux" and (x11_install_type is not defined or x11_install_type == 'wm')

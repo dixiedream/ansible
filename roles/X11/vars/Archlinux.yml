@@ -1,3 +1,4 @@
+---
 # Package names
 xorg_server_package: xorg-server
 xorg_xinit_package: xorg-xinit

@@ -1,3 +1,4 @@
+---
 # Common vars
 sudo_group: wheel
 aur_helper_name: yay

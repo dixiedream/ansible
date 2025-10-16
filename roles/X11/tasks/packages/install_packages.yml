@@ -1,17 +1,18 @@
-- name: packages
+---
+- name: Packages
   become: true
   block:
-    - name: packages | install common packages
-      package:
+    - name: packages | Install common packages
+      ansible.builtin.package:
         name:
           - sxiv
         state: latest
 
-    - name: packages | window manager
+    - name: packages | Window manager
       when: x11_install_type is not defined or x11_install_type == 'wm'
       block:
-        - name: packages | install window managers required packages
-          package:
+        - name: packages | Install window managers required packages
+          ansible.builtin.package:
             name:
               - arandr
               - autorandr
@@ -29,8 +30,8 @@
             state: latest
           when: ansible_distribution in ["Archlinux", "Artix Linux", "Debian", "Ubuntu"]
 
-        - name: packages | install Xsetroot (Archlinux)
-          pacman:
+        - name: packages | Install Xsetroot (Archlinux)
+          community.general.pacman:
             name:
               - xorg-xsetroot
             state: latest

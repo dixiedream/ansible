@@ -1,42 +1,69 @@
-- name: packages | brave
+---
+- name: packages | Brave
   become: true
   block:
-    - name: packages | brave | install (Archlinux)
-      become_user: "{{ user }}"
-      command: "{{ aur_helper_name }} -S --noconfirm --removemake brave-bin"
-      args:
-        creates: /usr/bin/brave
+    - name: packages | brave | Archlinux
       when: ansible_distribution in ["Archlinux", "Artix Linux"]
 
+      block:
+        - name: packages | brave | check if already installed
+          ansible.builtin.stat:
+            path: /usr/bin/brave
+          register: pkg_is_present
+
+        - name: packages | brave | enable passwordless pacman
+          become: true
+          ansible.builtin.replace:
+            path: "/etc/sudoers.d/{{ user }}"
+            regexp: "^(Cmnd_Alias.*)$"
+            replace: "\\1, /usr/bin/pacman"
+            validate: "visudo -cf %s"
+          when: not pkg_is_present.stat.exists
+
+        - name: packages | brave | install (Archlinux)
+          become_user: "{{ user }}"
+          ansible.builtin.command: "{{ aur_helper_name }} -S --noconfirm --removemake brave-bin"
+          args:
+            creates: /usr/bin/brave
+          when: not pkg_is_present.stat.exists
+
+        - name: packages | brave | disable passwordless pacman
+          become: true
+          ansible.builtin.replace:
+            path: "/etc/sudoers.d/{{ user }}"
+            regexp: "^(Cmnd_Alias[^\\n]*?)(?:\\s*,\\s*/usr/bin/pacman)?\\s*$"
+            replace: "\\1"
+            validate: "visudo -cf %s"
+          when: not pkg_is_present.stat.exists
     - name: packages | brave | install (Debian)
+      when: ansible_os_family == "Debian"
       block:
         - name: packages | brave | install required dependencies (Debian)
-          package:
+          ansible.builtin.package:
             name:
               - apt-transport-https
               - curl
 
         - name: packages | brave | setup keyring (Debian)
-          get_url:
+          ansible.builtin.get_url:
             url: https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
             dest: /usr/share/keyrings/brave-browser-archive-keyring.gpg
 
         - name: packages | brave | setup repo (Debian)
-          apt_repository:
+          ansible.builtin.apt_repository:
             repo: deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main
             state: present
             filename: brave-browser-release
 
         - name: packages | brave | install (Debian)
-          apt:
+          ansible.builtin.apt:
             name: brave-browser
-            update_cache: yes
+            update_cache: true
 
         - name: packages | brave | copy brave binary to /usr/bin (Debian)
-          file:
+          ansible.builtin.file:
             src: /opt/brave.com/brave/brave
             dest: /usr/bin/brave
             state: link
             owner: root
             group: root
-      when: ansible_os_family == "Debian"

@@ -1,14 +1,14 @@
 ---
 - hosts: all
   pre_tasks:
-    - name: pre-run | update package cache (MacOS)
-      homebrew:
-        update_homebrew: yes
-        upgrade_all: yes
+    - name: pre-run | Update package cache (MacOS)
+      community.general.homebrew:
+        update_homebrew: true
+        upgrade_all: true
       changed_when: false
       when: ansible_os_family == "Darwin"
 
-  # run roles
+# run roles
 - hosts: all
   roles:
     - mac

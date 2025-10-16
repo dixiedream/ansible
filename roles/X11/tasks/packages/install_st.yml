@@ -1,15 +1,16 @@
-- name: packages | st
+---
+- name: packages | St
   become: true
-  block:
-    - name: packages | st | clone repo
-      git:
-        repo: https://github.com/dixiedream/st
-        dest: /tmp/st
-        force: yes
-
-    - name: packages | st | install st
-      make:
-        target: install
-        chdir: /tmp/st
   when: ansible_system == "Linux" and (x11_install_type is not defined or x11_install_type == 'wm')
 
+  block:
+    - name: packages | st | clone repo
+      ansible.builtin.git:
+        repo: https://github.com/dixiedream/st
+        dest: /tmp/st
+        force: true
+
+    - name: packages | st | install st
+      community.general.make:
+        target: install
+        chdir: /tmp/st

@@ -1,31 +1,28 @@
+---
 - name: system setup | dotfiles | Linux
   become: true
   become_user: "{{ user }}"
   vars:
     dotfile_src: "/home/{{ user }}/.cfg"
+  when: ansible_system == "Linux"
   block:
     - name: system setup | dotfiles | Clone repo
-      git:
-        bare: yes
+      ansible.builtin.git:
+        bare: true
         repo: https://github.com/dixiedream/dotfiles.git
         dest: "{{ dotfile_src }}"
 
     - name: system setup | dotfiles | Setup repo
-      command: "git --git-dir={{ dotfile_src }} --work-tree='/home/{{ user }}' checkout -f {{ dotfiles_branch }}"
-
+      ansible.builtin.command: "git --git-dir={{ dotfile_src }} --work-tree='/home/{{ user }}' checkout -f {{ dotfiles_branch }}"
     - name: system setup | dotfiles | Setup repo
-      command: "git --git-dir={{ dotfile_src }} --work-tree='/home/{{ user }}' config --local status.showUntrackedFiles no"
-
+      ansible.builtin.command: "git --git-dir={{ dotfile_src }} --work-tree='/home/{{ user }}' config --local status.showUntrackedFiles no"
     - name: system setup | dotfiles | Setup repo
-      command: "git --git-dir={{ dotfile_src }} --work-tree='/home/{{ user }}' config remote.origin.url 'git@github.com:dixiedream/dotfiles.git'"
-
+      ansible.builtin.command: "git --git-dir={{ dotfile_src }} --work-tree='/home/{{ user }}' config remote.origin.url 'git@github.com:dixiedream/dotfiles.git'"
     - name: system setup | dotfiles | Setup repo
-      command: "git --git-dir={{ dotfile_src }} --work-tree='/home/{{ user }}' config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'"
-
+      ansible.builtin.command: "git --git-dir={{ dotfile_src }} --work-tree='/home/{{ user }}' config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'"
     - name: system setup | dotfiles | Add pipewire to X autostart (Runit)
-      lineinfile:
+      ansible.builtin.lineinfile:
         dest: "/home/{{ user }}/.xinitrc"
         regexp: '^autostart="dunst xcompmgr unclutter dwm_status"'
         line: 'autostart="dunst xcompmgr unclutter pipewire dwm_status"'
       when: ansible_service_mgr != 'systemd'
-  when: ansible_system == "Linux"

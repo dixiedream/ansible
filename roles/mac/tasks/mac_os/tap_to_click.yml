@@ -1,19 +1,20 @@
-- name: system setup | tap to click step 1
-  osx_defaults:
+---
+- name: system setup | Tap to click step 1
+  community.general.osx_defaults:
     domain: com.apple.driver.AppleBluetoothMultitouch.trackpad
     key: Clicking
     type: bool
     value: true
 
-- name: system setup | tap to click step 2
-  osx_defaults:
+- name: system setup | Tap to click step 2
+  community.general.osx_defaults:
     domain: com.apple.AppleMultitouchTrackpad
     key: Clicking
     type: bool
     value: true
 
 - name: system setup | tap to click | step 3
-  osx_defaults:
+  community.general.osx_defaults:
     domain: com.apple.driver.AppleMultitouch.trackpad
     key: Clicking
     type: bool
@@ -21,7 +22,7 @@
   become: true
 
 - name: system setup | tap to click | step 4
-  osx_defaults:
+  community.general.osx_defaults:
     domain: NSGlobalDomain
     key: com.apple.mouse.tapBehavior
     type: int
@@ -29,14 +30,14 @@
     host: currentHost
 
 - name: system setup | tap to click | step 5
-  osx_defaults:
+  community.general.osx_defaults:
     domain: NSGlobalDomain
     key: com.apple.mouse.tapBehavior
     type: int
     value: 1
 
-- name: system setup | disable natural scrolling
-  osx_defaults:
+- name: system setup | Disable natural scrolling
+  community.general.osx_defaults:
     domain: NSGlobalDomain
     key: com.apple.swipescrolldirection
     type: bool

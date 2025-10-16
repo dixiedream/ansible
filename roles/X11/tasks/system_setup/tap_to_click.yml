@@ -1,9 +1,10 @@
-- name: system setup | tap to click
+---
+- name: system setup | Tap to click
   become: true
-  copy:
+  ansible.builtin.copy:
     src: system_setup/tap_to_click.conf
     dest: /etc/X11/xorg.conf.d/30-touchpad.conf
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   when: ansible_distribution in ["Archlinux", "Artix Linux", "Debian", "Ubuntu"]

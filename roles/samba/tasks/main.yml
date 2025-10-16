@@ -1,49 +1,51 @@
+---
 # Samba share client
-- name: samba
+- name: Samba
   become: true
+  when: ansible_distribution in ["Archlinux", "Artix Linux"]
   block:
-    - name: samba | install client
-      package:
+    - name: samba | Install client
+      ansible.builtin.package:
         name:
           - smbclient
         state: latest
 
-    - name: samba | create etc directory
-      file:
+    - name: samba | Create etc directory
+      ansible.builtin.file:
         path: /etc/samba
         state: directory
 
-    - name: samba | create configuration file
-      file:
+    - name: samba | Create configuration file
+      ansible.builtin.file:
         path: /etc/samba/smb.conf
         state: touch
         modification_time: preserve
         access_time: preserve
 
-    - name: samba | create credential directory
-      file:
+    - name: samba | Create credential directory
+      ansible.builtin.file:
         path: /etc/samba/credentials
         state: directory
         owner: root
-        mode: '0700'
+        mode: "0700"
 
-    - name: samba | copy credential file
-      template:
+    - name: samba | Copy credential file
+      ansible.builtin.template:
         src: credentials.j2
         dest: /etc/samba/credentials/share
         owner: root
-        mode: '0600'
+        mode: "0600"
 
-    - name: samba | create localAliases if not found
-      file:
+    - name: samba | Create localAliases if not found
+      ansible.builtin.file:
         path: "/home/{{ user }}/.config/localAliases"
         state: touch
         modification_time: preserve
         access_time: preserve
         owner: "{{ user }}"
 
-    - name: samba | add alias
-      lineinfile:
+    - name: samba | Add alias
+      ansible.builtin.lineinfile:
         path: "/home/{{ user }}/.config/localAliases"
         regexp: "^alias mount-{{ item }}=\"sudo mount --mkdir -t cifs //{{ samba_server }}/{{ item }} /mnt/fileserver/{{ item }} -o iocharset=utf8,credentials=/etc/samba/credentials/share,uid=1000,gid=1001\""
         line: "alias mount-{{ item }}=\"sudo mount --mkdir -t cifs //{{ samba_server }}/{{ item }} /mnt/fileserver/{{ item }} -o iocharset=utf8,credentials=/etc/samba/credentials/share,uid=1000,gid=1001\""
@@ -51,4 +53,3 @@
         - media
         - private
         - public
-  when: ansible_distribution in ["Archlinux", "Artix Linux"]

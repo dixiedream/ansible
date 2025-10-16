@@ -1,8 +1,9 @@
-- name: packages | psutil
+---
+- name: packages | Psutil
+  when: ansible_os_family == "Debian"
   block:
-    - name: packages | install psutil
+    - name: packages | Install psutil
       become: true
-      package:
+      ansible.builtin.package:
         name: python3-psutil
         state: latest
-  when: ansible_os_family == "Debian"

@@ -2,16 +2,23 @@
 - name: Pro audio
   become: true
   block:
+    - name: Pro audio | Remove jack2
+      ansible.builtin.package:
+        name:
+          - jack2
+        state: absent
+        force: true
+
     - name: Pro audio | Install required packages
-      package:
+      ansible.builtin.package:
         name:
           - pipewire-jack
           - reaper
           - reapack
 
     - name: Pro audio | Add environment variable
-      lineinfile:
+      ansible.builtin.lineinfile:
         dest: "/home/{{ user }}/.zprofile"
-        regexp: '^export PIPEWIRE_LATENCY'
+        regexp: "^export PIPEWIRE_LATENCY"
         line: 'export PIPEWIRE_LATENCY="128/48000"'
-        insertafter: '^# App specs'
+        insertafter: "^# App specs"

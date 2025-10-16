@@ -1,25 +1,25 @@
-- name: system setup | disable the sound effects on boot
+---
+- name: system setup | Disable the sound effects on boot
   become: true
-  shell: "nvram SystemAudioVolume=\" \""
-
-- name: system setup | disable transparency in the menu bar and elsewhere on Yosemite
-  osx_defaults:
+  ansible.builtin.command: "nvram SystemAudioVolume=\" \""
+- name: system setup | Disable transparency in the menu bar and elsewhere on Yosemite
+  community.general.osx_defaults:
     domain: com.apple.universalaccess
     key: reduceTransparency
     type: bool
     value: true
   ignore_errors: true
 
-- name: system setup | reduce motion (Yosemite)
-  osx_defaults:
+- name: system setup | Reduce motion (Yosemite)
+  community.general.osx_defaults:
     domain: com.apple.universalaccess
     key: reduceMotion
     type: bool
     value: true
   ignore_errors: true
 
-- name: system setup | reduce motion (Monterey and later)
-  osx_defaults:
+- name: system setup | Reduce motion (Monterey and later)
+  community.general.osx_defaults:
     domain: com.apple.Accessibility
     key: ReduceMotionEnabled
     type: bool
@@ -33,103 +33,101 @@
 #     type: string
 #     value: "0.764700 0.976500 0.568600"
 
-- name: system setup | set sidebar icon size to medium
-  osx_defaults:
+- name: system setup | Set sidebar icon size to medium
+  community.general.osx_defaults:
     domain: NSGlobalDomain
     key: NSTableViewDefaultSizeMode
     type: int
     value: 2
 
-- name: system setup | increase window speed for cocoa applications
-  osx_defaults:
+- name: system setup | Increase window speed for cocoa applications
+  community.general.osx_defaults:
     domain: NSGlobalDomain
     key: NSWindowResizeTime
     type: float
     value: 0.001
 
-- name: system setup | expand save panel by default
-  command: "{{ item }}"
+- name: system setup | Expand save panel by default
+  ansible.builtin.command: "{{ item }}"
   with_items:
     - defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
     - defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
   changed_when: false
 
-
-- name: system setup | expand print panel by default
-  command: "{{ item }}"
+- name: system setup | Expand print panel by default
+  ansible.builtin.command: "{{ item }}"
   with_items:
     - defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
     - defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
   changed_when: false
 
-- name: system setup | automatically quit printer app once the print jobs complete
-  osx_defaults:
+- name: system setup | Automatically quit printer app once the print jobs complete
+  community.general.osx_defaults:
     domain: com.apple.print.PrintingPrefs
     key: "Quit When Finished"
     type: bool
     value: true
 
-- name: system setup | save to disk (not to iCloud) by default
-  osx_defaults:
+- name: system setup | Save to disk (not to iCloud) by default
+  community.general.osx_defaults:
     domain: NSGlobalDomain
     key: NSDocumentSaveNewDocumentsToCloud
     type: bool
     value: false
 
-- name: system setup | disable the "Are you sure you want to open this application?" dialog
-  osx_defaults:
+- name: system setup | Disable the "Are you sure you want to open this application?" dialog
+  community.general.osx_defaults:
     domain: com.apple.LaunchServices
     key: LSQuarantine
     type: bool
     value: false
 
-- name: system setup | remove duplicates in the Open with menu
-  shell: /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user
-
-- name: system setup | disable resume system wide
-  osx_defaults:
+- name: system setup | Remove duplicates in the Open with menu
+  ansible.builtin.command: /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain
+    system -domain user
+- name: system setup | Disable resume system wide
+  community.general.osx_defaults:
     domain: com.apple.systempreferences
     key: NSQuitAlwaysKeepsWindows
     type: bool
     value: false
 
-- name: system setup | set help viewer windows to non floating mode
-  osx_defaults:
+- name: system setup | Set help viewer windows to non floating mode
+  community.general.osx_defaults:
     domain: com.apple.helpviewer
     key: DevMode
     type: bool
     value: true
 
-- name: system setup | disable notification center
-  shell: launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
-
-- name: system setup | disable auto correct
-  osx_defaults:
+- name: system setup | Disable notification center
+  ansible.builtin.shell: launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
+- name: system setup | Disable auto correct
+  community.general.osx_defaults:
     domain: NSGlobalDomain
     key: NSAutomaticSpellingCorrectionEnabled
     type: bool
     value: false
 
-- name: system setup | increase sound quality for bluetooth headphones
-  osx_defaults:
+- name: system setup | Increase sound quality for bluetooth headphones
+  community.general.osx_defaults:
     domain: com.apple.BluetoothAudioAgent
     key: "Apple Bitpool Min (editable)"
     type: int
     value: 40
 
-- name: system setup | enable tap in modal dialogs
-  osx_defaults:
+- name: system setup | Enable tap in modal dialogs
+  community.general.osx_defaults:
     domain: NSGlobalDomain
     key: AppleKeyboardUIMode
     type: int
     value: 3
 
-- name: system setup | set fast keyboard repeat rate
-  command: "{{ item }}"
+- name: system setup | Set fast keyboard repeat rate
+  ansible.builtin.command: "{{ item }}"
   with_items:
     - defaults write NSGlobalDomain KeyRepeat -int 1
     - defaults write NSGlobalDomain InitialKeyRepeat -int 10
   changed_when: false
 
-- name: system setup | stop itunes from responding to keyboard media keys
-  shell: launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null
+- name: system setup | Stop itunes from responding to keyboard media keys
+  ansible.builtin.shell: launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null
