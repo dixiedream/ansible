@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.17.1
+## 2.17.2
 - AUR installs permissions improvements
 - Fix invalid value replaced inside `makepkg.conf`
 
