@@ -1,41 +1,42 @@
-- name: system setup | language
-  osx_defaults:
+---
+- name: system setup | Language
+  community.general.osx_defaults:
     domain: NSGlobalDomain
     key: AppleLanguages
     type: array
     value:
       - "en"
 
-- name: system setup | locale
-  osx_defaults:
+- name: system setup | Locale
+  community.general.osx_defaults:
     domain: NSGlobalDomain
     key: AppleLocale
     type: string
     value: "en_US@currency=EUR"
 
-- name: system setup | measurement units
-  osx_defaults:
+- name: system setup | Measurement units
+  community.general.osx_defaults:
     domain: NSGlobalDomain
     key: AppleMeasurementUnits
     type: string
     value: "Centimeters"
 
-- name: system setup | temp unit
-  osx_defaults:
+- name: system setup | Temp unit
+  community.general.osx_defaults:
     domain: NSGlobalDomain
     key: AppleTemperatureUnit
     type: string
     value: "Celsius"
 
-- name: system setup | metrics units
-  osx_defaults:
+- name: system setup | Metrics units
+  community.general.osx_defaults:
     domain: NSGlobalDomain
     key: AppleMetricUnits
     type: bool
     value: true
 
-- name: system setup | disable language menu in the corner of boot screen
-  osx_defaults:
+- name: system setup | Disable language menu in the corner of boot screen
+  community.general.osx_defaults:
     path: /Library/Preferences
     domain: com.apple.loginwindow
     key: showInputMenu
@@ -43,6 +44,6 @@
     value: false
   become: true
 
-- name: system setup | timezone
-  shell: systemsetup -settimezone "Europe/Rome" > /dev/null
+- name: system setup | Timezone
+  ansible.builtin.shell: systemsetup -settimezone "Europe/Rome" > /dev/null
   become: true

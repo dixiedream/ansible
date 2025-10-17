@@ -1,2 +1,5 @@
-%{{ sudo_group }} ALL=(ALL:ALL) ALL
-%{{ user }} ALL=(ALL:ALL) NOPASSWD: /usr/bin/mount,/usr/bin/umount
+#%{{ sudo_group }} ALL=(ALL:ALL) ALL
+Cmnd_Alias USER_CMDS = /usr/bin/mount, /usr/bin/umount
+
+%{{ user }} ALL=(ALL) NOPASSWD: USER_CMDS
+

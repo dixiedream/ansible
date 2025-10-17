@@ -1,41 +1,43 @@
+---
 - name: packages | lua language server | install package (Archlinux)
   become: true
-  package:
+  ansible.builtin.package:
     name: lua-language-server
     state: latest
   when: ansible_os_family in ["Archlinux", "Artix Linux"]
 
-- name: packages | lua language server (Debian)
+- name: packages | Lua language server (Debian)
   become: true
+  when: ansible_os_family in ["Debian"]
+
   block:
     - name: packages | lua language server | download release (Debian)
-      get_url:
-        url: "https://github.com/sumneko/lua-language-server/releases/download/{{ lua_language_server_version }}/lua-language-server-{{ lua_language_server_version }}-linux-x64.tar.gz"
+      ansible.builtin.get_url:
+        url: "https://github.com/sumneko/lua-language-server/releases/download/{{ lua_language_server_version }}/lua-language-server-{{ lua_language_server_version
+          }}-linux-x64.tar.gz"
         dest: /tmp/lua-language-server.tar.gz
 
     - name: packages | lua language server | ensure dir exists (Debian)
-      file:
+      ansible.builtin.file:
         path: /opt/lua-language-server
         state: directory
 
     - name: packages | lua language server | extract archive (Debian)
-      unarchive:
+      ansible.builtin.unarchive:
         src: /tmp/lua-language-server.tar.gz
         dest: /opt/lua-language-server
         owner: root
         group: root
 
     - name: packages | lua language server | create alias script (Debian)
-      copy:
+      ansible.builtin.copy:
         src: packages/install_lualanguageserver.sh
         dest: "/home/{{ user }}/.local/bin/lua-language-server"
         owner: "{{ user }}"
         group: root
-        mode: 0755
-  when: ansible_os_family in ["Debian"]
-
+        mode: "0755"
 - name: packages | lua language server | install (MacOS)
-  homebrew:
+  community.general.homebrew:
     name: lua-language-server
     state: latest
   when: ansible_os_family == "Darwin"

@@ -1,10 +1,11 @@
-- name: gnome | appearance
+---
+- name: gnome | Appearance
   become_user: "{{ user }}"
   block:
     - name: gnome | appearance | setup desktop theme
       vars:
         base_key: "/org/gnome/desktop/interface"
-      dconf:
+      community.general.dconf:
         key: "{{ item.key }}"
         value: "{{ item.value }}"
       with_items:
@@ -14,7 +15,7 @@
     - name: gnome | appearance | enable night colors
       vars:
         base_key: "/org/gnome/settings-daemon/plugins/color"
-      dconf:
+      community.general.dconf:
         key: "{{ item.key }}"
         value: "{{ item.value }}"
       with_items:
@@ -22,16 +23,13 @@
         - { key: "{{ base_key }}/night-light-temperature", value: "uint32 3223" }
 
     - name: gnome | appearance | profile cleaning
-      lineinfile:
+      ansible.builtin.lineinfile:
         dest: "/home/{{ user }}/.zprofile"
         regexp: "^{{ item }}"
         line: "#{{ item }}"
       with_items:
-        - 'export GTK_THEME'
-        - 'export GTK2_RC_FILES'
-        - 'export PASSWORD_STORE_DIR'
-        - 'export QT_QPA_PLATFORMTHEME'
-        - 'export SUDO_ASKPASS'
-
-
-
+        - "export GTK_THEME"
+        - "export GTK2_RC_FILES"
+        - "export PASSWORD_STORE_DIR"
+        - "export QT_QPA_PLATFORMTHEME"
+        - "export SUDO_ASKPASS"

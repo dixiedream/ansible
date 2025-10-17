@@ -1,18 +1,20 @@
-- name: system setup | locale
+---
+- name: system setup | Locale
   become: true
+  when: ansible_os_family in ["Archlinux", "Artix Linux"]
   block:
     - name: system setup | locale | set time zone (Archlinux)
-      file:
+      ansible.builtin.file:
         src: /usr/share/zoneinfo/Europe/Rome
         dest: /etc/localtime
         state: link
         force: true
         owner: root
         group: root
-        mode: 0700
+        mode: "0700"
 
     - name: system setup | locale | set ntp (Archlinux)
-      command: timedatectl set-ntp true
+      ansible.builtin.command: timedatectl set-ntp true
       changed_when: false
       ignore_errors: true
       when: ansible_service_mgr == 'systemd'
@@ -25,36 +27,34 @@
     #   when: "ansible_service_mgr != 'systemd'"
 
     - name: system setup | locale | sync hardware clock and system clock (Archlinux)
-      command: hwclock --systohc
+      ansible.builtin.command: hwclock --systohc
       changed_when: false
       ignore_errors: true
 
     - name: system setup | locale | refresh tzdata (Archlinux)
-      command: pacman -S --noconfirm tzdata
+      ansible.builtin.command: pacman -S --noconfirm tzdata
       changed_when: false
       ignore_errors: true
 
     - name: system setup | locale | set locale.gen file (Archlinux)
-      shell: echo 'en_US.UTF-8 UTF-8' > /etc/locale.gen
-
+      ansible.builtin.shell: echo 'en_US.UTF-8 UTF-8' > /etc/locale.gen
     - name: system setup | locale | generate locale (Archlinux)
-      command: locale-gen
+      ansible.builtin.command: locale-gen
       changed_when: false
       ignore_errors: true
 
     - name: system setup | locale | create locale.conf (Archlinux)
-      copy:
+      ansible.builtin.copy:
         src: system_setup/locale_locale.conf
         dest: /etc/locale.conf
         group: root
         owner: root
-        mode: 0644
+        mode: "0644"
 
     - name: system setup | locale | create vconsole.conf (Archlinux)
-      copy:
+      ansible.builtin.copy:
         src: system_setup/locale_vconsole.conf
         dest: /etc/vconsole.conf
         group: root
         owner: root
-        mode: 0644
-  when: ansible_os_family in ["Archlinux", "Artix Linux"]
+        mode: "0644"

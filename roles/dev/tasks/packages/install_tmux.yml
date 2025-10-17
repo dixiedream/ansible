@@ -1,20 +1,21 @@
-- name: packages | tmux
+---
+- name: packages | Tmux
+  when: ansible_system == "Linux"
   block:
     - name: packages | tmux | install required packages
       become: true
-      package:
+      ansible.builtin.package:
         name: tmux
         state: present
 
     - name: packages | tmux | creates dir if not exists (Debian)
       become_user: "{{ user }}"
-      file:
+      ansible.builtin.file:
         path: "/home/{{ user }}/.config/tmux/plugins"
         state: directory
 
     - name: packages | tmux | install package manager
       become_user: "{{ user }}"
-      git:
+      ansible.builtin.git:
         repo: https://github.com/tmux-plugins/tpm
         dest: "/home/{{ user }}/.config/tmux/plugins/tpm"
-  when: ansible_system == "Linux"

@@ -1,13 +1,14 @@
+---
 - name: packages | golang | install  package (Archlinux)
   become: true
-  pacman:
+  community.general.pacman:
     name: go
     state: latest
   when: ansible_os_family in ["Archlinux", "Artix Linux"]
 
 - name: packages | golang | download archive (Debian)
   become: true
-  get_url:
+  ansible.builtin.get_url:
     checksum: "{{ golang_checksum }}"
     url: "https://go.dev/dl/go{{ golang_version }}.linux-amd64.tar.gz"
     dest: /tmp/golang.tar.gz
@@ -15,7 +16,7 @@
 
 - name: packages | golang | extract archive (Debian)
   become: true
-  unarchive:
+  ansible.builtin.unarchive:
     src: /tmp/golang.tar.gz
     dest: /usr/local/
     owner: root
@@ -24,14 +25,14 @@
 
 - name: packages | golang | update $PATH var (Debian)
   become_user: "{{ user }}"
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: "/home/{{ user }}/.zprofile"
-    regexp: '^export PATH=\$PATH:\$GOROOT/bin:\$GOPATH/bin'
+    regexp: "^export PATH=\\$PATH:\\$GOROOT/bin:\\$GOPATH/bin"
     line: "export PATH=$PATH:$GOROOT/bin:$GOPATH/bin:/usr/local/go/bin"
   when: ansible_os_family in ["Debian"]
 
 - name: packages | golang | install (MacOS)
-  homebrew:
+  community.general.homebrew:
     name: go
     state: latest
   when: ansible_os_family == "Darwin"

@@ -1,9 +1,10 @@
-- name: mac os | install epk tap
-  command: brew tap epk/epk
+---
+- name: mac os | Install epk tap
+  ansible.builtin.command: brew tap epk/epk
   changed_when: false
   ignore_errors: true
 
-- name: mac os | install San Francisco Nerd font
-  command: "brew install --cask font-sf-mono-nerd-font"
+- name: mac os | Install San Francisco Nerd font
+  ansible.builtin.command: "brew install --cask font-sf-mono-nerd-font"
   changed_when: false
   ignore_errors: true

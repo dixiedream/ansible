@@ -1,7 +1,8 @@
-- name: packages | download and install Nordic theme
+---
+- name: packages | Download and install Nordic theme
   become: true
-  unarchive:
+  ansible.builtin.unarchive:
     src: "https://github.com/EliverLara/Nordic/releases/download/{{ nordic_theme_version }}/Nordic.tar.xz"
     dest: /usr/share/themes
-    remote_src: yes
+    remote_src: true
   when: ansible_distribution in ["Archlinux", "Artix Linux", "Debian", "Ubuntu"] and (base_install_type is not defined or base_install_type == 'wm')

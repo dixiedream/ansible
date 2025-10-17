@@ -1,10 +1,11 @@
-- name: gnome | keybindings
+---
+- name: gnome | Keybindings
   become_user: "{{ user }}"
   block:
     - name: gnome | keybindings | window management | Ubuntu
       vars:
         base_key: "/org/gnome/desktop/wm/keybindings"
-      dconf:
+      community.general.dconf:
         key: "{{ item.key }}"
         value: "{{ item.value }}"
       with_items:
@@ -31,7 +32,7 @@
     - name: gnome | keybindings | window management | Pop OS
       vars:
         base_key: "/org/gnome/desktop/wm/keybindings"
-      dconf:
+      community.general.dconf:
         key: "{{ item.key }}"
         value: "{{ item.value }}"
       with_items:
@@ -67,7 +68,7 @@
     - name: gnome | keybindings | media keys | Ubuntu
       vars:
         base_key: "/org/gnome/settings-daemon/plugins/media-keys"
-      dconf:
+      community.general.dconf:
         key: "{{ item.key }}"
         value: "{{ item.value }}"
       with_items:
@@ -87,7 +88,7 @@
     - name: gnome | keybindings | media keys | Pop Os
       vars:
         base_key: "/org/gnome/settings-daemon/plugins/media-keys"
-      dconf:
+      community.general.dconf:
         key: "{{ item.key }}"
         value: "{{ item.value }}"
       with_items:
@@ -110,7 +111,7 @@
     - name: gnome | keybindings | LF
       vars:
         base_key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0"
-      dconf:
+      community.general.dconf:
         key: "{{ item.key }}"
         value: "{{ item.value }}"
       with_items:
@@ -121,7 +122,7 @@
     - name: gnome | keybindings | change window focus on mouse hover
       vars:
         base_key: "/org/gnome/desktop/wm/preferences"
-      dconf:
+      community.general.dconf:
         key: "{{ item.key }}"
         value: "{{ item.value }}"
       with_items:
@@ -131,7 +132,7 @@
     - name: gnome | keybindings | pop shell
       vars:
         base_key: "/org/gnome/shell/extensions/pop-shell"
-      dconf:
+      community.general.dconf:
         key: "{{ item.key }}"
         value: "{{ item.value }}"
       with_items:
@@ -146,7 +147,7 @@
     - name: gnome | keybindings | tilingshell | Ubuntu
       vars:
         base_key: "/org/gnome/shell/extensions/tilingshell"
-      dconf:
+      community.general.dconf:
         key: "{{ item.key }}"
         value: "{{ item.value }}"
       with_items:
@@ -154,7 +155,9 @@
         - { key: "{{ base_key }}/inner-gaps", value: "uint32 3" }
         - { key: "{{ base_key }}/layouts-json", value: "'[{\"id\":\"806173\",\"tiles\":[{\"x\":0,\"y\":0,\"width\":1,\"height\":1,\"groups\":[]}]}]'" }
         - { key: "{{ base_key }}/outer-gaps", value: "uint32 3" }
-        - { key: "{{ base_key }}/overridden-settings", value: "{\"org.gnome.mutter.keybindings\":{\"toggle-tiled-right\":\"['<Super>Right']\",\"toggle-tiled-left\":\"['<Super>Left']\"},\"org.gnome.desktop.wm.keybindings\":{\"maximize\":\"@as []\",\"unmaximize\":\"@as []\"},\"org.gnome.mutter\":{\"edge-tiling\":\"true\"}}" }
+        - key: "{{ base_key }}/overridden-settings"
+          value: "{\"org.gnome.mutter.keybindings\":{\"toggle-tiled-right\":\"['<Super>Right']\",\"toggle-tiled-left\":\"['<Super>Left']\"},\"org.gnome.desktop.wm.keybindings\"\
+            :{\"maximize\":\"@as []\",\"unmaximize\":\"@as []\"},\"org.gnome.mutter\":{\"edge-tiling\":\"true\"}}"
         - { key: "{{ base_key }}/selected-layouts", value: "[['806173'], ['806173'], ['806173'], ['806173']]" }
         - { key: "{{ base_key }}/snap-assistant-animation-time", value: "uint32 0" }
         - { key: "{{ base_key }}/tile-preview-animation-time", value: "uint32 0" }
@@ -163,7 +166,7 @@
     - name: gnome | keybindings | mutter | Ubuntu
       vars:
         base_key: "/org/gnome/mutter"
-      dconf:
+      community.general.dconf:
         key: "{{ item.key }}"
         value: "{{ item.value }}"
       with_items:
@@ -175,7 +178,7 @@
     - name: gnome | keybindings | mutter keybindings | Ubuntu
       vars:
         base_key: "/org/gnome/mutter/keybindings"
-      dconf:
+      community.general.dconf:
         key: "{{ item.key }}"
         value: "{{ item.value }}"
       with_items:
@@ -186,7 +189,7 @@
     - name: gnome | keybindings | shell
       vars:
         base_key: "/org/gnome/shell/keybindings"
-      dconf:
+      community.general.dconf:
         key: "{{ item.key }}"
         value: "{{ item.value }}"
       with_items:
@@ -195,7 +198,7 @@
     - name: gnome | keybindings | shell
       vars:
         base_key: "/org/gnome/shell/keybindings"
-      dconf:
+      community.general.dconf:
         key: "{{ item.key }}"
         value: "{{ item.value }}"
       with_items:

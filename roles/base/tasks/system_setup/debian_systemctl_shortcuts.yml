@@ -1,8 +1,10 @@
-- name: system setup | debian systemctl shortcuts
+---
+- name: system setup | Debian systemctl shortcuts
   become: true
+  when: ansible_distribution == "Debian"
   block:
     - name: system setup | debian systemctl shortcuts | create poweroff shortcut (Debian)
-      file:
+      ansible.builtin.file:
         src: systemctl
         dest: /usr/bin/poweroff
         state: link
@@ -11,10 +13,9 @@
 
     - name: system setup | debian systemctl shortcuts | create reboot shortcut (Debian)
       become: true
-      file:
+      ansible.builtin.file:
         src: systemctl
         dest: /usr/bin/reboot
         state: link
         owner: root
         group: root
-  when: ansible_distribution == "Debian"

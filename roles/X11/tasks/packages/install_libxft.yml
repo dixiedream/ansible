@@ -1,15 +1,33 @@
-- name: packages | libxft
+---
+- name: packages | Libxft
   when: x11_install_type is not defined or x11_install_type == 'wm'
+  become: true
   block:
     - name: packages | libxft | install (Archlinux)
-      become: true
-      become_user: "{{ user }}"
-      shell: "yes | {{ aur_helper_name }} -S --removemake --noconfirm libxft-git"
       when: ansible_distribution in ["Archlinux", "Artix Linux"]
 
+      block:
+        - name: packages | libxft | enable passwordless pacman
+          become: true
+          ansible.builtin.replace:
+            path: "/etc/sudoers.d/{{ user }}"
+            regexp: "^(Cmnd_Alias.*)$"
+            replace: "\\1, /usr/bin/pacman"
+            validate: "visudo -cf %s"
+
+        - name: packages | libxft | install (Archlinux)
+          become_user: "{{ user }}"
+          ansible.builtin.shell: "{{ aur_helper_name }} -S --removemake --noconfirm libxft-git"
+
+        - name: packages | libxft | disable passwordless pacman
+          become: true
+          ansible.builtin.replace:
+            path: "/etc/sudoers.d/{{ user }}"
+            regexp: "^(Cmnd_Alias[^\\n]*?)(?:\\s*,\\s*/usr/bin/pacman)?\\s*$"
+            replace: "\\1"
+            validate: "visudo -cf %s"
     - name: packages | libxft | install required dep (Debian)
-      become: true
-      apt:
+      ansible.builtin.apt:
         name:
           # - libxft2
           - libtool
@@ -17,25 +35,9 @@
         state: latest
       when: ansible_distribution in ["Debian", "Ubuntu"]
 
-    - name: packages | clone libxft patched version (Debian)
-      become: true
-      git:
+    - name: packages | Clone libxft patched version (Debian)
+      ansible.builtin.git:
         repo: https://gitlab.freedesktop.org/xorg/lib/libxft.git
         dest: /tmp/libxft-bgra
-        force: yes
+        force: true
       when: ansible_distribution in ["Debian", "Ubuntu"]
-#
-#
-#git clone https://gitlab.freedesktop.org/xorg/lib/libxft.git
-#cd libxft
-#sudo apt install xutils-dev libtool
-#sudo sh autogen.sh --sysconfdir=/etc --prefix=/usr --mandir=/usr/share/man
-#sudo make install
-#cd /usr/lib/x86_64-linux-gnu
-#sudo rm -f libXft.*
-#sudo ln -s /usr/lib/libXft.a libXft.a
-#sudo ln -s /usr/lib/libXft.so.2.3.4 libXft.so
-#sudo ln -s /usr/lib/libXft.so.2.3.4 libXft.so.2
-#sudo ln -s /usr/lib/libXft.so.2.3.4 libXft.so.2.3.4
-#sudo ldconfig
-

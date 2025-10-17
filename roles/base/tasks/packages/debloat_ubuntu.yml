@@ -1,23 +1,25 @@
-- name: packages | debloat Ubuntu
+---
+- name: packages | Debloat Ubuntu
   become: true
+  when: ansible_distribution in ["Ubuntu"]
   block:
     - name: packages | debloat Ubuntu | remove snaps
-      command: "snap remove --purge {{ item }}"
+      ansible.builtin.command: "snap remove --purge {{ item }}"
       with_items:
-          - firefox
-          - snap-store
-          - firmware-updater
-          - gnome-42-2204
-          - gtk-common-themes
-          - snapd-desktop-integration
-          - bare
-          - core22
-          - snapd
+        - firefox
+        - snap-store
+        - firmware-updater
+        - gnome-42-2204
+        - gtk-common-themes
+        - snapd-desktop-integration
+        - bare
+        - core22
+        - snapd
       register: command_result
       failed_when: (command_result.msg != '') and ( 'No such file or directory' not in command_result.msg )
 
     - name: packages | debloat Ubuntu | remove snapd
-      apt:
+      ansible.builtin.apt:
         name: snapd
         state: absent
 
@@ -25,4 +27,3 @@
       ansible.builtin.copy:
         src: packages/nosnap.pref
         dest: /etc/apt/preferences.d/nosnap.pref
-  when: ansible_distribution in ["Ubuntu"]

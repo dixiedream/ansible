@@ -1,36 +1,36 @@
+---
 # Load distro specific variables
-- include_vars: "{{ ansible_os_family }}.yml"
+- ansible.builtin.include_vars: "{{ ansible_os_family }}.yml"
   when: ansible_system == "Linux"
 
 - name: Linux setup
-  block:
-    - import_tasks: users/user.yml
-    - import_tasks: ansible_setup.yml
-    - import_tasks: packages/add_arch_repos.yml
-    - import_tasks: packages/debloat_debian.yml
-    - import_tasks: packages/debloat_ubuntu.yml
-    - import_tasks: packages/install_aur_helper.yml
-    - import_tasks: packages/install_packages.yml
-    - import_tasks: packages/install_firefox.yml
-    - import_tasks: packages/install_pipewire.yml
-    - import_tasks: packages/install_neovim.yml
-    - import_tasks: packages/install_gitflow.yml
-    - import_tasks: packages/install_lazygit.yml
-    - import_tasks: packages/install_lf.yml
-    # - import_tasks: packages/install_drivers.yml
-    - import_tasks: packages/install_autocpufreq.yml
-    - import_tasks: packages/install_thermald.yml
-    - import_tasks: packages/install_brave.yml
-    - import_tasks: packages/install_nordic_theme.yml
-    - import_tasks: packages/install_twingate.yml
-    - import_tasks: system_setup/tty_display_off.yml
-    - import_tasks: system_setup/apt.yml
-    - import_tasks: system_setup/network.yml
-    - import_tasks: system_setup/locale.yml
-    - import_tasks: system_setup/pacman.yml
-    - import_tasks: system_setup/dotfiles.yml
-    - import_tasks: system_setup/remove_beep.yml
-    - import_tasks: system_setup/debian_systemctl_shortcuts.yml
-    - import_tasks: system_setup/battery_threshold.yml
-    - import_tasks: system_setup/bluetooth.yml
   when: ansible_system == "Linux"
+  block:
+    - ansible.builtin.import_tasks: users/user.yml
+    - ansible.builtin.import_tasks: ansible_setup.yml
+    - ansible.builtin.import_tasks: packages/add_arch_repos.yml
+    - ansible.builtin.import_tasks: packages/debloat_debian.yml
+    - ansible.builtin.import_tasks: packages/debloat_ubuntu.yml
+    - ansible.builtin.import_tasks: packages/install_aur_helper.yml
+    - ansible.builtin.import_tasks: packages/install_packages.yml
+    - ansible.builtin.import_tasks: packages/install_firefox.yml
+    - ansible.builtin.import_tasks: packages/install_pipewire.yml
+    - ansible.builtin.import_tasks: packages/install_neovim.yml
+    - ansible.builtin.import_tasks: packages/install_gitflow.yml
+    - ansible.builtin.import_tasks: packages/install_lazygit.yml
+    - ansible.builtin.import_tasks: packages/install_lf.yml
+    - ansible.builtin.import_tasks: packages/install_autocpufreq.yml
+    - ansible.builtin.import_tasks: packages/install_thermald.yml
+    - ansible.builtin.import_tasks: packages/install_brave.yml
+    - ansible.builtin.import_tasks: packages/install_nordic_theme.yml
+    - ansible.builtin.import_tasks: packages/install_twingate.yml
+    - ansible.builtin.import_tasks: system_setup/tty_display_off.yml
+    - ansible.builtin.import_tasks: system_setup/apt.yml
+    - ansible.builtin.import_tasks: system_setup/network.yml
+    - ansible.builtin.import_tasks: system_setup/locale.yml
+    - ansible.builtin.import_tasks: system_setup/pacman.yml
+    - ansible.builtin.import_tasks: system_setup/dotfiles.yml
+    - ansible.builtin.import_tasks: system_setup/remove_beep.yml
+    - ansible.builtin.import_tasks: system_setup/debian_systemctl_shortcuts.yml
+    - ansible.builtin.import_tasks: system_setup/battery_threshold.yml
+    - ansible.builtin.import_tasks: system_setup/bluetooth.yml

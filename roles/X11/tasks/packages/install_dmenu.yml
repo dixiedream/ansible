@@ -1,14 +1,15 @@
-- name: packages | dmenu
+---
+- name: packages | Dmenu
   become: true
+  when: ansible_system == "Linux" and (x11_install_type is not defined or x11_install_type == 'wm')
   block:
     - name: packages | dmenu | clone repo
-      git:
+      ansible.builtin.git:
         repo: https://github.com/dixiedream/dmenu
         dest: /tmp/dmenu
-        force: yes
+        force: true
 
     - name: packages | dmenu | install dmenu
-      make:
+      community.general.make:
         target: install
         chdir: /tmp/dmenu
-  when: ansible_system == "Linux" and (x11_install_type is not defined or x11_install_type == 'wm')

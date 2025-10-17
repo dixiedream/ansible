@@ -1,8 +1,9 @@
-- name: gnome | disable unwanted notifications
+---
+- name: gnome | Disable unwanted notifications
   become_user: "{{ user }}"
   vars:
     base_key: "/org/gnome/desktop/notifications/application"
-  dconf:
+  community.general.dconf:
     key: "{{ item.key }}"
     value: "{{ item.value }}"
   with_items:

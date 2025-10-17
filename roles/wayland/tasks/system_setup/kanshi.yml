@@ -2,12 +2,12 @@
 # for different machines so we're basically creating
 # a template... [AL20231128]
 ---
-- name: system setup | kanshi
+- name: system setup | Kanshi
   become_user: "{{ user }}"
   when: wayland_install_type is not defined or wayland_install_type == 'wm'
   block:
     - name: system setup | kanshi | create config template
-      blockinfile:
+      ansible.builtin.blockinfile:
         path: "/home/{{ user }}/.config/kanshi/config"
         create: true
         owner: "{{ user }}"
@@ -24,7 +24,3 @@
           #profile laptop {
           #  output LVDS-1 enable position 0,0
           #}
-
-
-
-

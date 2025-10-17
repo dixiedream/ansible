@@ -1,17 +1,18 @@
+---
 # Load distro specific variables
-- include_vars: "{{ ansible_os_family }}.yml"
+- ansible.builtin.include_vars: "{{ ansible_os_family }}.yml"
   when: ansible_system == "Linux"
 
 - name: Linux setup
-  block:
-    - import_tasks: packages/install_packages.yml
-    - import_tasks: packages/install_libxft.yml
-    - import_tasks: packages/install_dwm.yml
-    - import_tasks: packages/install_dwmblocks.yml
-    - import_tasks: packages/install_st.yml
-    - import_tasks: packages/install_dmenu.yml
-    - import_tasks: system_setup/locale.yml
-    - import_tasks: system_setup/tap_to_click.yml
-    - import_tasks: system_setup/lock_on_suspend.yml
-    - import_tasks: system_setup/xorg_security.yml
   when: ansible_system == "Linux"
+  block:
+    - ansible.builtin.import_tasks: packages/install_packages.yml
+    - ansible.builtin.import_tasks: packages/install_libxft.yml
+    - ansible.builtin.import_tasks: packages/install_dwm.yml
+    - ansible.builtin.import_tasks: packages/install_dwmblocks.yml
+    - ansible.builtin.import_tasks: packages/install_st.yml
+    - ansible.builtin.import_tasks: packages/install_dmenu.yml
+    - ansible.builtin.import_tasks: system_setup/locale.yml
+    - ansible.builtin.import_tasks: system_setup/tap_to_click.yml
+    - ansible.builtin.import_tasks: system_setup/lock_on_suspend.yml
+    - ansible.builtin.import_tasks: system_setup/xorg_security.yml

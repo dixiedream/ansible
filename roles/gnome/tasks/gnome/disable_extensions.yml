@@ -1,10 +1,11 @@
-- name: gnome | disable extensions
+---
+- name: gnome | Disable extensions
   become_user: "{{ user }}"
   block:
     - name: gnome | disable extensions | remove desktop icons and dock
       vars:
         base_key: "/org/gnome/shell"
-      dconf:
+      community.general.dconf:
         key: "{{ item.key }}"
         value: "{{ item.value }}"
       with_items:
@@ -13,7 +14,7 @@
     - name: gnome | disable extensions | remove desktop icons and dock | Pop OS
       vars:
         base_key: "/org/gnome/shell"
-      dconf:
+      community.general.dconf:
         key: "{{ item.key }}"
         value: "{{ item.value }}"
       with_items:
@@ -22,11 +23,13 @@
       when: ansible_distribution in ["Pop!_OS"]
 
     - name: gnome | disable extensions | Ubuntu
+      when: ansible_distribution in ["Ubuntu"]
+
       block:
         - name: gnome | disable extensions | remove desktop icons and dock | Ubuntu
           vars:
             base_key: "/org/gnome/shell"
-          dconf:
+          community.general.dconf:
             key: "{{ item.key }}"
             value: "{{ item.value }}"
           with_items:
@@ -36,7 +39,7 @@
         - name: gnome | disable extensions | dock | Ubuntu
           vars:
             base_key: "/org/gnome/shell/extensions/dash-to-dock"
-          dconf:
+          community.general.dconf:
             key: "{{ item.key }}"
             value: "{{ item.value }}"
           with_items:
@@ -48,10 +51,8 @@
         - name: gnome | disable extensions | tiling assistant | Ubuntu
           vars:
             base_key: "/org/gnome/shell/extensions/tiling-assistant"
-          dconf:
+          community.general.dconf:
             key: "{{ item.key }}"
             value: "{{ item.value }}"
           with_items:
             - { key: "{{ base_key }}/auto-tile", value: "@as []" }
-      when: ansible_distribution in ["Ubuntu"]
-

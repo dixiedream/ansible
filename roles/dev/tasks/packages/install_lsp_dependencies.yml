@@ -1,39 +1,40 @@
+---
 - name: packages | LSP | install HTML
-  npm:
-    global: yes
+  community.general.npm:
+    global: true
     name: vscode-langservers-extracted
 
 - name: packages | LSP | install gopls (Archlinux)
   become: true
-  package:
+  ansible.builtin.package:
     name: gopls
     state: latest
   when: ansible_os_family in ["Archlinux", "Artix Linux"]
 
 - name: packages | LSP | install gopls (MacOS)
-  command: go install golang.org/x/tools/gopls@latest
+  ansible.builtin.command: go install golang.org/x/tools/gopls@latest
   when: ansible_os_family in ["Darwin"]
 
 - name: packages | LSP | install gopls (Debian)
-  command: /usr/local/go/bin/go install golang.org/x/tools/gopls@latest
+  ansible.builtin.command: /usr/local/go/bin/go install golang.org/x/tools/gopls@latest
   when: ansible_os_family in ["Debian"]
 
 - name: packages | LSP | install GraphQl
-  npm:
-    global: yes
+  community.general.npm:
+    global: true
     name: graphql-language-service-cli
 
 - name: packages | LSP | install Typescript
-  npm:
-    global: yes
+  community.general.npm:
+    global: true
     name: typescript
 
 - name: packages | LSP | install Typescript Language Server
-  npm:
-    global: yes
+  community.general.npm:
+    global: true
     name: typescript-language-server
 
 - name: packages | LSP | install Vue Language Server
-  npm:
-    global: yes
+  community.general.npm:
+    global: true
     name: "@vue/language-server"

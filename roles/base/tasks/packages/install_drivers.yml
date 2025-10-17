@@ -1,9 +1,34 @@
-- name: packages | install drivers
+---
+- name: packages | Install drivers
+  when: ansible_distribution in ["Archlinux", "Artix Linux"] and ansible_product_version == "ThinkPad X230"
   block:
+    - name: packages | install drivers | check if already installed
+      ansible.builtin.stat:
+        path: /usr/bin/bcmfw
+      register: pkg_is_present
+
+    - name: packages | install drivers | enable passwordless pacman
+      become: true
+      ansible.builtin.replace:
+        path: "/etc/sudoers.d/{{ user }}"
+        regexp: "^(Cmnd_Alias.*)$"
+        replace: "\\1, /usr/bin/pacman"
+        validate: "visudo -cf %s"
+      when: not pkg_is_present.stat.exists
+
     - name: packages | install drivers | X230 Bluetooth firmware
       become: true
       become_user: "{{ user }}"
-      command: "{{ aur_helper_name }} -S --noconfirm --removemake bcm20702a1-firmware"
+      ansible.builtin.command: "{{ aur_helper_name }} -S --noconfirm --removemake bcm20702a1-firmware"
       args:
-        creates: /usr/bin/auto-cpufreq
-      when: ansible_distribution in ["Archlinux", "Artix Linux"] and ansible_product_version == "ThinkPad X230"
+        creates: /usr/bin/bcmfw
+      when: not pkg_is_present.stat.exists
+
+    - name: packages | install drivers | disable passwordless pacman
+      become: true
+      ansible.builtin.replace:
+        path: "/etc/sudoers.d/{{ user }}"
+        regexp: "^(Cmnd_Alias[^\\n]*?)(?:\\s*,\\s*/usr/bin/pacman)?\\s*$"
+        replace: "\\1"
+        validate: "visudo -cf %s"
+      when: not pkg_is_present.stat.exists

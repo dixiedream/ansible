@@ -1,63 +1,63 @@
+---
 - name: system setup | mac app store | Enable the WebKit Developer Tools in the
-  osx_defaults:
-    domain: com.apple.appstore 
-    key: WebKitDeveloperExtras 
-    type: bool 
+  community.general.osx_defaults:
+    domain: com.apple.appstore
+    key: WebKitDeveloperExtras
+    type: bool
     value: true
 
-- name: system setup | mac app store | Enable Debug Menu 
-  osx_defaults:
-    domain: com.apple.appstore 
-    key: ShowDebugMenu 
-    type: bool 
+- name: system setup | mac app store | Enable Debug Menu
+  community.general.osx_defaults:
+    domain: com.apple.appstore
+    key: ShowDebugMenu
+    type: bool
     value: true
 
 - name: system setup | mac app store | Enable the automatic update check
-  osx_defaults:
-    domain: com.apple.SoftwareUpdate 
-    key: AutomaticCheckEnabled 
-    type: bool 
+  community.general.osx_defaults:
+    domain: com.apple.SoftwareUpdate
+    key: AutomaticCheckEnabled
+    type: bool
     value: true
 
 - name: system setup | mac app store | Check for software updates daily, not just once per week
-  osx_defaults:
-    domain: com.apple.SoftwareUpdate 
-    key: ScheduleFrequency 
-    type: int 
+  community.general.osx_defaults:
+    domain: com.apple.SoftwareUpdate
+    key: ScheduleFrequency
+    type: int
     value: 1
 
 - name: system setup | mac app store | Download newly available updates in background
-  osx_defaults:
-    domain: com.apple.SoftwareUpdate 
-    key: AutomaticDownload 
-    type: int 
+  community.general.osx_defaults:
+    domain: com.apple.SoftwareUpdate
+    key: AutomaticDownload
+    type: int
     value: 1
 
 - name: system setup | mac app store | Install System data files & security updates
-  osx_defaults:
-    domain: com.apple.SoftwareUpdate 
-    key: CriticalUpdateInstall 
-    type: int 
+  community.general.osx_defaults:
+    domain: com.apple.SoftwareUpdate
+    key: CriticalUpdateInstall
+    type: int
     value: 1
 
 - name: system setup | mac app store | Automatically download apps purchased on other Macs
-  osx_defaults:
-    domain: com.apple.SoftwareUpdate 
-    key: ConfigDataInstall 
-    type: int 
+  community.general.osx_defaults:
+    domain: com.apple.SoftwareUpdate
+    key: ConfigDataInstall
+    type: int
     value: 1
 
 - name: system setup | mac app store | Turn on app auto-update
-  osx_defaults:
-    domain: com.apple.commerce 
-    key: AutoUpdate 
-    type: bool 
+  community.general.osx_defaults:
+    domain: com.apple.commerce
+    key: AutoUpdate
+    type: bool
     value: true
 
 - name: system setup | mac app store | Don't allow the App Store to reboot machine on macOS updates
-  osx_defaults:
-    domain: com.apple.commerce 
-    key: AutoUpdateRestartRequired 
-    type: bool 
+  community.general.osx_defaults:
+    domain: com.apple.commerce
+    key: AutoUpdateRestartRequired
+    type: bool
     value: false
-

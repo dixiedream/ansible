@@ -1,13 +1,14 @@
-- name: packages | pop-shell
+---
+- name: packages | Pop-shell
+  when: ansible_distribution in ["Pop!_OS", "Ubuntu"]
   block:
     - name: packages | pop-shell | clone aleDVirgo fork
-      git:
+      ansible.builtin.git:
         repo: https://github.com/aleDVirgo/pop-shell
         dest: /tmp/pop-shell
-        force: yes
+        force: true
 
     - name: packages | pop-shell | install extension
-      make:
+      community.general.make:
         target: local-install
         chdir: /tmp/pop-shell
-  when: ansible_distribution in ["Pop!_OS", "Ubuntu"]
