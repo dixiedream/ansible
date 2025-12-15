@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.17.3
+- Add missing QEMU package needed for SPICE support (Arch linux)
+
 ## 2.17.2
 - AUR installs permissions improvements
 - Fix invalid value replaced inside `makepkg.conf`
