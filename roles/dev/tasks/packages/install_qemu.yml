@@ -6,7 +6,8 @@
       community.general.pacman:
         name:
           - qemu-base
-          # - dnsmasq
+          - qemu-desktop
+          - dnsmasq
           - libvirt
           - virt-install
           - virt-manager
