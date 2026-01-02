@@ -22,3 +22,5 @@
         regexp: "^export PIPEWIRE_LATENCY"
         line: 'export PIPEWIRE_LATENCY="128/48000"'
         insertafter: "^# App specs"
+
+    - import_tasks: yabridge.yml

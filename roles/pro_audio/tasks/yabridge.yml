@@ -1,0 +1,24 @@
+# Using Windows audio plugins on Linux DAWs
+---
+- name: Yabridge
+  become: true
+  when: ansible_distribution in ["Archlinux", "Artix Linux"]
+  block:
+    - name: Yabridge | Install required packages
+      ansible.builtin.package:
+        name:
+          - wine-staging
+          - yabridge
+          - yabridgectl
+
+    - name: Yabridge | Setup VST2 folder
+      command: yabridgectl add "{{ pro_audio_wine_prefix }}/Program Files/Steinberg/VstPlugins"
+
+    - name: Yabridge | Setup VST3 folder
+      command: yabridgectl add "{{ pro_audio_wine_prefix }}/Program Files/Common Files/VST3"
+
+    - name: Yabridge | Setup CLAP folder
+      command: yabridgectl add "{{ pro_audio_wine_prefix }}/Program Files/Common Files/CLAP"
+
+    - name: Yabridge | Sync plugins
+      command: yabridgectl sync
