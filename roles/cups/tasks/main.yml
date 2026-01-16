@@ -25,26 +25,3 @@
         name: cups.socket
         state: started
         enabled: true
-
-- name: Canon MG3650 | Archlinux
-  when: ansible_distribution in ["Archlinux", "Artix Linux"]
-  block:
-    - name: Canon MG3650 | enable passwordless pacman
-      become: true
-      ansible.builtin.replace:
-        path: "/etc/sudoers.d/{{ user }}"
-        regexp: "^(Cmnd_Alias.*)$"
-        replace: "\\1, /usr/bin/pacman"
-        validate: "visudo -cf %s"
-
-    - name: Canon MG3650 | install
-      become_user: "{{ user }}"
-      ansible.builtin.shell: "{{ aur_helper_name }} -S --noconfirm --removemake cnijfilter2-mg3600"
-
-    - name: Canon MG3650 | disable passwordless pacman
-      become: true
-      ansible.builtin.replace:
-        path: "/etc/sudoers.d/{{ user }}"
-        regexp: "^(Cmnd_Alias[^\\n]*?)(?:\\s*,\\s*/usr/bin/pacman)?\\s*$"
-        replace: "\\1"
-        validate: "visudo -cf %s"

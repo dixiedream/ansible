@@ -38,3 +38,12 @@
   community.general.npm:
     global: true
     name: "@vue/language-server"
+
+- name: packages | LSP | install Zig and ZLS (Archlinux)
+  become: true
+  ansible.builtin.package:
+    name:
+      - zig
+      - zls
+    state: latest
+  when: ansible_os_family in ["Archlinux", "Artix Linux"]
