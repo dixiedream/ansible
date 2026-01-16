@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.18.0
+- Removed the Canon driver stuff as my printer is officially dead
+- Installing Zig and its language server for Nvim support
+- Pro audio now installs Yabridge for Windows VST support on linux
+
 ## 2.17.3
 - Add missing QEMU package needed for SPICE support (Arch linux)
 
