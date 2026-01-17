@@ -11,14 +11,20 @@
           - yabridge
           - yabridgectl
 
+    - name: Yabridge | Create plugins folder
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+      with_items:
+        - "{{ pro_audio_wine_prefix }}/Program Files/Steinberg/VstPlugins"
+        - "{{ pro_audio_wine_prefix }}/Program Files/Common Files/VST3"
+        - "{{ pro_audio_wine_prefix }}/Program Files/Common Files/CLAP"
+
     - name: Yabridge | Setup VST2 folder
-      command: yabridgectl add "{{ pro_audio_wine_prefix }}/Program Files/Steinberg/VstPlugins"
-
+      ansible.builtin.command: yabridgectl add "{{ pro_audio_wine_prefix }}/Program Files/Steinberg/VstPlugins"
     - name: Yabridge | Setup VST3 folder
-      command: yabridgectl add "{{ pro_audio_wine_prefix }}/Program Files/Common Files/VST3"
-
+      ansible.builtin.command: yabridgectl add "{{ pro_audio_wine_prefix }}/Program Files/Common Files/VST3"
     - name: Yabridge | Setup CLAP folder
-      command: yabridgectl add "{{ pro_audio_wine_prefix }}/Program Files/Common Files/CLAP"
-
+      ansible.builtin.command: yabridgectl add "{{ pro_audio_wine_prefix }}/Program Files/Common Files/CLAP"
     - name: Yabridge | Sync plugins
-      command: yabridgectl sync
+      ansible.builtin.command: yabridgectl sync
