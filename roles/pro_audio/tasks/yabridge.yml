@@ -1,30 +1,44 @@
 # Using Windows audio plugins on Linux DAWs
 ---
 - name: Yabridge
-  become: true
   when: ansible_distribution in ["Archlinux", "Artix Linux"]
   block:
     - name: Yabridge | Install required packages
+      become: true
       ansible.builtin.package:
         name:
           - wine-staging
+          - realtime
           - yabridge
           - yabridgectl
+
+    # Prevents the memory cap
+    - name: "Yabridge | ensure {{ user }} is in realtime group (Linux)"
+      become: true
+      ansible.builtin.user:
+        name: "{{ user }}"
+        groups: realtime
+        append: true
 
     - name: Yabridge | Create plugins folder
       ansible.builtin.file:
         path: "{{ item }}"
         state: directory
+        owner: "{{ user }}"
+        group: "{{ user }}"
       with_items:
-        - "{{ pro_audio_wine_prefix }}/Program Files/Steinberg/VstPlugins"
-        - "{{ pro_audio_wine_prefix }}/Program Files/Common Files/VST3"
-        - "{{ pro_audio_wine_prefix }}/Program Files/Common Files/CLAP"
+        - "/home/{{ user }}/.wine/drive_c/Program Files/Steinberg/VstPlugins"
+        - "/home/{{ user }}/.wine/drive_c/Program Files/Common Files/VST3"
+        - "/home/{{ user }}/.wine/drive_c/Program Files/Common Files/CLAP"
 
     - name: Yabridge | Setup VST2 folder
-      ansible.builtin.command: yabridgectl add "{{ pro_audio_wine_prefix }}/Program Files/Steinberg/VstPlugins"
+      ansible.builtin.command: yabridgectl add "/home/{{ user }}/.wine/drive_c/Program Files/Steinberg/VstPlugins"
+
     - name: Yabridge | Setup VST3 folder
-      ansible.builtin.command: yabridgectl add "{{ pro_audio_wine_prefix }}/Program Files/Common Files/VST3"
+      ansible.builtin.command: yabridgectl add "/home/{{ user }}/.wine/drive_c/Program Files/Common Files/VST3"
+
     - name: Yabridge | Setup CLAP folder
-      ansible.builtin.command: yabridgectl add "{{ pro_audio_wine_prefix }}/Program Files/Common Files/CLAP"
+      ansible.builtin.command: yabridgectl add "/home/{{ user }}/.wine/drive_c/Program Files/Common Files/CLAP"
+
     - name: Yabridge | Sync plugins
       ansible.builtin.command: yabridgectl sync

@@ -1,2 +1,0 @@
----
-pro_audio_wine_prefix: /home/{{ user }}/.wine/drive_c
