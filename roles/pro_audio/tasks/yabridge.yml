@@ -9,8 +9,8 @@
         name:
           - wine-staging
           - realtime
-          - yabridge
-          - yabridgectl
+          - yabridge-wine10-git
+          - yabridgectl-wine10-git
 
     # Prevents the memory cap
     - name: "Yabridge | ensure {{ user }} is in realtime group (Linux)"
