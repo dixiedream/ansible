@@ -9,8 +9,45 @@
         name:
           - wine-staging
           - realtime
-          - yabridge-wine10-git
-          - yabridgectl-wine10-git
+
+    - name: Yabridge | check if already installed
+      ansible.builtin.stat:
+        path: /usr/bin/yabridgectl
+      register: pkg_is_present
+
+    - name: Yabridge | enable passwordless pacman
+      become: true
+      ansible.builtin.replace:
+        path: "/etc/sudoers.d/{{ user }}"
+        regexp: "^(Cmnd_Alias.*)$"
+        replace: "\\1, /usr/bin/pacman"
+        validate: "visudo -cf %s"
+      when: not pkg_is_present.stat.exists
+
+    - name: Yabridge | Install package
+      become: true
+      become_user: "{{ user }}"
+      ansible.builtin.command: "{{ aur_helper_name }} -S --noconfirm --removemake yabridge-wine10-git"
+      args:
+        creates: /usr/bin/yabridge
+      when: not pkg_is_present.stat.exists
+
+    - name: Yabridge | Install package yabridgectl
+      become: true
+      become_user: "{{ user }}"
+      ansible.builtin.command: "{{ aur_helper_name }} -S --noconfirm --removemake yabridgectl-wine10-git"
+      args:
+        creates: /usr/bin/yabridge
+      when: not pkg_is_present.stat.exists
+
+    - name: Yabridge | disable passwordless pacman
+      become: true
+      ansible.builtin.replace:
+        path: "/etc/sudoers.d/{{ user }}"
+        regexp: "^(Cmnd_Alias[^\\n]*?)(?:\\s*,\\s*/usr/bin/pacman)?\\s*$"
+        replace: "\\1"
+        validate: "visudo -cf %s"
+      when: not pkg_is_present.stat.exists
 
     # Prevents the memory cap
     - name: "Yabridge | ensure {{ user }} is in realtime group (Linux)"
