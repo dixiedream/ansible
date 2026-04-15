@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.19.0
+- Yabridge supporting proper `wine-staging`
+- Installing `tree-sitter-cli` for new Neovim 0.12 updates
+- Minor fixes
+
 ## 2.18.0
 - Removed the Canon driver stuff as my printer is officially dead
 - Installing Zig and its language server for Nvim support
