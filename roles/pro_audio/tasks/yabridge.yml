@@ -1,24 +1,81 @@
 # Using Windows audio plugins on Linux DAWs
 ---
 - name: Yabridge
-  become: true
   when: ansible_distribution in ["Archlinux", "Artix Linux"]
   block:
     - name: Yabridge | Install required packages
+      become: true
       ansible.builtin.package:
         name:
           - wine-staging
-          - yabridge
-          - yabridgectl
+          - realtime
+
+    - name: Yabridge | check if already installed
+      ansible.builtin.stat:
+        path: /usr/bin/yabridgectl
+      register: pkg_is_present
+
+    - name: Yabridge | enable passwordless pacman
+      become: true
+      ansible.builtin.replace:
+        path: "/etc/sudoers.d/{{ user }}"
+        regexp: "^(Cmnd_Alias.*)$"
+        replace: "\\1, /usr/bin/pacman"
+        validate: "visudo -cf %s"
+      when: not pkg_is_present.stat.exists
+
+    - name: Yabridge | Install package
+      become: true
+      become_user: "{{ user }}"
+      ansible.builtin.command: "{{ aur_helper_name }} -S --noconfirm --removemake yabridge-wine10-git"
+      args:
+        creates: /usr/bin/yabridge
+      when: not pkg_is_present.stat.exists
+
+    - name: Yabridge | Install package yabridgectl
+      become: true
+      become_user: "{{ user }}"
+      ansible.builtin.command: "{{ aur_helper_name }} -S --noconfirm --removemake yabridgectl-wine10-git"
+      args:
+        creates: /usr/bin/yabridge
+      when: not pkg_is_present.stat.exists
+
+    - name: Yabridge | disable passwordless pacman
+      become: true
+      ansible.builtin.replace:
+        path: "/etc/sudoers.d/{{ user }}"
+        regexp: "^(Cmnd_Alias[^\\n]*?)(?:\\s*,\\s*/usr/bin/pacman)?\\s*$"
+        replace: "\\1"
+        validate: "visudo -cf %s"
+      when: not pkg_is_present.stat.exists
+
+    # Prevents the memory cap
+    - name: "Yabridge | ensure {{ user }} is in realtime group (Linux)"
+      become: true
+      ansible.builtin.user:
+        name: "{{ user }}"
+        groups: realtime
+        append: true
+
+    - name: Yabridge | Create plugins folder
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        owner: "{{ user }}"
+        group: "{{ user }}"
+      with_items:
+        - "/home/{{ user }}/.wine/drive_c/Program Files/Steinberg/VstPlugins"
+        - "/home/{{ user }}/.wine/drive_c/Program Files/Common Files/VST3"
+        - "/home/{{ user }}/.wine/drive_c/Program Files/Common Files/CLAP"
 
     - name: Yabridge | Setup VST2 folder
-      command: yabridgectl add "{{ pro_audio_wine_prefix }}/Program Files/Steinberg/VstPlugins"
+      ansible.builtin.command: yabridgectl add "/home/{{ user }}/.wine/drive_c/Program Files/Steinberg/VstPlugins"
 
     - name: Yabridge | Setup VST3 folder
-      command: yabridgectl add "{{ pro_audio_wine_prefix }}/Program Files/Common Files/VST3"
+      ansible.builtin.command: yabridgectl add "/home/{{ user }}/.wine/drive_c/Program Files/Common Files/VST3"
 
     - name: Yabridge | Setup CLAP folder
-      command: yabridgectl add "{{ pro_audio_wine_prefix }}/Program Files/Common Files/CLAP"
+      ansible.builtin.command: yabridgectl add "/home/{{ user }}/.wine/drive_c/Program Files/Common Files/CLAP"
 
     - name: Yabridge | Sync plugins
-      command: yabridgectl sync
+      ansible.builtin.command: yabridgectl sync

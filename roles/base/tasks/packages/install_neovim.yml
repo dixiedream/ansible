@@ -2,7 +2,9 @@
 - name: packages | neovim | install package
   become: true
   ansible.builtin.package:
-    name: neovim
+    name:
+      - neovim
+      - tree-sitter-cli
     state: latest
   when: ansible_distribution in ["Archlinux", "Artix Linux"]
 
