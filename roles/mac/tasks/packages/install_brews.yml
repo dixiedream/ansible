@@ -21,6 +21,7 @@
       - neovim
       - p7zip
       - ripgrep
+      - tree-sitter-cli
       - unar
       - unzip
       - yt-dlp
