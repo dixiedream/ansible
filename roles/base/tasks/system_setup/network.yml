@@ -1,13 +1,13 @@
 ---
 - name: system setup | Network
   become: true
-  when: ansible_distribution in ["Archlinux", "Artix Linux", "Debian", "Ubuntu"]
+  when: ansible_facts["distribution"] in ["Archlinux", "Artix Linux", "Debian", "Ubuntu"] and ansible_facts["service_mgr"] == 'systemd'
   block:
     - name: system setup | network | remove ifupdown (Debian)
       ansible.builtin.package:
         name: ifupdown
         state: absent
-      when: ansible_distribution in ["Debian", "Ubuntu"] and ansible_service_mgr == 'systemd'
+      when: ansible_facts["distribution"] in ["Debian", "Ubuntu"]
 
     - name: system setup | network | create basic ethernet conf
       ansible.builtin.copy:
@@ -15,7 +15,6 @@
         dest: /etc/systemd/network/en.network
         owner: root
         group: root
-      when: ansible_service_mgr == 'systemd'
 
     - name: system setup | network | create basic wireless conf
       ansible.builtin.copy:
@@ -23,13 +22,11 @@
         dest: /etc/systemd/network/wl.network
         owner: root
         group: root
-      when: ansible_service_mgr == 'systemd'
 
     - name: system setup | network | check if wpa_supplicant folder exists
       ansible.builtin.file:
         path: /etc/wpa_supplicant
         state: directory
-      when: ansible_service_mgr == 'systemd'
 
     - name: system setup | network | create wpa_supplicant template
       ansible.builtin.template:
@@ -37,7 +34,6 @@
         dest: /etc/wpa_supplicant/wpa_supplicant-example.conf
         owner: root
         group: root
-      when: ansible_service_mgr == 'systemd'
 
     - name: system setup | network | symlink resolv.conf (Debian)
       ansible.builtin.file:
@@ -46,7 +42,7 @@
         state: link
         owner: root
         group: root
-      when: ansible_distribution in ["Debian"] and ansible_service_mgr == 'systemd'
+      when: ansible_facts["distribution"] in ["Debian"]
 
     - name: system setup | network | symlink resolv.conf (Archlinux/Ubuntu)
       ansible.builtin.file:
@@ -55,5 +51,5 @@
         state: link
         owner: root
         group: root
-      when: ansible_os_family in ["Archlinux", "Artix Linux", "Ubuntu"] and ansible_service_mgr == 'systemd'
+      when: ansible_facts["os_family"] in ["Archlinux", "Artix Linux", "Ubuntu"]
       ignore_errors: true

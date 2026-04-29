@@ -4,7 +4,7 @@
   become_user: "{{ user }}"
   vars:
     dotfile_src: "/home/{{ user }}/.cfg"
-  when: ansible_system == "Linux"
+  when: ansible_facts["system"] == "Linux"
   block:
     - name: system setup | dotfiles | Clone repo
       ansible.builtin.git:
@@ -25,4 +25,4 @@
         dest: "/home/{{ user }}/.xinitrc"
         regexp: '^autostart="dunst xcompmgr unclutter dwm_status"'
         line: 'autostart="dunst xcompmgr unclutter pipewire dwm_status"'
-      when: ansible_service_mgr != 'systemd'
+      when: ansible_facts["service_mgr"] != 'systemd'

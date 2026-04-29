@@ -34,7 +34,7 @@
             state: latest
 
         - name: packages | install wayland packages | App2Unit
-          when: ansible_distribution in ["Archlinux", "Artix Linux"]
+          when: ansible_facts["distribution"] in ["Archlinux", "Artix Linux"]
           block:
             - name: packages | app2unit | check if already installed
               ansible.builtin.stat:

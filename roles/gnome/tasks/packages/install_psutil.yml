@@ -1,6 +1,6 @@
 ---
 - name: packages | Psutil
-  when: ansible_os_family == "Debian"
+  when: ansible_facts["os_family"] == "Debian"
   block:
     - name: packages | Install psutil
       become: true

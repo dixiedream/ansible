@@ -22,7 +22,7 @@
         name: "{{ user }}"
         groups: video
         append: true
-      when: ansible_distribution == "Debian" and "ansible_service_mgr != 'systemd'"
+      when: ansible_facts["distribution"] == "Debian" and ansible_facts["service_mgr"] != 'systemd'
 
     - name: users | "{{ user }}" | add sudoers file
       ansible.builtin.template:

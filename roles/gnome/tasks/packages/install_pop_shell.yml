@@ -1,6 +1,6 @@
 ---
 - name: packages | Pop-shell
-  when: ansible_distribution in ["Pop!_OS", "Ubuntu"]
+  when: ansible_facts["distribution"] in ["Pop!_OS", "Ubuntu"]
   block:
     - name: packages | pop-shell | clone aleDVirgo fork
       ansible.builtin.git:

@@ -1,7 +1,7 @@
 ---
 - name: packages | Add arch repos (Artix)
   become: true
-  when: ansible_distribution == "Artix Linux"
+  when: ansible_facts["distribution"] == "Artix Linux"
   block:
     - name: packages | add arch repos (Artix) | check pacman.conf
       ansible.builtin.lineinfile:

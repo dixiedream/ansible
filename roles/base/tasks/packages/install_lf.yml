@@ -5,7 +5,7 @@
     - name: packages | lf | install (Debian/Archlinux)
       ansible.builtin.package:
         name: lf
-      when: ansible_distribution in ["Debian", "Archlinux", "Artix Linux"]
+      when: ansible_facts["distribution"] in ["Debian", "Archlinux", "Artix Linux"]
 
     - name: packages | lf | install (Other Linux distros)
       ansible.builtin.unarchive:
@@ -13,4 +13,4 @@
         dest: /usr/local/bin
         remote_src: true
         mode: "0755"
-      when: ansible_distribution in ["Ubuntu", "Pop!_OS"]
+      when: ansible_facts["distribution"] in ["Ubuntu", "Pop!_OS"]

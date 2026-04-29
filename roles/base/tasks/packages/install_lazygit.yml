@@ -6,7 +6,7 @@
       ansible.builtin.package:
         name: lazygit
         state: latest
-      when: ansible_distribution in ["Artix Linux", "Archlinux", "Debian"]
+      when: ansible_facts["distribution"] in ["Artix Linux", "Archlinux", "Debian"]
 
     - name: packages | lazygit | ubuntu
       ansible.builtin.unarchive:
@@ -14,4 +14,4 @@
         dest: /usr/local/bin
         remote_src: true
         mode: "0755"
-      when: ansible_distribution in ["Ubuntu", "Pop!_OS"]
+      when: ansible_facts["distribution"] in ["Ubuntu", "Pop!_OS"]

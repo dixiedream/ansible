@@ -1,7 +1,7 @@
 ---
 - name: gnome | Pop-shell
   become_user: "{{ user }}"
-  when: ansible_distribution in ["Pop!_OS", "Ubuntu"]
+  when: ansible_facts["distribution"] in ["Pop!_OS", "Ubuntu"]
   block:
     - name: gnome | pop-shell | setup
       vars:

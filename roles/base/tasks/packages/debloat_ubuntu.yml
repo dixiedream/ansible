@@ -1,7 +1,7 @@
 ---
 - name: packages | Debloat Ubuntu
   become: true
-  when: ansible_distribution in ["Ubuntu"]
+  when: ansible_facts["distribution"] in ["Ubuntu"]
   block:
     - name: packages | debloat Ubuntu | remove snaps
       ansible.builtin.command: "snap remove --purge {{ item }}"

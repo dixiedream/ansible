@@ -6,10 +6,10 @@
       ansible.builtin.package:
         name: firefox
         state: latest
-      when: ansible_distribution in ["Artix Linux", "Archlinux", "Debian", "Pop!_OS"]
+      when: ansible_facts["distribution"] in ["Artix Linux", "Archlinux", "Debian", "Pop!_OS"]
 
     - name: packages | Firefox
-      when: ansible_distribution in ["Ubuntu"]
+      when: ansible_facts["distribution"] in ["Ubuntu"]
       block:
         - name: packages | firefox | ensure GPG is installed (Ubuntu)
           ansible.builtin.apt:

@@ -6,7 +6,7 @@
       - npm
       - sshpass
     state: latest
-  when: ansible_system == "Linux"
+  when: ansible_facts["system"] == "Linux"
 
 - name: packages | Install required packages (MacOS)
   community.general.homebrew:
@@ -16,4 +16,4 @@
       - ripgrep
       - fd
     state: latest
-  when: ansible_os_family == "Darwin"
+  when: ansible_facts["os_family"] == "Darwin"

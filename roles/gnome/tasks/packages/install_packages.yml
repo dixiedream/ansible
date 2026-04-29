@@ -7,4 +7,4 @@
         name:
           - gnome-shell-extension-manager
         state: latest
-      when: ansible_distribution in ["Ubuntu"]
+      when: ansible_facts["distribution"] in ["Ubuntu"]

@@ -3,7 +3,7 @@
   become: true
   block:
     - name: packages | brave | Archlinux
-      when: ansible_distribution in ["Archlinux", "Artix Linux"]
+      when: ansible_facts["distribution"] in ["Archlinux", "Artix Linux"]
 
       block:
         - name: packages | brave | check if already installed
@@ -36,7 +36,7 @@
             validate: "visudo -cf %s"
           when: not pkg_is_present.stat.exists
     - name: packages | brave | install (Debian)
-      when: ansible_os_family == "Debian"
+      when: ansible_facts["os_family"] == "Debian"
       block:
         - name: packages | brave | install required dependencies (Debian)
           ansible.builtin.package:

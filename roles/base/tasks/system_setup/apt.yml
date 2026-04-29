@@ -1,7 +1,7 @@
 ---
 - name: system setup | Apt
   become: true
-  when: ansible_distribution in ["Debian"]
+  when: ansible_facts["distribution"] in ["Debian"]
   block:
     - name: system setup | apt | disable recommended and suggested package installation (Debian)
       ansible.builtin.copy:

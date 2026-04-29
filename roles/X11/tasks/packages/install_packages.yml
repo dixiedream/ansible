@@ -28,11 +28,11 @@
               - "{{ xorg_xrandr_package }}"
               - xwallpaper
             state: latest
-          when: ansible_distribution in ["Archlinux", "Artix Linux", "Debian", "Ubuntu"]
+          when: ansible_facts["distribution"] in ["Archlinux", "Artix Linux", "Debian", "Ubuntu"]
 
         - name: packages | Install Xsetroot (Archlinux)
           community.general.pacman:
             name:
               - xorg-xsetroot
             state: latest
-          when: ansible_distribution in ["Archlinux", "Artix Linux"]
+          when: ansible_facts["distribution"] in ["Archlinux", "Artix Linux"]

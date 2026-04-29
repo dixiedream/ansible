@@ -1,7 +1,7 @@
 ---
 - name: system setup | TTY
   become: true
-  when: ansible_distribution in ["Archlinux"] and ansible_service_mgr == 'systemd'
+  when: ansible_facts["distribution"] in ["Archlinux"] and ansible_facts["service_mgr"] == 'systemd'
   block:
     - name: system setup | TTY | ensure dir exists
       ansible.builtin.file:

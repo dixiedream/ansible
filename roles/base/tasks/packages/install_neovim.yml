@@ -6,11 +6,11 @@
       - neovim
       - tree-sitter-cli
     state: latest
-  when: ansible_distribution in ["Archlinux", "Artix Linux"]
+  when: ansible_facts["distribution"] in ["Archlinux", "Artix Linux"]
 
 - name: packages | Neovim (Debian)
   become: true
-  when: ansible_distribution in ["Ubuntu", "Debian", "Pop!_OS"]
+  when: ansible_facts["distribution"] in ["Ubuntu", "Debian", "Pop!_OS"]
   block:
     - name: packages | neovim (Debian) | add "unstable" repository
       ansible.builtin.apt_repository:

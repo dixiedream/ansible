@@ -1,7 +1,7 @@
 ---
 - name: packages | Foot
   become: true
-  when: ansible_distribution in ["Pop!_OS", "Ubuntu"]
+  when: ansible_facts["distribution"] in ["Pop!_OS", "Ubuntu"]
   block:
     - name: packages | foot | install terminal emulator
       ansible.builtin.package:

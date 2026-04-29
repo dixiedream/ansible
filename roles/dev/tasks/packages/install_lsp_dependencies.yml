@@ -9,15 +9,15 @@
   ansible.builtin.package:
     name: gopls
     state: latest
-  when: ansible_os_family in ["Archlinux", "Artix Linux"]
+  when: ansible_facts["os_family"] in ["Archlinux", "Artix Linux"]
 
 - name: packages | LSP | install gopls (MacOS)
   ansible.builtin.command: go install golang.org/x/tools/gopls@latest
-  when: ansible_os_family in ["Darwin"]
+  when: ansible_facts["os_family"] in ["Darwin"]
 
 - name: packages | LSP | install gopls (Debian)
   ansible.builtin.command: /usr/local/go/bin/go install golang.org/x/tools/gopls@latest
-  when: ansible_os_family in ["Debian"]
+  when: ansible_facts["os_family"] in ["Debian"]
 
 - name: packages | LSP | install GraphQl
   community.general.npm:
@@ -46,4 +46,4 @@
       - zig
       - zls
     state: latest
-  when: ansible_os_family in ["Archlinux", "Artix Linux"]
+  when: ansible_facts["os_family"] in ["Archlinux", "Artix Linux"]

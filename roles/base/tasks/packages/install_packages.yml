@@ -48,21 +48,21 @@
           - "{{ noto_fonts_emoji_package }}"
           - "{{ wpa_supplicant_package }}"
         state: latest
-      when: ansible_distribution in ["Archlinux", "Artix Linux", "Debian", "Ubuntu"] and (base_install_type is not defined or base_install_type == 'wm')
+      when: ansible_facts["distribution"] in ["Archlinux", "Artix Linux", "Debian", "Ubuntu"] and (base_install_type is not defined or base_install_type == 'wm')
 
     - name: packages | Install Pacman Contrib package (Archlinux)
       community.general.pacman:
         name:
           - pacman-contrib
         state: latest
-      when: ansible_distribution in ["Archlinux", "Artix Linux"]
+      when: ansible_facts["distribution"] in ["Archlinux", "Artix Linux"]
 
     - name: packages | Install polkit package (Archlinux)
       community.general.pacman:
         name:
           - polkit
         state: latest
-      when: ansible_distribution in ["Archlinux", "Artix Linux"]
+      when: ansible_facts["distribution"] in ["Archlinux", "Artix Linux"]
 
     - name: packages | Install Bluetooth related stuff (Debian)
       ansible.builtin.apt:
@@ -71,4 +71,4 @@
           - bluez-firmware
           - libspa-0.2-bluetooth
         state: latest
-      when: ansible_os_family in ["Debian"] and (base_install_type is not defined or base_install_type == 'wm')
+      when: ansible_facts["os_family"] in ["Debian"] and (base_install_type is not defined or base_install_type == 'wm')

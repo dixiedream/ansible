@@ -4,11 +4,11 @@
   ansible.builtin.package:
     name: lua-language-server
     state: latest
-  when: ansible_os_family in ["Archlinux", "Artix Linux"]
+  when: ansible_facts["os_family"] in ["Archlinux", "Artix Linux"]
 
 - name: packages | Lua language server (Debian)
   become: true
-  when: ansible_os_family in ["Debian"]
+  when: ansible_facts["os_family"] in ["Debian"]
 
   block:
     - name: packages | lua language server | download release (Debian)
@@ -40,4 +40,4 @@
   community.general.homebrew:
     name: lua-language-server
     state: latest
-  when: ansible_os_family == "Darwin"
+  when: ansible_facts["os_family"] == "Darwin"

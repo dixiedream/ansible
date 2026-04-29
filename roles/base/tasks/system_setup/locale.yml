@@ -1,7 +1,7 @@
 ---
 - name: system setup | Locale
   become: true
-  when: ansible_os_family in ["Archlinux", "Artix Linux"]
+  when: ansible_facts["os_family"] in ["Archlinux", "Artix Linux"]
   block:
     - name: system setup | locale | set time zone (Archlinux)
       ansible.builtin.file:
@@ -17,14 +17,14 @@
       ansible.builtin.command: timedatectl set-ntp true
       changed_when: false
       ignore_errors: true
-      when: ansible_service_mgr == 'systemd'
+      when: ansible_facts["service_mgr"] == 'systemd'
 
     # - name: system setup | locale | set ntp (Artix)
     #   runit:
     #     name: ntpd
     #     state: started
     #     enabled: true
-    #   when: "ansible_service_mgr != 'systemd'"
+    #   when: ansible_facts["service_mgr"] != 'systemd'
 
     - name: system setup | locale | sync hardware clock and system clock (Archlinux)
       ansible.builtin.command: hwclock --systohc
