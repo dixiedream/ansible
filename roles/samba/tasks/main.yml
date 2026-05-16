@@ -2,7 +2,7 @@
 # Samba share client
 - name: Samba
   become: true
-  when: ansible_distribution in ["Archlinux", "Artix Linux"]
+  when: ansible_facts["distribution"] in ["Archlinux", "Artix Linux"]
   block:
     - name: samba | Install client
       ansible.builtin.package:

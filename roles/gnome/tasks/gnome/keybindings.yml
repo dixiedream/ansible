@@ -27,7 +27,7 @@
         - { key: "{{ base_key }}/switch-to-workspace-up", value: "@as []" }
         - { key: "{{ base_key }}/unmaximize", value: "@as []" }
         - { key: "{{ base_key }}/toggle-fullscreen", value: "['<Super>f']" }
-      when: ansible_distribution in ["Ubuntu"]
+      when: ansible_facts["distribution"] in ["Ubuntu"]
 
     - name: gnome | keybindings | window management | Pop OS
       vars:
@@ -63,7 +63,7 @@
         - { key: "{{ base_key }}/switch-to-workspace-down", value: "@as []" }
         - { key: "{{ base_key }}/switch-to-workspace-last", value: "@as []" }
         - { key: "{{ base_key }}/toggle-fullscreen", value: "['<Super>f']" }
-      when: ansible_distribution in ["Pop!_OS"]
+      when: ansible_facts["distribution"] in ["Pop!_OS"]
 
     - name: gnome | keybindings | media keys | Ubuntu
       vars:
@@ -83,7 +83,7 @@
         - { key: "{{ base_key }}/volume-mute", value: "['<Alt>m']" }
         - { key: "{{ base_key }}/volume-up", value: "['<Alt>Up']" }
         - { key: "{{ base_key }}/www", value: "['<Super>q']" }
-      when: ansible_distribution in ["Ubuntu"]
+      when: ansible_facts["distribution"] in ["Ubuntu"]
 
     - name: gnome | keybindings | media keys | Pop Os
       vars:
@@ -106,7 +106,7 @@
         - { key: "{{ base_key }}/volume-mute", value: "['<Alt>m']" }
         - { key: "{{ base_key }}/volume-up", value: "['<Alt>Up']" }
         - { key: "{{ base_key }}/www", value: "['<Super>q']" }
-      when: ansible_distribution in ["Pop!_OS"]
+      when: ansible_facts["distribution"] in ["Pop!_OS"]
 
     - name: gnome | keybindings | LF
       vars:
@@ -127,7 +127,7 @@
         value: "{{ item.value }}"
       with_items:
         - { key: "{{ base_key }}/focus-mode", value: "'sloppy'" }
-      when: ansible_distribution in ["Pop!_OS"]
+      when: ansible_facts["distribution"] in ["Pop!_OS"]
 
     - name: gnome | keybindings | pop shell
       vars:
@@ -142,7 +142,7 @@
         - { key: "{{ base_key }}/tile-enter", value: "@as []" }
         - { key: "{{ base_key }}/tile-orientation", value: "@as []" }
         - { key: "{{ base_key }}/toggle-tiling", value: "['<Super>y', '<Super>space']" }
-      when: ansible_distribution in ["Pop!_OS"]
+      when: ansible_facts["distribution"] in ["Pop!_OS"]
 
     - name: gnome | keybindings | tilingshell | Ubuntu
       vars:
@@ -161,7 +161,7 @@
         - { key: "{{ base_key }}/selected-layouts", value: "[['806173'], ['806173'], ['806173'], ['806173']]" }
         - { key: "{{ base_key }}/snap-assistant-animation-time", value: "uint32 0" }
         - { key: "{{ base_key }}/tile-preview-animation-time", value: "uint32 0" }
-      when: ansible_distribution in ["Ubuntu"]
+      when: ansible_facts["distribution"] in ["Ubuntu"]
 
     - name: gnome | keybindings | mutter | Ubuntu
       vars:
@@ -173,7 +173,7 @@
         - { key: "{{ base_key }}/dynamic-workspaces", value: "false" }
         - { key: "{{ base_key }}/edge-tiling", value: "false" }
         - { key: "{{ base_key }}/workspaces-only-on-primary", value: "false" }
-      when: ansible_distribution in ["Ubuntu"]
+      when: ansible_facts["distribution"] in ["Ubuntu"]
 
     - name: gnome | keybindings | mutter keybindings | Ubuntu
       vars:
@@ -184,7 +184,7 @@
       with_items:
         - { key: "{{ base_key }}/toggle-tiled-left", value: "@as []" }
         - { key: "{{ base_key }}/toggle-tiled-right", value: "@as []" }
-      when: ansible_distribution in ["Ubuntu"]
+      when: ansible_facts["distribution"] in ["Ubuntu"]
 
     - name: gnome | keybindings | shell
       vars:
@@ -207,4 +207,4 @@
         - { key: "{{ base_key }}/screenshot-window", value: "@as []" }
         - { key: "{{ base_key }}/show-screen-recording-ui", value: "@as []" }
         - { key: "{{ base_key }}/toggle-overview", value: "@as []" }
-      when: ansible_distribution in ["Pop!_OS"]
+      when: ansible_facts["distribution"] in ["Pop!_OS"]

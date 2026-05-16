@@ -15,7 +15,7 @@
           - edk2-ovmf
           - swtpm
         state: present
-      when: ansible_os_family in ["Archlinux", "Artix Linux"]
+      when: ansible_facts["os_family"] in ["Archlinux", "Artix Linux"]
 
     - name: packages | qemu | install required packages (Debian)
       ansible.builtin.apt:
@@ -29,7 +29,7 @@
           - ovmf
           - swtpm
         state: present
-      when: ansible_os_family in ["Debian"]
+      when: ansible_facts["os_family"] in ["Debian"]
 
     - name: packages | qemu | ensure qemu related services are not enabled (Debian)
       ansible.builtin.service:
@@ -41,7 +41,7 @@
         - libvirt-guests
         - systemd-machined
         # - dnsmasq
-      when: ansible_os_family in ["Debian"]
+      when: ansible_facts["os_family"] in ["Debian"]
 
     - name: "users | {{ user }} | ensure {{ user }} is in libvirt group (Linux)"
       become: true
@@ -49,7 +49,7 @@
         name: "{{ user }}"
         groups: libvirt
         append: true
-      when: ansible_system == "Linux"
+      when: ansible_facts["system"] == "Linux"
 
     - name: "users | {{ user }} | ensure {{ user }} is in kvm group (Ubuntu)"
       become: true
@@ -57,4 +57,4 @@
         name: "{{ user }}"
         groups: kvm
         append: true
-      when: ansible_distribution in ["Ubuntu"]
+      when: ansible_facts["distribution"] in ["Ubuntu"]

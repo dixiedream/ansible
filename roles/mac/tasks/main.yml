@@ -1,6 +1,6 @@
 ---
 - name: MacOS Setup
-  when: ansible_os_family == "Darwin"
+  when: ansible_facts["os_family"] == "Darwin"
   block:
     - ansible.builtin.import_tasks: packages/install_brews.yml
     - ansible.builtin.import_tasks: packages/install_aerospace.yml

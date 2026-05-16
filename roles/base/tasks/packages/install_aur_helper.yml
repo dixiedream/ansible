@@ -1,6 +1,6 @@
 ---
 - name: packages | AUR helper
-  when: ansible_os_family in ["Archlinux", "Artix Linux"]
+  when: ansible_facts["os_family"] in ["Archlinux", "Artix Linux"]
   block:
     - name: packages | AUR helper | check if already installed
       ansible.builtin.stat:

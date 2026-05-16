@@ -1,6 +1,6 @@
 ---
 - name: packages | Tmux
-  when: ansible_system == "Linux"
+  when: ansible_facts["system"] == "Linux"
   block:
     - name: packages | tmux | install required packages
       become: true

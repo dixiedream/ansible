@@ -1,44 +1,44 @@
 ---
 - name: system setup | Battery threshold
   become: true
-  when: ansible_form_factor is defined and ansible_form_factor == "Notebook" and ansible_distribution not in ['Pop!_OS', 'Ubuntu']
+  when: ansible_facts["form_factor"] is defined and ansible_facts["form_factor"] == "Notebook" and ansible_facts["distribution"] not in ['Pop!_OS', 'Ubuntu']
   block:
     - name: system setup | battery threshold | install package (Thinkpads)
       ansible.builtin.package:
         name: tpacpi-bat
         state: latest
-      when: ansible_system_vendor == "LENOVO" and ansible_distribution in ["Archlinux", "Artix Linux"]
+      when: ansible_facts["system_vendor"] == "LENOVO" and ansible_facts["distribution"] in ["Archlinux", "Artix Linux"]
 
     - name: system setup | battery threshold | clone package repo (Thinkpads Debian)
       ansible.builtin.git:
         repo: https://github.com/teleshoes/tpacpi-bat.git
         dest: /tmp/tpacpi-bat
-      when: ansible_system_vendor == "LENOVO" and ansible_distribution == "Debian"
+      when: ansible_facts["system_vendor"] == "LENOVO" and ansible_facts["distribution"] == "Debian"
 
     - name: system setup | battery threshold | install package (Thinkpads Debian)
       ansible.builtin.command: ./install.pl
       args:
         chdir: /tmp/tpacpi-bat
         creates: /usr/bin/tpacpi-bat
-      when: ansible_system_vendor == "LENOVO" and ansible_distribution == "Debian"
+      when: ansible_facts["system_vendor"] == "LENOVO" and ansible_facts["distribution"] == "Debian"
 
     - name: system setup | battery threshold | copy service (Thinkpads Debian)
       ansible.builtin.copy:
         src: system_setup/battery_threshold.service
         dest: /usr/lib/systemd/system/tpacpi.service
-      when: ansible_system_vendor == "LENOVO" and ansible_distribution == "Debian"
+      when: ansible_facts["system_vendor"] == "LENOVO" and ansible_facts["distribution"] == "Debian"
 
     - name: system setup | battery threshold | create required folder (Thinkpads Debian)
       ansible.builtin.file:
         path: /etc/conf.d
         state: directory
-      when: ansible_system_vendor == "LENOVO" and ansible_distribution == "Debian"
+      when: ansible_facts["system_vendor"] == "LENOVO" and ansible_facts["distribution"] == "Debian"
 
     - name: system setup | battery threshold | copy conf (Thinkpads)
       ansible.builtin.copy:
         src: system_setup/battery_threshold.conf
         dest: /etc/conf.d/tpacpi
-      when: ansible_system_vendor == "LENOVO"
+      when: ansible_facts["system_vendor"] == "LENOVO"
 
     - name: system setup | battery threshold | enable service (Thinkpads Debian)
       ansible.builtin.service:
@@ -46,7 +46,7 @@
         state: started
         enabled: true
       ignore_errors: true
-      when: ansible_system_vendor == "LENOVO" and ansible_distribution == "Debian" and ansible_service_mgr == 'systemd'
+      when: ansible_facts["system_vendor"] == "LENOVO" and ansible_facts["distribution"] == "Debian" and ansible_facts["service_mgr"] == 'systemd'
 
     - name: system setup | battery threshold | enable service (Thinkpads Archlinux)
       ansible.builtin.service:
@@ -54,4 +54,4 @@
         state: started
         enabled: true
       ignore_errors: true
-      when: ansible_system_vendor == "LENOVO" and ansible_distribution in ["Archlinux", "Artix Linux"] and ansible_service_mgr == 'systemd'
+      when: ansible_facts["system_vendor"] == "LENOVO" and ansible_facts["distribution"] in ["Archlinux", "Artix Linux"] and ansible_facts["service_mgr"] == 'systemd'

@@ -1,10 +1,14 @@
-- name: packages | auto-cpufreq
+---
+- name: packages | Auto-cpufreq
   become: true
+  when: ansible_facts["form_factor"] is defined and ansible_facts["form_factor"] == "Notebook"
   block:
     - name: packages | auto-cpufreq | Archlinux
+      when: ansible_facts["distribution"] in ["Archlinux", "Artix Linux"] and ansible_facts["service_mgr"] == 'systemd'
+
       block:
         - name: packages | auto-cpufreq | check if already installed
-          stat:
+          ansible.builtin.stat:
             path: /usr/bin/auto-cpufreq
           register: pkg_is_present
 
@@ -12,14 +16,14 @@
           become: true
           ansible.builtin.replace:
             path: "/etc/sudoers.d/{{ user }}"
-            regexp: '^(Cmnd_Alias.*)$'
-            replace: '\1, /usr/bin/pacman'
-            validate: 'visudo -cf %s'
+            regexp: "^(Cmnd_Alias.*)$"
+            replace: "\\1, /usr/bin/pacman"
+            validate: "visudo -cf %s"
           when: not pkg_is_present.stat.exists
 
         - name: packages | auto-cpufreq | install AUR package (Archlinux)
           become_user: "{{ user }}"
-          command: "{{ aur_helper_name }} -S --noconfirm --removemake auto-cpufreq"
+          ansible.builtin.command: "{{ aur_helper_name }} -S --noconfirm --removemake auto-cpufreq"
           args:
             creates: /usr/bin/auto-cpufreq
           when: not pkg_is_present.stat.exists
@@ -28,46 +32,43 @@
           become: true
           ansible.builtin.replace:
             path: "/etc/sudoers.d/{{ user }}"
-            regexp: '^(Cmnd_Alias[^\n]*?)(?:\s*,\s*/usr/bin/pacman)?\s*$'
-            replace: '\1'
-            validate: 'visudo -cf %s'
+            regexp: "^(Cmnd_Alias[^\\n]*?)(?:\\s*,\\s*/usr/bin/pacman)?\\s*$"
+            replace: "\\1"
+            validate: "visudo -cf %s"
           when: not pkg_is_present.stat.exists
-      when: ansible_distribution in ["Archlinux", "Artix Linux"] and ansible_service_mgr == 'systemd'
-
     - name: packages | auto-cpufreq | Debian
+      when: ansible_facts["os_family"] in ["Debian"] and ansible_facts["service_mgr"] == 'systemd'
+
       block:
         - name: packages | auto-cpufreq | clone repo (Debian)
-          git:
+          ansible.builtin.git:
             repo: https://github.com/AdnanHodzic/auto-cpufreq.git
             dest: ~/src/auto-cpufreq
 
         - name: packages | auto-cpufreq | install (Debian)
-          shell: ./auto-cpufreq-installer --install
+          ansible.builtin.command: ./auto-cpufreq-installer --install
           args:
             chdir: ~/src/auto-cpufreq
             creates: /usr/local/bin/auto-cpufreq
 
         - name: packages | auto-cpufreq | start and enable (Debian)
-          command: auto-cpufreq --install
-          ignore_errors: yes
-      when: ansible_os_family in ["Debian"] and ansible_service_mgr == 'systemd'
-
+          ansible.builtin.command: auto-cpufreq --install
+          ignore_errors: true
     - name: packages | auto-cpufreq | start and enable (Systemd)
-      service:
+      ansible.builtin.service:
         name: auto-cpufreq
         state: started
-        enabled: yes
-      when: ansible_service_mgr == 'systemd'
+        enabled: true
+      when: ansible_facts["service_mgr"] == 'systemd'
 
     - name: packages | auto-cpufreq | Runit
+      when: ansible_facts["service_mgr"] != 'systemd'
       block:
         - name: packages | auto-cpufreq | clone repo
-          git:
+          ansible.builtin.git:
             repo: https://github.com/AdnanHodzic/auto-cpufreq
             dest: /tmp/auto-cpufreq
-            force: yes
+            force: true
 
         - name: packages | auto-cpufreq | create conf file
-          shell: sh /tmp/auto-cpufreq/auto-cpufreq-installer --install
-      when: ansible_service_mgr != 'systemd'
-  when: ansible_form_factor is defined and ansible_form_factor == "Notebook"
+          ansible.builtin.command: sh /tmp/auto-cpufreq/auto-cpufreq-installer --install

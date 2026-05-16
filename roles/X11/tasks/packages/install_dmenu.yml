@@ -1,7 +1,7 @@
 ---
 - name: packages | Dmenu
   become: true
-  when: ansible_system == "Linux" and (x11_install_type is not defined or x11_install_type == 'wm')
+  when: ansible_facts["system"] == "Linux" and (x11_install_type is not defined or x11_install_type == 'wm')
   block:
     - name: packages | dmenu | clone repo
       ansible.builtin.git:

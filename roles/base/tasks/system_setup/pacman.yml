@@ -3,7 +3,7 @@
   become: true
   vars:
     nproc: "{{ lookup('pipe', 'nproc') | trim }}"
-  when: ansible_os_family in ["Archlinux", "Artix Linux"]
+  when: ansible_facts["os_family"] in ["Archlinux", "Artix Linux"]
   block:
     - name: system setup | pacman | make pacman pacman (Archlinux)
       ansible.builtin.lineinfile:

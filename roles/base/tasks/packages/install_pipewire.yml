@@ -1,7 +1,7 @@
 ---
 - name: packages | Pipewire
   become: true
-  when: ansible_distribution in ["Artix Linux", "Archlinux", "Debian"]
+  when: ansible_facts["distribution"] in ["Artix Linux", "Archlinux", "Debian"]
   block:
     - name: packages | pipewire | ensure pipewire-media-session is not present
       ansible.builtin.package:
@@ -21,7 +21,7 @@
         state: latest
 
     - name: packages | pipewire | runit setup
-      when: "ansible_service_mgr != 'systemd'"
+      when: ansible_facts["service_mgr"] != 'systemd'
       block:
         - name: packages | pipewire | copy conf files
           ansible.builtin.copy:

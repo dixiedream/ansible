@@ -8,10 +8,10 @@
           - docker
           - docker-compose
         state: latest
-      when: ansible_distribution in ["Artix Linux", "Archlinux", "Debian"]
+      when: ansible_facts["distribution"] in ["Artix Linux", "Archlinux", "Debian"]
 
     - name: packages | Enable Docker buildx (ArchLinux)
-      when: ansible_distribution in ["Ubuntu", "Pop!_OS"]
+      when: ansible_facts["distribution"] in ["Ubuntu", "Pop!_OS"]
 
       block:
         - name: Docker | Install dependencies
@@ -45,14 +45,14 @@
       ansible.builtin.package:
         name: "{{ docker_buildx_package }}"
         state: latest
-      when: ansible_system == "Linux"
+      when: ansible_facts["system"] == "Linux"
 
     - name: packages | Install Docker Desktop (MacOS)
       ansible.builtin.command: "brew install --cask {{ item }}"
       with_items:
         - docker
       ignore_errors: true
-      when: ansible_os_family == "Darwin"
+      when: ansible_facts["os_family"] == "Darwin"
 
     # - name: packages | install Docker packages (MacOS)
     #   homebrew:
@@ -60,7 +60,7 @@
     #       - docker-buildx
     #       - docker-compose
     #     state: latest
-    #   when: ansible_os_family == "Darwin"
+    #   when: ansible_facts["os_family"] == "Darwin"
 
     - name: packages | Ensure docker service is not enabled (Linux)
       become: true
@@ -68,7 +68,7 @@
         name: "docker.socket"
         state: stopped
         enabled: false
-      when: ansible_system == "Linux"
+      when: ansible_facts["system"] == "Linux"
 
     - name: packages | Ensure docker service is not enabled (Linux)
       become: true
@@ -76,7 +76,7 @@
         name: docker
         state: stopped
         enabled: false
-      when: ansible_system == "Linux"
+      when: ansible_facts["system"] == "Linux"
 
     - name: packages | Ensure containerd service is not enabled (Linux)
       become: true
@@ -84,7 +84,7 @@
         name: containerd
         state: stopped
         enabled: false
-      when: ansible_system == "Linux"
+      when: ansible_facts["system"] == "Linux"
 
     - name: packages | Ensure systemd networkd wait online service is not enabled (Linux)
       become: true
@@ -92,7 +92,7 @@
         name: systemd-networkd-wait-online
         state: stopped
         enabled: false
-      when: ansible_distribution in ["Artix Linux", "Archlinux", "Debian"]
+      when: ansible_facts["distribution"] in ["Artix Linux", "Archlinux", "Debian"]
 
     - name: "users | {{ user }} | ensure {{ user }} is in docker group (Linux)"
       become: true
@@ -100,4 +100,4 @@
         name: "{{ user }}"
         groups: docker
         append: true
-      when: ansible_system == "Linux"
+      when: ansible_facts["system"] == "Linux"

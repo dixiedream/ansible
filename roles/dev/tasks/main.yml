@@ -1,7 +1,7 @@
 ---
 # Load distro specific variables
-- ansible.builtin.include_vars: "{{ ansible_os_family }}.yml"
-  when: ansible_system == "Linux"
+- ansible.builtin.include_vars: "{{ ansible_facts['os_family'] }}.yml"
+  when: ansible_facts["system"] == "Linux"
 
 - block:
     - ansible.builtin.import_tasks: packages/install_packages.yml

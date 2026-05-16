@@ -1,6 +1,6 @@
 ---
 - name: packages | Install drivers
-  when: ansible_distribution in ["Archlinux", "Artix Linux"] and ansible_product_version == "ThinkPad X230"
+  when: ansible_facts["distribution"] in ["Archlinux", "Artix Linux"] and ansible_product_version == "ThinkPad X230"
   block:
     - name: packages | install drivers | check if already installed
       ansible.builtin.stat:

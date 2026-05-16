@@ -6,13 +6,13 @@
       community.general.pacman:
         update_cache: true
       changed_when: false
-      when: ansible_distribution in ["Archlinux", "Artix Linux"]
+      when: ansible_facts["distribution"] in ["Archlinux", "Artix Linux"]
 
     - name: pre-run | Update package cache (Apt)
       ansible.builtin.apt:
         update_cache: true
       changed_when: false
-      when: ansible_os_family == "Debian"
+      when: ansible_facts["os_family"] in "Debian"
 
 # run roles
 - hosts: all
@@ -26,10 +26,10 @@
       ansible.builtin.apt:
         autoclean: true
       changed_when: false
-      when: ansible_os_family == "Debian"
+      when: ansible_facts["os_family"] in "Debian"
 
     - name: Autoremove orphan packages (Apt)
       ansible.builtin.apt:
         autoremove: true
         purge: true
-      when: ansible_os_family == "Debian"
+      when: ansible_facts["os_family"] in "Debian"

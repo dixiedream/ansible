@@ -20,10 +20,10 @@
       with_items:
         - { key: "{{ base_key }}/disabled-extensions", value: "['ding@rastersoft.com']" }
         - { key: "{{ base_key }}/enable-animations", value: "false" }
-      when: ansible_distribution in ["Pop!_OS"]
+      when: ansible_facts["distribution"] in ["Pop!_OS"]
 
     - name: gnome | disable extensions | Ubuntu
-      when: ansible_distribution in ["Ubuntu"]
+      when: ansible_facts["distribution"] in ["Ubuntu"]
 
       block:
         - name: gnome | disable extensions | remove desktop icons and dock | Ubuntu

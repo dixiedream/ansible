@@ -1,7 +1,7 @@
 ---
 - name: system setup | Debian systemctl shortcuts
   become: true
-  when: ansible_distribution == "Debian"
+  when: ansible_facts["distribution"] == "Debian"
   block:
     - name: system setup | debian systemctl shortcuts | create poweroff shortcut (Debian)
       ansible.builtin.file:

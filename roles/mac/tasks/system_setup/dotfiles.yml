@@ -1,6 +1,6 @@
 ---
 - name: system setup | dotfiles | MacOS
-  when: ansible_system == "Darwin"
+  when: ansible_facts["system"] == "Darwin"
   block:
     - name: system setup | dotfiles | Clone repo
       ansible.builtin.git:
