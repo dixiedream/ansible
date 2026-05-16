@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.19.1
+- Syntax updates removing old deprecated formats
+
 ## 2.19.0
 - Yabridge supporting proper `wine-staging`
 - Installing `tree-sitter-cli` for new Neovim 0.12 updates
