@@ -24,6 +24,7 @@
 
     - name: packages | AUR helper | install (Archlinux)
       become_user: "{{ user }}"
+      become: true
       ansible.builtin.command: makepkg --noconfirm -si
       args:
         chdir: /tmp/{{ aur_helper_name }}
