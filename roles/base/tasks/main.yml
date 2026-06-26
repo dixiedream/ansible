@@ -23,7 +23,7 @@
     - ansible.builtin.import_tasks: packages/install_thermald.yml
     - ansible.builtin.import_tasks: packages/install_brave.yml
     - ansible.builtin.import_tasks: packages/install_nordic_theme.yml
-    - ansible.builtin.import_tasks: packages/install_twingate.yml
+    #- ansible.builtin.import_tasks: packages/install_twingate.yml
     - ansible.builtin.import_tasks: system_setup/tty_display_off.yml
     - ansible.builtin.import_tasks: system_setup/apt.yml
     - ansible.builtin.import_tasks: system_setup/network.yml
