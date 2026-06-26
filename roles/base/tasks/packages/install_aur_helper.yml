@@ -13,29 +13,34 @@
         dest: /tmp/{{ aur_helper_name }}
       when: not helper_is_present.stat.exists
 
-    - name: packages | AUR helper | enable passwordless pacman
+    - name: packages | AUR helper | install build dependencies
       become: true
-      ansible.builtin.replace:
-        path: "/etc/sudoers.d/{{ user }}"
-        regexp: "^(Cmnd_Alias.*)$"
-        replace: "\\1, /usr/bin/pacman"
-        validate: "visudo -cf %s"
+      community.general.pacman:
+        name:
+          - base-devel
+          - git
+        state: present
       when: not helper_is_present.stat.exists
 
-    - name: packages | AUR helper | install (Archlinux)
+    - name: packages | AUR helper | build package
       become_user: "{{ user }}"
-      become: true
-      ansible.builtin.command: makepkg --noconfirm -sSi
+      ansible.builtin.command: makepkg --noconfirm --skippgpcheck
       args:
         chdir: /tmp/{{ aur_helper_name }}
-        creates: /usr/bin/{{ aur_helper_name }}
       when: not helper_is_present.stat.exists
 
-    - name: packages | AUR helper | disable passwordless pacman
-      become: true
-      ansible.builtin.replace:
-        path: "/etc/sudoers.d/{{ user }}"
-        regexp: "^(Cmnd_Alias[^\\n]*?)(?:\\s*,\\s*/usr/bin/pacman)?\\s*$"
-        replace: "\\1"
-        validate: "visudo -cf %s"
+    - name: packages | AUR helper | find built package
+      ansible.builtin.find:
+        paths: /tmp/{{ aur_helper_name }}
+        patterns: "*.pkg.tar*"
+      register: aur_helper_pkg
       when: not helper_is_present.stat.exists
+
+    - name: packages | AUR helper | install built package
+      become: true
+      community.general.pacman:
+        name: "{{ aur_helper_pkg.files[0].path }}"
+        state: present
+      when:
+        - not helper_is_present.stat.exists
+        - aur_helper_pkg.files | length > 0
