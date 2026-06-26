@@ -23,8 +23,9 @@
       when: not helper_is_present.stat.exists
 
     - name: packages | AUR helper | build package
+      become: true
       become_user: "{{ user }}"
-      ansible.builtin.command: makepkg --noconfirm --skippgpcheck
+      ansible.builtin.command: makepkg --noconfirm --skippgpcheck --nodebug
       args:
         chdir: /tmp/{{ aur_helper_name }}
       when: not helper_is_present.stat.exists
@@ -32,7 +33,8 @@
     - name: packages | AUR helper | find built package
       ansible.builtin.find:
         paths: /tmp/{{ aur_helper_name }}
-        patterns: "*.pkg.tar*"
+        patterns: "{{ aur_helper_name }}-bin-*.pkg.tar*"
+        excludes: "*-debug-*"
       register: aur_helper_pkg
       when: not helper_is_present.stat.exists
 
@@ -44,3 +46,23 @@
       when:
         - not helper_is_present.stat.exists
         - aur_helper_pkg.files | length > 0
+
+    - name: packages | AUR helper | verify installation
+      ansible.builtin.stat:
+        path: /usr/bin/{{ aur_helper_name }}
+      register: helper_installed
+      failed_when: not helper_installed.stat.exists
+      when: not helper_is_present.stat.exists
+
+    - name: packages | AUR helper | configure yay for automation
+      become: true
+      become_user: "{{ user }}"
+      environment:
+        HOME: "/home/{{ user }}"
+      ansible.builtin.command: >
+        {{ aur_helper_name }}
+        --pacman /usr/bin/pacman
+        --sudoloop false
+        --save
+      changed_when: false
+      when: aur_helper_name == 'yay'
