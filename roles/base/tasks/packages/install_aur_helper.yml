@@ -54,15 +54,15 @@
       failed_when: not helper_installed.stat.exists
       when: not helper_is_present.stat.exists
 
-    - name: packages | AUR helper | configure yay for automation
-      become: true
-      become_user: "{{ user }}"
-      environment:
-        HOME: "/home/{{ user }}"
-      ansible.builtin.command: >
-        {{ aur_helper_name }}
-        --pacman /usr/bin/pacman
-        --sudoloop false
-        --save
-      changed_when: false
-      when: aur_helper_name == 'yay'
+    #- name: packages | AUR helper | configure yay for automation
+    #  become: true
+    #  become_user: "{{ user }}"
+    #  environment:
+    #    HOME: "/home/{{ user }}"
+    #  ansible.builtin.command: >
+    #    {{ aur_helper_name }}
+    #    --pacman /usr/bin/pacman
+    #    --sudoloop false
+    #    --save
+    #  changed_when: false
+    #  when: aur_helper_name == 'yay'
