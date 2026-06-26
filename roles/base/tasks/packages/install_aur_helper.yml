@@ -13,29 +13,56 @@
         dest: /tmp/{{ aur_helper_name }}
       when: not helper_is_present.stat.exists
 
-    - name: packages | AUR helper | enable passwordless pacman
+    - name: packages | AUR helper | install build dependencies
       become: true
-      ansible.builtin.replace:
-        path: "/etc/sudoers.d/{{ user }}"
-        regexp: "^(Cmnd_Alias.*)$"
-        replace: "\\1, /usr/bin/pacman"
-        validate: "visudo -cf %s"
+      community.general.pacman:
+        name:
+          - base-devel
+          - git
+        state: present
       when: not helper_is_present.stat.exists
 
-    - name: packages | AUR helper | install (Archlinux)
-      become_user: "{{ user }}"
+    - name: packages | AUR helper | build package
       become: true
-      ansible.builtin.command: sudo makepkg --noconfirm -si
+      become_user: "{{ user }}"
+      ansible.builtin.command: makepkg --noconfirm --skippgpcheck --nodebug
       args:
         chdir: /tmp/{{ aur_helper_name }}
-        creates: /usr/bin/{{ aur_helper_name }}
       when: not helper_is_present.stat.exists
 
-    - name: packages | AUR helper | disable passwordless pacman
-      become: true
-      ansible.builtin.replace:
-        path: "/etc/sudoers.d/{{ user }}"
-        regexp: "^(Cmnd_Alias[^\\n]*?)(?:\\s*,\\s*/usr/bin/pacman)?\\s*$"
-        replace: "\\1"
-        validate: "visudo -cf %s"
+    - name: packages | AUR helper | find built package
+      ansible.builtin.find:
+        paths: /tmp/{{ aur_helper_name }}
+        patterns: "{{ aur_helper_name }}-bin-*.pkg.tar*"
+        excludes: "*-debug-*"
+      register: aur_helper_pkg
       when: not helper_is_present.stat.exists
+
+    - name: packages | AUR helper | install built package
+      become: true
+      community.general.pacman:
+        name: "{{ aur_helper_pkg.files[0].path }}"
+        state: present
+      when:
+        - not helper_is_present.stat.exists
+        - aur_helper_pkg.files | length > 0
+
+    - name: packages | AUR helper | verify installation
+      ansible.builtin.stat:
+        path: /usr/bin/{{ aur_helper_name }}
+      register: helper_installed
+      failed_when: not helper_installed.stat.exists
+      when: not helper_is_present.stat.exists
+
+    #- name: packages | AUR helper | configure yay for automation
+    #  become: true
+    #  become_user: "{{ user }}"
+    #  environment:
+    #    HOME: "/home/{{ user }}"
+    #  ansible.builtin.command: >
+    #    {{ aur_helper_name }}
+    #    --pacman /usr/bin/pacman
+    #    --sudoloop false
+    #    --save
+    #  changed_when: false
+    #  when: aur_helper_name == 'yay'
