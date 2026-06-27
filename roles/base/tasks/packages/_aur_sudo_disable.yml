@@ -1,6 +1,0 @@
----
-- name: AUR | disable passwordless install
-  become: true
-  ansible.builtin.file:
-    path: "/etc/sudoers.d/99-aur-{{ user }}"
-    state: absent

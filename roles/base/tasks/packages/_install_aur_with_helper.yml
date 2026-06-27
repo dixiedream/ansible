@@ -2,7 +2,16 @@
 - name: "AUR | {{ aur_package_name }} | install with helper"
   become: true
   block:
-    - ansible.builtin.import_tasks: _aur_sudo_enable.yml
+    - name: AUR | enable passwordless install
+      become: true
+      ansible.builtin.copy:
+        dest: "/etc/sudoers.d/99-aur-{{ user }}"
+        content: |
+          {{ user }} ALL=(ALL) NOPASSWD: /usr/bin/pacman, /usr/bin/{{ aur_helper_name }}
+        owner: root
+        group: root
+        mode: "0440"
+        validate: "visudo -cf %s"
 
     - name: "AUR | {{ aur_package_name }} | install package"
       become_user: "{{ user }}"
@@ -29,5 +38,8 @@
         - not aur_install_result.skipped | default(false)
         - aur_install_result.rc | default(0) != 0
 
-  always:
-    - ansible.builtin.import_tasks: _aur_sudo_disable.yml
+    - name: AUR | disable passwordless install
+      become: true
+      ansible.builtin.file:
+        path: "/etc/sudoers.d/99-aur-{{ user }}"
+        state: absent

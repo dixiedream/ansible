@@ -33,4 +33,5 @@
     - ansible.builtin.import_tasks: system_setup/remove_beep.yml
     - ansible.builtin.import_tasks: system_setup/debian_systemctl_shortcuts.yml
     #- ansible.builtin.import_tasks: system_setup/battery_threshold.yml
+    - ansible.builtin.import_tasks: system_setup/fingerprint.yml
     - ansible.builtin.import_tasks: system_setup/bluetooth.yml

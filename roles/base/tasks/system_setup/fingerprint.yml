@@ -1,0 +1,16 @@
+---
+- name: system setup | fingerprint
+  become: true
+  when: ansible_facts["form_factor"] is defined and ansible_facts["form_factor"] == "Notebook" and ansible_facts["distribution"] in ["Archlinux", "Artix Linux"]
+  block:
+    - name: system setup | fingerprint | install package (Thinkpads)
+      ansible.builtin.package:
+        name: fprintd
+        state: latest
+
+    - name: system setup | fingerprint | add to pam
+      ansible.builtin.lineinfile:
+        dest: /etc/pam.d/system-local-login
+        line: "auth   sufficient pam_fprintd.so"
+        insertafter: "^#%PAM-1.0"
+        state: present
