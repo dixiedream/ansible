@@ -7,25 +7,17 @@
       when: ansible_facts["distribution"] in ["Archlinux", "Artix Linux"]
 
       block:
-        - name: packages | libxft | enable passwordless pacman
-          become: true
-          ansible.builtin.replace:
-            path: "/etc/sudoers.d/{{ user }}"
-            regexp: "^(Cmnd_Alias.*)$"
-            replace: "\\1, /usr/bin/pacman"
-            validate: "visudo -cf %s"
+        - name: packages | libxft | check if already installed
+          ansible.builtin.stat:
+            path: /usr/lib/libXft.so
+          register: libxft_is_present
 
         - name: packages | libxft | install (Archlinux)
-          become_user: "{{ user }}"
-          ansible.builtin.shell: "{{ aur_helper_name }} -S --removemake --noconfirm libxft-git"
-
-        - name: packages | libxft | disable passwordless pacman
-          become: true
-          ansible.builtin.replace:
-            path: "/etc/sudoers.d/{{ user }}"
-            regexp: "^(Cmnd_Alias[^\\n]*?)(?:\\s*,\\s*/usr/bin/pacman)?\\s*$"
-            replace: "\\1"
-            validate: "visudo -cf %s"
+          ansible.builtin.import_tasks: ../../../base/tasks/packages/_install_aur_with_helper.yml
+          vars:
+            aur_package_name: libxft-git
+            aur_creates: /usr/lib/libXft.so
+          when: not libxft_is_present.stat.exists
     - name: packages | libxft | install required dep (Debian)
       ansible.builtin.apt:
         name:

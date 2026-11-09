@@ -1,0 +1,11 @@
+---
+- name: AUR | enable passwordless install
+  become: true
+  ansible.builtin.copy:
+    dest: "/etc/sudoers.d/99-aur-{{ user }}"
+    content: |
+      {{ user }} ALL=(ALL) NOPASSWD: /usr/bin/pacman, /usr/bin/{{ aur_helper_name }}
+    owner: root
+    group: root
+    mode: "0440"
+    validate: "visudo -cf %s"

@@ -1,0 +1,33 @@
+---
+- name: "AUR | {{ aur_package_name }} | install with helper"
+  become: true
+  block:
+    - ansible.builtin.import_tasks: _aur_sudo_enable.yml
+
+    - name: "AUR | {{ aur_package_name }} | install package"
+      become_user: "{{ user }}"
+      environment:
+        HOME: "/home/{{ user }}"
+      ansible.builtin.command: >
+        {{ aur_helper_name }}
+        --pacman /usr/bin/pacman
+        -S --noconfirm --removemake
+        {{ aur_package_name }}
+      args:
+        creates: "{{ aur_creates | default(omit) }}"
+      register: aur_install_result
+      changed_when: aur_install_result.rc == 0
+
+    - name: "AUR | {{ aur_package_name }} | show install failure"
+      ansible.builtin.fail:
+        msg: |
+          AUR install of {{ aur_package_name }} failed (rc={{ aur_install_result.rc }}):
+          stdout: {{ aur_install_result.stdout | default('') }}
+          stderr: {{ aur_install_result.stderr | default('') }}
+      when:
+        - aur_install_result is defined
+        - not aur_install_result.skipped | default(false)
+        - aur_install_result.rc | default(0) != 0
+
+  always:
+    - ansible.builtin.import_tasks: _aur_sudo_disable.yml
