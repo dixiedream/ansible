@@ -29,11 +29,6 @@
     global: true
     name: typescript
 
-- name: packages | LSP | install Typescript Language Server
-  community.general.npm:
-    global: true
-    name: typescript-language-server
-
 - name: packages | LSP | install Vue Language Server
   community.general.npm:
     global: true
