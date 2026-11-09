@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.20.0
+- Improving AUR packages installation on fresh installs
+- Mac OS little improvements
+- Removing old tsserver installation
+
 ## 2.19.1
 - Syntax updates removing old deprecated formats
 
